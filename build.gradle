@@ -196,3 +196,8 @@ idea {
         downloadJavadoc = true
     }
 }
+
+// Avoid failing on duplicate resources from multiple source dirs (e.g., src/main/resources and src/generated/resources)
+tasks.withType(ProcessResources).configureEach {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}

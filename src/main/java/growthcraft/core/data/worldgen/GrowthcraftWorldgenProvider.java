@@ -199,7 +199,7 @@ public class GrowthcraftWorldgenProvider implements DataProvider {
 
     private static JsonObject buildBiomeModifier(String biomeTag) {
         JsonObject root = new JsonObject();
-        root.addProperty("type", "neoforge:add_features_by_tag");
+        root.addProperty("type", "neoforge:add_features");
 
         // Biome tag to apply to (single tag reference string with leading '#')
         root.addProperty("biomes", "#" + biomeTag);
