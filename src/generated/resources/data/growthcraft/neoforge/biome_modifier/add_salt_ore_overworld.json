@@ -1,0 +1,8 @@
+{
+  "type": "neoforge:add_features_by_tag",
+  "biomes": "#minecraft:is_overworld",
+  "features": [
+    "growthcraft:salt_ore_placed"
+  ],
+  "step": "underground_ores"
+}

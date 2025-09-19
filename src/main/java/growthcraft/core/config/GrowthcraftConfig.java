@@ -52,6 +52,16 @@ public class GrowthcraftConfig {
 
     public static final ModConfigSpec SPEC = SERVER_BUILDER.build();
 
+    // Public getters for worldgen values (used by datagen and runtime where applicable)
+    public static boolean saltOreGenEnabled() { return SALT_ORE_GEN_ENABLED.get(); }
+    public static boolean saltOreGenEndEnabled() { return saltOreGenTheEndEnabled.get(); }
+    public static boolean saltOreGenNetherEnabled() { return saltOreGenNetherEnabled.get(); }
+    public static boolean saltOreGenDeepslateEnabled() { return saltOreGenDeepslateEnabled.get(); }
+    public static int saltOreVeinSize() { return saltOreGenVeinSize.get(); }
+    public static int saltOreHeightMin() { return saltOreGenHeightMin.get(); }
+    public static int saltOreHeightMax() { return saltOreGenHeightMax.get(); }
+    public static int saltOreSpreadAmount() { return saltOreGenSpreadAmount.get(); }
+
     private static boolean validateItemName(final Object obj) {
         return obj instanceof String itemName && BuiltInRegistries.ITEM.containsKey(ResourceLocation.parse(itemName));
     }

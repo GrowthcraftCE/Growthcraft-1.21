@@ -17,6 +17,17 @@ public class GrowthcraftCreativeTabs {
                     .icon(() -> new ItemStack(GrowthcraftItems.CROWBAR_WHITE.get()))
                     .title(Component.literal("Growthcraft"))
                     .displayItems((params, output) -> {
+                        // Materials
+                        output.accept(GrowthcraftItems.SALT.get());
+
+                        // Blocks
+                        output.accept(GrowthcraftItems.SALT_BLOCK.get());
+                        output.accept(GrowthcraftItems.SALT_ORE.get());
+                        output.accept(GrowthcraftItems.SALT_ORE_DEEPSLATE.get());
+                        output.accept(GrowthcraftItems.SALT_ORE_NETHER.get());
+                        output.accept(GrowthcraftItems.SALT_ORE_END.get());
+
+                        // Tools
                         output.accept(GrowthcraftItems.CROWBAR_WHITE.get());
                         output.accept(GrowthcraftItems.CROWBAR_LIGHT_GRAY.get());
                         output.accept(GrowthcraftItems.CROWBAR_GRAY.get());
