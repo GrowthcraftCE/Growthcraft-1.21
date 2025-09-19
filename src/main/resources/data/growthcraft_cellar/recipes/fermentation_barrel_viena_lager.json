@@ -1,0 +1,27 @@
+{
+  "type": "growthcraft_cellar:fermentation_barrel_recipe",
+  "processing_time": 1200,
+  "ingredient_item": {
+    "item": "growthcraft_cellar:yeast_lager",
+    "count": 1
+  },
+  "ingredient_fluid": {
+    "fluid": "growthcraft_cellar:deep_amber_wort_fluid_source",
+    "amount": 1000
+  },
+  "result": {
+    "fluid": "growthcraft_cellar:vienna_lager_fluid_source",
+    "amount": 1000
+  },
+  "effects": [
+    {
+      "effect": "minecraft:luck",
+      "duration": 1200,
+      "amplifier": 1
+    }
+  ],
+  "bottle": {
+    "item": "growthcraft_cellar:potion_lager"
+  },
+  "color": "0xCFA26F"
+}

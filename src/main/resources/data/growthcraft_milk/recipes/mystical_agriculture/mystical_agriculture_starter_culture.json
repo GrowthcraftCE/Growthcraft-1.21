@@ -1,0 +1,40 @@
+{
+  "type": "cucumber:shaped_no_mirror",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "mysticalagriculture"
+    },
+    {
+      "type": "mysticalagriculture:crop_enabled",
+      "crop": "mysticalagriculture:nature"
+    },
+    {
+      "type": "growthcraft:feature_enabled",
+      "feature": "milk"
+    }
+  ],
+  "pattern": [
+    "   ",
+    "ACA",
+    "FAI"
+  ],
+  "key": {
+    "A": {
+      "item": "mysticalagriculture:iron_essence"
+    },
+    "C": {
+      "item": "mysticalagriculture:cow_essence"
+    },
+    "F": {
+      "item": "mysticalagriculture:fire_essence"
+    },
+    "I": {
+      "item": "mysticalagriculture:ice_essence"
+    }
+  },
+  "result": {
+    "item": "growthcraft_milk:starter_culture",
+    "count": 8
+  }
+}

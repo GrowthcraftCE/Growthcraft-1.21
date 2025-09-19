@@ -1,0 +1,95 @@
+{
+  "name": "Mystical Agriculture",
+  "flag": "mod:mysticalagriculture",
+  "icon": "mysticalagriculture:textures/item/guide_book.png",
+  "category": "growthcraft:mystical_agriculture",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "title": "Growthcraft",
+      "recipe": "growthcraft:mystical_agriculture/mystical_agriculture_rope_linen",
+      "recipe2": "growthcraft:mystical_agriculture/mystical_agriculture_salt"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Growthcraft Apiary",
+      "recipe": "growthcraft_apiary:mystical_agriculture/mystical_agriculture_bee"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Growthcraft Apples",
+      "recipe": "growthcraft_apples:mystical_agriculture/mystical_agriculture_apple_log"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Growthcraft Cellar",
+      "recipe": "growthcraft_cellar:mystical_agriculture/mystical_agriculture_grain",
+      "recipe2": "growthcraft_cellar:mystical_agriculture/mystical_agriculture_grain_pale_golden"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Growthcraft Cellar",
+      "recipe": "growthcraft_cellar:mystical_agriculture/mystical_agriculture_grain_golden",
+      "recipe2": "growthcraft_cellar:mystical_agriculture/mystical_agriculture_grain_amber"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Growthcraft Cellar",
+      "recipe": "growthcraft_cellar:mystical_agriculture/mystical_agriculture_grain_deep_amber",
+      "recipe2": "growthcraft_cellar:mystical_agriculture/mystical_agriculture_grain_copper"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Growthcraft Cellar",
+      "recipe": "growthcraft_cellar:mystical_agriculture/mystical_agriculture_grain_deep_copper",
+      "recipe2": "growthcraft_cellar:mystical_agriculture/mystical_agriculture_grain_brown"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Growthcraft Cellar",
+      "recipe": "growthcraft_cellar:mystical_agriculture/mystical_agriculture_grain_dark",
+      "recipe2": "growthcraft_cellar:mystical_agriculture/mystical_agriculture_hops"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Growthcraft Cellar",
+      "recipe": "growthcraft_cellar:mystical_agriculture/mystical_agriculture_purple_grapes",
+      "recipe2": "growthcraft_cellar:mystical_agriculture/mystical_agriculture_red_grapes"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Growthcraft Cellar",
+      "recipe": "growthcraft_cellar:mystical_agriculture/mystical_agriculture_white_grapes",
+      "recipe2": "growthcraft_cellar:mystical_agriculture/mystical_agriculture_yeast_bayanus"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Growthcraft Cellar",
+      "recipe": "growthcraft_cellar:mystical_agriculture/mystical_agriculture_yeast_brewers",
+      "recipe2": "growthcraft_cellar:mystical_agriculture/mystical_agriculture_yeast_lager"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Growthcraft Cellar",
+      "recipe": "growthcraft_cellar:mystical_agriculture/mystical_agriculture_yeast_seishu",
+      "recipe2": "growthcraft_cellar:mystical_agriculture/mystical_agriculture_yeast_ethereal"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Growthcraft Milk",
+      "recipe": "growthcraft_milk:mystical_agriculture/mystical_agriculture_bucket_of_milk",
+      "recipe2": "growthcraft_milk:mystical_agriculture/mystical_agriculture_starter_culture"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Growthcraft Milk",
+      "recipe": "growthcraft_milk:mystical_agriculture/mystical_agriculture_stomach"
+    },
+    {
+      "type": "patchouli:crafting",
+      "title": "Growthcraft Rice",
+      "recipe": "growthcraft_rice:mystical_agriculture/mystical_agriculture_rice"
+    }
+  ]
+}

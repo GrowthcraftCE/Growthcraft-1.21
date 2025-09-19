@@ -1,0 +1,33 @@
+{
+  "type": "growthcraft_cellar:fermentation_barrel_recipe",
+  "processing_time": 1200,
+  "ingredient_item": {
+    "item": "growthcraft_cellar:yeast_bayanus",
+    "count": 1
+  },
+  "ingredient_fluid": {
+    "fluid": "growthcraft_rice:rice_water_fluid_source",
+    "amount": 1000
+  },
+  "result": {
+    "fluid": "growthcraft_rice:rice_wine_fluid_source",
+    "amount": 1000
+  },
+  "effects": [
+    {
+      "effect": "minecraft:strength",
+      "duration": 2400,
+      "amplifier": 1
+    }
+  ],
+  "bottle": {
+    "item": "growthcraft_cellar:potion_wine"
+  },
+  "color": "0xEAA6D2",
+  "conditions": [
+    {
+      "type": "growthcraft:feature_enabled",
+      "feature": "rice/beverages"
+    }
+  ]
+}

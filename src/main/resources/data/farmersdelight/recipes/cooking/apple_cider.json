@@ -1,0 +1,33 @@
+{
+  "type": "farmersdelight:cooking",
+  "cookingtime": 200,
+  "experience": 1.0,
+  "ingredients": [
+    {
+      "item": "minecraft:apple"
+    },
+    {
+      "item": "minecraft:apple"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "recipe_book_tab": "drinks",
+  "result": {
+    "item": "farmersdelight:apple_cider"
+  },
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "farmersdelight"
+    },
+    {
+      "type": "forge:false"
+    },
+    {
+      "type": "growthcraft:feature_enabled",
+      "feature": "milk"
+    }
+  ]
+}

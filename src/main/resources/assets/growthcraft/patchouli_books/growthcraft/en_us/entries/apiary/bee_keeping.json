@@ -1,0 +1,29 @@
+{
+  "name": "Bee Keeping",
+  "icon": "growthcraft_apiary:bee",
+  "category": "growthcraft:apiary",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "In order to catch a bee, you must break a Bee Hive, there is a one in four chance of a bee being dropped.$(br2)Once you have your first bee, you will need to craft a Bee Box."
+    },
+    {
+      "type": "image",
+      "images": [
+        "growthcraft:textures/patchouli/blocks/bee_box_flowers.png"
+      ],
+      "text": "Be sure to place flowers around your bee box."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "growthcraft_apiary:bee_box_oak",
+      "text": "As your bees produce honey comb, they will need flowers near the bee box. They will also duplicate any flower that is within range."
+    },
+    {
+      "type": "crafting",
+      "recipe": "growthcraft_apiary:bee_box_oak",
+      "recipe2": "growthcraft_apiary:bee_box_spruce"
+    }
+  ]
+}

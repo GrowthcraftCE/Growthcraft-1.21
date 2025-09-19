@@ -1,0 +1,17 @@
+{
+  "name": "Culture Jar",
+  "icon": "growthcraft_cellar:culture_jar",
+  "category": "growthcraft:cellar",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "growthcraft_cellar:culture_jar",
+      "text": "The culture jar is primarily used to multiply yeasts.$(br2)Put a yeast in a $(bold)Culture Jar$() with its $(l:cellar/yeast)corresponding fluid$(), provide a nearby heat source, and it will grow additional yeasts.$(br2)The culture jar is also used to grow a $(bold)Starter Culture$() for $(l:milk/making_cheese)Making Cheese$()."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "growthcraft_cellar:culture_jar"
+    }
+  ]
+}

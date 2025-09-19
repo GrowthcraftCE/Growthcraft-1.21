@@ -1,0 +1,30 @@
+{
+  "name": "Wines and Ciders",
+  "icon": "growthcraft_cellar:potion_wine",
+  "category": "growthcraft:cellar",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Wines and ciders are made from different fruits, but use the same overall process:$(br2)1. Grow grapes or apples.$(br)2. Place the fruit into the $(l:cellar/fruit_press)Fruit Press$() to make juice.$(br)3. Place the juice into a $(l:cellar/ferment_barrel)Fermentation Barrel$() with $(6)Bayanus Yeast$().$(br)4. Use a glass bottle to extract the fermented wine.$(br)5. Enjoy the effects!"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "growthcraft_cellar:potion_wine",
+      "title": "Wines",
+      "text": "Wines are made from $(5)Grape Juice$() and $(6)Bayanus Yeast$(). The types of wine are:$(br2)$(bold)Purple Wine$()$(li)Absorption II (1:00)$(br2)$(bold)Red Wine$()$(li)Health II (1:00)$(br2)$(bold)White Wine$()$(li)Saturation II (1:00)"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "growthcraft_cellar:potion_wine",
+      "title": "Cider",
+      "text": "Cider is made from $(4)Apple Juice$() and $(6)Bayanus Yeast$().$(br2)$(bold)Apple Cider$()$(li)Saturation II (1:00)"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "growthcraft_cellar:potion_wine",
+      "title": "Rice Wine",
+      "text": "$(bold)Rice Wine$() and $(bold)Sake$() are made from rice instead of fruit and use a slightly different process described $(l:rice/fermenting_rice)here$()."
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "type": "cucumber:shaped_no_mirror",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "mysticalagriculture"
+    },
+    {
+      "type": "mysticalagriculture:crop_enabled",
+      "crop": "mysticalagriculture:dye"
+    }
+  ],
+  "pattern": [
+    "DSS",
+    "SDS",
+    "SSD"
+  ],
+  "key": {
+    "S": {
+      "item": "mysticalagriculture:stone_essence"
+    },
+    "D": {
+      "item": "mysticalagriculture:dye_essence"
+    }
+  },
+  "result": {
+    "item": "growthcraft:salt",
+    "count": 4
+  }
+}

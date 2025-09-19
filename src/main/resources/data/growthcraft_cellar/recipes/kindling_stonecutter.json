@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "count": 4,
+  "ingredient": {
+    "item": "minecraft:oak_planks"
+  },
+  "result": "growthcraft_cellar:kindling"
+}

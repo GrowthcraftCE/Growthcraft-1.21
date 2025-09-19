@@ -1,0 +1,12 @@
+{
+  "type": "growthcraft_cellar:roaster_recipe",
+  "roasting_level": 5,
+  "input_item": {
+    "item": "growthcraft_cellar:grain",
+    "count": 1
+  },
+  "result": {
+    "item": "growthcraft_cellar:grain_copper",
+    "count": 1
+  }
+}

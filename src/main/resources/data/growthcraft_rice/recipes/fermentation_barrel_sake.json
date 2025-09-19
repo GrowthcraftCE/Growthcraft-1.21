@@ -1,0 +1,33 @@
+{
+  "type": "growthcraft_cellar:fermentation_barrel_recipe",
+  "processing_time": 1800,
+  "ingredient_item": {
+    "item": "growthcraft_rice:yeast_seishu",
+    "count": 1
+  },
+  "ingredient_fluid": {
+    "fluid": "growthcraft_rice:rice_water_fluid_source",
+    "amount": 1000
+  },
+  "result": {
+    "fluid": "growthcraft_rice:sake_fluid_source",
+    "amount": 1000
+  },
+  "effects": [
+    {
+      "effect": "minecraft:strength",
+      "duration": 6000,
+      "amplifier": 2
+    }
+  ],
+  "bottle": {
+    "item": "growthcraft_cellar:potion_wine"
+  },
+  "color": "0xE0E2DC",
+  "conditions": [
+    {
+      "type": "growthcraft:feature_enabled",
+      "feature": "rice/beverages"
+    }
+  ]
+}

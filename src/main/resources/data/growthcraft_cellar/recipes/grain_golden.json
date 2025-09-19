@@ -1,0 +1,12 @@
+{
+  "type": "growthcraft_cellar:roaster_recipe",
+  "roasting_level": 2,
+  "input_item": {
+    "item": "growthcraft_cellar:grain",
+    "count": 1
+  },
+  "result": {
+    "item": "growthcraft_cellar:grain_golden",
+    "count": 1
+  }
+}

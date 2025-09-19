@@ -1,0 +1,30 @@
+{
+  "type": "cucumber:shaped_no_mirror",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "mysticalagriculture"
+    },
+    {
+      "type": "mysticalagriculture:crop_enabled",
+      "crop": "mysticalagriculture:honey"
+    }
+  ],
+  "pattern": [
+    "A A",
+    " B ",
+    "A A"
+  ],
+  "key": {
+    "A": {
+      "item": "mysticalagriculture:spider_essence"
+    },
+    "B": {
+      "item": "mysticalagriculture:slime_essence"
+    }
+  },
+  "result": {
+    "item": "growthcraft:rope_linen",
+    "count": 4
+  }
+}

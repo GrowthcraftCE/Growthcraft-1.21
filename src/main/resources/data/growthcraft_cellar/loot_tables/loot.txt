@@ -1,0 +1,35 @@
+
+
+item: there is a percentage chance you'll find a few bottles of mead in pillager tower chest. Number here seems high but that bum place has only one chest and this fits the theme.
+default value: 90%
+file to override in datapack:  loot_tables/chests/pillager_outpost.json
+
+
+item: there is a chance you'll find a few bottles of wine in underwater ruin chest. Default of 10% is not low because ruins will have half a dozen chests.
+default value: 10%
+file to override in datapack:  loot_tables/chests/underwater_ruin.json
+
+
+item: there is a chance you'll find a few bottles of ale in shipwreck chest.
+default value: 60%
+file to override in datapack:  loot_tables/chests/shipwreck.json
+
+
+item: there is a chance you'll find a few bottles of wine in villager home chest.
+default value: 0%   - disabled by default
+file to override in datapack:  loot_tables/chests/village.json
+
+
+item: there is a chance you'll find a few bottles of wine in buried beach chest.
+default value: 0%
+file to override in datapack:  loot_tables/chests/buried_treasure.json
+
+
+item: there is a chance you'll find a few bottles of lager in woodland mansion chest.
+default value: 15%
+file to override in datapack:  loot_tables/chests/woodland_mansion.json
+
+
+item: there is a chance you'll find a few bottles of wine in stronghold chest.
+default value: 0%
+file to override in datapack:  loot_tables/chests/stronghold.json

@@ -1,0 +1,34 @@
+{
+  "type": "cucumber:shaped_no_mirror",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "mysticalagriculture"
+    },
+    {
+      "type": "mysticalagriculture:crop_enabled",
+      "crop": "mysticalagriculture:cow"
+    },
+    {
+      "type": "growthcraft:feature_enabled",
+      "feature": "milk"
+    }
+  ],
+  "pattern": [
+    "AAA",
+    " B ",
+    "   "
+  ],
+  "key": {
+    "A": {
+      "item": "mysticalagriculture:cow_essence"
+    },
+    "B": {
+      "item": "mysticalagriculture:iron_essence"
+    }
+  },
+  "result": {
+    "item": "growthcraft_milk:stomach",
+    "count": 1
+  }
+}

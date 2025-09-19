@@ -1,0 +1,10 @@
+{
+  "name": "Growthcraft",
+  "landing_text": "Growthcraft enriches the farming and brewing aspects with Minecraft.$(br2)With an array of new crops like grapes, hops, and rice, you can cultivate your own vineyards and create beverages such as wine, beer, and sake.",
+  "book_texture": "patchouli:textures/gui/book_green.png",
+  "creative_tab": "growthcraft:tab",
+  "show_progress": false,
+  "i18n": true,
+  "use_resource_pack": true,
+  "version": 9
+}

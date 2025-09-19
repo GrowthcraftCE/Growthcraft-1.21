@@ -1,0 +1,32 @@
+{
+  "name": "Maiking Ice Cream",
+  "icon": "growthcraft_milk:ice_cream_apple",
+  "category": "growthcraft:milk",
+  "sortnum": 6,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "On those hot days, after working in the mine, digging out just one more block, you might find yourself needinga break. Why not enjoy some nice fresh ice cream."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "growthcraft_milk:ice_cream_apple",
+      "recipe2": "growthcraft_milk:ice_cream_chocolate"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "growthcraft_milk:ice_cream_grape_purple",
+      "recipe2": "growthcraft_milk:ice_cream_grape_red"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "growthcraft_milk:ice_cream_grape_white",
+      "recipe2": "growthcraft_milk:ice_cream_honey"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "growthcraft_milk:ice_cream_pumpkin",
+      "recipe2": "growthcraft_milk:ice_cream_watermelon"
+    }
+  ]
+}

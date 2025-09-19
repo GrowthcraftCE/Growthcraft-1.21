@@ -1,0 +1,27 @@
+{
+  "type": "growthcraft_cellar:fermentation_barrel_recipe",
+  "processing_time": 7200,
+  "ingredient_item": {
+    "item": "growthcraft_cellar:yeast_brewers",
+    "count": 1
+  },
+  "ingredient_fluid": {
+    "fluid": "growthcraft_cellar:brown_wort_fluid_source",
+    "amount": 1000
+  },
+  "result": {
+    "fluid": "growthcraft_cellar:brown_ale_fluid_source",
+    "amount": 1000
+  },
+  "effects": [
+    {
+      "effect": "minecraft:haste",
+      "duration": 7200,
+      "amplifier": 3
+    }
+  ],
+  "bottle": {
+    "item": "growthcraft_cellar:potion_ale"
+  },
+  "color": "0x594732"
+}

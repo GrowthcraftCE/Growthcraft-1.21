@@ -1,0 +1,23 @@
+{
+  "type": "growthcraft_cellar:brew_kettle_recipe",
+  "requires_heat": true,
+  "requires_lid": "false",
+  "processing_time": 600,
+  "by_product_chance": 10,
+  "input_fluid": {
+    "fluid": "minecraft:water",
+    "amount": 250
+  },
+  "input_item": {
+    "item": "growthcraft_cellar:grain_pale_golden",
+    "count": 1
+  },
+  "output_fluid": {
+    "fluid": "growthcraft_cellar:pale_golden_wort_fluid_source",
+    "amount": 250
+  },
+  "by_product": {
+    "item": "minecraft:bone_meal",
+    "count": 1
+  }
+}

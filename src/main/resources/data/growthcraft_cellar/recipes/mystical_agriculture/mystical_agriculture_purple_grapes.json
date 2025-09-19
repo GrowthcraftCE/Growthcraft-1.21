@@ -1,0 +1,30 @@
+{
+  "type": "cucumber:shaped_no_mirror",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "mysticalagriculture"
+    },
+    {
+      "type": "mysticalagriculture:crop_enabled",
+      "crop": "mysticalagriculture:dye"
+    }
+  ],
+  "pattern": [
+    "B A",
+    "B A",
+    " A "
+  ],
+  "key": {
+    "A": {
+      "item": "mysticalagriculture:dye_essence"
+    },
+    "B": {
+      "item": "mysticalagriculture:nature_essence"
+    }
+  },
+  "result": {
+    "item": "growthcraft_cellar:grape_purple",
+    "count": 4
+  }
+}

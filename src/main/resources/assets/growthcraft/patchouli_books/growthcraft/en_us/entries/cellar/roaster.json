@@ -1,0 +1,30 @@
+{
+  "name": "Roaster",
+  "icon": "growthcraft_cellar:roaster",
+  "category": "growthcraft:cellar",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "growthcraft_cellar:roaster",
+      "text": "The roaster is used to roast grain and food items.$(br2)Use the wrench to adjust the roasting level and the roaster will roast an entire stack of items.$(br2)The roaster will also need a heat source under it."
+    },
+    {
+      "type": "image",
+      "images": [
+        "growthcraft:textures/patchouli/blocks/roaster_smoke.png"
+      ],
+      "text": "The roaster will start smoking when there is a valid item in it."
+    },
+    {
+      "title": "Roasting Times",
+      "type": "text",
+      "text": "Roasting Level 1 (30 secs)$(li)Pale Golden Grain$(br2)Roasting Level 2 (60 secs)$(li)Golden Grain$(li)Chicken, Beef$(br2)Roasting Level 3 (1 1/2 min)$(li)Amber Grain$(br2)Roasting Level 4 (2 min)$(li)Deep Amber Grain"
+    },
+    {
+      "title": "Roasting Times",
+      "type": "text",
+      "text": "Roasting Level 5 (2 1/2 min)$(li)Copper Grain$(br2)Roasting Level 6 (3 min)$(li)Deep Copper Grain$(br2)Roasting Level 7 (3 1/2 min)$(li)Brown Grain$(br2)Roasting Level 8 (4 min)$(li)Dark Grain"
+    }
+  ]
+}

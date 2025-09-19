@@ -1,0 +1,27 @@
+{
+  "type": "growthcraft_cellar:fermentation_barrel_recipe",
+  "processing_time": 6000,
+  "ingredient_item": {
+    "item": "growthcraft_cellar:yeast_brewers",
+    "count": 1
+  },
+  "ingredient_fluid": {
+    "fluid": "growthcraft_cellar:dark_wort_fluid_source",
+    "amount": 1000
+  },
+  "result": {
+    "fluid": "growthcraft_cellar:stout_ale_fluid_source",
+    "amount": 1000
+  },
+  "effects": [
+    {
+      "effect": "minecraft:hero_of_the_village",
+      "duration": 12000,
+      "amplifier": 1
+    }
+  ],
+  "bottle": {
+    "item": "growthcraft_cellar:potion_ale"
+  },
+  "color": "0x0E0A07"
+}

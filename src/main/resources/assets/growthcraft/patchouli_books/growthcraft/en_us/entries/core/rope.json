@@ -1,0 +1,32 @@
+{
+  "name": "Rope",
+  "icon": "growthcraft:rope_linen",
+  "category": "growthcraft:core",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "growthcraft:rope_linen",
+      "text": "Rope is commonly used for growing grapes and hops.$(br2)Rope is initially crafted by combining a leash with string. Adding more string to an existing rope will extend it."
+    },
+    {
+      "type": "crafting",
+      "recipe": "growthcraft:rope_linen",
+      "recipe2": "growthcraft:rope_linen_lengthen"
+    },
+    {
+      "type": "image",
+      "images": [
+        "growthcraft:textures/patchouli/blocks/rope_fence_connected.png"
+      ],
+      "text": "Rope can be placed on any vanilla fence."
+    },
+    {
+      "type": "image",
+      "images": [
+        "growthcraft:textures/patchouli/blocks/rope_connected.png"
+      ],
+      "text": "Rope can also be attached to itself. This will be needed for growing grapes and hops."
+    }
+  ]
+}
