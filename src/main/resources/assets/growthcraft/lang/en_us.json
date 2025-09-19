@@ -1,0 +1,13 @@
+{
+  "itemGroup.growthcraft": "Example Mod Tab",
+  "block.growthcraft.example_block": "Example Block",
+  "item.growthcraft.example_item": "Example Item",
+
+  "growthcraft.configuration.title": "Growthcraft Configs",
+  "growthcraft.configuration.section.growthcraft.common.toml": "Growthcraft Configs",
+  "growthcraft.configuration.section.growthcraft.common.toml.title": "Growthcraft Configs",
+  "growthcraft.configuration.items": "Item List",
+  "growthcraft.configuration.logDirtBlock": "Log Dirt Block",
+  "growthcraft.configuration.magicNumberIntroduction": "Magic Number Text",
+  "growthcraft.configuration.magicNumber": "Magic Number"
+}
