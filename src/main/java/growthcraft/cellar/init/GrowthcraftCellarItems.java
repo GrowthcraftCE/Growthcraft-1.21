@@ -50,37 +50,6 @@ public class GrowthcraftCellarItems {
     public static final DeferredItem<Item> YEAST_LAGER = ITEMS.register(Reference.UnlocalizedName.Item.YEAST_LAGER, () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> YEAST_LAGER_ETHEREAL = ITEMS.register(Reference.UnlocalizedName.Item.YEAST_LAGER_ETHEREAL, () -> new Item(new Item.Properties()));
 
-    // Fluid Buckets (placeholder registrations; functional buckets will tie to fluids later)
-    public static final DeferredItem<Item> AMBER_ALE_FLUID_BUCKET = ITEMS.register(Reference.UnlocalizedName.Item.AMBER_ALE_FLUID_BUCKET, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> AMBER_LAGER_FLUID_BUCKET = ITEMS.register(Reference.UnlocalizedName.Item.AMBER_LAGER_FLUID_BUCKET, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> AMBER_WORT_FLUID_BUCKET = ITEMS.register(Reference.UnlocalizedName.Item.AMBER_WORT_FLUID_BUCKET, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> BROWN_ALE_FLUID_BUCKET = ITEMS.register(Reference.UnlocalizedName.Item.BROWN_ALE_FLUID_BUCKET, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> BROWN_LAGER_FLUID_BUCKET = ITEMS.register(Reference.UnlocalizedName.Item.BROWN_LAGER_FLUID_BUCKET, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> BROWN_WORT_FLUID_BUCKET = ITEMS.register(Reference.UnlocalizedName.Item.BROWN_WORT_FLUID_BUCKET, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> COPPER_ALE_FLUID_BUCKET = ITEMS.register(Reference.UnlocalizedName.Item.COPPER_ALE_FLUID_BUCKET, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> COPPER_LAGER_FLUID_BUCKET = ITEMS.register(Reference.UnlocalizedName.Item.COPPER_LAGER_FLUID_BUCKET, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> COPPER_WORT_FLUID_BUCKET = ITEMS.register(Reference.UnlocalizedName.Item.COPPER_WORT_FLUID_BUCKET, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> DARK_LAGER_FLUID_BUCKET = ITEMS.register(Reference.UnlocalizedName.Item.DARK_LAGER_FLUID_BUCKET, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> DARK_WORT_FLUID_BUCKET = ITEMS.register(Reference.UnlocalizedName.Item.DARK_WORT_FLUID_BUCKET, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> DEEP_AMBER_WORT_FLUID_BUCKET = ITEMS.register(Reference.UnlocalizedName.Item.DEEP_AMBER_WORT_FLUID_BUCKET, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> DEEP_COPPER_WORT_FLUID_BUCKET = ITEMS.register(Reference.UnlocalizedName.Item.DEEP_COPPER_WORT_FLUID_BUCKET, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> GOLDEN_WORT_FLUID_BUCKET = ITEMS.register(Reference.UnlocalizedName.Item.GOLDEN_WORT_FLUID_BUCKET, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> HOPPED_GOLDEN_WORT_FLUID_BUCKET = ITEMS.register(Reference.UnlocalizedName.Item.HOPPED_GOLDEN_WORT_FLUID_BUCKET, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> IPA_ALE_FLUID_BUCKET = ITEMS.register(Reference.UnlocalizedName.Item.IPA_ALE_FLUID_BUCKET, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> OLD_PORT_ALE_FLUID_BUCKET = ITEMS.register(Reference.UnlocalizedName.Item.OLD_PORT_ALE_FLUID_BUCKET, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> PALE_ALE_FLUID_BUCKET = ITEMS.register(Reference.UnlocalizedName.Item.PALE_ALE_FLUID_BUCKET, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> PALE_GOLDEN_WORT_FLUID_BUCKET = ITEMS.register(Reference.UnlocalizedName.Item.PALE_GOLDEN_WORT_FLUID_BUCKET, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> PALE_LAGER_FLUID_BUCKET = ITEMS.register(Reference.UnlocalizedName.Item.PALE_LAGER_FLUID_BUCKET, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> PILSNER_LAGER_FLUID_BUCKET = ITEMS.register(Reference.UnlocalizedName.Item.PILSNER_LAGER_FLUID_BUCKET, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> PURPLE_GRAPE_JUICE_FLUID_BUCKET = ITEMS.register(Reference.UnlocalizedName.Item.PURPLE_GRAPE_JUICE_FLUID_BUCKET, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> PURPLE_GRAPE_WINE_FLUID_BUCKET = ITEMS.register(Reference.UnlocalizedName.Item.PURPLE_GRAPE_WINE_FLUID_BUCKET, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> RED_GRAPE_JUICE_FLUID_BUCKET = ITEMS.register(Reference.UnlocalizedName.Item.RED_GRAPE_JUICE_FLUID_BUCKET, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> RED_GRAPE_WINE_FLUID_BUCKET = ITEMS.register(Reference.UnlocalizedName.Item.RED_GRAPE_WINE_FLUID_BUCKET, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> STOUT_ALE_FLUID_BUCKET = ITEMS.register(Reference.UnlocalizedName.Item.STOUT_ALE_FLUID_BUCKET, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> VIENNA_LAGER_FLUID_BUCKET = ITEMS.register(Reference.UnlocalizedName.Item.VIENNA_LAGER_FLUID_BUCKET, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> WHITE_GRAPE_JUICE_FLUID_BUCKET = ITEMS.register(Reference.UnlocalizedName.Item.WHITE_GRAPE_JUICE_FLUID_BUCKET, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> WHITE_GRAPE_WINE_FLUID_BUCKET = ITEMS.register(Reference.UnlocalizedName.Item.WHITE_GRAPE_WINE_FLUID_BUCKET, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> WORT_FLUID_BUCKET = ITEMS.register(Reference.UnlocalizedName.Item.WORT_FLUID_BUCKET, () -> new Item(new Item.Properties()));
 
     private GrowthcraftCellarItems() {}
 }

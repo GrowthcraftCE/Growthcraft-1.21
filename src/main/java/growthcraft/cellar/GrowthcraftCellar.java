@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import growthcraft.cellar.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.config.Reference;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
+import growthcraft.cellar.init.GrowthcraftCellarFluids;
 import growthcraft.core.init.GrowthcraftCreativeTabs;
 import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.bus.api.IEventBus;
@@ -29,6 +30,9 @@ public class GrowthcraftCellar {
 
         // Register Deferred Registers
         GrowthcraftCellarItems.ITEMS.register(modEventBus);
+        GrowthcraftCellarFluids.FLUID_TYPES.register(modEventBus);
+        GrowthcraftCellarFluids.FLUIDS.register(modEventBus);
+        GrowthcraftCellarFluids.BLOCKS.register(modEventBus);
 
         // Add creative tab contributions
         modEventBus.addListener(this::buildCreativeTab);

@@ -86,24 +86,32 @@ config="${mod_id}.mixins.json"
     ordering="NONE"
     side="BOTH"
 
+
+
 [[mods]]
-modId = "growthcraft_cellar"
-version = "${mod_version}"
-displayName = "Growthcraft Cellar"
-logoFile = "growthcraft_cellar_logo.png"
-description = '''
-  Growthcraft Cellar adds processing and fermentation for various items and drinks.
-'''
+modId="growthcraft_cellar"
+version="${mod_version}"
+displayName="Growthcraft Cellar"
+authors="${mod_authors}"
+description='''Growthcraft Cellar adds processing and fermentation for various items and drinks.'''
 
 [[dependencies.growthcraft_cellar]]
-modId = "growthcraft"
-mandatory = true
-versionRange = "[1.21,)"
-ordering = "AFTER"
-side = "BOTH"
+    modId="neoforge"
+    type="required"
+    versionRange="[${neo_version},)"
+    ordering="NONE"
+    side="BOTH"
 
-# Features are specific properties of the game environment, that you may want to declare you require. This example declares
-# that your mod requires GL version 3.2 or higher. Other features will be added. They are side aware so declaring this won't
-# stop your mod loading on the server for example.
-#[features.${mod_id}]
-#openGLVersion="[3.2,)"
+[[dependencies.growthcraft_cellar]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.growthcraft_cellar]]
+    modId="growthcraft"
+    type="required"
+    versionRange="[${mod_version},)"
+    ordering="AFTER"
+    side="BOTH"
