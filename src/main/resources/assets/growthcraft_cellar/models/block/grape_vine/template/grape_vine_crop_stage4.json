@@ -1,0 +1,301 @@
+{
+  "credit": "Made with Blockbench",
+  "render_type": "cutout",
+  "ambientocclusion": false,
+  "textures": {
+    "0": "growthcraft_cellar:block/grape_vine/grape_vine_crop_stage0",
+    "2": "growthcraft_cellar:item/grape_red",
+    "particle": "growthcraft_cellar:block/grape_vine/grape_vine_leaves",
+    "missing": "growthcraft:block/missing"
+  },
+  "elements": [
+    {
+      "name": "east",
+      "from": [
+        12,
+        8,
+        0
+      ],
+      "to": [
+        12,
+        16,
+        16
+      ],
+      "faces": {
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            8
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            8
+          ],
+          "texture": "#0"
+        }
+      }
+    },
+    {
+      "name": "west",
+      "from": [
+        4,
+        8,
+        0
+      ],
+      "to": [
+        4,
+        16,
+        16
+      ],
+      "faces": {
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            8
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            8
+          ],
+          "texture": "#0"
+        }
+      }
+    },
+    {
+      "name": "south",
+      "from": [
+        0,
+        8,
+        12
+      ],
+      "to": [
+        16,
+        16,
+        12
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            8
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            8
+          ],
+          "texture": "#0"
+        }
+      }
+    },
+    {
+      "name": "north",
+      "from": [
+        0,
+        8,
+        4
+      ],
+      "to": [
+        16,
+        16,
+        4
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            8
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            8
+          ],
+          "texture": "#0"
+        }
+      }
+    },
+    {
+      "name": "fruit1",
+      "from": [
+        5.29289,
+        10,
+        7.53553
+      ],
+      "to": [
+        11.29289,
+        16,
+        7.53553
+      ],
+      "rotation": {
+        "angle": -45,
+        "axis": "y",
+        "origin": [
+          8.29289,
+          11.5,
+          7.53553
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#2"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            7
+          ],
+          "texture": "#missing"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#2"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            7
+          ],
+          "texture": "#missing"
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            10,
+            0
+          ],
+          "texture": "#missing"
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            10,
+            0
+          ],
+          "texture": "#missing"
+        }
+      }
+    },
+    {
+      "name": "fruit2",
+      "from": [
+        5.29289,
+        10,
+        7.53553
+      ],
+      "to": [
+        11.29289,
+        16,
+        7.53553
+      ],
+      "rotation": {
+        "angle": 45,
+        "axis": "y",
+        "origin": [
+          8.29289,
+          11.5,
+          7.53553
+        ]
+      },
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#2"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            0,
+            7
+          ],
+          "texture": "#missing"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#2"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            0,
+            7
+          ],
+          "texture": "#missing"
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            10,
+            0
+          ],
+          "texture": "#missing"
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            10,
+            0
+          ],
+          "texture": "#missing"
+        }
+      }
+    }
+  ]
+}

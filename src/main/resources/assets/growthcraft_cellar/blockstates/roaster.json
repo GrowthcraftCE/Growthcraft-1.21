@@ -1,0 +1,245 @@
+{
+  "variants": {
+    "facing=north,lit=false,roasting_level=1": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_1"
+    },
+    "facing=south,lit=false,roasting_level=1": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_1",
+      "y": 180
+    },
+    "facing=east,lit=false,roasting_level=1": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_1",
+      "y": 90
+    },
+    "facing=west,lit=false,roasting_level=1": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_1",
+      "y": 270
+    },
+    "facing=north,lit=true,roasting_level=1": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_1"
+    },
+    "facing=south,lit=true,roasting_level=1": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_1",
+      "y": 180
+    },
+    "facing=east,lit=true,roasting_level=1": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_1",
+      "y": 90
+    },
+    "facing=west,lit=true,roasting_level=1": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_1",
+      "y": 270
+    },
+    "facing=north,lit=false,roasting_level=2": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_2"
+    },
+    "facing=south,lit=false,roasting_level=2": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_2",
+      "y": 180
+    },
+    "facing=east,lit=false,roasting_level=2": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_2",
+      "y": 90
+    },
+    "facing=west,lit=false,roasting_level=2": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_2",
+      "y": 270
+    },
+    "facing=north,lit=true,roasting_level=2": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_2"
+    },
+    "facing=south,lit=true,roasting_level=2": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_2",
+      "y": 180
+    },
+    "facing=east,lit=true,roasting_level=2": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_2",
+      "y": 90
+    },
+    "facing=west,lit=true,roasting_level=2": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_2",
+      "y": 270
+    },
+    "facing=north,lit=false,roasting_level=3": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_3"
+    },
+    "facing=south,lit=false,roasting_level=3": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_3",
+      "y": 180
+    },
+    "facing=east,lit=false,roasting_level=3": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_3",
+      "y": 90
+    },
+    "facing=west,lit=false,roasting_level=3": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_3",
+      "y": 270
+    },
+    "facing=north,lit=true,roasting_level=3": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_3"
+    },
+    "facing=south,lit=true,roasting_level=3": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_3",
+      "y": 180
+    },
+    "facing=east,lit=true,roasting_level=3": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_3",
+      "y": 90
+    },
+    "facing=west,lit=true,roasting_level=3": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_3",
+      "y": 270
+    },
+    "facing=north,lit=false,roasting_level=4": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_4"
+    },
+    "facing=south,lit=false,roasting_level=4": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_4",
+      "y": 180
+    },
+    "facing=east,lit=false,roasting_level=4": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_4",
+      "y": 90
+    },
+    "facing=west,lit=false,roasting_level=4": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_4",
+      "y": 270
+    },
+    "facing=north,lit=true,roasting_level=4": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_4"
+    },
+    "facing=south,lit=true,roasting_level=4": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_4",
+      "y": 180
+    },
+    "facing=east,lit=true,roasting_level=4": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_4",
+      "y": 90
+    },
+    "facing=west,lit=true,roasting_level=4": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_4",
+      "y": 270
+    },
+    "facing=north,lit=false,roasting_level=5": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_5"
+    },
+    "facing=south,lit=false,roasting_level=5": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_5",
+      "y": 180
+    },
+    "facing=east,lit=false,roasting_level=5": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_5",
+      "y": 90
+    },
+    "facing=west,lit=false,roasting_level=5": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_5",
+      "y": 270
+    },
+    "facing=north,lit=true,roasting_level=5": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_5"
+    },
+    "facing=south,lit=true,roasting_level=5": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_5",
+      "y": 180
+    },
+    "facing=east,lit=true,roasting_level=5": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_5",
+      "y": 90
+    },
+    "facing=west,lit=true,roasting_level=5": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_5",
+      "y": 270
+    },
+    "facing=north,lit=false,roasting_level=6": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_6"
+    },
+    "facing=south,lit=false,roasting_level=6": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_6",
+      "y": 180
+    },
+    "facing=east,lit=false,roasting_level=6": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_6",
+      "y": 90
+    },
+    "facing=west,lit=false,roasting_level=6": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_6",
+      "y": 270
+    },
+    "facing=north,lit=true,roasting_level=6": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_6"
+    },
+    "facing=south,lit=true,roasting_level=6": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_6",
+      "y": 180
+    },
+    "facing=east,lit=true,roasting_level=6": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_6",
+      "y": 90
+    },
+    "facing=west,lit=true,roasting_level=6": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_6",
+      "y": 270
+    },
+    "facing=north,lit=false,roasting_level=7": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_7"
+    },
+    "facing=south,lit=false,roasting_level=7": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_7",
+      "y": 180
+    },
+    "facing=east,lit=false,roasting_level=7": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_7",
+      "y": 90
+    },
+    "facing=west,lit=false,roasting_level=7": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_7",
+      "y": 270
+    },
+    "facing=north,lit=true,roasting_level=7": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_7"
+    },
+    "facing=south,lit=true,roasting_level=7": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_7",
+      "y": 180
+    },
+    "facing=east,lit=true,roasting_level=7": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_7",
+      "y": 90
+    },
+    "facing=west,lit=true,roasting_level=7": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_7",
+      "y": 270
+    },
+    "facing=north,lit=false,roasting_level=8": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_8"
+    },
+    "facing=south,lit=false,roasting_level=8": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_8",
+      "y": 180
+    },
+    "facing=east,lit=false,roasting_level=8": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_8",
+      "y": 90
+    },
+    "facing=west,lit=false,roasting_level=8": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_8",
+      "y": 270
+    },
+    "facing=north,lit=true,roasting_level=8": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_8"
+    },
+    "facing=south,lit=true,roasting_level=8": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_8",
+      "y": 180
+    },
+    "facing=east,lit=true,roasting_level=8": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_8",
+      "y": 90
+    },
+    "facing=west,lit=true,roasting_level=8": {
+      "model": "growthcraft_cellar:block/roaster_chimney_level_8",
+      "y": 270
+    }
+  }
+
+}

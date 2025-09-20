@@ -41,5 +41,8 @@ public class GrowthcraftDataGenerators {
 
         // Worldgen (configured/placed features and biome modifiers)
         generator.addProvider(event.includeServer(), new GrowthcraftWorldgenProvider(output));
+
+        // Cellar: client-side item models
+        generator.addProvider(event.includeClient(), new growthcraft.cellar.data.CellarItemModels(output, existingFileHelper));
     }
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "block/leaves",
+  "textures": {
+    "all": "growthcraft_cellar:block/cork/cork_tree_leaves"
+  }
+}
