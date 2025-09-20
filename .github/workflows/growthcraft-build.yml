@@ -2,11 +2,16 @@ name: Growthcraft Build and Analyze
 
 on:
   push:
-    branches: ['**']
+    branches: [main, development]
   pull_request:
+    branches: [main, development]
 
 permissions:
   contents: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:
