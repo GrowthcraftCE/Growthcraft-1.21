@@ -1,0 +1,39 @@
+{
+  "name": "Fermenting with Rice",
+  "icon": "growthcraft_rice:sake_fluid_bucket",
+  "category": "growthcraft:rice",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The history of fermenting rice into drinks is a global narrative that transcends cultures and spans millennia. This practice likely began independently in various regions where rice was a staple crop, including Asia, Africa, and parts of the Americas. In Asia, rice-based alcoholic beverages like sake in Japan, makgeolli in Korea, "
+    },
+    {
+      "type": "patchouli:text",
+      "title": "     ",
+      "text": "and rice wine in China have ancient origins, tracing back thousands of years. These drinks served both culinary and ceremonial purposes. In Africa, millet and sorghum-based fermented beverages, often mixed with rice when available, have been brewed for centuries by different ethnic groups. Throughout history, rice fermentation methods have evolved"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "     ",
+      "text": "alongside cultural traditions and technological advancements, giving rise to a diverse array of rice-based drinks enjoyed worldwide, each with its unique flavors, production techniques, and significance within its respective culture."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "     ",
+      "text": "To get started with making fermented rice drinks, you will need to make Rice Water. This is the left over fluid from brewing rice and water in the Brew Kettle.$(br2)Depending on the yeast that you use in the fermentation barrel with the Rice Water will result in either Rice Wine or Sake."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "growthcraft_rice:rice_wine_fluid_bucket",
+      "title": "Rice Wine",
+      "text": "$(bold)Ingredients$()$(li)Rice Water$(li)Bayanus Yeast$(br2)$(bold)Fermentation Time$()$(li)1000 mb$(li)30 secs$(br2)$(bold)Effects$()$(li)Strength I (01:00)"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "growthcraft_rice:sake_fluid_bucket",
+      "title": "Sake",
+      "text": "$(bold)Ingredients$()$(li)Rice Water$(li)Seishu Yeast$(br2)$(bold)Fermentation Time$()$(li)1000 mb$(li)45 secs$(br2)$(bold)Effects$()$(li)Strength II (05:00)"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "type": "cucumber:shaped_no_mirror",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "mysticalagriculture"
+    },
+    {
+      "type": "mysticalagriculture:crop_enabled",
+      "crop": "mysticalagriculture:nature"
+    },
+    {
+      "type": "growthcraft:feature_enabled",
+      "feature": "rice"
+    }
+  ],
+  "pattern": [
+    "   ",
+    "WNW",
+    "DDD"
+  ],
+  "key": {
+    "N": {
+      "item": "mysticalagriculture:nature_essence"
+    },
+    "W": {
+      "item": "mysticalagriculture:water_essence"
+    },
+    "D": {
+      "item": "mysticalagriculture:dirt_essence"
+    }
+  },
+  "result": {
+    "item": "growthcraft_rice:rice",
+    "count": 8
+  }
+}

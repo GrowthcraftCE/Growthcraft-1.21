@@ -1,0 +1,12 @@
+{
+  "name": "Developer's note",
+  "icon": "minecraft:stripped_bamboo_block",
+  "category": "growthcraft:bamboo",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "$(o)Growthcraft mod offered bamboo to players long before vanilla Minecraft did. $(br2)Now that vanilla includes bamboo (as of 1.20), Growthcraft's bamboo content was turned into a resource pack. To activate it go to $(n)main menu$()$(o), then $(n)Options$()$(o) then $(n)Resource packs$()."
+    }
+  ]
+}

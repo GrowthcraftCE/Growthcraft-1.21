@@ -1,9 +1,9 @@
-# Growthcraft 1.21
+# Growthcraft 1.21.1 (NeoForge)
 
-[![Growthcraft Version](https://img.shields.io/badge/Growthcraft-1.21.0.1-orange.svg)](https://github.com/GrowthcraftCE/Growthcraft-1.21)
+[![Growthcraft Version](https://img.shields.io/badge/Growthcraft-1.21.1.1-orange.svg)](https://github.com/GrowthcraftCE/Growthcraft-1.21)
 [![](http://cf.way2muchnoise.eu/versions/growthcraft-community-edition_latest.svg)](https://minecraft.curseforge.com/projects/growthcraft-community-edition/)
 [![](http://cf.way2muchnoise.eu/short_growthcraft-community-edition.svg)](https://minecraft.curseforge.com/projects/growthcraft-community-edition/)
-[![Forge Version](https://img.shields.io/badge/Minecraft%20Forge-51.0.17-yellow.svg)](http://files.minecraftforge.net/maven/net/minecraftforge/forge/index_1.20.1.html)
+[![NeoForge Version](https://img.shields.io/badge/NeoForge-21.1.x-yellow.svg)](https://projects.neoforged.net/neoforged/neoforge)
 
 [![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2FGrowthcraftCE%2FGrowthcraft-1.21%2Fbadge%3Fref%3Ddevelopment&style=flat)](https://actions-badge.atrox.dev/GrowthcraftCE/Growthcraft-1.21/goto?ref=development)
 [![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/GrowthcraftCE/Growthcraft-1.21)
@@ -19,17 +19,11 @@ to our GitHub wiki documentation. As of version 9 we have included an in-game ma
 
 ## History
 
-### Growthcraft 1.21 (Minecraft 1.21)
-
-End of Support: TBD
-Latest Version: 1.21.0.1 
-Stable Version: TBD
-
-### Growthcraft 9 (Minecraft 1.20.1)
+### Growthcraft 1.21 (Minecraft 1.21.1)
 
 End of Support: TBD  
-Latest Version: 9.1.2  
-Stable Version: 9.2.0
+Latest Version: 1.21.1.1  
+Stable Version: 1.21.1.1
 
 ### Growthcraft 8 (Minecraft 1.19.4)
 
@@ -45,7 +39,7 @@ Stable Version: TBD
 
 ### Growthcraft 6 (Minecraft 1.16)
 
-Going from Minecraft Forge 1.12 to 1.16 made a lot of changes to the MCP mappings to the point that it prompted a
+Going from Minecraft NeoForge 1.12 to 1.16 made a lot of changes to the MCP mappings to the point that it prompted a
 complete rewrite from the ground.
 
 End of Support: 31 DEC 2023  
@@ -54,9 +48,11 @@ Stable Version: 6.1.4
 
 ### Growthcraft 4 (Minecraft 1.12.2)
 
-End of Support: 07 JAN 2021  
+End of Support: TBD  
 Latest Version: 4.2.2.1  
 Stable Version: 4.2.2.1
+
+Note: Growthcraft 4 remains supported thanks to ongoing maintenance by Doenerstyle.
 
 ### Growthcraft 2 (Minecraft 1.7.10)
 

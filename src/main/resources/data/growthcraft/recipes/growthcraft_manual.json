@@ -1,0 +1,18 @@
+{
+  "type": "patchouli:shapeless_book_recipe",
+  "ingredients": [
+    {
+      "item": "growthcraft:salt"
+    },
+    {
+      "item": "minecraft:book"
+    }
+  ],
+  "book": "growthcraft:growthcraft",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "patchouli"
+    }
+  ]
+}

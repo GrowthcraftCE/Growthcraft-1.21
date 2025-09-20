@@ -1,0 +1,19 @@
+{
+    "type":"immersiveengineering:fermenter",
+    "energy":1600,
+    "fluid":
+    {
+        "amount":20,
+        "fluid":"immersiveengineering:ethanol"
+    },
+    "input":
+    {
+        "tag":"forge:fruits/grapes"
+    },
+    "conditions": [
+        {
+            "type": "forge:mod_loaded",
+            "modid": "immersiveengineering"
+        }
+    ]
+}

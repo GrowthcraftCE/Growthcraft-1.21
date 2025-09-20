@@ -1,0 +1,34 @@
+{
+  "type": "cucumber:shaped_no_mirror",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "mysticalagriculture"
+    },
+    {
+      "type": "mysticalagriculture:crop_enabled",
+      "crop": "mysticalagriculture:honey"
+    },
+    {
+      "type": "growthcraft:feature_enabled",
+      "feature": "apiary"
+    }
+  ],
+  "pattern": [
+    "A A",
+    " H ",
+    "   "
+  ],
+  "key": {
+    "H": {
+      "item": "mysticalagriculture:honey_essence"
+    },
+    "A": {
+      "item": "mysticalagriculture:air_essence"
+    }
+  },
+  "result": {
+    "item": "growthcraft_apiary:bee",
+    "count": 1
+  }
+}

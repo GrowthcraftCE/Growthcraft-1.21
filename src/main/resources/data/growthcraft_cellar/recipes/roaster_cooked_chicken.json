@@ -1,0 +1,12 @@
+{
+  "type": "growthcraft_cellar:roaster_recipe",
+  "roasting_level": 1,
+  "input_item": {
+    "item": "minecraft:chicken",
+    "count": 1
+  },
+  "result": {
+    "item": "minecraft:cooked_chicken",
+    "count": 1
+  }
+}

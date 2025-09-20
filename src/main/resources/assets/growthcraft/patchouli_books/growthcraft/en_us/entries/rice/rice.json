@@ -1,0 +1,17 @@
+{
+  "name": "Cultivating Rice",
+  "icon": "growthcraft_rice:rice_stalk",
+  "category": "growthcraft:rice",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The earliest evidence of rice cultivation dates back to 7000–5000 BCE in central and eastern China. The first recorded mention of rice comes from China in 2800 BC. The oldest archaeological evidence of rice use by humans has been found in the middle and lower Yangzi River Valley region of China. Phytoliths, silicon microfossils of plant cell structures,"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "     ",
+      "text": "$(br)from rice have been found at the Xianrendong and Diotonghuan sites and dated to 11,000–12,000 bc.$(br2)To start growing rice, you will need Cultivated Farmland. Planting rice onto the farmland will start the growing process. Rice grows in four stages and you can use bone meal to speed up the growth process."
+    }
+  ]
+}

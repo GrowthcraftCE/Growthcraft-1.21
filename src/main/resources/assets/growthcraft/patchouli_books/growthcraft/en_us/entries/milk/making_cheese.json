@@ -1,0 +1,79 @@
+{
+  "name": "Making Cheese",
+  "icon": "growthcraft_milk:textures/item/cheese/appenzeller_aged.png",
+  "category": "growthcraft:milk",
+  "sortnum": 5,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The art of making cheese dates back over 7,000 years ago. This process has remained relatively the same over the ages."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Summary",
+      "text": "$(br)1. Make cultured milk in the mixing vat$(br2)2. Make cheese curds$(br2)3. Drain the cheese curds$(br2)4. Press the curds into a wheel$(br2)5. Age your cheese wheel"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Cultured Milk",
+      "text": "In order to make cultured milk, your mixing vat must have a heat source underneath it. Once the mixing vat is heated, add 4 buckets of Milk, 1 bucket of Rennet and 1 starter culture. Then activate the vat with a wooden stick to start the process. Once the cultured milk is developed, remove the rennet with a bucket. This will leave 4 buckets of cultured milk in your mixing vat."
+    },
+    {
+      "type": "image",
+      "title": "Cheese Curds",
+      "border": true,
+      "images": [
+        "growthcraft:textures/patchouli/screenshots/cheese/cheddar_cheese_curds.png"
+      ],
+      "text": "Next, add ingredients to make cheese curds of your intended cheese."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "growthcraft_milk:mixing_vat"
+    },
+    {
+      "title": "Ingredients",
+      "type": "text",
+      "text": "Cheddar Cheese$(li)1 Salt$(li)1 Orange Dye$(br2)Gorgonzola Cheese$(li)1 Salt$(li)1 Grape$(br2)Emmentaler Cheese$(li)1 Salt$(li)1 Wheat"
+    },
+    {
+      "title": "Ingredients",
+      "type": "text",
+      "text": "Appenzeller Cheese$(li)1 Salt$(li)1 Grape$(li)1 Bayanus Yeast$(br2)Asiago Cheese$(li)1 Salt$(li)1 Salt$(li)1 Yellow Dye$(br2)Parmesan Cheese$(li)1 Salt$(li)1 White Dye"
+    },
+    {
+      "title": "Ingredients",
+      "type": "text",
+      "text": "Monterey Cheese$(li)1 Salt$(li)1 Red Dye$(br2)Provolone Cheese$(li)1 Salt$(li)1 Yellow Dye$(br2)Gouda Cheese$(li)1 Salt$(li)1 Gray Dye"
+    },
+    {
+      "type": "image",
+      "title": "Draining Curds",
+      "border": true,
+      "images": [
+        "growthcraft:textures/patchouli/screenshots/cheese/hanging_cheese_curds.png"
+      ],
+      "text": "Now that you have cheese curds, attach them to the underside of a block to drain."
+    },
+    {
+      "type": "image",
+      "title": "Cheese Press",
+      "border": true,
+      "images": [
+        "growthcraft:textures/patchouli/blocks/cheese_press_hanging_curds.png"
+      ],
+      "text": "Finally, you will need to place the drained curds into a $(l:milk/mixing_vat)Cheese Press$(/l)."
+    },
+    {
+      "title": "Ingredients",
+      "type": "text",
+      "text": "Casu Marzu Cheese$(li)1 Salt$(li)1 Rotten Flesh"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Cheese Aging",
+      "text": "In order to make cheese editable, you will need to age your cheese. This is done by simply placing your cheese wheel down and waiting for it to age.$(br2)Once the cheese wheel has become aged, it will change colors."
+    }
+  ]
+}
+

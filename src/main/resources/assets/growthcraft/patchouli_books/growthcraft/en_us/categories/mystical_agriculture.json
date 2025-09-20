@@ -1,0 +1,7 @@
+{
+  "name": "Mystical Agriculture",
+  "flag": "mod:mysticalagriculture",
+  "description": "We see that you have Mystical Agriculture. As a result, you can grow your Growthcraft resources!",
+  "icon": "mysticalagriculture:textures/item/guide_book.png",
+  "sortnum": 8
+}

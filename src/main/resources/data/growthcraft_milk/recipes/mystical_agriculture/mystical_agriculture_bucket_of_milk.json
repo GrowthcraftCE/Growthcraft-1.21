@@ -1,0 +1,34 @@
+{
+  "type": "cucumber:shaped_no_mirror",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "mysticalagriculture"
+    },
+    {
+      "type": "mysticalagriculture:crop_enabled",
+      "crop": "mysticalagriculture:cow"
+    },
+    {
+      "type": "growthcraft:feature_enabled",
+      "feature": "milk"
+    }
+  ],
+  "pattern": [
+    "   ",
+    "ICI",
+    " I "
+  ],
+  "key": {
+    "I": {
+      "item": "mysticalagriculture:iron_essence"
+    },
+    "C": {
+      "item": "mysticalagriculture:cow_essence"
+    }
+  },
+  "result": {
+    "item": "growthcraft_milk:milk_fluid_bucket",
+    "count": 1
+  }
+}

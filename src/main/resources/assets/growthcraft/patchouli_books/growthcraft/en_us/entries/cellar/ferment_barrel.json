@@ -1,0 +1,20 @@
+{
+  "name": "Fermentation Barrel",
+  "icon": "growthcraft_cellar:fermentation_barrel_oak",
+  "category": "growthcraft:cellar",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "growthcraft_cellar:fermentation_barrel_oak",
+      "title": "Fermentation Barrel",
+      "text": "The fermentation barrel is used to ferment ales, lagers, wines, ciders, and mead. Each of these beverages will apply a different effect upon drinking.$(br2)Place the base fluid into the barrel with the appropriate yeast to produce a fermented product.$(br)The finished product can be extracted with a glass bottle."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "growthcraft_cellar:fermentation_barrel_oak",
+      "title": " ",
+      "text": "The fermentation barrel can fit up to four buckets of fluid, but takes longer to process the more fluid is present."
+    }
+  ]
+}

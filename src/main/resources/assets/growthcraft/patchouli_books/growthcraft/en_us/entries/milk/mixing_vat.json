@@ -1,0 +1,21 @@
+{
+  "name": "Mixing Vat",
+  "icon": "growthcraft_milk:mixing_vat",
+  "category": "growthcraft:milk",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "anchor": "mixing_vat",
+      "text": "The Growthcraft Milk Mixing Vat is used to mix fluids and items to process them into either fluid-based or item-based results such as cheese and cheese curds. Fluids are added to the mixing vat by right-clicking on the block with a filled bucket of fluid. There are two fluid handlers that are accessible by either the top face of the block or the sides."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Items are added by activating the GUI for the block. In order for the mixing vat to start mixing the ingredients, it must be right-click activated by the activation tool listed in the recipe. This is generally a wooden sword or a stick. If the recipe results in an item, there will be a secondary activation tool that will be consumed upon drawing the item (cheese curds require a cheesecloth)."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "growthcraft_milk:mixing_vat"
+    }
+  ]
+}

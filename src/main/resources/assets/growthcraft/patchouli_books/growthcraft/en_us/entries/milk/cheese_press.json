@@ -1,0 +1,29 @@
+{
+  "name": "Cheese Press",
+  "icon": "growthcraft_milk:cheese_press",
+  "category": "growthcraft:milk",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The cheese press is used to press drained cheese curds into cheese wheels.$(br2)Drained cheese curds are added to the press by activating the press with the curds in your primary hand. Once the curds are placed in the press, use a wrench to tighten it. It will take a couple of turns to tighten it closed."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "As the press works you should see fluid particles draining out below it.$(br2)Once the particles stop draining, shift activate the press with the wrench to open it and retrieve the resulting cheese wheel."
+    },
+    {
+      "type": "image",
+      "border": true,
+      "images": [
+        "growthcraft:textures/patchouli/blocks/cheese_press_hanging_curds.png"
+      ],
+      "text": " "
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "growthcraft_milk:cheese_press",
+      "recipe2": "growthcraft:wrench"
+    }
+  ]
+}

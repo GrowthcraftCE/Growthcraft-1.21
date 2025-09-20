@@ -1,0 +1,16 @@
+{
+  "name": "Making Rennet",
+  "icon": "growthcraft_milk:rennet_fluid_bucket",
+  "category": "growthcraft:milk",
+  "sortnum": 8,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Rennet is the basis of making cheese. Rennet is made using the Brew Kettle by boiling either mushrooms, cow stomach, or thistle.$(br2)The amount of rennet produced depends on the ingredients."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(br2)Brown or Red Mushrooms$(li)125mb Rennet$(br2)Cow Stomach$(li)1000mb Rennet$(br2)Thistle$(li)125mb Rennet"
+    }
+  ]
+}

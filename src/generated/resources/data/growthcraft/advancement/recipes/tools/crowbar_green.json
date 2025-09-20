@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_crowbar_green_carpet": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:green_carpet"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_iron_ingots": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:ingots/iron"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "growthcraft:crowbar_green"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_iron_ingots",
+      "has_crowbar_green_carpet"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "growthcraft:crowbar_green"
+    ]
+  }
+}

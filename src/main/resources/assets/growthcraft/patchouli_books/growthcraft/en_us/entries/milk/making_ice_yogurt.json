@@ -1,0 +1,36 @@
+{
+  "name": "Making Yogurt",
+  "icon": "growthcraft_milk:yogurt_apple",
+  "category": "growthcraft:milk",
+  "sortnum": 7,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Interested in making a healthy snack? Make some yogurt."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "growthcraft_milk:yogurt_apple",
+      "recipe2": "growthcraft_milk:yogurt_chocolate"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "growthcraft_milk:yogurt_grape_purple",
+      "recipe2": "growthcraft_milk:yogurt_grape_red"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "growthcraft_milk:yogurt_grape_white",
+      "recipe2": "growthcraft_milk:yogurt_honey"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "growthcraft_milk:yogurt_pumpkin",
+      "recipe": "growthcraft_milk:yogurt_watermelon"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "growthcraft_milk:yogurt_plain"
+    }
+  ]
+}

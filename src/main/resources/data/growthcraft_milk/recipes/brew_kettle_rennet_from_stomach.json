@@ -1,0 +1,29 @@
+{
+  "type": "growthcraft_cellar:brew_kettle_recipe",
+  "requires_heat": true,
+  "requires_lid": "false",
+  "processing_time": 600,
+  "by_product_chance": 1,
+  "input_fluid": {
+    "fluid": "minecraft:water",
+    "amount": 1000
+  },
+  "input_item": {
+    "item": "growthcraft_milk:stomach",
+    "count": 1
+  },
+  "output_fluid": {
+    "fluid": "growthcraft_milk:rennet_fluid_source",
+    "amount": 1000
+  },
+  "by_product": {
+    "item": "minecraft:bone_meal",
+    "count": 1
+  },
+  "conditions": [
+    {
+      "type": "growthcraft:feature_enabled",
+      "feature": "milk"
+    }
+  ]
+}

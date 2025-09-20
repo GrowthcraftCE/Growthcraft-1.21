@@ -1,0 +1,39 @@
+{
+  "type": "growthcraft_milk:mixing_vat_item_recipe",
+  "processing_time": 1200,
+  "requires_heat": true,
+  "result_type": "item",
+  "input_fluid": {
+    "fluid": "growthcraft_milk:cultured_milk_fluid_source",
+    "amount": 4000
+  },
+  "ingredients": [
+    {
+      "tag": "forge:dusts/salt",
+      "count": 1
+    },
+    {
+      "tag": "forge:fruits/grapes",
+      "count": 1
+    },
+    {
+      "item": "growthcraft_cellar:yeast_bayanus",
+      "count": 1
+    }
+  ],
+  "result_item": {
+    "item": "growthcraft_milk:appenzeller_cheese_curds"
+  },
+  "activation_tool": {
+    "item": "minecraft:wooden_sword"
+  },
+  "result_activation_tool": {
+    "item": "growthcraft_milk:cheese_cloth"
+  },
+  "conditions": [
+    {
+      "type": "growthcraft:feature_enabled",
+      "feature": "milk"
+    }
+  ]
+}

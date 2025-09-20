@@ -1,0 +1,22 @@
+{
+  "name": "Guide to Mead",
+  "icon": "growthcraft_cellar:fermentation_barrel_oak",
+  "category": "growthcraft:apiary",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "text",
+      "text": "Honey can be used for a wide range of beneficial elixirs through out the world.$(br2)Our master brewsmiths have been hard at work and have perfected the recipe for mead are are willing to share it with you."
+    },
+    {
+      "type": "text",
+      "text": "To get started you will need to place four filled honey comb and a bucket of water in the Brew Kettle to produce one bucket of Mead Must. The process doesn't take long to complete.$(br2)Next, take your bucket of Mead Must and one bayanus yeast and place them into a ferment barrel. After the yeast has fermented the Mead Must, use a glass bottle or a wine bottle to extract the fresh mead from the barrel.$(br2)The ferment barrel can hold up to four buckets of Mead Must. If you want to ferment all four buckets, you will need four bayanus yeast."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "growthcraft_cellar:potion_wine",
+      "title": "Mead",
+      "text": "$(bold)Honey Mead$()$(li)Bayanus Yeast$(li)Health Boost II (3:00)"
+    }
+  ]
+}

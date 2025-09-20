@@ -1,0 +1,37 @@
+{
+  "name": "Cultivated Farmland",
+  "icon": "growthcraft_rice:cultivated_farmland",
+  "category": "growthcraft:rice",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The history of cultivating farmland is a testament to humanity's ingenuity and its ability to adapt and harness the Earth's resources for sustenance. Dating back over 10,000 years, the origins of agriculture can be traced to ancient civilizations such as the Sumerians, Egyptians, and Chinese, who first tamed and cultivated wild plants and grains."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "     ",
+      "text": "$(br)The Neolithic Revolution marked a pivotal moment when humans transitioned from nomadic hunting and gathering to settled farming, leading to the development of permanent settlements and the growth of early civilizations. Over the millennia, farming practices evolved, with innovations like the plow and irrigation systems boosting agricultural"
+    },
+    {
+      "type": "patchouli:text",
+      "title": "     ",
+      "text": "productivity. The agricultural revolution fueled population growth, trade, and the emergence of complex societies, ultimately shaping the course of human history and laying the foundation for modern agriculture as we know it today."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "growthcraft_rice:cultivator",
+      "text": "To convert your farmland into Cultivated Farmland, you must first craft the cultivator."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "growthcraft_rice:cultivated_farmland",
+      "text": "Now that you have a Cultivator, you can use it on farmland to convert it to cultivated farmland. The cultivated farmland must be near a water source so the it can naturally flood and be ready for you to plant rice on it. If you are impatient, you can use a water bucket bucket on it to instantly flood it."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "growthcraft_rice:rice_stalk",
+      "text": "Once you see that there is a layer of water on top of the farmland, plant your crops that require cultivated farmland.$(br2)Rice grows at about the same rate as wheat."
+    }
+  ]
+}

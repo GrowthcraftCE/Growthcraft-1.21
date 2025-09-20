@@ -1,0 +1,22 @@
+{
+  "name": "Tools",
+  "icon": "growthcraft:wrench",
+  "category": "growthcraft:core",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "growthcraft:wrench",
+      "text": "The wrench can be used to adjust certain blocks within Growthcraft.$(br2)When used on the roaster, it will adjust the smoke stack in order to adjust how long the roaster will process."
+    },
+    {
+      "type": "crafting",
+      "recipe": "growthcraft:wrench"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "growthcraft:crowbar_green",
+      "text": "The crowbar can be crafted into 16 different colors. It used to be used to break blocks and retain their contents. Currently it is only cosmetic."
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Brew Kettle",
+  "icon": "growthcraft_cellar:brew_kettle",
+  "category": "growthcraft:cellar",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "growthcraft_cellar:brew_kettle",
+      "text": "The brew kettle is primarily used to make $(o)Wort$() from water and grain that can then be used to make $(l:cellar/ales_and_lagers)Ales and Lagers$().$(br2)It also makes $(o)Must$() for making $(l:apiary/honey_mead)Mead$(), and $(l:milk/making_rennet)$(o)Rennet$() for making $(l:milk/making_cheese)Cheese$()."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "growthcraft_cellar:brew_kettle"
+    }
+  ]
+}

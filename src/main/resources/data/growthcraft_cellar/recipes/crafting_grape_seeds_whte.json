@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "seeds",
+  "ingredients": [
+    {
+      "item": "growthcraft_cellar:grape_white"
+    }
+  ],
+  "result": {
+    "item": "growthcraft_cellar:grape_seeds_white"
+  }
+}

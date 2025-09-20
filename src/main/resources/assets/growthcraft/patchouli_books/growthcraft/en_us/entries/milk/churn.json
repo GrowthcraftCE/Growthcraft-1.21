@@ -1,0 +1,18 @@
+{
+  "name": "Churn",
+  "icon": "growthcraft_milk:churn",
+  "category": "growthcraft:milk",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The churn is used to make butter and butter milk.$(br2)There currently isn't a use for either, but at least you can still make it."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "growthcraft_milk:churn",
+      "title": "    ",
+      "text": "Add Milk to the churn and activate the pludger by right clicking on the churn. You will see the pludger go up and down. Once is is finished, you can get Butter Milk and Butter from the block."
+    }
+  ]
+}
