@@ -1,6 +1,7 @@
 package growthcraft.core.data.loot;
 
 import growthcraft.core.init.GrowthcraftBlocks;
+import growthcraft.core.init.GrowthcraftItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
@@ -16,7 +17,10 @@ public class GrowthcraftBlockLoot extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        // Generate simple self-drop loot tables for known Growthcraft blocks
+        // Generate loot tables for Growthcraft blocks
+        // Rope block should drop the rope item (since there is no BlockItem for the rope block)
+        this.add(GrowthcraftBlocks.ROPE_LINEN.get(), createSingleItemTable(GrowthcraftItems.ROPE_LINEN.get()));
+
         // Salt blocks and ores (retain existing behavior; custom JSONs may override at runtime)
         this.dropSelf(GrowthcraftBlocks.SALT_BLOCK.get());
         this.dropSelf(GrowthcraftBlocks.SALT_ORE.get());
