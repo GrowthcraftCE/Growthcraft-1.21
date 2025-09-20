@@ -30,7 +30,8 @@ public class ClientFluidTypeExtensions implements IClientFluidTypeExtensions {
     }
 
     public ClientFluidTypeExtensions flowing(String name, String folder) {
-        this.flowing = ResourceLocation.fromNamespaceAndPath(this.modid, folder + "/" + name + "_flowing");
+        // Match asset naming convention: <name>_fluid_flowing.png under textures/<folder>
+        this.flowing = ResourceLocation.fromNamespaceAndPath(this.modid, folder + "/" + name + "_fluid_flowing");
         return this;
     }
 
@@ -44,8 +45,9 @@ public class ClientFluidTypeExtensions implements IClientFluidTypeExtensions {
     }
 
     public ClientFluidTypeExtensions overlay(String name, String folder) {
-        this.overlay = ResourceLocation.fromNamespaceAndPath(this.modid, folder + "/" + name + "_overlay");
-        return renderOverlay(ResourceLocation.fromNamespaceAndPath(this.modid, "textures/" + folder + "/" + name + "_overlay.png"));
+        // Match asset naming convention: <name>_fluid_overlay.png under textures/<folder>
+        this.overlay = ResourceLocation.fromNamespaceAndPath(this.modid, folder + "/" + name + "_fluid_overlay");
+        return renderOverlay(ResourceLocation.fromNamespaceAndPath(this.modid, "textures/" + folder + "/" + name + "_fluid_overlay.png"));
     }
 
     public ClientFluidTypeExtensions renderOverlay(ResourceLocation path) {
@@ -58,7 +60,8 @@ public class ClientFluidTypeExtensions implements IClientFluidTypeExtensions {
     }
 
     public ClientFluidTypeExtensions still(String name, String folder) {
-        this.still = ResourceLocation.fromNamespaceAndPath(this.modid, folder + "/" + name + "_still");
+        // Match asset naming convention: <name>_fluid_still.png under textures/<folder>
+        this.still = ResourceLocation.fromNamespaceAndPath(this.modid, folder + "/" + name + "_fluid_still");
         return this;
     }
 
