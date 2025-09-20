@@ -42,7 +42,9 @@ jobs:
 
       - name: Update Growthcraft-Updates versions JSON
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Use a Personal Access Token with "repo" scope stored as UPDATES_TOKEN secret,
+          # because the default GITHUB_TOKEN cannot write to a different repository.
+          GITHUB_TOKEN: ${{ secrets.UPDATES_TOKEN }}
           UPDATES_OWNER: GrowthcraftCE
           UPDATES_REPO: Growthcraft-Updates
           UPDATES_PATH: growthcraft-versions.json

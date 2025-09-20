@@ -53,7 +53,35 @@ public class RopeItem extends Item {
         Block targetBlock = target.getBlock();
 
         if (!(targetBlock instanceof FenceBlock)) {
-            return InteractionResult.PASS;
+            // Try placing a rope block adjacent to the clicked face
+            BlockPos placePos = pos.relative(context.getClickedFace());
+            BlockState existing = level.getBlockState(placePos);
+            if (!existing.isAir()) {
+                return InteractionResult.PASS;
+            }
+            Block ropeBlock = GrowthcraftBlocks.ROPE_LINEN.get();
+            BlockState ropeState = ropeBlock.defaultBlockState()
+                    .setValue(RopeFenceBlock.KNOT, Boolean.TRUE);
+            // Waterlogging
+            if (level.getFluidState(placePos).isSource()) {
+                ropeState = ropeState.setValue(BlockStateProperties.WATERLOGGED, Boolean.TRUE);
+            }
+            // Compute horizontal connections to adjacent rope blocks or rope fences
+            for (Direction dir : new Direction[]{Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST}) {
+                BlockPos np = placePos.relative(dir);
+                BlockState ns = level.getBlockState(np);
+                Block nb = ns.getBlock();
+                boolean connect = (nb instanceof growthcraft.core.block.RopeBlock) || (nb instanceof RopeFenceBlock);
+                if (dir == Direction.NORTH && ropeState.hasProperty(FenceBlock.NORTH)) ropeState = ropeState.setValue(FenceBlock.NORTH, connect);
+                if (dir == Direction.EAST && ropeState.hasProperty(FenceBlock.EAST)) ropeState = ropeState.setValue(FenceBlock.EAST, connect);
+                if (dir == Direction.SOUTH && ropeState.hasProperty(FenceBlock.SOUTH)) ropeState = ropeState.setValue(FenceBlock.SOUTH, connect);
+                if (dir == Direction.WEST && ropeState.hasProperty(FenceBlock.WEST)) ropeState = ropeState.setValue(FenceBlock.WEST, connect);
+            }
+            level.setBlock(placePos, ropeState, Block.UPDATE_ALL);
+            if (!context.getPlayer().isCreative()) {
+                context.getItemInHand().shrink(1);
+            }
+            return InteractionResult.SUCCESS;
         }
         Block ropeFence = FENCE_TO_ROPE.get(targetBlock);
         if (ropeFence == null) {
