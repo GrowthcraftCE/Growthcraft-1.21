@@ -53,6 +53,8 @@ neoForge {
     // These can be tweaked, removed, or duplicated as needed.
     runs {
         client {
+            // Explicitly set correct NeoForge launch target to avoid accidental Forge target selection
+            type = "neoforgeclientdev"
             client()
 
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
@@ -60,6 +62,8 @@ neoForge {
         }
 
         server {
+            // Explicitly set correct NeoForge launch target
+            type = "neoforgeserverdev"
             server()
             programArgument '--nogui'
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
@@ -74,6 +78,8 @@ neoForge {
         }
 
         data {
+            // Explicitly set correct NeoForge data launch target
+            type = "neoforgedatadev"
             data()
 
             // example of overriding the workingDirectory set in configureEach above, uncomment if you want to use it
