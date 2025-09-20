@@ -67,7 +67,11 @@ public class ClientFluidTypeExtensions implements IClientFluidTypeExtensions {
     }
 
     public ClientFluidTypeExtensions tint(int tint) {
-        // Accept packed ARGB or RGB as provided; preserve alpha for fluid rendering.
+        // Accept packed ARGB or RGB. If no alpha is provided (0x00RRGGBB), default to semi-transparent (0x7F).
+        int alpha = (tint >>> 24) & 0xFF;
+        if (alpha == 0x00) {
+            tint |= 0x7F000000; // default to ~50% transparency when alpha is absent
+        }
         this.tintColor = tint;
         this.tintFunction = ($0, $1, $2) -> this.tintColor;
         return this;

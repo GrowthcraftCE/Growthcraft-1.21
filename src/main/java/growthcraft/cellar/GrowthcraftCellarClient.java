@@ -1,7 +1,11 @@
 package growthcraft.cellar;
 
 import growthcraft.core.Growthcraft;
+import growthcraft.cellar.init.GrowthcraftCellarFluids;
+import growthcraft.lib.fluid.FluidRegistryContainer;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -28,5 +32,14 @@ public class GrowthcraftCellarClient {
         // Some client setup code
         Growthcraft.LOGGER.info("HELLO FROM CLIENT SETUP");
         Growthcraft.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+
+        // Ensure all Growthcraft Cellar fluids render as translucent like water
+        event.enqueueWork(() -> {
+            RenderType translucent = RenderType.translucent();
+            for (FluidRegistryContainer container : GrowthcraftCellarFluids.ALL) {
+                ItemBlockRenderTypes.setRenderLayer(container.source.get(), translucent);
+                ItemBlockRenderTypes.setRenderLayer(container.flowing.get(), translucent);
+            }
+        });
     }
 }

@@ -171,6 +171,13 @@ public class FluidRegistryContainer {
         };
     }
 
+    /**
+     * Exposes the NeoForge BaseFlowingFluid.Properties for this fluid pair (source/flowing).
+     * Mods integrating with Growthcraft can use this to tweak runtime attributes such as
+     * levelDecreasePerBlock, slopeFindDistance, tickRate, or explosionResistance if needed.
+     *
+     * Note: Prefer configuring through AdditionalProperties at registration time when possible.
+     */
     public BaseFlowingFluid.Properties getProperties() {
         return this.properties;
     }
