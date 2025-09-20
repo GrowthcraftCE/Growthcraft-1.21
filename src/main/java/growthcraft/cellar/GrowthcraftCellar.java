@@ -49,6 +49,7 @@ public class GrowthcraftCellar {
     private void buildCreativeTab(BuildCreativeModeTabContentsEvent event) {
         CreativeModeTab tab = event.getTab();
         if (tab == GrowthcraftCreativeTabs.MAIN.get()) {
+            // Grains
             event.accept(GrowthcraftCellarItems.GRAIN);
             event.accept(GrowthcraftCellarItems.GRAIN_AMBER);
             event.accept(GrowthcraftCellarItems.GRAIN_BROWN);
@@ -58,6 +59,37 @@ public class GrowthcraftCellar {
             event.accept(GrowthcraftCellarItems.GRAIN_DEEP_COPPER);
             event.accept(GrowthcraftCellarItems.GRAIN_GOLDEN);
             event.accept(GrowthcraftCellarItems.GRAIN_PALE_GOLDEN);
+
+            // Grapes
+            event.accept(GrowthcraftCellarItems.GRAPE_PURPLE);
+            event.accept(GrowthcraftCellarItems.GRAPE_RED);
+            event.accept(GrowthcraftCellarItems.GRAPE_WHITE);
+
+            // Seeds
+            event.accept(GrowthcraftCellarItems.GRAPE_SEEDS_PURPLE);
+            event.accept(GrowthcraftCellarItems.GRAPE_SEEDS_RED);
+            event.accept(GrowthcraftCellarItems.GRAPE_SEEDS_WHITE);
+            event.accept(GrowthcraftCellarItems.HOPS_SEEDS);
+
+            // Hops & misc
+            event.accept(GrowthcraftCellarItems.HOPS);
+            event.accept(GrowthcraftCellarItems.KINDLING);
+            event.accept(GrowthcraftCellarItems.CORK_BARK);
+            event.accept(GrowthcraftCellarItems.CORK_COASTER);
+
+            // Yeasts
+            event.accept(GrowthcraftCellarItems.YEAST_BAYANUS);
+            event.accept(GrowthcraftCellarItems.YEAST_BAYANUS_ETHEREAL);
+            event.accept(GrowthcraftCellarItems.YEAST_BREWERS);
+            event.accept(GrowthcraftCellarItems.YEAST_BREWERS_ETHEREAL);
+            event.accept(GrowthcraftCellarItems.YEAST_ETHEREAL);
+            event.accept(GrowthcraftCellarItems.YEAST_LAGER);
+            event.accept(GrowthcraftCellarItems.YEAST_LAGER_ETHEREAL);
+
+            // Fluid buckets
+            for (var container : GrowthcraftCellarFluids.ALL) {
+                event.accept(container.bucket.get());
+            }
         }
     }
 

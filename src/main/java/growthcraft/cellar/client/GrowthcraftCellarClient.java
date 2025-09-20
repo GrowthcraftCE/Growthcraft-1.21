@@ -37,11 +37,11 @@ public final class GrowthcraftCellarClient {
         registerGrainColor(event, GrowthcraftCellarItems.GRAIN_GOLDEN, Reference.GrainColor.GRAIN_GOLDEN);
         registerGrainColor(event, GrowthcraftCellarItems.GRAIN_PALE_GOLDEN, Reference.GrainColor.GRAIN_PALE_GOLDEN);
 
-        // Fluid buckets overlay tint (layer 1): use the fluid's client tint color
+        // Fluid buckets fluid tint (layer 0): use the fluid's client tint color
         for (FluidRegistryContainer container : GrowthcraftCellarFluids.ALL) {
             event.register((stack, tintIndex) -> {
-                // Only tint the overlay layer
-                if (tintIndex != 1) return 0xFFFFFFFF;
+                // Only tint the fluid layer (layer0)
+                if (tintIndex != 0) return 0xFFFFFFFF;
                 // Obtain tint from the fluid's client extensions
                 var fluid = container.source.get();
                 int color = IClientFluidTypeExtensions.of(fluid).getTintColor();

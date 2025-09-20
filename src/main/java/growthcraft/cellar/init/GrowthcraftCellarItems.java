@@ -1,6 +1,7 @@
 package growthcraft.cellar.init;
 
 import growthcraft.cellar.config.Reference;
+import growthcraft.cellar.item.EtherealYeastItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -43,12 +44,12 @@ public class GrowthcraftCellarItems {
 
     // Yeasts
     public static final DeferredItem<Item> YEAST_BAYANUS = ITEMS.register(Reference.UnlocalizedName.Item.YEAST_BAYANUS, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> YEAST_BAYANUS_ETHEREAL = ITEMS.register(Reference.UnlocalizedName.Item.YEAST_BAYANUS_ETHEREAL, () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> YEAST_BAYANUS_ETHEREAL = ITEMS.register(Reference.UnlocalizedName.Item.YEAST_BAYANUS_ETHEREAL, () -> new EtherealYeastItem(new Item.Properties()));
     public static final DeferredItem<Item> YEAST_BREWERS = ITEMS.register(Reference.UnlocalizedName.Item.YEAST_BREWERS, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> YEAST_BREWERS_ETHEREAL = ITEMS.register(Reference.UnlocalizedName.Item.YEAST_BREWERS_ETHEREAL, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> YEAST_ETHEREAL = ITEMS.register(Reference.UnlocalizedName.Item.YEAST_ETHEREAL, () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> YEAST_BREWERS_ETHEREAL = ITEMS.register(Reference.UnlocalizedName.Item.YEAST_BREWERS_ETHEREAL, () -> new EtherealYeastItem(new Item.Properties()));
+    public static final DeferredItem<Item> YEAST_ETHEREAL = ITEMS.register(Reference.UnlocalizedName.Item.YEAST_ETHEREAL, () -> new EtherealYeastItem(new Item.Properties()));
     public static final DeferredItem<Item> YEAST_LAGER = ITEMS.register(Reference.UnlocalizedName.Item.YEAST_LAGER, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> YEAST_LAGER_ETHEREAL = ITEMS.register(Reference.UnlocalizedName.Item.YEAST_LAGER_ETHEREAL, () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> YEAST_LAGER_ETHEREAL = ITEMS.register(Reference.UnlocalizedName.Item.YEAST_LAGER_ETHEREAL, () -> new EtherealYeastItem(new Item.Properties()));
 
 
     private GrowthcraftCellarItems() {}
