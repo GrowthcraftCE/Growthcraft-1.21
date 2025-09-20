@@ -82,7 +82,13 @@ public class FluidRegistryContainer {
                     .slopeFindDistance(additionalProperties.slopeFindDistance).tickRate(additionalProperties.tickRate);
         }
 
-        this.block = BLOCK_REGISTRY.register(name + "_fluid", () -> new LiquidBlock(this.source.get(), blockProperties));
+        this.block = BLOCK_REGISTRY.register(name + "_fluid", () -> {
+            BaseFlowingFluid.Source src = this.source.get();
+            if (additionalProperties != null && additionalProperties.blockFactory != null) {
+                return additionalProperties.blockFactory.apply(src, blockProperties);
+            }
+            return new LiquidBlock(src, blockProperties);
+        });
         this.properties.block(() -> this.block.get());
 
         this.bucket = ITEM_REGISTRY.register(name + "_fluid_bucket", () -> new BucketItem(this.source.get(), itemProperties));
@@ -174,6 +180,8 @@ public class FluidRegistryContainer {
         private float explosionResistance = 1;
         private int slopeFindDistance = 4;
         private int tickRate = 5;
+        // Optional factory allowing callers to provide a custom LiquidBlock implementation for the source fluid
+        private java.util.function.BiFunction<BaseFlowingFluid.Source, BlockBehaviour.Properties, LiquidBlock> blockFactory;
 
         public AdditionalProperties explosionResistance(float resistance) {
             this.explosionResistance = resistance;
@@ -192,6 +200,11 @@ public class FluidRegistryContainer {
 
         public AdditionalProperties tickRate(int rate) {
             this.tickRate = rate;
+            return this;
+        }
+
+        public AdditionalProperties customBlock(java.util.function.BiFunction<BaseFlowingFluid.Source, BlockBehaviour.Properties, LiquidBlock> factory) {
+            this.blockFactory = factory;
             return this;
         }
     }

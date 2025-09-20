@@ -7,6 +7,7 @@ import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.material.FluidState;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import org.apache.commons.lang3.function.TriFunction;
+import growthcraft.lib.utils.ColorUtils;
 
 public class ClientFluidTypeExtensions implements IClientFluidTypeExtensions {
     public final String modid;
@@ -16,7 +17,7 @@ public class ClientFluidTypeExtensions implements IClientFluidTypeExtensions {
     public ResourceLocation renderOverlay;
     public Vector3f fogColor;
     public TriFunction<FluidState, BlockAndTintGetter, BlockPos, Integer> tintFunction;
-    public int tintColor;
+    public int tintColor = 0xFFFFFFFF; // default to opaque white (no tint)
 
     public ClientFluidTypeExtensions(String modid, String fluidName) {
         this.modid = modid;
@@ -66,9 +67,14 @@ public class ClientFluidTypeExtensions implements IClientFluidTypeExtensions {
     }
 
     public ClientFluidTypeExtensions tint(int tint) {
+        // Accept packed ARGB or RGB as provided; preserve alpha for fluid rendering.
         this.tintColor = tint;
-        this.tintFunction = ($0, $1, $2) -> tint < 0 ? tint * -1 : tint;
+        this.tintFunction = ($0, $1, $2) -> this.tintColor;
         return this;
+    }
+
+    public ClientFluidTypeExtensions tint(ColorUtils.GrowthcraftColor color) {
+        return tint(color.toIntValue());
     }
 
     public ClientFluidTypeExtensions tint(TriFunction<FluidState, BlockAndTintGetter, BlockPos, Integer> tinter) {
