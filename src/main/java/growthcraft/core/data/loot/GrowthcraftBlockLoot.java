@@ -16,12 +16,27 @@ public class GrowthcraftBlockLoot extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        // Generate simple self-drop loot tables for all registered Growthcraft blocks
+        // Generate simple self-drop loot tables for known Growthcraft blocks
+        // Salt blocks and ores (retain existing behavior; custom JSONs may override at runtime)
         this.dropSelf(GrowthcraftBlocks.SALT_BLOCK.get());
         this.dropSelf(GrowthcraftBlocks.SALT_ORE.get());
         this.dropSelf(GrowthcraftBlocks.SALT_ORE_DEEPSLATE.get());
         this.dropSelf(GrowthcraftBlocks.SALT_ORE_NETHER.get());
         this.dropSelf(GrowthcraftBlocks.SALT_ORE_END.get());
+
+        // Rope Linen Fence variants
+        this.dropSelf(GrowthcraftBlocks.ROPE_LINEN_OAK_FENCE.get());
+        this.dropSelf(GrowthcraftBlocks.ROPE_LINEN_SPRUCE_FENCE.get());
+        this.dropSelf(GrowthcraftBlocks.ROPE_LINEN_BIRCH_FENCE.get());
+        this.dropSelf(GrowthcraftBlocks.ROPE_LINEN_JUNGLE_FENCE.get());
+        this.dropSelf(GrowthcraftBlocks.ROPE_LINEN_DARK_OAK_FENCE.get());
+        this.dropSelf(GrowthcraftBlocks.ROPE_LINEN_ACACIA_FENCE.get());
+        this.dropSelf(GrowthcraftBlocks.ROPE_LINEN_MANGROVE_FENCE.get());
+        this.dropSelf(GrowthcraftBlocks.ROPE_LINEN_CHERRY_FENCE.get());
+        this.dropSelf(GrowthcraftBlocks.ROPE_LINEN_BAMBOO_FENCE.get());
+        this.dropSelf(GrowthcraftBlocks.ROPE_LINEN_NETHER_BRICK_FENCE.get());
+        this.dropSelf(GrowthcraftBlocks.ROPE_LINEN_CRIMSON_FENCE.get());
+        this.dropSelf(GrowthcraftBlocks.ROPE_LINEN_WARPED_FENCE.get());
     }
 
     @Override
