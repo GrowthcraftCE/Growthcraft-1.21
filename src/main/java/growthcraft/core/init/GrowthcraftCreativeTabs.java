@@ -19,6 +19,7 @@ public class GrowthcraftCreativeTabs {
                     .displayItems((params, output) -> {
                         // Materials
                         output.accept(GrowthcraftItems.SALT.get());
+                        output.accept(GrowthcraftItems.ROPE_LINEN.get());
 
                         // Blocks
                         output.accept(GrowthcraftItems.SALT_BLOCK.get());

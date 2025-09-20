@@ -14,6 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.item.Items;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -38,6 +39,18 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
                 .requires(GrowthcraftItems.SALT_BLOCK.get())
                 .unlockedBy(getHasName(GrowthcraftItems.SALT_BLOCK.get()), has(GrowthcraftItems.SALT_BLOCK.get()))
                 .save(output, ResourceLocation.fromNamespaceAndPath(Reference.MODID, "salt_from_block"));
+
+        // Rope (linen) recipe: 8x rope_linen from string and lead
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftItems.ROPE_LINEN.get(), 8)
+                .pattern("AAA")
+                .pattern("ABA")
+                .pattern("AAA")
+                .define('A', Items.STRING)
+                .define('B', Items.LEAD)
+                .group("growthcraft")
+                .unlockedBy(getHasName(Items.STRING), has(Items.STRING))
+                .unlockedBy(getHasName(Items.LEAD), has(Items.LEAD))
+                .save(output, ResourceLocation.fromNamespaceAndPath(Reference.MODID, "rope_linen"));
 
         // Crowbar recipes (shaped) using common tags for NeoForge
         TagKey<Item> IRON_NUGGETS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "nuggets/iron"));

@@ -201,3 +201,52 @@ idea {
 tasks.withType(ProcessResources).configureEach {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
+
+// Automatically run data generation when data generator sources change.
+// This task stays up-to-date unless files under the data generator sources are modified.
+// When it does run (i.e., inputs changed), it finalizes by invoking the runData task.
+// Usage: it is wired into the 'check' lifecycle so regular builds/checks will honor it.
+def dataGenSourceFiles = files(
+        fileTree(dir: 'src/main/java', include: [
+                // Common locations for datagen code
+                '**/data/**/*.java',
+                '**/datagen/**/*.java',
+                'growthcraft/**/data/**/*.java',
+                'growthcraft/**/datagen/**/*.java'
+        ]),
+        // Explicitly include well-known classes
+        'src/main/java/growthcraft/core/data/GrowthcraftDataGenerators.java',
+        'src/main/java/growthcraft/core/data/worldgen/GrowthcraftWorldgenProvider.java',
+        'src/main/java/growthcraft/core/data/tags/GrowthcraftBlockTags.java',
+        'src/main/java/growthcraft/core/data/recipe/GrowthcraftRecipeProvider.java'
+)
+
+tasks.register('checkDataGeneratorChanges') {
+    group = 'verification'
+    description = 'Runs runData if data generator sources changed since last run.'
+
+    // Track datagen sources as inputs so Gradle can determine if this task is up-to-date
+    inputs.files(dataGenSourceFiles)
+            .withPropertyName('dataGenSources')
+            .withPathSensitivity(PathSensitivity.RELATIVE)
+
+    // Single marker file to enable up-to-date checks
+    def marker = layout.buildDirectory.file('datagen/check.marker')
+    outputs.file(marker)
+
+    doLast {
+        def markerFile = marker.get().asFile
+        markerFile.parentFile.mkdirs()
+        markerFile.text = String.valueOf(System.currentTimeMillis())
+        logger.lifecycle('Detected changes in data generator sources. Executing runData...')
+    }
+
+    // Only triggers when this task actually executes (i.e., when inputs changed)
+    finalizedBy 'runData'
+}
+
+// Make the standard verification lifecycle depend on the check task above
+// so regular builds will run datagen when needed.
+plugins.withId('java') {
+    tasks.named('check') { dependsOn 'checkDataGeneratorChanges' }
+}
