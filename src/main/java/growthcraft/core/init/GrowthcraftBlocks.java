@@ -1,5 +1,6 @@
 package growthcraft.core.init;
 
+import growthcraft.core.block.RopeBlock;
 import growthcraft.core.block.RopeFenceBlock;
 import growthcraft.core.config.Reference;
 import net.minecraft.world.level.block.Block;
@@ -9,6 +10,11 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class GrowthcraftBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Reference.MODID);
+
+    // Rope blocks
+    public static final DeferredBlock<RopeBlock> ROPE_LINEN = BLOCKS.register(Reference.UnlocalizedName.Block.ROPE_LINEN,
+            () -> new RopeBlock(BlockBehaviour.Properties.of().strength(0.2F)))
+    ;
 
     // Salt blocks and ores
     public static final DeferredBlock<Block> SALT_BLOCK = BLOCKS.register(Reference.UnlocalizedName.Block.SALT_BLOCK,

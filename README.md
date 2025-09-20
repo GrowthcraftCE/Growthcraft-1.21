@@ -1,12 +1,10 @@
 # Growthcraft 1.21.1 (NeoForge)
 
-[![Growthcraft Version](https://img.shields.io/badge/Growthcraft-1.21.1.1-orange.svg)](https://github.com/GrowthcraftCE/Growthcraft-1.21)
+[![Growthcraft Version](https://img.shields.io/badge/Growthcraft-1.21.1.2-orange.svg)](https://github.com/GrowthcraftCE/Growthcraft-1.21)
 [![](http://cf.way2muchnoise.eu/versions/growthcraft-community-edition_latest.svg)](https://minecraft.curseforge.com/projects/growthcraft-community-edition/)
 [![](http://cf.way2muchnoise.eu/short_growthcraft-community-edition.svg)](https://minecraft.curseforge.com/projects/growthcraft-community-edition/)
 [![NeoForge Version](https://img.shields.io/badge/NeoForge-21.1.x-yellow.svg)](https://projects.neoforged.net/neoforged/neoforge)
-
 [![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2FGrowthcraftCE%2FGrowthcraft-1.21%2Fbadge%3Fref%3Ddevelopment&style=flat)](https://actions-badge.atrox.dev/GrowthcraftCE/Growthcraft-1.21/goto?ref=development)
-[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/GrowthcraftCE/Growthcraft-1.21)
 [![Discord Channel](https://img.shields.io/discord/333690296334548994.svg?color=green)](https://discord.gg/Quh76Jn)
 
 Welcome to Growthcraft. Growthcraft is a collection of Minecraft mods that adds an extra layer of immersion into the
@@ -22,8 +20,8 @@ to our GitHub wiki documentation. As of version 9 we have included an in-game ma
 ### Growthcraft 1.21 (Minecraft 1.21.1)
 
 End of Support: TBD  
-Latest Version: 1.21.1.1  
-Stable Version: 1.21.1.1
+Latest Version: 1.21.1.2  
+Stable Version: 1.21.1.2
 
 ### Growthcraft 8 (Minecraft 1.19.4)
 
@@ -75,3 +73,14 @@ Stable Version: 2.1.0a
 
 The original Growthcraft mod was created and developed by Gwafu. He did a lot of improving it over a period of three
 years. 
+
+
+## Versioning Policy
+
+We maintain the mod_version in gradle.properties using a Minecraft-version-prefixed scheme (e.g., 1.21.1.x). Whenever a significant feature or behavior change is completed (for example, the Rope block implementation), increment the version:
+
+- Update mod_version in gradle.properties.
+- Update the version badge at the top of README.md and the History section's Latest/Stable lines.
+- Include the version bump in the same PR as the feature or immediately after.
+
+Use patch-level bumps (the final number) for additive features, fixes, and small changes. Consider minor/major schema changes if we later adopt broader semver rules.
