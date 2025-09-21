@@ -1,9 +1,12 @@
 package growthcraft.cellar;
 
 import growthcraft.cellar.init.GrowthcraftCellarFluids;
+import growthcraft.cellar.init.GrowthcraftCellarMenus;
+import growthcraft.cellar.client.screen.CultureJarScreen;
 import growthcraft.core.Growthcraft;
 import growthcraft.lib.fluid.FluidRegistryContainer;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.neoforged.api.distmarker.Dist;
@@ -14,6 +17,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
 // This class will not load on dedicated servers. Accessing client side code from here is safe.
 @Mod(value = Growthcraft.MODID, dist = Dist.CLIENT)
@@ -40,7 +44,12 @@ public class GrowthcraftCellarClient {
                 ItemBlockRenderTypes.setRenderLayer(container.source.get(), translucent);
                 ItemBlockRenderTypes.setRenderLayer(container.flowing.get(), translucent);
             }
+
         });
     }
 
+    @SubscribeEvent
+    static void registerScreens(RegisterMenuScreensEvent event) {
+        event.register(GrowthcraftCellarMenus.CULTURE_JAR.get(), CultureJarScreen::new);
+    }
 }

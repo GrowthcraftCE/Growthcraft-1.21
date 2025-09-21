@@ -6,6 +6,7 @@ import growthcraft.cellar.config.Reference;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.cellar.init.GrowthcraftCellarFluids;
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
+import growthcraft.cellar.init.GrowthcraftCellarBlockEntities;
 import growthcraft.core.init.GrowthcraftCreativeTabs;
 import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.bus.api.IEventBus;
@@ -35,6 +36,8 @@ public class GrowthcraftCellar {
         GrowthcraftCellarFluids.FLUID_TYPES.register(modEventBus);
         GrowthcraftCellarFluids.FLUIDS.register(modEventBus);
         GrowthcraftCellarFluids.BLOCKS.register(modEventBus);
+        GrowthcraftCellarBlockEntities.BLOCK_ENTITY_TYPES.register(modEventBus);
+        growthcraft.cellar.init.GrowthcraftCellarMenus.MENUS.register(modEventBus);
 
         // Add creative tab contributions
         modEventBus.addListener(this::buildCreativeTab);

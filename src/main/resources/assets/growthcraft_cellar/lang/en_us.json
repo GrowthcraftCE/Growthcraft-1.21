@@ -146,5 +146,6 @@
   "emi.category.growthcraft_cellar.jar1": "Culturing (starters)",
   "emi.category.growthcraft_cellar.jar2": "Culturing",
   "emi.category.growthcraft_cellar.book": "Other",
-  "label.growthcraft_cellar.roaster_level": "Roaster level: %s"
+  "label.growthcraft_cellar.roaster_level": "Roaster level: %s",
+  "gui.growthcraft_cellar.empty": "Empty"
 }
