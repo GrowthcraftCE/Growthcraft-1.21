@@ -53,9 +53,9 @@ public record FluidTankRenderer(int width, int height, int capacityMb, float alp
         int yTop = y + (height - filled);
 
         IClientFluidTypeExtensions ext = IClientFluidTypeExtensions.of(stack.getFluid());
-        // Prefer the still texture for GUI rendering, fall back to flowing if still is missing.
-        ResourceLocation tex = ext.getStillTexture();
-        if (tex == null) tex = ext.getFlowingTexture();
+        // Test: Prefer the flowing texture for GUI rendering, fall back to still if flowing is missing.
+        ResourceLocation tex = ext.getFlowingTexture();
+        if (tex == null) tex = ext.getStillTexture();
         if (tex == null) return;
 
         var atlas = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS);
@@ -109,9 +109,9 @@ public record FluidTankRenderer(int width, int height, int capacityMb, float alp
 
         var mc = Minecraft.getInstance();
         IClientFluidTypeExtensions ext = IClientFluidTypeExtensions.of(stack.getFluid());
-        // Prefer the still texture for GUI rendering, fall back to flowing if still is missing.
-        ResourceLocation tex = ext.getStillTexture();
-        if (tex == null) tex = ext.getFlowingTexture();
+        // Test: Prefer the flowing texture for GUI rendering, fall back to still if flowing is missing.
+        ResourceLocation tex = ext.getFlowingTexture();
+        if (tex == null) tex = ext.getStillTexture();
         if (tex == null) return;
 
         var atlas = mc.getTextureAtlas(InventoryMenu.BLOCK_ATLAS);

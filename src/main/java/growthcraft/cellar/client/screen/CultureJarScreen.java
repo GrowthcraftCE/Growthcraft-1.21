@@ -34,9 +34,9 @@ public class CultureJarScreen extends AbstractContainerScreen<CultureJarMenu> {
     protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
         graphics.blit(TEXTURE, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
 
-        // Draw fluid tank contents via reusable renderer with shimmer effect
+        // Draw fluid tank contents via reusable renderer (flowing texture animates via atlas)
         FluidStack stack = this.menu.getClientFluidStack();
-        this.tankRenderer.renderWithShimmer(graphics, this.leftPos + TANK_X, this.topPos + TANK_Y, stack);
+        this.tankRenderer.render(graphics, this.leftPos + TANK_X, this.topPos + TANK_Y, stack);
     }
 
     @Override
