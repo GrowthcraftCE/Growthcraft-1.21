@@ -83,8 +83,9 @@ public class RopeFenceBlock extends FenceBlock {
 
     @Override
     public boolean connectsTo(BlockState neighborState, boolean neighborIsFullBlock, Direction side) {
-        // Allow normal fence connections plus connect to RopeBlock
+        // Allow normal fence connections plus connect to RopeBlock and other RopeFenceBlocks
         if (neighborState.getBlock() instanceof RopeBlock) return true;
+        if (neighborState.getBlock() instanceof RopeFenceBlock) return true;
         return super.connectsTo(neighborState, neighborIsFullBlock, side);
     }
 
