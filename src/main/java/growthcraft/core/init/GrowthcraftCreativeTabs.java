@@ -29,7 +29,6 @@ public class GrowthcraftCreativeTabs {
                         output.accept(GrowthcraftItems.SALT_ORE_END.get());
 
                         // Tools
-                        output.accept(GrowthcraftItems.WRENCH.get());
                         output.accept(GrowthcraftItems.CROWBAR_WHITE.get());
                         output.accept(GrowthcraftItems.CROWBAR_LIGHT_GRAY.get());
                         output.accept(GrowthcraftItems.CROWBAR_GRAY.get());

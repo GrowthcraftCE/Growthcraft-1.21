@@ -7,7 +7,7 @@
     {
       "type": "spotlight",
       "item": "growthcraft_cellar:roaster",
-      "text": "The roaster is used to roast grain and food items.$(br2)Use the wrench to adjust the roasting level and the roaster will roast an entire stack of items.$(br2)The roaster will also need a heat source under it."
+      "text": "The roaster is used to roast grain and food items.$(br2)Use the crowbar to adjust the roasting level and the roaster will roast an entire stack of items.$(br2)The roaster will also need a heat source under it."
     },
     {
       "type": "image",

@@ -22,7 +22,6 @@ public class Reference {
         }
 
         public static final class Item {
-            public static final String WRENCH = "wrench";
             public static final String SALT = "salt";
             // Rope items
             public static final String ROPE = "rope";

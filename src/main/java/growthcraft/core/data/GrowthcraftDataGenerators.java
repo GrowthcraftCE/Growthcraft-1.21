@@ -5,6 +5,7 @@ import growthcraft.core.data.loot.GrowthcraftBlockLoot;
 import growthcraft.core.data.recipe.GrowthcraftRecipeProvider;
 import growthcraft.core.data.worldgen.GrowthcraftWorldgenProvider;
 import growthcraft.core.data.tags.GrowthcraftBlockTags;
+import growthcraft.core.data.tags.GrowthcraftItemTags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -35,6 +36,9 @@ public class GrowthcraftDataGenerators {
 
         // Block tags (mineable, needs_* tool level, etc.)
         generator.addProvider(event.includeServer(), new GrowthcraftBlockTags(output, lookupProvider, existingFileHelper));
+
+        // Item tags (crowbars in common wrench tag)
+        generator.addProvider(event.includeServer(), new GrowthcraftItemTags(output, lookupProvider));
 
         // Recipes
         generator.addProvider(event.includeServer(), new GrowthcraftRecipeProvider(output, lookupProvider));
