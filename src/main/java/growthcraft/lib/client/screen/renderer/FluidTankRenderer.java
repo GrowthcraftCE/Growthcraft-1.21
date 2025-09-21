@@ -1,6 +1,7 @@
 package growthcraft.lib.client.screen.renderer;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
@@ -52,13 +53,15 @@ public record FluidTankRenderer(int width, int height, int capacityMb, float alp
         int yTop = y + (height - filled);
 
         IClientFluidTypeExtensions ext = IClientFluidTypeExtensions.of(stack.getFluid());
-        ResourceLocation stillTex = ext.getStillTexture();
-        if (stillTex == null) return;
+        // Prefer the still texture for GUI rendering, fall back to flowing if still is missing.
+        ResourceLocation tex = ext.getStillTexture();
+        if (tex == null) tex = ext.getFlowingTexture();
+        if (tex == null) return;
 
         var atlas = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS);
-        var sprite = atlas.apply(stillTex);
+        var sprite = atlas.apply(tex);
 
-        int tint = ext.getTintColor(stack);
+        int tint = ext.getTintColor();
         float a = ((tint >>> 24) & 0xFF) / 255.0f;
         float r = ((tint >>> 16) & 0xFF) / 255.0f;
         float g = ((tint >>> 8) & 0xFF) / 255.0f;
@@ -91,5 +94,61 @@ public record FluidTankRenderer(int width, int height, int capacityMb, float alp
         // draw as a 1x1 white pixel stretched: use fill with color via GuiGraphics
         graphics.fill(x, y, x + this.width, y + this.height, argbColor);
         graphics.setColor(1f, 1f, 1f, 1f);
+    }
+
+    /**
+     * Render fluid with a subtle animated shimmer overlay. Call this instead of render() for the effect.
+     */
+    public void renderWithShimmer(GuiGraphics graphics, int x, int y, FluidStack stack) {
+        if (stack == null || stack.isEmpty()) return;
+        int amount = stack.getAmount();
+        if (amount <= 0) return;
+
+        int filled = Math.max(1, (int) Math.floor((amount / (double) capacityMb) * height));
+        int yTop = y + (height - filled);
+
+        var mc = Minecraft.getInstance();
+        IClientFluidTypeExtensions ext = IClientFluidTypeExtensions.of(stack.getFluid());
+        // Prefer the still texture for GUI rendering, fall back to flowing if still is missing.
+        ResourceLocation tex = ext.getStillTexture();
+        if (tex == null) tex = ext.getFlowingTexture();
+        if (tex == null) return;
+
+        var atlas = mc.getTextureAtlas(InventoryMenu.BLOCK_ATLAS);
+        var sprite = atlas.apply(tex);
+
+        int tint = ext.getTintColor();
+        float a = ((tint >>> 24) & 0xFF) / 255.0f;
+        float r = ((tint >>> 16) & 0xFF) / 255.0f;
+        float g = ((tint >>> 8) & 0xFF) / 255.0f;
+        float b = (tint & 0xFF) / 255.0f;
+        a = a * this.alphaScale;
+
+        // Base pass (same as render)
+        RenderSystem.enableBlend();
+        RenderSystem.defaultBlendFunc();
+        graphics.setColor(r, g, b, a);
+        graphics.blit(x, yTop, 0, this.width, filled, sprite);
+
+        // Shimmer overlay pass: extremely subtle highlight with a time-based alpha pulse
+        double tSec = (Util.getMillis() % 9000L) / 1000.0; // 9s loop (slower shimmer)
+        float pulse = (float)(0.015 + 0.020 * Math.sin(tSec * Math.PI * 2.0)); // 0.015..0.035
+
+        // Use a neutral white highlight so we preserve the texture detail and hue
+        float sr = 1f;
+        float sg = 1f;
+        float sb = 1f;
+
+        // Use default alpha blending to avoid washing out details
+        RenderSystem.enableBlend();
+        RenderSystem.defaultBlendFunc();
+
+        graphics.setColor(sr, sg, sb, pulse);
+        graphics.blit(x, yTop, 1, this.width, filled, sprite);
+
+        // Cleanup state
+        graphics.setColor(1f, 1f, 1f, 1f);
+        RenderSystem.defaultBlendFunc();
+        RenderSystem.disableBlend();
     }
 }
