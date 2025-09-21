@@ -1,31 +1,28 @@
 package growthcraft.cellar.client.screen;
 
-import growthcraft.cellar.menu.CultureJarMenu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Inventory;
 
-public class CultureJarScreen extends AbstractContainerScreen<CultureJarMenu> {
+public class CultureJarScreen extends Screen {
     private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("growthcraft_cellar", "textures/gui/culture_jar_screen.png");
+    private int imageWidth = 176;
+    private int imageHeight = 166;
+    private int leftPos;
+    private int topPos;
 
-    public CultureJarScreen(CultureJarMenu menu, Inventory playerInventory, Component title) {
-        super(menu, playerInventory, title);
-        this.imageWidth = 176;
-        this.imageHeight = 166;
-    }
-
-    @Override
-    protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
-        graphics.blit(TEXTURE, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
+    public CultureJarScreen() {
+        super(Component.translatable("container.growthcraft_cellar.culture_jar"));
     }
 
     @Override
     protected void init() {
         super.init();
-        // Explicitly disable menu background blur for this in-world container screen
+        this.leftPos = (this.width - this.imageWidth) / 2;
+        this.topPos = (this.height - this.imageHeight) / 2;
+        // Explicitly disable menu background blur for this non-container in-world GUI
         Minecraft.getInstance().gameRenderer.shutdownEffect();
     }
 
@@ -33,15 +30,11 @@ public class CultureJarScreen extends AbstractContainerScreen<CultureJarMenu> {
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         // Ensure any menu background blur is disabled for this screen on each frame
         Minecraft.getInstance().gameRenderer.shutdownEffect();
-        // Follow vanilla container render order to avoid filter/blur artifacts
+        // Let the base Screen render once (this will invoke our non-blur background)
         super.render(graphics, mouseX, mouseY, partialTick);
-        this.renderTooltip(graphics, mouseX, mouseY);
-    }
-
-    @Override
-    protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
-        graphics.drawString(this.font, this.title, 8, 6, 4210752, false);
-        graphics.drawString(this.font, this.playerInventoryTitle, 8, this.imageHeight - 96 + 2, 4210752, false);
+        // Now draw our GUI texture and labels on top so they are not darkened by the background overlay
+        graphics.blit(TEXTURE, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
+        graphics.drawString(this.font, this.title, this.leftPos + 8, this.topPos + 6, 4210752, false);
     }
 
     @Override
