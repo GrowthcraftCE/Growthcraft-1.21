@@ -35,6 +35,9 @@ public class CrowbarItem extends SwordItem {
         float displaySpeed = 4.0F + (-2.4F);
 
         // Prepend numbers to attribute names
+        tooltip.add(Component.translatable("item.modifiers.mainhand")
+                .append(Component.literal(":"))
+                .withStyle(ChatFormatting.GRAY));
         tooltip.add(Component.literal(" " + formatNumber(displayDamage) + " ")
                 .append(Component.translatable("attribute.name.generic.attack_damage"))
                 .withStyle(ChatFormatting.DARK_GREEN));
