@@ -37,10 +37,10 @@ public class CrowbarItem extends SwordItem {
         // Prepend numbers to attribute names
         tooltip.add(Component.literal(" " + formatNumber(displayDamage) + " ")
                 .append(Component.translatable("attribute.name.generic.attack_damage"))
-                .withStyle(ChatFormatting.GREEN));
+                .withStyle(ChatFormatting.DARK_GREEN));
         tooltip.add(Component.literal(" " + formatNumber(displaySpeed) + " ")
                 .append(Component.translatable("attribute.name.generic.attack_speed"))
-                .withStyle(ChatFormatting.GREEN));
+                .withStyle(ChatFormatting.DARK_GREEN));
     }
 
     private static String formatNumber(float value) {
