@@ -5,6 +5,7 @@ import growthcraft.cellar.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.config.Reference;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.cellar.init.GrowthcraftCellarFluids;
+import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.core.init.GrowthcraftCreativeTabs;
 import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.bus.api.IEventBus;
@@ -25,11 +26,12 @@ public class GrowthcraftCellar {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public GrowthcraftCellar(IEventBus modEventBus, ModContainer modContainer) {
-        // Register the commonSetup method for modloading
+        // Register the commonSetup
         modEventBus.addListener(this::commonSetup);
 
         // Register Deferred Registers
         GrowthcraftCellarItems.ITEMS.register(modEventBus);
+        GrowthcraftCellarBlocks.BLOCKS.register(modEventBus);
         GrowthcraftCellarFluids.FLUID_TYPES.register(modEventBus);
         GrowthcraftCellarFluids.FLUIDS.register(modEventBus);
         GrowthcraftCellarFluids.BLOCKS.register(modEventBus);
@@ -49,6 +51,9 @@ public class GrowthcraftCellar {
     private void buildCreativeTab(BuildCreativeModeTabContentsEvent event) {
         CreativeModeTab tab = event.getTab();
         if (tab == GrowthcraftCreativeTabs.MAIN.get()) {
+            // Blocks
+            event.accept(GrowthcraftCellarItems.CULTURE_JAR);
+
             // Grains
             event.accept(GrowthcraftCellarItems.GRAIN);
             event.accept(GrowthcraftCellarItems.GRAIN_AMBER);

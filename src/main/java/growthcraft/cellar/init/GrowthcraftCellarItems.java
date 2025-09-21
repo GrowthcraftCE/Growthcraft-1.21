@@ -2,6 +2,7 @@ package growthcraft.cellar.init;
 
 import growthcraft.cellar.config.Reference;
 import growthcraft.cellar.item.EtherealYeastItem;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -12,6 +13,9 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class GrowthcraftCellarItems {
     // Register items under the Cellar modid
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Reference.MODID);
+
+    // Blocks (BlockItems)
+    public static final DeferredItem<Item> CULTURE_JAR = ITEMS.register(Reference.UnlocalizedName.Block.CULTURE_JAR, () -> new BlockItem(GrowthcraftCellarBlocks.CULTURE_JAR.get(), new Item.Properties()));
 
     // Grains (base + color variants)
     public static final DeferredItem<Item> GRAIN = ITEMS.register(Reference.UnlocalizedName.Item.GRAIN, () -> new Item(new Item.Properties()));

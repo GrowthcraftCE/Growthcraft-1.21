@@ -52,9 +52,19 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(Items.LEAD), has(Items.LEAD))
                 .save(output, ResourceLocation.fromNamespaceAndPath(Reference.MODID, "rope_linen"));
 
+        // Wrench recipe (shaped) using iron ingots and a stick
+        TagKey<Item> IRON_INGOTS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "ingots/iron"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, GrowthcraftItems.WRENCH.get())
+                .pattern(" II")
+                .pattern(" SI")
+                .pattern("I  ")
+                .define('I', IRON_INGOTS)
+                .define('S', Items.STICK)
+                .unlockedBy("has_iron_ingots", has(IRON_INGOTS))
+                .save(output, ResourceLocation.fromNamespaceAndPath(Reference.MODID, Reference.UnlocalizedName.Item.WRENCH));
+
         // Crowbar recipes (shaped) using common tags for NeoForge
         TagKey<Item> IRON_NUGGETS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "nuggets/iron"));
-        TagKey<Item> IRON_INGOTS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "ingots/iron"));
 
         // Pattern:
         //   "  A"

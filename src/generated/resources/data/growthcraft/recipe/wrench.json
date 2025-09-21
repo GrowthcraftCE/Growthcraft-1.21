@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    " II",
+    " SI",
+    "I  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "growthcraft:wrench"
+  }
+}

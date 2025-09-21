@@ -10,7 +10,8 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class GrowthcraftItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Reference.MODID);
 
-    // Simple materials
+    // Simple materials / tools
+    public static final DeferredItem<Item> WRENCH = ITEMS.register(Reference.UnlocalizedName.Item.WRENCH, () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> SALT = ITEMS.register(Reference.UnlocalizedName.Item.SALT, () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> ROPE_LINEN = ITEMS.register(Reference.UnlocalizedName.Item.ROPE_LINEN, () -> new RopeItem(new Item.Properties()));
 
