@@ -22,15 +22,19 @@ public class CultureJarGuiScreen extends Screen {
         super.init();
         this.leftPos = (this.width - this.imageWidth) / 2;
         this.topPos = (this.height - this.imageHeight) / 2;
+        // Explicitly disable menu background blur for this non-container in-world GUI
+        Minecraft.getInstance().gameRenderer.shutdownEffect();
     }
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        // Draw a simple translucent background without invoking menu blur
-        graphics.fill(0, 0, this.width, this.height, 0xA0000000);
+        // Ensure any menu background blur is disabled for this screen on each frame
+        Minecraft.getInstance().gameRenderer.shutdownEffect();
+        // Let the base Screen render once (this will invoke our non-blur background)
+        super.render(graphics, mouseX, mouseY, partialTick);
+        // Now draw our GUI texture and labels on top so they are not darkened by the background overlay
         graphics.blit(TEXTURE, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
         graphics.drawString(this.font, this.title, this.leftPos + 8, this.topPos + 6, 4210752, false);
-        super.render(graphics, mouseX, mouseY, partialTick);
     }
 
     @Override
@@ -38,18 +42,9 @@ public class CultureJarGuiScreen extends Screen {
         return false;
     }
 
+    // Override background rendering to avoid any menu blur being applied by the base Screen implementation
     @Override
-    public void removed() {
-        // Ensure any active post effect (e.g., blur) is shut down when this screen is removed
-        Minecraft.getInstance().gameRenderer.shutdownEffect();
-        super.removed();
+    public void renderBackground(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        graphics.fill(0, 0, this.width, this.height, 0xA0000000);
     }
-
-    @Override
-    public void onClose() {
-        // Also ensure shutdown on close in case different lifecycle path is taken
-        Minecraft.getInstance().gameRenderer.shutdownEffect();
-        super.onClose();
-    }
-
 }

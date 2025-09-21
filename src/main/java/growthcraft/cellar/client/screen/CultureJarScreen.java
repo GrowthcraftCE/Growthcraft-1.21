@@ -1,7 +1,5 @@
 package growthcraft.cellar.client.screen;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import growthcraft.cellar.menu.CultureJarMenu;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -25,9 +23,17 @@ public class CultureJarScreen extends AbstractContainerScreen<CultureJarMenu> {
     }
 
     @Override
+    protected void init() {
+        super.init();
+        // Explicitly disable menu background blur for this in-world container screen
+        Minecraft.getInstance().gameRenderer.shutdownEffect();
+    }
+
+    @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        // Draw a simple translucent background without invoking menu blur
-        graphics.fill(0, 0, this.width, this.height, 0xA0000000);
+        // Ensure any menu background blur is disabled for this screen on each frame
+        Minecraft.getInstance().gameRenderer.shutdownEffect();
+        // Follow vanilla container render order to avoid filter/blur artifacts
         super.render(graphics, mouseX, mouseY, partialTick);
         this.renderTooltip(graphics, mouseX, mouseY);
     }
@@ -37,22 +43,15 @@ public class CultureJarScreen extends AbstractContainerScreen<CultureJarMenu> {
         graphics.drawString(this.font, this.title, 8, 6, 4210752, false);
         graphics.drawString(this.font, this.playerInventoryTitle, 8, this.imageHeight - 96 + 2, 4210752, false);
     }
+
     @Override
     public boolean isPauseScreen() {
         return false;
     }
 
+    // Override background rendering to avoid any menu blur being applied by the base Screen implementation
     @Override
-    public void removed() {
-        // Ensure any active post effect (e.g., blur) is shut down when this screen is removed
-        Minecraft.getInstance().gameRenderer.shutdownEffect();
-        super.removed();
-    }
-
-    @Override
-    public void onClose() {
-        // Also ensure shutdown on close in case different lifecycle path is taken
-        Minecraft.getInstance().gameRenderer.shutdownEffect();
-        super.onClose();
+    public void renderBackground(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+        graphics.fill(0, 0, this.width, this.height, 0xA0000000);
     }
 }
