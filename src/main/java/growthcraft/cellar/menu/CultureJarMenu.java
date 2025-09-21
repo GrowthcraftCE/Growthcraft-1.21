@@ -20,12 +20,22 @@ public class CultureJarMenu extends AbstractContainerMenu {
     @Nullable
     private final CultureJarBlockEntity jarBE; // only present on server side
 
+    // Client-side cached fields for synced tank data
+    private int clientAmount = 0;
+    private int clientFluidId = -1;
+
     // Synced client-side via data slots
     private final ContainerData tankData = new ContainerData() {
         // 0: amount, 1: fluid raw id (BuiltInRegistries.FLUID)
         @Override
         public int get(int index) {
-            if (jarBE == null) return 0;
+            if (jarBE == null) {
+                return switch (index) {
+                    case 0 -> clientAmount;
+                    case 1 -> clientFluidId;
+                    default -> 0;
+                };
+            }
             return switch (index) {
                 case 0 -> jarBE.getTank().getFluidAmount();
                 case 1 -> jarBE.getTank().getFluid().isEmpty() ? -1 : BuiltInRegistries.FLUID.getId(jarBE.getTank().getFluid().getFluid());
@@ -35,7 +45,11 @@ public class CultureJarMenu extends AbstractContainerMenu {
 
         @Override
         public void set(int index, int value) {
-            // client-side receives values; no-op here
+            // client-side receives values here
+            if (jarBE == null) {
+                if (index == 0) clientAmount = value;
+                else if (index == 1) clientFluidId = value;
+            }
         }
 
         @Override

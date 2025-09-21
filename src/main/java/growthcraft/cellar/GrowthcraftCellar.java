@@ -39,6 +39,9 @@ public class GrowthcraftCellar {
         GrowthcraftCellarBlockEntities.BLOCK_ENTITY_TYPES.register(modEventBus);
         growthcraft.cellar.init.GrowthcraftCellarMenus.MENUS.register(modEventBus);
 
+        // Capabilities registration
+        modEventBus.addListener(growthcraft.cellar.init.GrowthcraftCellarCapabilities::registerCapabilities);
+
         // Add creative tab contributions
         modEventBus.addListener(this::buildCreativeTab);
 

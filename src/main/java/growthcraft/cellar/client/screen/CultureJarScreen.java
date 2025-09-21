@@ -1,15 +1,13 @@
 package growthcraft.cellar.client.screen;
 
 import growthcraft.cellar.menu.CultureJarMenu;
+import growthcraft.lib.client.screen.renderer.FluidTankRenderer;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.fluids.FluidStack;
-
-import java.util.List;
 
 public class CultureJarScreen extends AbstractContainerScreen<CultureJarMenu> {
     private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("growthcraft_cellar", "textures/gui/culture_jar_screen.png");
@@ -17,42 +15,28 @@ public class CultureJarScreen extends AbstractContainerScreen<CultureJarMenu> {
     // Tank render area inside the GUI (relative to top-left of the GUI)
     private static final int TANK_X = 80; // adjust as needed to match texture
     private static final int TANK_Y = 18;
-    private static final int TANK_W = 15;
+    private static final int TANK_W = 16;
     private static final int TANK_H = 52;
+
+    // Scale factor for fluid alpha to increase transparency in the tank rendering (1.0 = original alpha)
+    private static final float FLUID_ALPHA_SCALE = 0.1f;
+
+    private FluidTankRenderer tankRenderer;
 
     public CultureJarScreen(CultureJarMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
         this.imageWidth = 176;
         this.imageHeight = 166;
+        this.tankRenderer = new FluidTankRenderer(TANK_W, TANK_H, menu.getTankCapacity(), FLUID_ALPHA_SCALE);
     }
 
     @Override
     protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
         graphics.blit(TEXTURE, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
 
-        // Draw fluid tank contents as a simple tinted bar
-        int amount = this.menu.getFluidAmount();
-        int capacity = this.menu.getTankCapacity();
-        if (amount > 0 && capacity > 0) {
-            FluidStack stack = this.menu.getClientFluidStack();
-            int color = 0xAAFFFFFF; // default with alpha
-            if (!stack.isEmpty()) {
-                color = (0xAA << 24) | (IClientFluidTypeExtensions.of(stack.getFluid()).getTintColor() & 0xFFFFFF);
-            }
-            int filled = Math.max(1, (int)Math.floor((amount / (double)capacity) * TANK_H));
-            int x0 = this.leftPos + TANK_X;
-            int y1 = this.topPos + TANK_Y + TANK_H; // bottom
-            int y0 = y1 - filled; // top of filled area
-            graphics.fill(x0, y0, x0 + TANK_W, y1, color);
-        }
-        // optional: draw a thin dark border for clarity
-        int bx = this.leftPos + TANK_X;
-        int by = this.topPos + TANK_Y;
-        int bcolor = 0xFF2F2F2F;
-        graphics.fill(bx - 1, by - 1, bx + TANK_W + 1, by, bcolor);
-        graphics.fill(bx - 1, by + TANK_H, bx + TANK_W + 1, by + TANK_H + 1, bcolor);
-        graphics.fill(bx - 1, by, bx, by + TANK_H, bcolor);
-        graphics.fill(bx + TANK_W, by, bx + TANK_W + 1, by + TANK_H, bcolor);
+        // Draw fluid tank contents via reusable renderer
+        FluidStack stack = this.menu.getClientFluidStack();
+        this.tankRenderer.render(graphics, this.leftPos + TANK_X, this.topPos + TANK_Y, stack);
     }
 
     @Override

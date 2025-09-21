@@ -1,5 +1,6 @@
 package growthcraft.cellar.block.entity;
 
+import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.init.GrowthcraftCellarBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
@@ -29,6 +30,15 @@ public class CultureJarBlockEntity extends BlockEntity implements WorldlyContain
         @Override
         protected void onContentsChanged() {
             setChanged();
+            var fluid = getFluid();
+            String name = fluid.isEmpty() ? "<empty>" : fluid.getHoverName().getString();
+            GrowthcraftCellar.LOGGER.debug("[CultureJarBE] Tank changed at {}: {} mB {}", worldPosition, fluid.getAmount(), name);
+            // Ensure clients are notified so GUIs and rendering update
+            if (level != null && !level.isClientSide) {
+                BlockState state = getBlockState();
+                level.sendBlockUpdated(worldPosition, state, state, 3);
+                GrowthcraftCellar.LOGGER.debug("[CultureJarBE] Sent block update for GUI sync at {}", worldPosition);
+            }
         }
     };
 
@@ -133,6 +143,7 @@ public class CultureJarBlockEntity extends BlockEntity implements WorldlyContain
         CompoundTag tankTag = new CompoundTag();
         this.tank.writeToNBT(provider, tankTag);
         tag.put("Tank", tankTag);
+        GrowthcraftCellar.LOGGER.debug("[CultureJarBE] saveAdditional at {}: items={} tank={}mB", worldPosition, this.items.stream().filter(s -> !s.isEmpty()).count(), this.tank.getFluidAmount());
     }
 
     @Override
@@ -144,5 +155,6 @@ public class CultureJarBlockEntity extends BlockEntity implements WorldlyContain
         // Tank
         CompoundTag tankTag = tag.getCompound("Tank");
         this.tank.readFromNBT(provider, tankTag);
+        GrowthcraftCellar.LOGGER.debug("[CultureJarBE] loadAdditional at {}: items={} tank={}mB", worldPosition, this.items.stream().filter(s -> !s.isEmpty()).count(), this.tank.getFluidAmount());
     }
 }
