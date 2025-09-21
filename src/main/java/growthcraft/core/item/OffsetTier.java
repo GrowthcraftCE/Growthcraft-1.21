@@ -1,6 +1,7 @@
 package growthcraft.core.item;
 
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
@@ -11,6 +12,12 @@ import net.minecraft.world.level.block.Block;
  * without re-implementing attribute component plumbing.
  */
 public final class OffsetTier implements Tier {
+    /**
+     * Shared constant used by Growthcraft's crowbar variants. Named after the original field.
+     * Note: despite the name, the configured offset is -1.0f to match current balance.
+     */
+    public static final OffsetTier IRON_MINUS2 = new OffsetTier(Tiers.IRON, -1.0f);
+
     private final Tier base;
     private final float attackDamageOffset; // can be negative to reduce damage
 
