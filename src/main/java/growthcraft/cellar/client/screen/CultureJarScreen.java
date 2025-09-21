@@ -18,8 +18,8 @@ public class CultureJarScreen extends AbstractContainerScreen<CultureJarMenu> {
     private static final int TANK_W = 16;
     private static final int TANK_H = 52;
 
-    // Scale factor for fluid alpha to increase transparency in the tank rendering (1.0 = original alpha)
-    private static final float FLUID_ALPHA_SCALE = 0.1f;
+    // Scale factor for fluid alpha (1.0 = original alpha). 0.7 keeps it visible with gentle transparency.
+    private static final float FLUID_ALPHA_SCALE = 0.7f;
 
     private FluidTankRenderer tankRenderer;
 

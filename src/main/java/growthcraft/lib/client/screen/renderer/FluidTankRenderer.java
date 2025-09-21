@@ -65,10 +65,17 @@ public record FluidTankRenderer(int width, int height, int capacityMb, float alp
         float b = (tint & 0xFF) / 255.0f;
         a = a * this.alphaScale;
 
+        // Ensure alpha blending is enabled so the fluid can render translucently over the GUI background.
+        RenderSystem.enableBlend();
+        RenderSystem.defaultBlendFunc();
+
         // Apply color and draw the sprite stretched to the filled area.
         graphics.setColor(r, g, b, a);
         graphics.blit(x, yTop, 0, this.width, filled, sprite);
+
+        // Reset color and blending state to avoid leaking into other GUI draws.
         graphics.setColor(1f, 1f, 1f, 1f);
+        RenderSystem.disableBlend();
     }
 
     /**
