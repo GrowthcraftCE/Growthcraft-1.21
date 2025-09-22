@@ -44,6 +44,7 @@ public class CultureJarBlockEntity extends BlockEntity implements WorldlyContain
 
     public CultureJarBlockEntity(BlockPos pos, BlockState state) {
         super(GrowthcraftCellarBlockEntities.CULTURE_JAR.get(), pos, state);
+        GrowthcraftCellar.LOGGER.info("[CultureJarBE] Constructed at {} (client={})", pos, state.getBlock().defaultMapColor().col);
     }
 
     // Inventory API

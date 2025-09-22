@@ -11,6 +11,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.registries.DeferredItem;
 
@@ -22,6 +23,15 @@ import net.neoforged.neoforge.registries.DeferredItem;
 @EventBusSubscriber(modid = GrowthcraftCellar.MODID, value = Dist.CLIENT)
 public final class GrowthcraftCellarClient {
     private GrowthcraftCellarClient() {}
+
+    @SubscribeEvent
+    public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        GrowthcraftCellar.LOGGER.info("[CellarClient] Registering CultureJarBlockEntityRenderer");
+        event.registerBlockEntityRenderer(
+                growthcraft.cellar.init.GrowthcraftCellarBlockEntities.CULTURE_JAR.get(),
+                growthcraft.cellar.client.renderer.CultureJarBlockEntityRenderer::new
+        );
+    }
 
     @SubscribeEvent
     public static void onRegisterItemColors(RegisterColorHandlersEvent.Item event) {
