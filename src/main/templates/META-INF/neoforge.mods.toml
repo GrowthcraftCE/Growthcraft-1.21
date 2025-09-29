@@ -115,3 +115,32 @@ description='''Growthcraft Cellar adds processing and fermentation for various i
     versionRange="[${mod_version},)"
     ordering="AFTER"
     side="BOTH"
+
+
+[[mods]]
+modId="growthcraft_milk"
+version="${mod_version}"
+displayName="Growthcraft Milk"
+authors="${mod_authors}"
+description='''Growthcraft Milk centralizes dairy-related machines and processing as part of Cellar integration roadmap.'''
+
+[[dependencies.growthcraft_milk]]
+    modId="neoforge"
+    type="required"
+    versionRange="[${neo_version},)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.growthcraft_milk]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.growthcraft_milk]]
+    modId="growthcraft"
+    type="required"
+    versionRange="[${mod_version},)"
+    ordering="AFTER"
+    side="BOTH"
