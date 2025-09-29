@@ -25,13 +25,13 @@ import net.neoforged.neoforge.fluids.FluidStack;
 public class CultureJarBlockEntityRenderer implements BlockEntityRenderer<CultureJarBlockEntity> {
     // Inner bounds of the fluid within the 1x1x1 block space. Tweaked to sit inside the glass.
     // Vanilla units are in block coords (0..1). We'll keep a small inset to avoid Z-fighting.
-    // Fit snugly inside the jar’s inner walls (block shape is 5..11 -> 0.3125..0.6875)
-    private static final float MIN_X = 5.5f / 16.0f; // 0.34375
-    private static final float MAX_X = 10.5f / 16.0f; // 0.65625
+    // Fit snugly inside the jar’s inner walls (block shape is 5..11 -> 0.3125..0.6875, height 0..8 -> 0.0..0.5)
+    private static final float MIN_X = 6.25f / 16.0f; // slightly smaller footprint (inset +0.5px)
+    private static final float MAX_X = 9.75f / 16.0f;
     private static final float MIN_Z = MIN_X;
     private static final float MAX_Z = MAX_X;
-    private static final float MIN_Y = 2.0f / 16.0f; // start slightly above the base
-    private static final float MAX_Y = 12.0f / 16.0f; // below the lid
+    private static final float MIN_Y = 0.5f / 16.0f; // bottom aligned per feedback, with tiny offset
+    private static final float MAX_Y = 4.0f / 16.0f; // top lowered by ~1.5px
 
     public CultureJarBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {}
 
@@ -68,7 +68,7 @@ public class CultureJarBlockEntityRenderer implements BlockEntityRenderer<Cultur
         int overlay = OverlayTexture.NO_OVERLAY;
 
         // Build quads
-        VertexConsumer vc = buffer.getBuffer(RenderType.entityTranslucentCull(InventoryMenu.BLOCK_ATLAS));
+        VertexConsumer vc = buffer.getBuffer(RenderType.entityTranslucent(InventoryMenu.BLOCK_ATLAS));
 
         poseStack.pushPose();
         // Centered as block-local already; no additional transforms required

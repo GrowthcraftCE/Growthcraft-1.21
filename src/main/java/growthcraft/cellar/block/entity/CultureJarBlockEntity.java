@@ -7,6 +7,9 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Clearable;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Player;
@@ -157,5 +160,24 @@ public class CultureJarBlockEntity extends BlockEntity implements WorldlyContain
         CompoundTag tankTag = tag.getCompound("Tank");
         this.tank.readFromNBT(provider, tankTag);
         GrowthcraftCellar.LOGGER.debug("[CultureJarBE] loadAdditional at {}: items={} tank={}mB", worldPosition, this.items.stream().filter(s -> !s.isEmpty()).count(), this.tank.getFluidAmount());
+    }
+
+    // --- Client sync for renderer/GUI ---
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        // Triggers handleUpdateTag on client, carrying getUpdateTag contents
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider provider) {
+        CompoundTag tag = new CompoundTag();
+        this.saveAdditional(tag, provider);
+        return tag;
+    }
+
+    @Override
+    public void handleUpdateTag(CompoundTag tag, HolderLookup.Provider provider) {
+        this.loadAdditional(tag, provider);
     }
 }
