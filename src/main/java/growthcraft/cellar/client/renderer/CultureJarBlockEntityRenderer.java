@@ -26,12 +26,12 @@ public class CultureJarBlockEntityRenderer implements BlockEntityRenderer<Cultur
     // Inner bounds of the fluid within the 1x1x1 block space. Tweaked to sit inside the glass.
     // Vanilla units are in block coords (0..1). We'll keep a small inset to avoid Z-fighting.
     // Fit snugly inside the jar’s inner walls (block shape is 5..11 -> 0.3125..0.6875, height 0..8 -> 0.0..0.5)
-    private static final float MIN_X = 6.25f / 16.0f; // slightly smaller footprint (inset +0.5px)
-    private static final float MAX_X = 9.75f / 16.0f;
+    private static final float MIN_X = 6.125f / 16.0f; // slight shrink to avoid z-fighting (~0.125px per side)
+    private static final float MAX_X = 9.875f / 16.0f;
     private static final float MIN_Z = MIN_X;
     private static final float MAX_Z = MAX_X;
-    private static final float MIN_Y = 0.5f / 16.0f; // bottom aligned per feedback, with tiny offset
-    private static final float MAX_Y = 4.0f / 16.0f; // top lowered by ~1.5px
+    private static final float MIN_Y = 0.1f / 16.0f; // bottom aligned per feedback, with tiny offset
+    private static final float MAX_Y = 5.5f / 16.0f; // increased height by ~1.5px per feedback
 
     public CultureJarBlockEntityRenderer(BlockEntityRendererProvider.Context ctx) {}
 
