@@ -40,6 +40,10 @@ public class CultureJarBlockEntity extends BlockEntity implements WorldlyContain
             if (level != null && !level.isClientSide) {
                 BlockState state = getBlockState();
                 level.sendBlockUpdated(worldPosition, state, state, 3);
+                // Proactively flag the chunk as changed so the BE data packet is sent reliably
+                if (level instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+                    serverLevel.getChunkSource().blockChanged(worldPosition);
+                }
                 GrowthcraftCellar.LOGGER.debug("[CultureJarBE] Sent block update for GUI sync at {}", worldPosition);
             }
         }

@@ -45,11 +45,6 @@ public class GrowthcraftCellarClient {
                 ItemBlockRenderTypes.setRenderLayer(container.flowing.get(), translucent);
             }
 
-            // Fallback/ensure block entity renderer registration in case RegisterRenderers event was missed.
-            net.minecraft.client.renderer.blockentity.BlockEntityRenderers.register(
-                    growthcraft.cellar.init.GrowthcraftCellarBlockEntities.CULTURE_JAR.get(),
-                    growthcraft.cellar.client.renderer.CultureJarBlockEntityRenderer::new
-            );
         });
     }
 
