@@ -48,7 +48,6 @@ public final class Reference {
         public static final String ICE_CREAM_WATERMELON = "ice_cream_watermelon";
         public static final String KUMIS = "kumis";
         public static final String MILK = "milk";
-        public static final String MILKING_BUCKET_COPPER = "milking_bucket_copper";
         public static final String MILKING_BUCKET_IRON = "milking_bucket_iron";
         public static final String MIXING_VAT = "mixing_vat";
         public static final String MIXING_VAT_FLUID_RECIPE = "mixing_vat_fluid_recipe";

@@ -23,18 +23,10 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 public final class GrowthcraftMilkClient {
     private GrowthcraftMilkClient() {}
 
-    // Copper color (opaque ARGB)
-    private static final int COPPER_TINT = 0xFFB87333; // classic copper hex
-
     @SubscribeEvent
     public static void onRegisterItemColors(RegisterColorHandlersEvent.Item event) {
         // Contents tint: use milk default color for now (tool is empty by design)
         registerContentsTint(event, GrowthcraftMilkItems.MILKING_BUCKET_IRON);
-        registerContentsTint(event, GrowthcraftMilkItems.MILKING_BUCKET_COPPER);
-
-        // Base tint: only copper bucket gets a base tint (iron uses the raw texture colors)
-        event.register((stack, tintIndex) -> tintIndex == 1 ? COPPER_TINT : 0xFFFFFFFF,
-                GrowthcraftMilkItems.MILKING_BUCKET_COPPER.get());
     }
 
     private static void registerContentsTint(RegisterColorHandlersEvent.Item event,

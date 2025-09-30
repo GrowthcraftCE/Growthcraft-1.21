@@ -49,7 +49,7 @@ public final class GrowthcraftMilkFluids {
 
         Item.Properties itemProps = new Item.Properties().stacksTo(1);
 
-        return new FluidRegistryContainer(
+        FluidRegistryContainer container = new FluidRegistryContainer(
                 name,
                 typeProps,
                 () -> FluidRegistryContainer.createExtension(client),
@@ -61,5 +61,8 @@ public final class GrowthcraftMilkFluids {
                 BLOCKS,
                 ITEMS
         );
+        // Tie the milk fluid to our custom milk bucket item so vanilla empty buckets can be filled from tanks/blocks
+        container.getProperties().bucket(() -> growthcraft.milk.init.GrowthcraftMilkItems.MILK_BUCKET_IRON.get());
+        return container;
     }
 }

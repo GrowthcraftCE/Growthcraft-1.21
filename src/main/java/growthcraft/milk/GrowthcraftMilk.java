@@ -58,11 +58,9 @@ public class GrowthcraftMilk {
         if (tab == GrowthcraftCreativeTabs.MAIN.get()) {
             // Tools
             event.accept(GrowthcraftMilkItems.MILKING_BUCKET_IRON.get());
-            event.accept(GrowthcraftMilkItems.MILKING_BUCKET_COPPER.get());
 
             // Fluid buckets (Milk module)
             event.accept(GrowthcraftMilkItems.MILK_BUCKET_IRON.get());
-            event.accept(GrowthcraftMilkItems.MILK_BUCKET_COPPER.get());
         }
     }
 

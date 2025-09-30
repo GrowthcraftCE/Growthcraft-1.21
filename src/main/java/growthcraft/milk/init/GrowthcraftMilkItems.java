@@ -17,8 +17,6 @@ public final class GrowthcraftMilkItems {
     public static final net.neoforged.neoforge.registries.DeferredHolder<Item, MilkingBucketItem> MILKING_BUCKET_IRON =
             ITEMS.register(Reference.UnlocalizedName.MILKING_BUCKET_IRON, () -> new MilkingBucketItem(() -> Fluids.EMPTY, new Item.Properties().stacksTo(16)));
 
-    public static final net.neoforged.neoforge.registries.DeferredHolder<Item, MilkingBucketItem> MILKING_BUCKET_COPPER =
-            ITEMS.register(Reference.UnlocalizedName.MILKING_BUCKET_COPPER, () -> new MilkingBucketItem(() -> Fluids.EMPTY, new Item.Properties().stacksTo(16)));
 
     // Filled milk bucket variants (both point to the same milk fluid)
     public static final net.neoforged.neoforge.registries.DeferredHolder<Item, GrowthcraftMilkBucketItem> MILK_BUCKET_IRON =
@@ -27,9 +25,4 @@ public final class GrowthcraftMilkItems {
                     () -> MILKING_BUCKET_IRON.get(),
                     new Item.Properties().stacksTo(1)));
 
-    public static final net.neoforged.neoforge.registries.DeferredHolder<Item, GrowthcraftMilkBucketItem> MILK_BUCKET_COPPER =
-            ITEMS.register("milk_fluid_bucket_copper", () -> new GrowthcraftMilkBucketItem(
-                    GrowthcraftMilkFluids.MILK.source.get(),
-                    () -> MILKING_BUCKET_COPPER.get(),
-                    new Item.Properties().stacksTo(1)));
 }

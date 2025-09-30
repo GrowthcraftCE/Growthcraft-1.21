@@ -81,9 +81,6 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
         addCrowbarRecipe(output, GrowthcraftItems.CROWBAR_YELLOW.get(), Blocks.YELLOW_CARPET.asItem(), IRON_NUGGETS, IRON_INGOTS, "crowbar_yellow");
 
         // --- Milk module recipes ---
-        // Common copper tags (NeoForge 'c')
-        TagKey<Item> COPPER_INGOTS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "ingots/copper"));
-
         // Iron Milking Bucket
         net.minecraft.data.recipes.ShapedRecipeBuilder.shaped(RecipeCategory.MISC, growthcraft.milk.init.GrowthcraftMilkItems.MILKING_BUCKET_IRON.get())
                 .pattern("NNN")
@@ -93,16 +90,6 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
                 .define('I', IRON_INGOTS)
                 .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
                 .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.milk.config.Reference.MODID, "milking_bucket_iron"));
-
-        // Copper Milking Bucket
-        net.minecraft.data.recipes.ShapedRecipeBuilder.shaped(RecipeCategory.MISC, growthcraft.milk.init.GrowthcraftMilkItems.MILKING_BUCKET_COPPER.get())
-                .pattern("NNN")
-                .pattern("I I")
-                .pattern(" I ")
-                .define('N', IRON_NUGGETS)
-                .define('I', COPPER_INGOTS)
-                .unlockedBy(getHasName(Items.COPPER_INGOT), has(Items.COPPER_INGOT))
-                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.milk.config.Reference.MODID, "milking_bucket_copper"));
     }
 
     private static void addCrowbarRecipe(RecipeOutput output, Item result, Item carpet, TagKey<Item> nuggets, TagKey<Item> ingots, String name) {

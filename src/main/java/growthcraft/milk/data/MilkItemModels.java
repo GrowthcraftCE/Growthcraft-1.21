@@ -18,7 +18,6 @@ public class MilkItemModels extends ItemModelProvider {
     protected void registerModels() {
         // Layered model using existing textures in growthcraft_milk assets
         milkingBucketTool(Reference.UnlocalizedName.MILKING_BUCKET_IRON);
-        milkingBucketTool(Reference.UnlocalizedName.MILKING_BUCKET_COPPER);
     }
 
     private void milkingBucketTool(String name) {

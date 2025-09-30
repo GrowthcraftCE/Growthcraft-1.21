@@ -117,7 +117,47 @@ public class CultureJarBlock extends HorizontalDirectionalBlock implements Entit
             var before = jar.getTank().getFluid().copy();
             String beforeName = before.isEmpty() ? "<empty>" : before.getHoverName().getString();
             GrowthcraftCellar.LOGGER.debug("[CultureJar] useItemOn(Server): Player={} Hand={} HeldItem={} BeforeTank={}mB {}", player.getGameProfile().getName(), hand, heldStack.getItem(), before.getAmount(), beforeName);
+
+            // Special-case: Fill empty Growthcraft milking bucket directly from the jar
+            if (heldStack.getItem() instanceof growthcraft.milk.item.MilkingBucketItem) {
+                net.neoforged.neoforge.fluids.FluidStack inTank = jar.getTank().getFluid();
+                if (!inTank.isEmpty() && inTank.getFluid() == growthcraft.milk.init.GrowthcraftMilkFluids.MILK.source.get() && inTank.getAmount() >= 1000) {
+                    net.neoforged.neoforge.fluids.FluidStack drained = jar.getTank().drain(1000, IFluidHandler.FluidAction.EXECUTE);
+                    if (drained.getAmount() == 1000) {
+                        ItemStack filled = new ItemStack(growthcraft.milk.init.GrowthcraftMilkItems.MILK_BUCKET_IRON.get());
+                        if (!player.getAbilities().instabuild) {
+                            player.setItemInHand(hand, filled);
+                        }
+                        be.setChanged();
+                        level.sendBlockUpdated(pos, state, state, 3);
+                        GrowthcraftCellar.LOGGER.debug("[CultureJar] Filled milking bucket from jar. Now {}mB left", jar.getTank().getFluidAmount());
+                        return ItemInteractionResult.SUCCESS;
+                    }
+                }
+            }
+
             boolean acted = FluidUtil.interactWithFluidHandler(player, hand, handler);
+
+            // Fallback: Some BucketItem variants (like our custom Growthcraft milk buckets) do not expose an item fluid handler.
+            // If the generic interaction failed, try manual transfer for Growthcraft milk buckets (deposit into jar).
+            if (!acted && heldStack.getItem() instanceof growthcraft.milk.item.GrowthcraftMilkBucketItem milkBucket) {
+                // Attempt to insert 1000 mB of Growthcraft Milk into the jar
+                net.neoforged.neoforge.fluids.FluidStack toInsert = new net.neoforged.neoforge.fluids.FluidStack(
+                        growthcraft.milk.init.GrowthcraftMilkFluids.MILK.source.get(), 1000);
+                int filled = jar.getTank().fill(toInsert, IFluidHandler.FluidAction.EXECUTE);
+                GrowthcraftCellar.LOGGER.debug("[CultureJar] Fallback milk transfer (to jar): requested=1000 filled={} currentTank={}mB", filled, jar.getTank().getFluidAmount());
+                if (filled == 1000) {
+                    // Replace the held bucket with its crafting remainder (our empty milking bucket), unless in creative
+                    if (!player.getAbilities().instabuild) {
+                        ItemStack remainder = milkBucket.getCraftingRemainingItem(heldStack);
+                        player.setItemInHand(hand, remainder.copy());
+                    }
+                    be.setChanged();
+                    level.sendBlockUpdated(pos, state, state, 3);
+                    return ItemInteractionResult.SUCCESS;
+                }
+            }
+
             var after = jar.getTank().getFluid();
             String afterName = after.isEmpty() ? "<empty>" : after.getHoverName().getString();
             GrowthcraftCellar.LOGGER.debug("[CultureJar] useItemOn(Server): acted={} AfterTank={}mB {}", acted, jar.getTank().getFluidAmount(), afterName);
