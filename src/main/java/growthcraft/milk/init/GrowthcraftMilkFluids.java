@@ -53,7 +53,7 @@ public final class GrowthcraftMilkFluids {
                 name,
                 typeProps,
                 () -> FluidRegistryContainer.createExtension(client),
-                new FluidRegistryContainer.AdditionalProperties().tickRate(5).slopeFindDistance(4).levelDecreasePerBlock(1).explosionResistance(100f),
+                new FluidRegistryContainer.AdditionalProperties().tickRate(5).slopeFindDistance(4).levelDecreasePerBlock(1).explosionResistance(100f).noBucket(),
                 blockProps,
                 itemProps,
                 FLUIDS,

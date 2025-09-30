@@ -35,7 +35,8 @@ public class FluidRegistryContainer {
     public final net.neoforged.neoforge.registries.DeferredHolder<FluidType, FluidType> type;
     public final FluidType.Properties typeProperties;
     public final net.neoforged.neoforge.registries.DeferredHolder<Block, LiquidBlock> block;
-    public final net.neoforged.neoforge.registries.DeferredHolder<Item, BucketItem> bucket;
+    @Nullable
+        public net.neoforged.neoforge.registries.DeferredHolder<Item, BucketItem> bucket;
     public final net.neoforged.neoforge.registries.DeferredHolder<Fluid, net.neoforged.neoforge.fluids.BaseFlowingFluid.Source> source;
     public final net.neoforged.neoforge.registries.DeferredHolder<Fluid, net.neoforged.neoforge.fluids.BaseFlowingFluid.Flowing> flowing;
     private net.neoforged.neoforge.fluids.BaseFlowingFluid.Properties properties;
@@ -91,8 +92,12 @@ public class FluidRegistryContainer {
         });
         this.properties.block(() -> this.block.get());
 
-        this.bucket = ITEM_REGISTRY.register(name + "_fluid_bucket", () -> new BucketItem(this.source.get(), itemProperties));
-        this.properties.bucket(() -> this.bucket.get());
+        if (additionalProperties == null || additionalProperties.registerBucket) {
+            this.bucket = ITEM_REGISTRY.register(name + "_fluid_bucket", () -> new BucketItem(this.source.get(), itemProperties));
+            this.properties.bucket(() -> this.bucket.get());
+        } else {
+            this.bucket = null;
+        }
     }
 
     public FluidRegistryContainer(String name, FluidType.Properties typeProperties,
@@ -187,6 +192,7 @@ public class FluidRegistryContainer {
         private float explosionResistance = 1;
         private int slopeFindDistance = 4;
         private int tickRate = 5;
+        private boolean registerBucket = true;
         // Optional factory allowing callers to provide a custom LiquidBlock implementation for the source fluid
         private java.util.function.BiFunction<BaseFlowingFluid.Source, BlockBehaviour.Properties, LiquidBlock> blockFactory;
 
@@ -212,6 +218,15 @@ public class FluidRegistryContainer {
 
         public AdditionalProperties customBlock(java.util.function.BiFunction<BaseFlowingFluid.Source, BlockBehaviour.Properties, LiquidBlock> factory) {
             this.blockFactory = factory;
+            return this;
+        }
+
+        /**
+         * Disable automatic bucket item registration for this fluid.
+         * Use when you want to provide custom bucket items separately.
+         */
+        public AdditionalProperties noBucket() {
+            this.registerBucket = false;
             return this;
         }
     }
