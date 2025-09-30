@@ -215,20 +215,6 @@ tasks.withType(ProcessResources).configureEach {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
-// Convenience alias: align user expectation of 'createLaunchScripts' with NeoForge's 'genIntellijRuns'.
-// The standard Gradle 'createStartScripts' belongs to the Application plugin and does not generate IDE configs.
-// NeoForge ModDev exposes 'genIntellijRuns' to generate IntelliJ IDEA run configurations.
-// This alias makes `gradlew createLaunchScripts` generate IDEA run configs for this project.
-// Note: If you use VSCode, prefer 'genVSCodeRuns'.
-// If the underlying task is missing, Gradle will fail with a clear message.
-// If a task named 'createLaunchScripts' already exists (e.g., from another plugin), augment it to also generate IntelliJ runs.
-tasks.named('createLaunchScripts') {
-    group = 'ide'
-    description = 'Creates OS launch scripts for client/server/data/gametest runs (not IntelliJ configs).'
-    // Generate external launch scripts for all configured runs
-    dependsOn 'createClientLaunchScript', 'createServerLaunchScript', 'createDataLaunchScript', 'createGameTestServerLaunchScript'
-}
-
 // Automatically run data generation when data generator sources change.
 // This task stays up-to-date unless files under the data generator sources are modified.
 // When it does run (i.e., inputs changed), it finalizes by invoking the runData task.
