@@ -115,6 +115,10 @@ neoForge {
         "growthcraft_cellar" {
             sourceSet(sourceSets.main)
         }
+        // Map Milk module as a logical mod within the same source set
+        "growthcraft_milk" {
+            sourceSet(sourceSets.main)
+        }
     }
 }
 

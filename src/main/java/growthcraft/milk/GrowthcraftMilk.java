@@ -1,10 +1,12 @@
 package growthcraft.milk;
 
 import com.mojang.logging.LogUtils;
+import growthcraft.core.init.GrowthcraftCreativeTabs;
 import growthcraft.milk.config.GrowthcraftMilkConfig;
 import growthcraft.milk.config.Reference;
 import growthcraft.milk.init.GrowthcraftMilkFluids;
 import growthcraft.milk.init.GrowthcraftMilkItems;
+import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -12,6 +14,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
 
@@ -34,6 +37,9 @@ public class GrowthcraftMilk {
         GrowthcraftMilkFluids.FLUIDS.register(modEventBus);
         GrowthcraftMilkFluids.BLOCKS.register(modEventBus);
 
+        // Contribute items to the creative tab
+        modEventBus.addListener(this::buildCreativeTab);
+
         // Register to the global event bus for general events
         NeoForge.EVENT_BUS.register(this);
 
@@ -45,6 +51,18 @@ public class GrowthcraftMilk {
 
     private void commonSetup(FMLCommonSetupEvent event) {
         LOGGER.info("[{}] Common setup", Reference.NAME);
+    }
+
+    private void buildCreativeTab(BuildCreativeModeTabContentsEvent event) {
+        CreativeModeTab tab = event.getTab();
+        if (tab == GrowthcraftCreativeTabs.MAIN.get()) {
+            // Tools
+            event.accept(GrowthcraftMilkItems.MILKING_BUCKET_IRON.get());
+            event.accept(GrowthcraftMilkItems.MILKING_BUCKET_COPPER.get());
+
+            // Fluid buckets (Milk module)
+            event.accept(GrowthcraftMilkFluids.MILK.bucket.get());
+        }
     }
 
     @SubscribeEvent

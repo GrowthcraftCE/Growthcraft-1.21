@@ -48,5 +48,9 @@ public class GrowthcraftDataGenerators {
 
         // Cellar: client-side item models
         generator.addProvider(event.includeClient(), new growthcraft.cellar.data.CellarItemModels(output, existingFileHelper));
+
+        // Milk: client-side item models
+        generator.addProvider(event.includeClient(), new growthcraft.milk.data.MilkItemModels(output, existingFileHelper));
+
     }
 }
