@@ -26,6 +26,7 @@ public final class GrowthcraftMilkFluids {
     public static final DeferredRegister<Item> ITEMS = GrowthcraftMilkItems.ITEMS;
 
     public static final FluidRegistryContainer MILK = registerMilk();
+    // Additional variant bucket items are registered in GrowthcraftMilkItems to control empty returns.
 
     private static FluidRegistryContainer registerMilk() {
         String name = "milk";
