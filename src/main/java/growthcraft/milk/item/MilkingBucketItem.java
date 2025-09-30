@@ -56,7 +56,10 @@ public class MilkingBucketItem extends Item implements DispensibleContainerItem 
         EntityType<?> type = target.getType();
         boolean milkable = type.is(GrowthcraftMilkTags.EntityTypes.MILKABLE) || target instanceof Cow;
         if (milkable) {
-            ItemStack milkBucket = new ItemStack(GrowthcraftMilkFluids.MILK.bucket.get());
+            boolean usedCopperTool = stack.getItem() == growthcraft.milk.init.GrowthcraftMilkItems.MILKING_BUCKET_COPPER.get();
+            ItemStack milkBucket = new ItemStack(usedCopperTool
+                    ? growthcraft.milk.init.GrowthcraftMilkItems.MILK_BUCKET_COPPER.get()
+                    : growthcraft.milk.init.GrowthcraftMilkItems.MILK_BUCKET_IRON.get());
             if (!player.getInventory().add(milkBucket)) {
                 player.drop(milkBucket, false);
             }

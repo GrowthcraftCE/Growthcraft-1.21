@@ -61,7 +61,8 @@ public class GrowthcraftMilk {
             event.accept(GrowthcraftMilkItems.MILKING_BUCKET_COPPER.get());
 
             // Fluid buckets (Milk module)
-            event.accept(GrowthcraftMilkFluids.MILK.bucket.get());
+            event.accept(GrowthcraftMilkItems.MILK_BUCKET_IRON.get());
+            event.accept(GrowthcraftMilkItems.MILK_BUCKET_COPPER.get());
         }
     }
 
