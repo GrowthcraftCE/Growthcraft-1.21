@@ -208,6 +208,12 @@ public class CultureJarBlockEntity extends BlockEntity implements WorldlyContain
     public static void serverTick(Level level, BlockPos pos, BlockState state, CultureJarBlockEntity jar) {
         if (level.isClientSide) return;
 
+        // Periodically refresh LIT state from surroundings in case a neighbor change wasn't fired
+        if ((level.getGameTime() & 19L) == 0L) { // every 20 ticks approx
+            CultureJarBlock.updateLitState(level, pos, state);
+            state = level.getBlockState(pos); // refresh local reference if changed
+        }
+
         // must be lit to process
         if (!state.getValue(CultureJarBlock.LIT)) {
             if (jar.processTime != 0) {
@@ -294,8 +300,24 @@ public class CultureJarBlockEntity extends BlockEntity implements WorldlyContain
             if (!r.matches(new CultureJarInput(input), level)) continue;
             // heat requirement
             if (r.requiresHeatSource() && !level.getBlockState(this.worldPosition).getValue(CultureJarBlock.LIT)) continue;
-            // fluid check
-            if (!r.getFluid().fluidId().equals(tankId)) continue;
+            // fluid check: accept exact ID match, or fluids that share the same FluidType (source/flowing),
+            // and be tolerant of recipes that reference base names without the "_source/_flowing" suffix.
+            ResourceLocation reqId = r.getFluid().fluidId();
+            boolean fluidOk = reqId.equals(tankId);
+            if (!fluidOk) {
+                net.minecraft.world.level.material.Fluid reqFluid = net.minecraft.core.registries.BuiltInRegistries.FLUID.get(reqId);
+                net.minecraft.world.level.material.Fluid tankFluidType = tankFluid.getFluid();
+                if (reqFluid != net.minecraft.world.level.material.Fluids.EMPTY) {
+                    // Compare by FluidType to allow source/flowing to match
+                    fluidOk = reqFluid.getFluidType() == tankFluidType.getFluidType();
+                } else {
+                    // Try common suffixes when the recipe used a base name
+                    ResourceLocation baseSource = ResourceLocation.fromNamespaceAndPath(reqId.getNamespace(), reqId.getPath() + "_source");
+                    ResourceLocation baseFlowing = ResourceLocation.fromNamespaceAndPath(reqId.getNamespace(), reqId.getPath() + "_flowing");
+                    fluidOk = baseSource.equals(tankId) || baseFlowing.equals(tankId);
+                }
+            }
+            if (!fluidOk) continue;
             if (tankFluid.getAmount() < r.getFluid().amount()) continue;
             return Optional.of(holder);
         }

@@ -32,7 +32,7 @@ public class CellarItemModels extends ItemModelProvider {
         // Additional items (grapes, hops, yeasts, etc.) can be enabled once their textures exist.
 
         // Cultures
-        generated("starter_culture");
+        generatedWithTexture("starter_culture", ResourceLocation.fromNamespaceAndPath("growthcraft_milk", "item/starter_culture"));
 
         // Fluid bucket item models (layered bucket textures from core mod assets)
         bucket(Reference.UnlocalizedName.Item.AMBER_ALE_FLUID_BUCKET);

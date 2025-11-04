@@ -26,7 +26,15 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.phys.BlockHitResult;
+import growthcraft.cellar.config.Reference;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.fluids.FluidUtil;
@@ -35,6 +43,8 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 public class CultureJarBlock extends HorizontalDirectionalBlock implements EntityBlock, net.minecraft.world.level.block.BucketPickup {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final MapCodec<CultureJarBlock> CODEC = simpleCodec(CultureJarBlock::new);
+
+    private static final TagKey<Block> HEAT_SOURCE_TAG = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Reference.MODID, Reference.UnlocalizedName.Tag.HEATSOURCES));
 
     // Reduced bounding box to better match the jar model footprint and height
     private static final VoxelShape SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 8.0D, 11.0D);
@@ -63,12 +73,70 @@ public class CultureJarBlock extends HorizontalDirectionalBlock implements Entit
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+        BlockPos pos = context.getClickedPos();
+        Level level = context.getLevel();
+        boolean lit = !level.isClientSide && hasHeatSourceNearby(level, pos);
+        return this.defaultBlockState()
+                .setValue(FACING, context.getHorizontalDirection().getOpposite())
+                .setValue(LIT, lit);
     }
 
     @Override
     protected MapCodec<? extends CultureJarBlock> codec() {
         return CODEC;
+    }
+
+    // --- Heat source detection within 2 blocks ---
+    public static boolean hasHeatSourceNearby(Level level, BlockPos pos) {
+        if (level == null) return false;
+        // Scan a cube of radius 2 (Chebyshev). Cheap enough once in a while.
+        for (int dx = -2; dx <= 2; dx++) {
+            for (int dy = -2; dy <= 2; dy++) {
+                for (int dz = -2; dz <= 2; dz++) {
+                    // limit to radius 2 (sphere), slightly cheaper set than 125 checks if we prefer
+                    int r2 = dx*dx + dy*dy + dz*dz;
+                    if (r2 > 4) continue; // outside radius 2
+                    BlockPos checkPos = pos.offset(dx, dy, dz);
+                    BlockState bs = level.getBlockState(checkPos);
+                    if (isHeatSourceBlock(level, checkPos, bs)) return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static boolean isHeatSourceBlock(Level level, BlockPos pos, BlockState state) {
+        // Prefer tag first so packs/mods can extend
+        if (state.is(HEAT_SOURCE_TAG)) return true;
+        // Vanilla/common heat sources
+        if (state.is(Blocks.MAGMA_BLOCK)) return true;
+        if (state.is(Blocks.FIRE) || state.is(Blocks.SOUL_FIRE)) return true;
+        // Any lit block with LIT=true (covers furnaces, blast/smoker, campfires, candles when lit)
+        if (state.hasProperty(BlockStateProperties.LIT) && Boolean.TRUE.equals(state.getValue(BlockStateProperties.LIT))) return true;
+        // Lava source or flowing
+        FluidState fluid = level.getFluidState(pos);
+        if (!fluid.isEmpty() && (fluid.is(FluidTags.LAVA) || fluid.getType() == Fluids.LAVA)) return true;
+        return false;
+    }
+
+    public static void updateLitState(Level level, BlockPos pos, BlockState state) {
+        if (level == null || level.isClientSide) return;
+        boolean lit = hasHeatSourceNearby(level, pos);
+        if (state.getValue(LIT) != lit) {
+            level.setBlock(pos, state.setValue(LIT, lit), 3);
+        }
+    }
+
+    @Override
+    public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
+        super.onPlace(state, level, pos, oldState, isMoving);
+        if (!level.isClientSide) updateLitState(level, pos, state);
+    }
+
+    @Override
+    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
+        super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
+        if (!level.isClientSide) updateLitState(level, pos, state);
     }
 
     @Override
