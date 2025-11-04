@@ -97,6 +97,9 @@ public final class Reference {
             public static final String YEAST_LAGER = "yeast_lager";
             public static final String YEAST_LAGER_ETHEREAL = "yeast_lager_ethereal";
 
+            // Cultures
+            public static final String STARTER_CULTURE = "starter_culture";
+
             // Fluid Buckets (match item model names)
             public static final String AMBER_ALE_FLUID_BUCKET = "amber_ale_fluid_bucket";
             public static final String AMBER_LAGER_FLUID_BUCKET = "amber_lager_fluid_bucket";
