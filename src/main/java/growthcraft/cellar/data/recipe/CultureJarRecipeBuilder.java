@@ -1,14 +1,9 @@
 package growthcraft.cellar.data.recipe;
 
-import com.google.gson.JsonObject;
 import growthcraft.cellar.config.Reference;
-import growthcraft.cellar.init.GrowthcraftCellarItems;
-import growthcraft.cellar.init.GrowthcraftCellarRecipes;
-import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 
 /**
@@ -35,6 +30,11 @@ public class CultureJarRecipeBuilder {
         return new CultureJarRecipeBuilder(ingredient, fluidId, amount, result, count);
     }
 
+    // Convenience for the first recipe id
+    public static ResourceLocation rl(String path) {
+        return ResourceLocation.fromNamespaceAndPath(Reference.MODID, path);
+    }
+
     public CultureJarRecipeBuilder time(int ticks) {
         this.time = ticks;
         return this;
@@ -48,10 +48,5 @@ public class CultureJarRecipeBuilder {
     public void save(RecipeOutput output, ResourceLocation id) {
         // TODO: Implement FinishedRecipe-compatible emission using RecipeOutput for MC 1.21.1
         // Temporarily no-op to keep compilation green until full datagen integration step.
-    }
-
-    // Convenience for the first recipe id
-    public static ResourceLocation rl(String path) {
-        return ResourceLocation.fromNamespaceAndPath(Reference.MODID, path);
     }
 }
