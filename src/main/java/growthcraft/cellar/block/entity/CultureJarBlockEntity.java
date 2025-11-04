@@ -1,22 +1,32 @@
 package growthcraft.cellar.block.entity;
 
 import growthcraft.cellar.GrowthcraftCellar;
+import growthcraft.cellar.block.CultureJarBlock;
 import growthcraft.cellar.init.GrowthcraftCellarBlockEntities;
+import growthcraft.cellar.init.GrowthcraftCellarRecipes;
+import growthcraft.cellar.recipe.CultureJarRecipe;
+import growthcraft.cellar.recipe.input.CultureJarInput;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Clearable;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+
+import java.util.List;
+import java.util.Optional;
 
 public class CultureJarBlockEntity extends BlockEntity implements WorldlyContainer, Clearable, net.minecraft.world.MenuProvider {
     public static final int SLOT_INPUT = 0;
@@ -48,6 +58,9 @@ public class CultureJarBlockEntity extends BlockEntity implements WorldlyContain
             }
         }
     };
+
+    private int processTime;
+    private int processTimeTotal;
 
     public CultureJarBlockEntity(BlockPos pos, BlockState state) {
         super(GrowthcraftCellarBlockEntities.CULTURE_JAR.get(), pos, state);
@@ -151,7 +164,10 @@ public class CultureJarBlockEntity extends BlockEntity implements WorldlyContain
         CompoundTag tankTag = new CompoundTag();
         this.tank.writeToNBT(provider, tankTag);
         tag.put("Tank", tankTag);
-        GrowthcraftCellar.LOGGER.debug("[CultureJarBE] saveAdditional at {}: items={} tank={}mB", worldPosition, this.items.stream().filter(s -> !s.isEmpty()).count(), this.tank.getFluidAmount());
+        // Processing
+        tag.putInt("ProcessTime", this.processTime);
+        tag.putInt("ProcessTimeTotal", this.processTimeTotal);
+        GrowthcraftCellar.LOGGER.debug("[CultureJarBE] saveAdditional at {}: items={} tank={}mB time={}/{}", worldPosition, this.items.stream().filter(s -> !s.isEmpty()).count(), this.tank.getFluidAmount(), this.processTime, this.processTimeTotal);
     }
 
     @Override
@@ -163,7 +179,10 @@ public class CultureJarBlockEntity extends BlockEntity implements WorldlyContain
         // Tank
         CompoundTag tankTag = tag.getCompound("Tank");
         this.tank.readFromNBT(provider, tankTag);
-        GrowthcraftCellar.LOGGER.debug("[CultureJarBE] loadAdditional at {}: items={} tank={}mB", worldPosition, this.items.stream().filter(s -> !s.isEmpty()).count(), this.tank.getFluidAmount());
+        // Processing
+        this.processTime = tag.getInt("ProcessTime");
+        this.processTimeTotal = tag.getInt("ProcessTimeTotal");
+        GrowthcraftCellar.LOGGER.debug("[CultureJarBE] loadAdditional at {}: items={} tank={}mB time={}/{}", worldPosition, this.items.stream().filter(s -> !s.isEmpty()).count(), this.tank.getFluidAmount(), this.processTime, this.processTimeTotal);
     }
 
     // --- Client sync for renderer/GUI ---
@@ -183,5 +202,103 @@ public class CultureJarBlockEntity extends BlockEntity implements WorldlyContain
     @Override
     public void handleUpdateTag(CompoundTag tag, HolderLookup.Provider provider) {
         this.loadAdditional(tag, provider);
+    }
+
+    // --- Processing logic ---
+    public static void serverTick(Level level, BlockPos pos, BlockState state, CultureJarBlockEntity jar) {
+        if (level.isClientSide) return;
+
+        // must be lit to process
+        if (!state.getValue(CultureJarBlock.LIT)) {
+            if (jar.processTime != 0) {
+                jar.processTime = 0;
+                jar.processTimeTotal = 0;
+                jar.setChanged();
+            }
+            return;
+        }
+
+        ItemStack input = jar.getItem(SLOT_INPUT);
+        if (input.isEmpty()) {
+            jar.resetProgress();
+            return;
+        }
+
+        net.neoforged.neoforge.fluids.FluidStack inTank = jar.tank.getFluid();
+        if (inTank.isEmpty()) {
+            jar.resetProgress();
+            return;
+        }
+
+        java.util.Optional<net.minecraft.world.item.crafting.RecipeHolder<CultureJarRecipe>> match = jar.findMatch(level, input, inTank);
+        if (match.isEmpty()) {
+            jar.resetProgress();
+            return;
+        }
+
+        CultureJarRecipe recipe = match.get().value();
+        // Check output room
+        if (!jar.canOutput(recipe.getResult())) {
+            jar.resetProgress();
+            return;
+        }
+
+        // Progress
+        jar.processTimeTotal = recipe.getTime();
+        jar.processTime++;
+        if (jar.processTime >= jar.processTimeTotal) {
+            // Complete: consume inputs and produce output
+            int toDrain = Math.max(1, recipe.getFluid().amount());
+            jar.tank.drain(toDrain, net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
+            input.shrink(1);
+            jar.insertOutput(recipe.getResult());
+            jar.processTime = 0;
+            jar.processTimeTotal = 0;
+            jar.setChanged();
+            level.sendBlockUpdated(pos, state, state, 3);
+        }
+    }
+
+    private void resetProgress() {
+        if (this.processTime != 0 || this.processTimeTotal != 0) {
+            this.processTime = 0;
+            this.processTimeTotal = 0;
+            setChanged();
+        }
+    }
+
+    private boolean canOutput(ItemStack stack) {
+        ItemStack out = this.getItem(SLOT_OUTPUT);
+        if (out.isEmpty()) return true;
+        if (!ItemStack.isSameItem(out, stack)) return false;
+        return out.getCount() + stack.getCount() <= out.getMaxStackSize();
+    }
+
+    private void insertOutput(ItemStack stack) {
+        if (stack.isEmpty()) return;
+        ItemStack out = this.getItem(SLOT_OUTPUT);
+        if (out.isEmpty()) {
+            this.setItem(SLOT_OUTPUT, stack.copy());
+        } else if (ItemStack.isSameItem(out, stack)) {
+            out.grow(stack.getCount());
+        }
+    }
+
+    private Optional<RecipeHolder<CultureJarRecipe>> findMatch(Level level, ItemStack input, net.neoforged.neoforge.fluids.FluidStack tankFluid) {
+        if (!(level instanceof net.minecraft.server.level.ServerLevel serverLevel)) return Optional.empty();
+        var rm = serverLevel.getRecipeManager();
+        java.util.List<RecipeHolder<CultureJarRecipe>> list = rm.getAllRecipesFor(GrowthcraftCellarRecipes.CULTURE_JAR_TYPE.get());
+        ResourceLocation tankId = net.minecraft.core.registries.BuiltInRegistries.FLUID.getKey(tankFluid.getFluid());
+        for (RecipeHolder<CultureJarRecipe> holder : list) {
+            CultureJarRecipe r = holder.value();
+            if (!r.matches(new CultureJarInput(input), level)) continue;
+            // heat requirement
+            if (r.requiresHeatSource() && !level.getBlockState(this.worldPosition).getValue(CultureJarBlock.LIT)) continue;
+            // fluid check
+            if (!r.getFluid().fluidId().equals(tankId)) continue;
+            if (tankFluid.getAmount() < r.getFluid().amount()) continue;
+            return Optional.of(holder);
+        }
+        return Optional.empty();
     }
 }

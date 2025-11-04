@@ -38,6 +38,8 @@ public class GrowthcraftCellar {
         GrowthcraftCellarFluids.BLOCKS.register(modEventBus);
         GrowthcraftCellarBlockEntities.BLOCK_ENTITY_TYPES.register(modEventBus);
         growthcraft.cellar.init.GrowthcraftCellarMenus.MENUS.register(modEventBus);
+        growthcraft.cellar.init.GrowthcraftCellarRecipes.SERIALIZERS.register(modEventBus);
+        growthcraft.cellar.init.GrowthcraftCellarRecipes.TYPES.register(modEventBus);
 
         // Capabilities registration
         modEventBus.addListener(growthcraft.cellar.init.GrowthcraftCellarCapabilities::registerCapabilities);
@@ -96,6 +98,9 @@ public class GrowthcraftCellar {
             event.accept(GrowthcraftCellarItems.YEAST_ETHEREAL);
             event.accept(GrowthcraftCellarItems.YEAST_LAGER);
             event.accept(GrowthcraftCellarItems.YEAST_LAGER_ETHEREAL);
+
+            // Cultures
+            event.accept(GrowthcraftCellarItems.STARTER_CULTURE);
 
             // Fluid buckets
             for (var container : GrowthcraftCellarFluids.ALL) {

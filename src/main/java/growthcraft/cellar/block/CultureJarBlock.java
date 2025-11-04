@@ -223,7 +223,11 @@ public class CultureJarBlock extends HorizontalDirectionalBlock implements Entit
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return null; // no ticking yet
+        return level.isClientSide ? null : (lvl, pos, st, be) -> {
+            if (be instanceof CultureJarBlockEntity jar) {
+                CultureJarBlockEntity.serverTick(lvl, pos, st, jar);
+            }
+        };
     }
 
     // Vanilla bucket support: allow empty vanilla buckets to pick up milk from the jar

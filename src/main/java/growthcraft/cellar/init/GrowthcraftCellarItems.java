@@ -55,6 +55,9 @@ public class GrowthcraftCellarItems {
     public static final DeferredItem<Item> YEAST_LAGER = ITEMS.register(Reference.UnlocalizedName.Item.YEAST_LAGER, () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> YEAST_LAGER_ETHEREAL = ITEMS.register(Reference.UnlocalizedName.Item.YEAST_LAGER_ETHEREAL, () -> new EtherealYeastItem(new Item.Properties()));
 
+    // Cultures
+    public static final DeferredItem<Item> STARTER_CULTURE = ITEMS.register(Reference.UnlocalizedName.Item.STARTER_CULTURE, () -> new Item(new Item.Properties()));
+
 
     private GrowthcraftCellarItems() {}
 }

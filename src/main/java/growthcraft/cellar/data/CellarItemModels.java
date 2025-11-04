@@ -31,6 +31,9 @@ public class CellarItemModels extends ItemModelProvider {
         // Limit conversion scope to assets we are certain have textures available right now.
         // Additional items (grapes, hops, yeasts, etc.) can be enabled once their textures exist.
 
+        // Cultures
+        generated("starter_culture");
+
         // Fluid bucket item models (layered bucket textures from core mod assets)
         bucket(Reference.UnlocalizedName.Item.AMBER_ALE_FLUID_BUCKET);
         bucket(Reference.UnlocalizedName.Item.AMBER_LAGER_FLUID_BUCKET);
