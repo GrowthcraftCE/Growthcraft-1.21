@@ -2,55 +2,19 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "rolls": 1,
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "growthcraft:salt",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 2.0,
-                "max": 4.0
-              }
-            }
-          ]
-        },
-        {
-          "type": "minecraft:item",
-          "name": "growthcraft:salt",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 2.0,
-                "max": 3.0
-              }
-            }
-          ],
-          "conditions": [
-            {
-              "condition": "minecraft:match_tool",
-              "predicate": {
-                "enchantments": [
-                  {
-                    "enchantment": "minecraft:fortune",
-                    "levels": {
-                      "min": 1
-                    }
-                  }
-                ]
-              }
-            }
-          ]
+          "name": "growthcraft:salt_ore"
         }
       ],
-      "conditions": [
-        { "condition": "minecraft:survives_explosion" }
-      ]
+      "rolls": 1.0
     }
   ],
   "random_sequence": "growthcraft:blocks/salt_ore"
