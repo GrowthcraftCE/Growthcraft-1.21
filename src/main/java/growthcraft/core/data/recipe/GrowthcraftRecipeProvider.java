@@ -3,6 +3,7 @@ package growthcraft.core.data.recipe;
 import growthcraft.core.config.ConfigValueCondition;
 import growthcraft.core.config.Reference;
 import growthcraft.apples.init.GrowthcraftApplesItems;
+import growthcraft.apiary.init.GrowthcraftApiaryItems;
 import growthcraft.bamboo.init.GrowthcraftBambooItems;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.core.init.GrowthcraftItems;
@@ -150,6 +151,7 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
         addCellarGrainRecipes(output);
 
         addAppleWoodRecipes(output);
+        addApiaryBeeswaxRecipes(output);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GrowthcraftBambooItems.BAMBOO_POST_VERTICAL.get(), 2)
                 .pattern("B")
@@ -241,6 +243,37 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
                 .group(growthcraft.apples.config.Reference.MODID)
                 .unlockedBy(getHasName(GrowthcraftApplesItems.APPLE_WOOD_LOG.get()), has(GrowthcraftApplesItems.APPLE_WOOD_LOG.get()))
                 .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.apples.config.Reference.MODID, growthcraft.apples.config.Reference.UnlocalizedName.Block.APPLE_WOOD));
+    }
+
+    private static void addApiaryBeeswaxRecipes(RecipeOutput output) {
+        addBeeswaxDyeRecipe(output, GrowthcraftApiaryItems.BEES_WAX_BLACK.get(), Tags.Items.DYES_BLACK, growthcraft.apiary.config.Reference.UnlocalizedName.BEES_WAX_BLACK);
+        addBeeswaxDyeRecipe(output, GrowthcraftApiaryItems.BEES_WAX_BLUE.get(), Tags.Items.DYES_BLUE, growthcraft.apiary.config.Reference.UnlocalizedName.BEES_WAX_BLUE);
+        addBeeswaxDyeRecipe(output, GrowthcraftApiaryItems.BEES_WAX_BROWN.get(), Tags.Items.DYES_BROWN, growthcraft.apiary.config.Reference.UnlocalizedName.BEES_WAX_BROWN);
+        addBeeswaxDyeRecipe(output, GrowthcraftApiaryItems.BEES_WAX_CYAN.get(), Tags.Items.DYES_CYAN, growthcraft.apiary.config.Reference.UnlocalizedName.BEES_WAX_CYAN);
+        addBeeswaxDyeRecipe(output, GrowthcraftApiaryItems.BEES_WAX_GRAY.get(), Tags.Items.DYES_GRAY, growthcraft.apiary.config.Reference.UnlocalizedName.BEES_WAX_GRAY);
+        addBeeswaxDyeRecipe(output, GrowthcraftApiaryItems.BEES_WAX_GREEN.get(), Tags.Items.DYES_GREEN, growthcraft.apiary.config.Reference.UnlocalizedName.BEES_WAX_GREEN);
+        addBeeswaxDyeRecipe(output, GrowthcraftApiaryItems.BEES_WAX_LIGHT_BLUE.get(), Tags.Items.DYES_LIGHT_BLUE, growthcraft.apiary.config.Reference.UnlocalizedName.BEES_WAX_LIGHT_BLUE);
+        addBeeswaxDyeRecipe(output, GrowthcraftApiaryItems.BEES_WAX_LIGHT_GRAY.get(), Tags.Items.DYES_LIGHT_GRAY, growthcraft.apiary.config.Reference.UnlocalizedName.BEES_WAX_LIGHT_GRAY);
+        addBeeswaxDyeRecipe(output, GrowthcraftApiaryItems.BEES_WAX_LIME.get(), Tags.Items.DYES_LIME, growthcraft.apiary.config.Reference.UnlocalizedName.BEES_WAX_LIME);
+        addBeeswaxDyeRecipe(output, GrowthcraftApiaryItems.BEES_WAX_MAGENTA.get(), Tags.Items.DYES_MAGENTA, growthcraft.apiary.config.Reference.UnlocalizedName.BEES_WAX_MAGENTA);
+        addBeeswaxDyeRecipe(output, GrowthcraftApiaryItems.BEES_WAX_ORANGE.get(), Tags.Items.DYES_ORANGE, growthcraft.apiary.config.Reference.UnlocalizedName.BEES_WAX_ORANGE);
+        addBeeswaxDyeRecipe(output, GrowthcraftApiaryItems.BEES_WAX_PINK.get(), Tags.Items.DYES_PINK, growthcraft.apiary.config.Reference.UnlocalizedName.BEES_WAX_PINK);
+        addBeeswaxDyeRecipe(output, GrowthcraftApiaryItems.BEES_WAX_PURPLE.get(), Tags.Items.DYES_PURPLE, growthcraft.apiary.config.Reference.UnlocalizedName.BEES_WAX_PURPLE);
+        addBeeswaxDyeRecipe(output, GrowthcraftApiaryItems.BEES_WAX_RED.get(), Tags.Items.DYES_RED, growthcraft.apiary.config.Reference.UnlocalizedName.BEES_WAX_RED);
+        addBeeswaxDyeRecipe(output, GrowthcraftApiaryItems.BEES_WAX_WHITE.get(), Tags.Items.DYES_WHITE, growthcraft.apiary.config.Reference.UnlocalizedName.BEES_WAX_WHITE);
+        addBeeswaxDyeRecipe(output, GrowthcraftApiaryItems.BEES_WAX_YELLOW.get(), Tags.Items.DYES_YELLOW, growthcraft.apiary.config.Reference.UnlocalizedName.BEES_WAX_YELLOW);
+    }
+
+    private static void addBeeswaxDyeRecipe(RecipeOutput output, Item result, TagKey<Item> dye, String name) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, result, 8)
+                .pattern("AAA")
+                .pattern("ABA")
+                .pattern("AAA")
+                .define('A', GrowthcraftApiaryItems.BEES_WAX.get())
+                .define('B', dye)
+                .group(growthcraft.apiary.config.Reference.MODID)
+                .unlockedBy(getHasName(GrowthcraftApiaryItems.BEES_WAX.get()), has(GrowthcraftApiaryItems.BEES_WAX.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.apiary.config.Reference.MODID, name));
     }
 
     private static void addMilkIngredientRecipes(RecipeOutput output) {

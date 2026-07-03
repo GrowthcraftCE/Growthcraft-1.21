@@ -231,3 +231,32 @@ description='''Growthcraft Apples adds apple wood building blocks and apple proc
     versionRange="[${mod_version},)"
     ordering="AFTER"
     side="BOTH"
+
+
+[[mods]]
+modId="growthcraft_apiary"
+version="${mod_version}"
+displayName="Growthcraft Apiary"
+authors="${mod_authors}"
+description='''Growthcraft Apiary adds bees, wax, honey, and beekeeping progression.'''
+
+[[dependencies.growthcraft_apiary]]
+    modId="neoforge"
+    type="required"
+    versionRange="[${neo_version},)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.growthcraft_apiary]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.growthcraft_apiary]]
+    modId="growthcraft"
+    type="required"
+    versionRange="[${mod_version},)"
+    ordering="AFTER"
+    side="BOTH"

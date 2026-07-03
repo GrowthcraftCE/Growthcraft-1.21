@@ -86,7 +86,7 @@ neoForge {
             // gameDirectory = project.file('run-data')
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-            programArguments.addAll '--mod', project.mod_id, '--mod', 'growthcraft_cellar', '--mod', 'growthcraft_milk', '--mod', 'growthcraft_rice', '--mod', 'growthcraft_bamboo', '--mod', 'growthcraft_apples', '--all', '--flat', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+            programArguments.addAll '--mod', project.mod_id, '--mod', 'growthcraft_cellar', '--mod', 'growthcraft_milk', '--mod', 'growthcraft_rice', '--mod', 'growthcraft_bamboo', '--mod', 'growthcraft_apples', '--mod', 'growthcraft_apiary', '--all', '--flat', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
         }
 
         // applies to all the run configs above
@@ -126,6 +126,9 @@ neoForge {
             sourceSet(sourceSets.main)
         }
         "growthcraft_apples" {
+            sourceSet(sourceSets.main)
+        }
+        "growthcraft_apiary" {
             sourceSet(sourceSets.main)
         }
     }
@@ -353,7 +356,7 @@ def scanRecipesWithTypes = {
     }.sort { a, b -> a.id <=> b.id }
 }
 
-def growthcraftNamespaces = ['growthcraft', 'growthcraft_cellar', 'growthcraft_milk', 'growthcraft_rice', 'growthcraft_bamboo', 'growthcraft_apples'] as Set
+def growthcraftNamespaces = ['growthcraft', 'growthcraft_cellar', 'growthcraft_milk', 'growthcraft_rice', 'growthcraft_bamboo', 'growthcraft_apples', 'growthcraft_apiary'] as Set
 
 def namespaceForJavaFile = { File javaFile ->
     def path = javaFile.toPath().toString().replace('\\', '/')
@@ -371,6 +374,9 @@ def namespaceForJavaFile = { File javaFile ->
     }
     if (path.contains('/growthcraft/apples/')) {
         return 'growthcraft_apples'
+    }
+    if (path.contains('/growthcraft/apiary/')) {
+        return 'growthcraft_apiary'
     }
     if (path.contains('/growthcraft/core/')) {
         return 'growthcraft'
@@ -463,6 +469,14 @@ def scanRegisteredGrowthcraftIds = {
             def blockItemHelperMatcher = (line =~ /\bblockItem\(([^,]+),/)
             if (blockItemHelperMatcher.find()) {
                 def path = resolveRegistrationPath(blockItemHelperMatcher.group(1), namespace, constantsByNamespace)
+                if (path != null) {
+                    registeredItems.add("${namespace}:${path}".toString())
+                }
+            }
+
+            def simpleItemHelperMatcher = (line =~ /DeferredItem<[^>]+>\s+[A-Z0-9_]+\s*=\s*register\(([^)]+)\)/)
+            if (simpleItemHelperMatcher.find()) {
+                def path = resolveRegistrationPath(simpleItemHelperMatcher.group(1), namespace, constantsByNamespace)
                 if (path != null) {
                     registeredItems.add("${namespace}:${path}".toString())
                 }

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_bees_wax": {
+      "conditions": {
+        "items": [
+          {
+            "items": "growthcraft_apiary:bees_wax"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "growthcraft_apiary:bees_wax_orange"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_bees_wax"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "growthcraft_apiary:bees_wax_orange"
+    ]
+  }
+}

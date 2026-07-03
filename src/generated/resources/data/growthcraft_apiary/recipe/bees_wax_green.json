@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "growthcraft_apiary",
+  "key": {
+    "A": {
+      "item": "growthcraft_apiary:bees_wax"
+    },
+    "B": {
+      "tag": "c:dyes/green"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "ABA",
+    "AAA"
+  ],
+  "result": {
+    "count": 8,
+    "id": "growthcraft_apiary:bees_wax_green"
+  }
+}
