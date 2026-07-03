@@ -56,6 +56,14 @@ public class GrowthcraftMilk {
     private void buildCreativeTab(BuildCreativeModeTabContentsEvent event) {
         CreativeModeTab tab = event.getTab();
         if (tab == GrowthcraftCreativeTabs.MAIN.get()) {
+            // Ingredients
+            event.accept(GrowthcraftMilkItems.BUTTER.get());
+            event.accept(GrowthcraftMilkItems.BUTTER_SALTED.get());
+            event.accept(GrowthcraftMilkItems.CHEESE_CLOTH.get());
+            event.accept(GrowthcraftMilkItems.STARTER_CULTURE.get());
+            event.accept(GrowthcraftMilkItems.STOMACH.get());
+            event.accept(GrowthcraftMilkItems.THISTLE.get());
+
             // Tools
             event.accept(GrowthcraftMilkItems.MILKING_BUCKET_IRON.get());
 
