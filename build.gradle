@@ -435,6 +435,22 @@ def scanRegisteredGrowthcraftIds = {
                 }
             }
 
+            def curdsHelperMatcher = (line =~ /\bregisterCheeseCurds\(([^,]+),/)
+            if (curdsHelperMatcher.find()) {
+                def path = resolveRegistrationPath("${curdsHelperMatcher.group(1)} + \"_cheese_curds\"", namespace, constantsByNamespace)
+                if (path != null) {
+                    registeredItems.add("${namespace}:${path}".toString())
+                }
+            }
+
+            def drainedCurdsHelperMatcher = (line =~ /\bregisterDrainedCheeseCurds\(([^)]+)\)/)
+            if (drainedCurdsHelperMatcher.find()) {
+                def path = resolveRegistrationPath("${drainedCurdsHelperMatcher.group(1)} + \"_cheese_curds_drained\"", namespace, constantsByNamespace)
+                if (path != null) {
+                    registeredItems.add("${namespace}:${path}".toString())
+                }
+            }
+
             def blockMatcher = (line =~ /\bBLOCKS\.register\(([^,]+),/)
             if (blockMatcher.find()) {
                 def path = resolveRegistrationPath(blockMatcher.group(1), namespace, constantsByNamespace)

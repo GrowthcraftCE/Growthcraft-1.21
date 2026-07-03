@@ -66,6 +66,26 @@ public class GrowthcraftMilk {
             event.accept(GrowthcraftMilkItems.STOMACH.get());
             event.accept(GrowthcraftMilkItems.THISTLE.get());
             event.accept(GrowthcraftMilkItems.THISTLE_SEED.get());
+            event.accept(GrowthcraftMilkItems.APPENZELLER_CHEESE_CURDS.get());
+            event.accept(GrowthcraftMilkItems.APPENZELLER_CHEESE_CURDS_DRAINED.get());
+            event.accept(GrowthcraftMilkItems.ASIAGO_CHEESE_CURDS.get());
+            event.accept(GrowthcraftMilkItems.ASIAGO_CHEESE_CURDS_DRAINED.get());
+            event.accept(GrowthcraftMilkItems.CASU_MARZU_CHEESE_CURDS.get());
+            event.accept(GrowthcraftMilkItems.CASU_MARZU_CHEESE_CURDS_DRAINED.get());
+            event.accept(GrowthcraftMilkItems.CHEDDAR_CHEESE_CURDS.get());
+            event.accept(GrowthcraftMilkItems.CHEDDAR_CHEESE_CURDS_DRAINED.get());
+            event.accept(GrowthcraftMilkItems.EMMENTALER_CHEESE_CURDS.get());
+            event.accept(GrowthcraftMilkItems.EMMENTALER_CHEESE_CURDS_DRAINED.get());
+            event.accept(GrowthcraftMilkItems.GORGONZOLA_CHEESE_CURDS.get());
+            event.accept(GrowthcraftMilkItems.GORGONZOLA_CHEESE_CURDS_DRAINED.get());
+            event.accept(GrowthcraftMilkItems.GOUDA_CHEESE_CURDS.get());
+            event.accept(GrowthcraftMilkItems.GOUDA_CHEESE_CURDS_DRAINED.get());
+            event.accept(GrowthcraftMilkItems.MONTEREY_CHEESE_CURDS.get());
+            event.accept(GrowthcraftMilkItems.MONTEREY_CHEESE_CURDS_DRAINED.get());
+            event.accept(GrowthcraftMilkItems.PARMESAN_CHEESE_CURDS.get());
+            event.accept(GrowthcraftMilkItems.PARMESAN_CHEESE_CURDS_DRAINED.get());
+            event.accept(GrowthcraftMilkItems.PROVOLONE_CHEESE_CURDS.get());
+            event.accept(GrowthcraftMilkItems.PROVOLONE_CHEESE_CURDS_DRAINED.get());
             event.accept(GrowthcraftMilkItems.RICOTTA_CHEESE_CURDS.get());
             event.accept(GrowthcraftMilkItems.RICOTTA_CHEESE_CURDS_DRAINED.get());
 
