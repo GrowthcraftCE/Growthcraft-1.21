@@ -17,6 +17,10 @@ public class ApiaryBlockLoot extends BlockLootSubProvider {
     @Override
     protected void generate() {
         GrowthcraftApiaryBlocks.BEE_BOXES.forEach(block -> dropSelf(block.get()));
+        GrowthcraftApiaryBlocks.CANDLES.forEach(candleBlocks -> {
+            dropSelf(candleBlocks.standing().get());
+            dropOther(candleBlocks.wall().get(), candleBlocks.standing().get());
+        });
     }
 
     @Override
