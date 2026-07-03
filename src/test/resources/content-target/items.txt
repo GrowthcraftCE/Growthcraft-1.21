@@ -113,7 +113,6 @@ growthcraft_apples:apple_wood_log
 growthcraft_apples:apple_wood_log_stripped
 growthcraft_apples:apple_wood_stripped
 growthcraft_apples:bee_box_apple
-growthcraft_apples:fishtrap_apple
 growthcraft_bamboo:bamboo_post_vertical
 growthcraft_cellar:ale_potion
 growthcraft_cellar:amber_ale_fluid_bucket

@@ -30,6 +30,7 @@ public class MilkBlockLoot extends BlockLootSubProvider {
         dropCheeseWheels();
         dropCheeseCurds();
         dropThistleCrop();
+        dropShopSigns();
     }
 
     private void dropMachineBlocks() {
@@ -96,6 +97,13 @@ public class MilkBlockLoot extends BlockLootSubProvider {
                 GrowthcraftMilkItems.THISTLE_SEED.get(),
                 LootItemBlockStatePropertyCondition.hasBlockStateProperties(GrowthcraftMilkBlocks.THISTLE_CROP.get())
                         .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CropBlock.AGE, CropBlock.MAX_AGE))));
+    }
+
+    private void dropShopSigns() {
+        add(GrowthcraftMilkBlocks.HANGING_SIGN_1_OAK.get(), noDrop());
+        add(GrowthcraftMilkBlocks.HANGING_SIGN_1_SPRUCE.get(), noDrop());
+        add(GrowthcraftMilkBlocks.HANGING_SIGN_2_OAK.get(), noDrop());
+        add(GrowthcraftMilkBlocks.HANGING_SIGN_2_SPRUCE.get(), noDrop());
     }
 
     private LootItemBlockStatePropertyCondition.Builder isCheeseCurdsDrained(Block block) {

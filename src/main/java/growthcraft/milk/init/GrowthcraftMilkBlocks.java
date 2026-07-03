@@ -8,6 +8,10 @@ import growthcraft.milk.block.MixingVatBlock;
 import growthcraft.milk.block.PancheonBlock;
 import growthcraft.milk.block.ThistleCropBlock;
 import growthcraft.milk.config.Reference;
+import net.minecraft.world.level.block.CeilingHangingSignBlock;
+import net.minecraft.world.level.block.WallHangingSignBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -62,6 +66,18 @@ public final class GrowthcraftMilkBlocks {
             Reference.UnlocalizedName.THISTLE_CROP,
             ThistleCropBlock::new
     );
+    public static final DeferredBlock<CeilingHangingSignBlock> HANGING_SIGN_1_OAK = BLOCKS.register(
+            Reference.UnlocalizedName.HANGING_SIGN_1_OAK,
+            () -> new CeilingHangingSignBlock(WoodType.OAK, hangingSignProperties()));
+    public static final DeferredBlock<CeilingHangingSignBlock> HANGING_SIGN_1_SPRUCE = BLOCKS.register(
+            Reference.UnlocalizedName.HANGING_SIGN_1_SPRUCE,
+            () -> new CeilingHangingSignBlock(WoodType.SPRUCE, hangingSignProperties()));
+    public static final DeferredBlock<WallHangingSignBlock> HANGING_SIGN_2_OAK = BLOCKS.register(
+            Reference.UnlocalizedName.HANGING_SIGN_2_OAK,
+            () -> new WallHangingSignBlock(WoodType.OAK, hangingSignProperties()));
+    public static final DeferredBlock<WallHangingSignBlock> HANGING_SIGN_2_SPRUCE = BLOCKS.register(
+            Reference.UnlocalizedName.HANGING_SIGN_2_SPRUCE,
+            () -> new WallHangingSignBlock(WoodType.SPRUCE, hangingSignProperties()));
 
     private static DeferredBlock<CheeseWheelBlock> registerCheese(String cheeseName) {
         return BLOCKS.register(cheeseName + "_cheese", CheeseWheelBlock::new);
@@ -77,5 +93,13 @@ public final class GrowthcraftMilkBlocks {
 
     private static DeferredBlock<CheeseCurdBlock> registerCheeseCurds(String cheeseName) {
         return BLOCKS.register(cheeseName + "_cheese_curds", CheeseCurdBlock::new);
+    }
+
+    private static BlockBehaviour.Properties hangingSignProperties() {
+        return BlockBehaviour.Properties.of()
+                .forceSolidOn()
+                .noCollission()
+                .strength(1.0F)
+                .ignitedByLava();
     }
 }

@@ -38,6 +38,10 @@ public final class Reference {
         public static final String EMMENTALER = "emmentaler";
         public static final String GORGONZOLA = "gorgonzola";
         public static final String GOUDA = "gouda";
+        public static final String HANGING_SIGN_1_OAK = "hanging_sign_1_oak";
+        public static final String HANGING_SIGN_1_SPRUCE = "hanging_sign_1_spruce";
+        public static final String HANGING_SIGN_2_OAK = "hanging_sign_2_oak";
+        public static final String HANGING_SIGN_2_SPRUCE = "hanging_sign_2_spruce";
         public static final String ICE_CREAM_APPLE = "ice_cream_apple";
         public static final String ICE_CREAM_CHOCOLATE = "ice_cream_chocolate";
         public static final String ICE_CREAM_GRAPE_PURPLE = "ice_cream_grape_purple";
