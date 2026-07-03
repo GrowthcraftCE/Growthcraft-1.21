@@ -1,5 +1,6 @@
 package growthcraft.core.data.tags;
 
+import growthcraft.apiary.init.GrowthcraftApiaryBlocks;
 import growthcraft.bamboo.init.GrowthcraftBambooBlocks;
 import growthcraft.apples.init.GrowthcraftApplesBlocks;
 import growthcraft.core.config.Reference;
@@ -44,6 +45,17 @@ public class GrowthcraftBlockTags extends BlockTagsProvider {
                         GrowthcraftApplesBlocks.APPLE_WOOD_LOG.get(),
                         GrowthcraftApplesBlocks.APPLE_WOOD_LOG_STRIPPED.get(),
                         GrowthcraftApplesBlocks.APPLE_WOOD_STRIPPED.get(),
+                        GrowthcraftApiaryBlocks.BEE_BOX_ACACIA.get(),
+                        GrowthcraftApiaryBlocks.BEE_BOX_BAMBOO.get(),
+                        GrowthcraftApiaryBlocks.BEE_BOX_BIRCH.get(),
+                        GrowthcraftApiaryBlocks.BEE_BOX_CHERRY.get(),
+                        GrowthcraftApiaryBlocks.BEE_BOX_CRIMSON.get(),
+                        GrowthcraftApiaryBlocks.BEE_BOX_DARK_OAK.get(),
+                        GrowthcraftApiaryBlocks.BEE_BOX_JUNGLE.get(),
+                        GrowthcraftApiaryBlocks.BEE_BOX_MANGROVE.get(),
+                        GrowthcraftApiaryBlocks.BEE_BOX_OAK.get(),
+                        GrowthcraftApiaryBlocks.BEE_BOX_SPRUCE.get(),
+                        GrowthcraftApiaryBlocks.BEE_BOX_WARPED.get(),
                         GrowthcraftBambooBlocks.BAMBOO_POST_VERTICAL.get(),
                         GrowthcraftBambooBlocks.BAMBOO_POST_HORIZONTAL.get()
                 );

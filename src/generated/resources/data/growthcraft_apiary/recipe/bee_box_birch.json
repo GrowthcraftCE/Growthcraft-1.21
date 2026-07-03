@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "growthcraft_apiary",
+  "key": {
+    "B": {
+      "item": "minecraft:birch_slab"
+    },
+    "P": {
+      "item": "minecraft:birch_planks"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "pattern": [
+    "SPS",
+    "PBP",
+    "SPS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "growthcraft_apiary:bee_box_birch"
+  }
+}

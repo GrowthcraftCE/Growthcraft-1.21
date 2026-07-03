@@ -2,6 +2,7 @@ package growthcraft.apiary;
 
 import com.mojang.logging.LogUtils;
 import growthcraft.apiary.config.Reference;
+import growthcraft.apiary.init.GrowthcraftApiaryBlocks;
 import growthcraft.apiary.init.GrowthcraftApiaryItems;
 import growthcraft.core.init.GrowthcraftCreativeTabs;
 import net.minecraft.world.item.CreativeModeTab;
@@ -16,6 +17,7 @@ public class GrowthcraftApiary {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public GrowthcraftApiary(IEventBus modEventBus) {
+        GrowthcraftApiaryBlocks.BLOCKS.register(modEventBus);
         GrowthcraftApiaryItems.ITEMS.register(modEventBus);
         modEventBus.addListener(this::buildCreativeTab);
 
@@ -25,6 +27,7 @@ public class GrowthcraftApiary {
     private void buildCreativeTab(BuildCreativeModeTabContentsEvent event) {
         CreativeModeTab tab = event.getTab();
         if (tab == GrowthcraftCreativeTabs.MAIN.get()) {
+            GrowthcraftApiaryItems.BEE_BOX_ITEMS.forEach(item -> event.accept(item.get()));
             GrowthcraftApiaryItems.SIMPLE_ITEMS.forEach(item -> event.accept(item.get()));
         }
     }
