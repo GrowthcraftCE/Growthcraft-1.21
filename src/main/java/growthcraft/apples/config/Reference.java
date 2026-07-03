@@ -9,6 +9,13 @@ public final class Reference {
     private Reference() {}
 
     public static final class UnlocalizedName {
+        public static final class Fluid {
+            public static final String APPLE_CIDER = "apple_cider";
+            public static final String APPLE_JUICE = "apple_juice";
+
+            private Fluid() {}
+        }
+
         public static final class Block {
             public static final String APPLE_PLANK = "apple_plank";
             public static final String APPLE_PLANK_BUTTON = "apple_plank_button";
@@ -36,5 +43,12 @@ public final class Reference {
         }
 
         private UnlocalizedName() {}
+    }
+
+    public static final class FluidColor {
+        public static final growthcraft.lib.utils.ColorUtils.GrowthcraftColor APPLE_CIDER = new growthcraft.lib.utils.ColorUtils.GrowthcraftColor(0xFFDF9C40);
+        public static final growthcraft.lib.utils.ColorUtils.GrowthcraftColor APPLE_JUICE = new growthcraft.lib.utils.ColorUtils.GrowthcraftColor(0xFFFFD627);
+
+        private FluidColor() {}
     }
 }
