@@ -344,6 +344,144 @@ def scanRecipesWithTypes = {
     }.sort { a, b -> a.id <=> b.id }
 }
 
+def growthcraftNamespaces = ['growthcraft', 'growthcraft_cellar', 'growthcraft_milk'] as Set
+
+def namespaceForJavaFile = { File javaFile ->
+    def path = javaFile.toPath().toString().replace('\\', '/')
+    if (path.contains('/growthcraft/cellar/')) {
+        return 'growthcraft_cellar'
+    }
+    if (path.contains('/growthcraft/milk/')) {
+        return 'growthcraft_milk'
+    }
+    if (path.contains('/growthcraft/core/')) {
+        return 'growthcraft'
+    }
+    return null
+}
+
+def scanReferenceConstantsByNamespace = {
+    def constants = [:].withDefault { [:] }
+    def pattern = ~/public static final String ([A-Z0-9_]+)\s*=\s*"([^"]+)"/
+    fileTree('src/main/java/growthcraft') {
+        include '**/config/Reference.java'
+    }.each { javaFile ->
+        def namespace = namespaceForJavaFile(javaFile)
+        if (namespace == null) {
+            return
+        }
+
+        javaFile.eachLine('UTF-8') { line ->
+            def matcher = pattern.matcher(line)
+            if (matcher.find()) {
+                constants[namespace][matcher.group(1)] = matcher.group(2)
+            }
+        }
+    }
+    return constants
+}
+
+def resolveRegistrationPath = { String expression, String namespace, Map constantsByNamespace ->
+    def trimmed = expression.trim()
+    def literal = (trimmed =~ /^"([^"]+)"/)
+    if (literal.find()) {
+        return literal.group(1)
+    }
+
+    def constant = (trimmed =~ /Reference\.UnlocalizedName(?:\.[A-Za-z0-9_]+)*\.([A-Z0-9_]+)/)
+    if (constant.find()) {
+        return constantsByNamespace[namespace][constant.group(1)]
+    }
+
+    return null
+}
+
+def scanRegisteredGrowthcraftIds = {
+    def constantsByNamespace = scanReferenceConstantsByNamespace()
+    def registeredItems = [] as Set
+    def registeredBlocks = [] as Set
+    def registeredFluids = [] as Set
+
+    fileTree('src/main/java/growthcraft') {
+        include '**/init/*.java'
+    }.each { javaFile ->
+        def namespace = namespaceForJavaFile(javaFile)
+        if (namespace == null) {
+            return
+        }
+
+        javaFile.eachLine('UTF-8') { line ->
+            def itemMatcher = (line =~ /\bITEMS\.register\(([^,]+),/)
+            if (itemMatcher.find()) {
+                def path = resolveRegistrationPath(itemMatcher.group(1), namespace, constantsByNamespace)
+                if (path != null) {
+                    registeredItems.add("${namespace}:${path}".toString())
+                }
+            }
+
+            def blockMatcher = (line =~ /\bBLOCKS\.register\(([^,]+),/)
+            if (blockMatcher.find()) {
+                def path = resolveRegistrationPath(blockMatcher.group(1), namespace, constantsByNamespace)
+                if (path != null) {
+                    registeredBlocks.add("${namespace}:${path}".toString())
+                }
+            }
+
+            def fluidRegisterMatcher = (line =~ /FluidRegistryContainer\s+[A-Z0-9_]+\s*=\s*register\(([^,]+),/)
+            if (fluidRegisterMatcher.find()) {
+                def path = resolveRegistrationPath(fluidRegisterMatcher.group(1), namespace, constantsByNamespace)
+                if (path != null) {
+                    registeredFluids.add("${namespace}:${path}_fluid_source".toString())
+                    registeredFluids.add("${namespace}:${path}_fluid_flowing".toString())
+                    registeredBlocks.add("${namespace}:${path}_fluid".toString())
+                    registeredItems.add("${namespace}:${path}_fluid_bucket".toString())
+                }
+            }
+
+            def localNameMatcher = (line =~ /String name\s*=\s*"([^"]+)"/)
+            if (localNameMatcher.find() && javaFile.name.contains('Fluids')) {
+                def path = localNameMatcher.group(1)
+                registeredFluids.add("${namespace}:${path}_fluid_source".toString())
+                registeredFluids.add("${namespace}:${path}_fluid_flowing".toString())
+                registeredBlocks.add("${namespace}:${path}_fluid".toString())
+                registeredItems.add("${namespace}:${path}_fluid_bucket".toString())
+            }
+        }
+    }
+
+    return [items: registeredItems.toSorted(), blocks: registeredBlocks.toSorted(), fluids: registeredFluids.toSorted()]
+}
+
+def collectRecipeRegistryReferences
+collectRecipeRegistryReferences = { Object node, Set itemRefs, Set fluidRefs ->
+    if (node instanceof Map) {
+        node.each { key, value ->
+            if (value instanceof String && key in ['item', 'id']) {
+                itemRefs.add(value)
+            } else if (value instanceof String && key == 'fluid') {
+                fluidRefs.add(value)
+            } else {
+                collectRecipeRegistryReferences(value, itemRefs, fluidRefs)
+            }
+        }
+    } else if (node instanceof Collection) {
+        node.each { collectRecipeRegistryReferences(it, itemRefs, fluidRefs) }
+    }
+}
+
+def scanRecipeRegistryReferences = {
+    return scanRecipesWithTypes().collect { recipe ->
+        def json = new groovy.json.JsonSlurper().parse(recipe.file)
+        def itemRefs = [] as Set
+        def fluidRefs = [] as Set
+        collectRecipeRegistryReferences(json, itemRefs, fluidRefs)
+        return recipe + [
+                itemRefs : itemRefs.findAll { it.contains(':') }.toSorted(),
+                fluidRefs: fluidRefs.findAll { it.contains(':') }.toSorted()
+        ]
+    }
+}
+
 def supportedCustomRecipeTypes = [
         'growthcraft_cellar:culture_jar': 'Culture Jar recipe type and serializer are registered.'
 ]
@@ -382,6 +520,7 @@ tasks.register('migrationProgress') {
     inputs.dir(targetDir)
     inputs.dir(file('src/main/resources'))
     inputs.dir(file('src/generated/resources')).optional()
+    inputs.dir(file('src/main/java'))
 
     def reportFile = layout.buildDirectory.file('reports/growthcraft/migration-progress.md')
     outputs.file(reportFile)
@@ -459,6 +598,55 @@ tasks.register('migrationProgress') {
         } else {
             unknownCustomRecipes.each { recipe ->
                 report.append("- `${recipe.id}` uses `${recipe.type}`\n")
+            }
+        }
+
+        def registeredIds = scanRegisteredGrowthcraftIds()
+        def recipesWithReferences = scanRecipeRegistryReferences()
+        def itemReferences = [:].withDefault { [] as Set }
+        def fluidReferences = [:].withDefault { [] as Set }
+        recipesWithReferences.each { recipe ->
+            recipe.itemRefs.findAll { ref -> growthcraftNamespaces.any { ref.startsWith("${it}:") } }.each { ref ->
+                itemReferences[ref].add(recipe.id)
+            }
+            recipe.fluidRefs.findAll { ref -> growthcraftNamespaces.any { ref.startsWith("${it}:") } }.each { ref ->
+                fluidReferences[ref].add(recipe.id)
+            }
+        }
+
+        def missingItemReferences = itemReferences.findAll { id, ignored -> !registeredIds.items.contains(id) }.toSorted { a, b -> a.key <=> b.key }
+        def missingFluidReferences = fluidReferences.findAll { id, ignored -> !registeredIds.fluids.contains(id) }.toSorted { a, b -> a.key <=> b.key }
+
+        report.append('\n## Recipe Growthcraft Reference Audit\n\n')
+        report.append('Advisory static scan of item/fluid IDs used by recipes compared to currently visible Java registrations. This helps identify content prerequisites before moving a recipe type from blocked to supported.\n\n')
+        report.append('| Reference kind | Registered | Referenced by recipes | Missing registrations |\n')
+        report.append('| --- | ---: | ---: | ---: |\n')
+        report.append("| Items | ${registeredIds.items.size()} | ${itemReferences.size()} | ${missingItemReferences.size()} |\n")
+        report.append("| Fluids | ${registeredIds.fluids.size()} | ${fluidReferences.size()} | ${missingFluidReferences.size()} |\n")
+
+        report.append('\n### Missing Recipe Item References\n\n')
+        if (missingItemReferences.isEmpty()) {
+            report.append('None.\n')
+        } else {
+            missingItemReferences.each { id, recipeIds ->
+                report.append("- `${id}` (${recipeIds.size()} recipes): ${recipeIds.toSorted().take(5).collect { "`$it`" }.join(', ')}")
+                if (recipeIds.size() > 5) {
+                    report.append(", ...")
+                }
+                report.append('\n')
+            }
+        }
+
+        report.append('\n### Missing Recipe Fluid References\n\n')
+        if (missingFluidReferences.isEmpty()) {
+            report.append('None.\n')
+        } else {
+            missingFluidReferences.each { id, recipeIds ->
+                report.append("- `${id}` (${recipeIds.size()} recipes): ${recipeIds.toSorted().take(5).collect { "`$it`" }.join(', ')}")
+                if (recipeIds.size() > 5) {
+                    report.append(", ...")
+                }
+                report.append('\n')
             }
         }
 
