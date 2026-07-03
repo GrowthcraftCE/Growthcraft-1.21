@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "conditions": [
+    {
+      "type": "growthcraft:feature_enabled",
+      "feature": "rice"
+    }
+  ],
+  "group": "growthcraft_rice",
+  "key": {
+    "F": {
+      "tag": "minecraft:fishes"
+    },
+    "K": {
+      "item": "minecraft:dried_kelp"
+    },
+    "R": {
+      "item": "growthcraft_rice:rice_cooked"
+    }
+  },
+  "pattern": [
+    " F ",
+    "RRR",
+    "KKK"
+  ],
+  "result": {
+    "count": 12,
+    "item": "growthcraft_rice:sushi_roll"
+  },
+  "show_notification": true
+}
