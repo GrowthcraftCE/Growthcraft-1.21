@@ -451,6 +451,14 @@ def scanRegisteredGrowthcraftIds = {
                 }
             }
 
+            def cheeseSliceHelperMatcher = (line =~ /\bregisterCheeseSlice\(([^)]+)\)/)
+            if (cheeseSliceHelperMatcher.find()) {
+                def path = resolveRegistrationPath("${cheeseSliceHelperMatcher.group(1)} + \"_cheese_slice\"", namespace, constantsByNamespace)
+                if (path != null) {
+                    registeredItems.add("${namespace}:${path}".toString())
+                }
+            }
+
             def blockMatcher = (line =~ /\bBLOCKS\.register\(([^,]+),/)
             if (blockMatcher.find()) {
                 def path = resolveRegistrationPath(blockMatcher.group(1), namespace, constantsByNamespace)

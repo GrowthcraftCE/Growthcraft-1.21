@@ -18,6 +18,7 @@ public final class GrowthcraftMilkTags {
         private Items() {}
         // Used by recipes later; kept here for compatibility with previous code. Not yet consumed.
         public static final TagKey<Item> TAG_MILK_BUCKETS = tag("milk_buckets");
+        public static final TagKey<Item> CHEESE_SLICES = tag("cheese_slices");
 
         private static TagKey<Item> tag(String name) {
             return ItemTags.create(ResourceLocation.fromNamespaceAndPath(Reference.MODID, name));

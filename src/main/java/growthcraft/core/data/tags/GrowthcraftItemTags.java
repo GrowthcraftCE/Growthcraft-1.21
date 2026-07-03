@@ -47,5 +47,19 @@ public class GrowthcraftItemTags extends IntrinsicHolderTagsProvider<Item> {
 
         this.tag(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS)
                 .add(GrowthcraftMilkItems.MILK_BUCKET_IRON.get());
+
+        this.tag(GrowthcraftMilkTags.Items.CHEESE_SLICES)
+                .add(
+                        GrowthcraftMilkItems.APPENZELLER_CHEESE_SLICE.get(),
+                        GrowthcraftMilkItems.ASIAGO_CHEESE_SLICE.get(),
+                        GrowthcraftMilkItems.CASU_MARZU_CHEESE_SLICE.get(),
+                        GrowthcraftMilkItems.CHEDDAR_CHEESE_SLICE.get(),
+                        GrowthcraftMilkItems.EMMENTALER_CHEESE_SLICE.get(),
+                        GrowthcraftMilkItems.GORGONZOLA_CHEESE_SLICE.get(),
+                        GrowthcraftMilkItems.GOUDA_CHEESE_SLICE.get(),
+                        GrowthcraftMilkItems.MONTEREY_CHEESE_SLICE.get(),
+                        GrowthcraftMilkItems.PARMESAN_CHEESE_SLICE.get(),
+                        GrowthcraftMilkItems.PROVOLONE_CHEESE_SLICE.get()
+                );
     }
 }

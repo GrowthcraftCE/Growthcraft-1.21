@@ -90,6 +90,16 @@ public class GrowthcraftMilk {
             event.accept(GrowthcraftMilkItems.RICOTTA_CHEESE_CURDS_DRAINED.get());
 
             // Foods
+            event.accept(GrowthcraftMilkItems.APPENZELLER_CHEESE_SLICE.get());
+            event.accept(GrowthcraftMilkItems.ASIAGO_CHEESE_SLICE.get());
+            event.accept(GrowthcraftMilkItems.CASU_MARZU_CHEESE_SLICE.get());
+            event.accept(GrowthcraftMilkItems.CHEDDAR_CHEESE_SLICE.get());
+            event.accept(GrowthcraftMilkItems.EMMENTALER_CHEESE_SLICE.get());
+            event.accept(GrowthcraftMilkItems.GORGONZOLA_CHEESE_SLICE.get());
+            event.accept(GrowthcraftMilkItems.GOUDA_CHEESE_SLICE.get());
+            event.accept(GrowthcraftMilkItems.MONTEREY_CHEESE_SLICE.get());
+            event.accept(GrowthcraftMilkItems.PARMESAN_CHEESE_SLICE.get());
+            event.accept(GrowthcraftMilkItems.PROVOLONE_CHEESE_SLICE.get());
             event.accept(GrowthcraftMilkItems.RICOTTA_CHEESE_SLICE.get());
             event.accept(GrowthcraftMilkItems.ICE_CREAM_APPLE.get());
             event.accept(GrowthcraftMilkItems.ICE_CREAM_CHOCOLATE.get());

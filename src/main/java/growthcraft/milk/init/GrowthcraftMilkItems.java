@@ -1,6 +1,7 @@
 package growthcraft.milk.init;
 
 import growthcraft.lib.item.GrowthcraftBowlFoodItem;
+import growthcraft.lib.item.GrowthcraftFoodItem;
 import growthcraft.milk.config.Reference;
 import growthcraft.milk.item.CheeseCurdsBlockItem;
 import growthcraft.milk.item.CheeseCurdsDrainedItem;
@@ -81,6 +82,27 @@ public final class GrowthcraftMilkItems {
     public static final DeferredHolder<Item, CheeseCurdsDrainedItem> RICOTTA_CHEESE_CURDS_DRAINED =
             registerDrainedCheeseCurds(Reference.UnlocalizedName.RICOTTA);
 
+    public static final DeferredHolder<Item, GrowthcraftFoodItem> APPENZELLER_CHEESE_SLICE =
+            registerCheeseSlice(Reference.UnlocalizedName.APPENZELLER);
+    public static final DeferredHolder<Item, GrowthcraftFoodItem> ASIAGO_CHEESE_SLICE =
+            registerCheeseSlice(Reference.UnlocalizedName.ASIAGO);
+    public static final DeferredHolder<Item, GrowthcraftFoodItem> CASU_MARZU_CHEESE_SLICE =
+            registerCheeseSlice(Reference.UnlocalizedName.CASU_MARZU);
+    public static final DeferredHolder<Item, GrowthcraftFoodItem> CHEDDAR_CHEESE_SLICE =
+            registerCheeseSlice(Reference.UnlocalizedName.CHEDDAR);
+    public static final DeferredHolder<Item, GrowthcraftFoodItem> EMMENTALER_CHEESE_SLICE =
+            registerCheeseSlice(Reference.UnlocalizedName.EMMENTALER);
+    public static final DeferredHolder<Item, GrowthcraftFoodItem> GORGONZOLA_CHEESE_SLICE =
+            registerCheeseSlice(Reference.UnlocalizedName.GORGONZOLA);
+    public static final DeferredHolder<Item, GrowthcraftFoodItem> GOUDA_CHEESE_SLICE =
+            registerCheeseSlice(Reference.UnlocalizedName.GOUDA);
+    public static final DeferredHolder<Item, GrowthcraftFoodItem> MONTEREY_CHEESE_SLICE =
+            registerCheeseSlice(Reference.UnlocalizedName.MONTEREY);
+    public static final DeferredHolder<Item, GrowthcraftFoodItem> PARMESAN_CHEESE_SLICE =
+            registerCheeseSlice(Reference.UnlocalizedName.PARMESAN);
+    public static final DeferredHolder<Item, GrowthcraftFoodItem> PROVOLONE_CHEESE_SLICE =
+            registerCheeseSlice(Reference.UnlocalizedName.PROVOLONE);
+
     public static final DeferredHolder<Item, GrowthcraftBowlFoodItem> RICOTTA_CHEESE_SLICE =
             registerBowlFood(Reference.UnlocalizedName.RICOTTA + "_cheese_slice", 4, 0.4F, 16);
 
@@ -134,6 +156,10 @@ public final class GrowthcraftMilkItems {
 
     private static DeferredHolder<Item, GrowthcraftBowlFoodItem> registerBowlFood(String name, int nutrition, float saturationModifier, int maxStackSize) {
         return ITEMS.register(name, () -> new GrowthcraftBowlFoodItem(nutrition, saturationModifier, maxStackSize));
+    }
+
+    private static DeferredHolder<Item, GrowthcraftFoodItem> registerCheeseSlice(String cheeseName) {
+        return ITEMS.register(cheeseName + "_cheese_slice", () -> new GrowthcraftFoodItem(8, 0.5F, 64));
     }
 
     private static DeferredHolder<Item, CheeseCurdsBlockItem> registerCheeseCurds(String cheeseName, DeferredBlock<?> block) {
