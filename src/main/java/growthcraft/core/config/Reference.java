@@ -44,6 +44,7 @@ public class Reference {
             public static final String CROWBAR_RED = "crowbar_red";
             public static final String CROWBAR_WHITE = "crowbar_white";
             public static final String CROWBAR_YELLOW = "crowbar_yellow";
+            public static final String WRENCH = "wrench";
 
             private Item() {}
         }

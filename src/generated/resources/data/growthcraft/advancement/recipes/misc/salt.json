@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "growthcraft:salt_from_block"
+        "recipe": "growthcraft:salt"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "growthcraft:salt_from_block"
+      "growthcraft:salt"
     ]
   }
 }

@@ -45,6 +45,7 @@ public class GrowthcraftCreativeTabs {
                         output.accept(GrowthcraftItems.CROWBAR_PURPLE.get());
                         output.accept(GrowthcraftItems.CROWBAR_MAGENTA.get());
                         output.accept(GrowthcraftItems.CROWBAR_PINK.get());
+                        output.accept(GrowthcraftItems.WRENCH.get());
                     })
                     .build()
     );

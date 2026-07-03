@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_rope_linen": {
+      "conditions": {
+        "items": [
+          {
+            "items": "growthcraft:rope_linen"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "growthcraft:rope_linen_lengthen"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_rope_linen"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "growthcraft:rope_linen_lengthen"
+    ]
+  }
+}

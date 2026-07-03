@@ -86,7 +86,7 @@ neoForge {
             // gameDirectory = project.file('run-data')
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+            programArguments.addAll '--mod', project.mod_id, '--mod', 'growthcraft_cellar', '--mod', 'growthcraft_milk', '--all', '--flat', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
         }
 
         // applies to all the run configs above
@@ -141,6 +141,9 @@ dependencies {
     // We add the full version to localRuntime, not runtimeOnly, so that we do not publish a dependency on it
     localRuntime "mezz.jei:jei-${minecraft_version_short}-neoforge:${jei_version}"
 
+    testImplementation platform('org.junit:junit-bom:5.11.4')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+
     // Example mod dependency using a mod jar from ./libs with a flat dir repository
     // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
     // The group id is ignored when searching -- in this case, it is "blank"
@@ -155,6 +158,10 @@ dependencies {
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
+}
+
+tasks.named('test', Test).configure {
+    useJUnitPlatform()
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
@@ -262,4 +269,94 @@ tasks.register('checkDataGeneratorChanges') {
 // so regular builds will run datagen when needed.
 plugins.withId('java') {
     tasks.named('check') { dependsOn 'checkDataGeneratorChanges' }
+}
+
+def readContentIds = { File file ->
+    if (!file.exists()) {
+        return [] as Set
+    }
+
+    return file.readLines('UTF-8')
+            .collect { it.replace('\uFEFF', '').trim() }
+            .findAll { !it.isEmpty() }
+            .toSorted()
+            .toSet()
+}
+
+def scanResourceIds = { String kind ->
+    def pattern
+    if (kind == 'blocks') {
+        pattern = ~/^assets[\\\/]([^\\\/]+)[\\\/]blockstates[\\\/](.+)\.json$/
+    } else if (kind == 'items') {
+        pattern = ~/^assets[\\\/]([^\\\/]+)[\\\/]models[\\\/]item[\\\/](.+)\.json$/
+    } else {
+        pattern = ~/^data[\\\/]([^\\\/]+)[\\\/]recipes?[\\\/](.+)\.json$/
+    }
+
+    def roots = [file('src/main/resources'), file('src/generated/resources')]
+    return roots.collectMany { root ->
+        if (!root.exists()) {
+            return []
+        }
+
+        return fileTree(root) {
+            include '**/*.json'
+        }.collect { resourceFile ->
+            def relativePath = root.toPath().relativize(resourceFile.toPath()).toString()
+            def matcher = pattern.matcher(relativePath)
+            if (!matcher.matches()) {
+                return null
+            }
+            return "${matcher.group(1)}:${matcher.group(2).replace('\\', '/')}"
+        }.findAll { it != null }
+    }.toSorted().toSet()
+}
+
+tasks.register('migrationProgress') {
+    group = 'verification'
+    description = 'Reports current resource ID coverage against the Growthcraft 1.20 content target.'
+
+    def targetDir = file('src/test/resources/content-target')
+    inputs.dir(targetDir)
+    inputs.dir(file('src/main/resources'))
+    inputs.dir(file('src/generated/resources')).optional()
+
+    def reportFile = layout.buildDirectory.file('reports/growthcraft/migration-progress.md')
+    outputs.file(reportFile)
+
+    doLast {
+        def categories = ['blocks', 'items', 'recipes']
+        def report = new StringBuilder()
+        report.append('# Growthcraft Migration Progress\n\n')
+        report.append('Compares current resources in `src/main/resources` and `src/generated/resources` against ID targets extracted from `.previous`.\n\n')
+        report.append('| Category | Current | Target | Missing | Coverage |\n')
+        report.append('| --- | ---: | ---: | ---: | ---: |\n')
+
+        def missingByCategory = [:]
+        categories.each { category ->
+            def targetIds = readContentIds(file("${targetDir}/${category}.txt"))
+            def currentIds = scanResourceIds(category)
+            def missingIds = (targetIds - currentIds).toSorted()
+            missingByCategory[category] = missingIds
+
+            def coverage = targetIds.isEmpty()
+                    ? '100.0%'
+                    : String.format(Locale.ROOT, '%.1f%%', ((targetIds.size() - missingIds.size()) * 100.0d) / targetIds.size())
+            report.append("| ${category.capitalize()} | ${currentIds.size()} | ${targetIds.size()} | ${missingIds.size()} | ${coverage} |\n")
+        }
+
+        missingByCategory.each { category, missingIds ->
+            report.append("\n## Missing ${category.capitalize()}\n\n")
+            if (missingIds.isEmpty()) {
+                report.append('None.\n')
+            } else {
+                missingIds.each { report.append("- `${it}`\n") }
+            }
+        }
+
+        def output = reportFile.get().asFile
+        output.parentFile.mkdirs()
+        output.text = report.toString()
+        logger.lifecycle("Migration progress report written to ${output}")
+    }
 }

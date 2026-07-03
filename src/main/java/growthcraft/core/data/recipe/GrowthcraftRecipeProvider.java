@@ -1,6 +1,8 @@
 package growthcraft.core.data.recipe;
 
+import growthcraft.core.config.ConfigValueCondition;
 import growthcraft.core.config.Reference;
+import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.core.init.GrowthcraftItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -11,10 +13,15 @@ import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.item.Items;
+import net.neoforged.neoforge.common.conditions.ICondition;
+import net.neoforged.neoforge.common.conditions.NotCondition;
+import net.neoforged.neoforge.common.conditions.TagEmptyCondition;
+import net.neoforged.neoforge.common.Tags;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -38,7 +45,7 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, GrowthcraftItems.SALT.get(), 9)
                 .requires(GrowthcraftItems.SALT_BLOCK.get())
                 .unlockedBy(getHasName(GrowthcraftItems.SALT_BLOCK.get()), has(GrowthcraftItems.SALT_BLOCK.get()))
-                .save(output, ResourceLocation.fromNamespaceAndPath(Reference.MODID, "salt_from_block"));
+                .save(output, ResourceLocation.fromNamespaceAndPath(Reference.MODID, "salt"));
 
         // Rope (linen) recipe: 8x rope_linen from string and lead
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftItems.ROPE_LINEN.get(), 8)
@@ -51,6 +58,16 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(Items.STRING), has(Items.STRING))
                 .unlockedBy(getHasName(Items.LEAD), has(Items.LEAD))
                 .save(output, ResourceLocation.fromNamespaceAndPath(Reference.MODID, "rope_linen"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftItems.ROPE_LINEN.get(), 8)
+                .pattern("AAA")
+                .pattern("ABA")
+                .pattern("AAA")
+                .define('A', Items.STRING)
+                .define('B', GrowthcraftItems.ROPE_LINEN.get())
+                .group("growthcraft")
+                .unlockedBy(getHasName(GrowthcraftItems.ROPE_LINEN.get()), has(GrowthcraftItems.ROPE_LINEN.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath(Reference.MODID, "rope_linen_lengthen"));
 
         // Common iron ingots tag used by crowbar recipes
         TagKey<Item> IRON_INGOTS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "ingots/iron"));
@@ -80,6 +97,16 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
         addCrowbarRecipe(output, GrowthcraftItems.CROWBAR_WHITE.get(), Blocks.WHITE_CARPET.asItem(), IRON_NUGGETS, IRON_INGOTS, "crowbar_white");
         addCrowbarRecipe(output, GrowthcraftItems.CROWBAR_YELLOW.get(), Blocks.YELLOW_CARPET.asItem(), IRON_NUGGETS, IRON_INGOTS, "crowbar_yellow");
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, GrowthcraftItems.WRENCH.get())
+                .pattern(" BB")
+                .pattern(" AB")
+                .pattern("A  ")
+                .define('A', IRON_INGOTS)
+                .define('B', IRON_NUGGETS)
+                .group("growthcraft")
+                .unlockedBy("has_iron_ingots", has(IRON_INGOTS))
+                .save(output, ResourceLocation.fromNamespaceAndPath(Reference.MODID, "wrench"));
+
         // --- Milk module recipes ---
         // Iron Milking Bucket
         net.minecraft.data.recipes.ShapedRecipeBuilder.shaped(RecipeCategory.MISC, growthcraft.milk.init.GrowthcraftMilkItems.MILKING_BUCKET_IRON.get())
@@ -90,6 +117,30 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
                 .define('I', IRON_INGOTS)
                 .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
                 .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.milk.config.Reference.MODID, "milking_bucket_iron"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftCellarItems.CULTURE_JAR.get())
+                .pattern("BAB")
+                .pattern("B B")
+                .pattern("BBB")
+                .define('A', ItemTags.PLANKS)
+                .define('B', Tags.Items.GLASS_PANES)
+                .group("growthcraft_cellar")
+                .unlockedBy("has_glass_panes", has(Tags.Items.GLASS_PANES))
+                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.cellar.config.Reference.MODID, growthcraft.cellar.config.Reference.UnlocalizedName.Block.CULTURE_JAR));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, GrowthcraftCellarItems.HOPS_SEEDS.get(), 2)
+                .requires(GrowthcraftCellarItems.HOPS.get())
+                .group("growthcraft_cellar")
+                .unlockedBy(getHasName(GrowthcraftCellarItems.HOPS.get()), has(GrowthcraftCellarItems.HOPS.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.cellar.config.Reference.MODID, growthcraft.cellar.config.Reference.UnlocalizedName.Item.HOPS_SEEDS));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, GrowthcraftCellarItems.CORK_COASTER.get(), 2)
+                .requires(GrowthcraftCellarItems.CORK_BARK.get())
+                .group("growthcraft_cellar")
+                .unlockedBy(getHasName(GrowthcraftCellarItems.CORK_BARK.get()), has(GrowthcraftCellarItems.CORK_BARK.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.cellar.config.Reference.MODID, growthcraft.cellar.config.Reference.UnlocalizedName.Item.CORK_COASTER));
+
+        addCellarGrainRecipes(output);
     }
 
     private static void addCrowbarRecipe(RecipeOutput output, Item result, Item carpet, TagKey<Item> nuggets, TagKey<Item> ingots, String name) {
@@ -103,5 +154,50 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_iron_ingots", has(ingots))
                 .unlockedBy("has_" + name + "_carpet", has(carpet))
                 .save(output, ResourceLocation.fromNamespaceAndPath(Reference.MODID, name));
+    }
+
+    private static void addCellarGrainRecipes(RecipeOutput output) {
+        TagKey<Item> barley = itemTag("forge", "grain/barley");
+        TagKey<Item> basicAdjunctGrains = itemTag(growthcraft.cellar.config.Reference.MODID, "adjunct_grains_basic");
+        TagKey<Item> extendedAdjunctGrains = itemTag(growthcraft.cellar.config.Reference.MODID, "adjunct_grains_extended");
+        TagKey<Item> extendedAdjunctGrainsMinusWheat = itemTag(growthcraft.cellar.config.Reference.MODID, "adjunct_grains_extended_minus_wheat");
+
+        ICondition barleyMissing = new TagEmptyCondition(barley);
+        ICondition barleyPresent = new NotCondition(barleyMissing);
+        ICondition basicAdjunctsPresent = new NotCondition(new TagEmptyCondition(basicAdjunctGrains));
+        ICondition extendedAdjunctsPresent = new NotCondition(new TagEmptyCondition(extendedAdjunctGrains));
+        ICondition extendedMinusWheatPresent = new NotCondition(new TagEmptyCondition(extendedAdjunctGrainsMinusWheat));
+        ICondition additionalAdjunctsEnabled = new ConfigValueCondition("cellar", "brewing.allow_additional_adjunct_grains");
+        ICondition additionalAdjunctsDisabled = new NotCondition(additionalAdjunctsEnabled);
+
+        shapelessGrain(output.withConditions(barleyMissing), "grain", Items.WHEAT, Items.WHEAT, Items.WHEAT, Items.WHEAT);
+        shapelessGrain(output.withConditions(barleyPresent), "grain_2", Items.WHEAT, Items.WHEAT, Items.WHEAT, Items.WHEAT, Items.WHEAT);
+        shapelessGrain(output.withConditions(barleyPresent), "grain_3", barley, barley, barley);
+        shapelessGrain(output.withConditions(barleyPresent, additionalAdjunctsDisabled, basicAdjunctsPresent), "grain_4", barley, barley, basicAdjunctGrains, basicAdjunctGrains);
+        shapelessGrain(output.withConditions(barleyPresent, additionalAdjunctsEnabled, extendedAdjunctsPresent), "grain_5", barley, barley, extendedAdjunctGrains, extendedAdjunctGrains);
+        shapelessGrain(output.withConditions(barleyMissing, additionalAdjunctsDisabled, basicAdjunctsPresent), "grain_6", Items.WHEAT, Items.WHEAT, Items.WHEAT, basicAdjunctGrains, basicAdjunctGrains);
+        shapelessGrain(output.withConditions(barleyMissing, additionalAdjunctsEnabled, extendedMinusWheatPresent), "grain_7", Items.WHEAT, Items.WHEAT, Items.WHEAT, extendedAdjunctGrainsMinusWheat, extendedAdjunctGrainsMinusWheat);
+    }
+
+    private static void shapelessGrain(RecipeOutput output, String recipeName, Object... ingredients) {
+        ShapelessRecipeBuilder builder = ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, GrowthcraftCellarItems.GRAIN.get(), 3)
+                .group("growthcraft_cellar")
+                .unlockedBy(getHasName(Items.WHEAT), has(Items.WHEAT));
+
+        for (Object ingredient : ingredients) {
+            if (ingredient instanceof Item item) {
+                builder.requires(item);
+            } else if (ingredient instanceof TagKey<?> tag) {
+                @SuppressWarnings("unchecked")
+                TagKey<Item> itemTag = (TagKey<Item>) tag;
+                builder.requires(itemTag);
+            }
+        }
+
+        builder.save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.cellar.config.Reference.MODID, recipeName));
+    }
+
+    private static TagKey<Item> itemTag(String namespace, String path) {
+        return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(namespace, path));
     }
 }

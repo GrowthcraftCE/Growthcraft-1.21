@@ -40,6 +40,7 @@ public class GrowthcraftItems {
     public static final DeferredItem<Item> CROWBAR_PURPLE = ITEMS.register(Reference.UnlocalizedName.Item.CROWBAR_PURPLE, () -> new CrowbarItem(OffsetTier.IRON_MINUS2, crowbarProps()));
     public static final DeferredItem<Item> CROWBAR_MAGENTA = ITEMS.register(Reference.UnlocalizedName.Item.CROWBAR_MAGENTA, () -> new CrowbarItem(OffsetTier.IRON_MINUS2, crowbarProps()));
     public static final DeferredItem<Item> CROWBAR_PINK = ITEMS.register(Reference.UnlocalizedName.Item.CROWBAR_PINK, () -> new CrowbarItem(OffsetTier.IRON_MINUS2, crowbarProps()));
+    public static final DeferredItem<Item> WRENCH = ITEMS.register(Reference.UnlocalizedName.Item.WRENCH, () -> new Item(new Item.Properties()));
 
     // Crowbar variants (16 colors) - behave like iron swords (damage/speed/durability)
     private static Item.Properties crowbarProps() {

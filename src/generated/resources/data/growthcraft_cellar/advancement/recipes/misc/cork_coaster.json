@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cork_bark": {
+      "conditions": {
+        "items": [
+          {
+            "items": "growthcraft_cellar:cork_bark"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "growthcraft_cellar:cork_coaster"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_cork_bark"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "growthcraft_cellar:cork_coaster"
+    ]
+  }
+}
