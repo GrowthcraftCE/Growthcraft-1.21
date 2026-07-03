@@ -25,6 +25,15 @@ public class GrowthcraftRice {
     private void buildCreativeTab(BuildCreativeModeTabContentsEvent event) {
         CreativeModeTab tab = event.getTab();
         if (tab == GrowthcraftCreativeTabs.MAIN.get()) {
+            event.accept(GrowthcraftRiceItems.CULTIVATOR.get());
+            event.accept(GrowthcraftRiceItems.KNIFE.get());
+            event.accept(GrowthcraftRiceItems.RICE_GRAINS.get());
+            event.accept(GrowthcraftRiceItems.RICE.get());
+            event.accept(GrowthcraftRiceItems.RICE_COOKED.get());
+            event.accept(GrowthcraftRiceItems.RICE_STALK.get());
+            event.accept(GrowthcraftRiceItems.SUSHI_ROLL.get());
+            event.accept(GrowthcraftRiceItems.ONIGIRI.get());
+            event.accept(GrowthcraftRiceItems.CHICKEN_RICE.get());
             event.accept(GrowthcraftRiceItems.YEAST_SEISHU.get());
         }
     }
