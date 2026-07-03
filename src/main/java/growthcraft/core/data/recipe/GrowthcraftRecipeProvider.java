@@ -4,6 +4,7 @@ import growthcraft.core.config.ConfigValueCondition;
 import growthcraft.core.config.Reference;
 import growthcraft.apples.init.GrowthcraftApplesItems;
 import growthcraft.apiary.init.GrowthcraftApiaryItems;
+import growthcraft.apiary.init.GrowthcraftApiaryTags;
 import growthcraft.bamboo.init.GrowthcraftBambooItems;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.core.init.GrowthcraftItems;
@@ -153,6 +154,7 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
         addAppleWoodRecipes(output);
         addApiaryBeeswaxRecipes(output);
         addApiaryBeeBoxRecipes(output);
+        addApiaryCandleRecipes(output);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GrowthcraftBambooItems.BAMBOO_POST_VERTICAL.get(), 2)
                 .pattern("B")
@@ -275,6 +277,43 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
                 .group(growthcraft.apiary.config.Reference.MODID)
                 .unlockedBy(getHasName(GrowthcraftApiaryItems.BEES_WAX.get()), has(GrowthcraftApiaryItems.BEES_WAX.get()))
                 .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.apiary.config.Reference.MODID, name));
+    }
+
+    private static void addApiaryCandleRecipes(RecipeOutput output) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, Items.CANDLE)
+                .pattern("S")
+                .pattern("H")
+                .define('S', Items.STRING)
+                .define('H', GrowthcraftApiaryTags.Items.HONEY_COMB)
+                .group(growthcraft.apiary.config.Reference.MODID)
+                .unlockedBy("has_honey_comb", has(GrowthcraftApiaryTags.Items.HONEY_COMB))
+                .save(output, ResourceLocation.fromNamespaceAndPath("minecraft", "candle"));
+
+        addCandleDyeRecipe(output, Items.BLACK_CANDLE, Tags.Items.DYES_BLACK, "black_candle");
+        addCandleDyeRecipe(output, Items.BLUE_CANDLE, Tags.Items.DYES_BLUE, "blue_candle");
+        addCandleDyeRecipe(output, Items.BROWN_CANDLE, Tags.Items.DYES_BROWN, "brown_candle");
+        addCandleDyeRecipe(output, Items.CYAN_CANDLE, Tags.Items.DYES_CYAN, "cyan_candle");
+        addCandleDyeRecipe(output, Items.GRAY_CANDLE, Tags.Items.DYES_GRAY, "gray_candle");
+        addCandleDyeRecipe(output, Items.GREEN_CANDLE, Tags.Items.DYES_GREEN, "green_candle");
+        addCandleDyeRecipe(output, Items.LIGHT_BLUE_CANDLE, Tags.Items.DYES_LIGHT_BLUE, "light_blue_candle");
+        addCandleDyeRecipe(output, Items.LIGHT_GRAY_CANDLE, Tags.Items.DYES_LIGHT_GRAY, "light_gray_candle");
+        addCandleDyeRecipe(output, Items.LIME_CANDLE, Tags.Items.DYES_LIME, "lime_candle");
+        addCandleDyeRecipe(output, Items.MAGENTA_CANDLE, Tags.Items.DYES_MAGENTA, "magenta_candle");
+        addCandleDyeRecipe(output, Items.ORANGE_CANDLE, Tags.Items.DYES_ORANGE, "orange_candle");
+        addCandleDyeRecipe(output, Items.PINK_CANDLE, Tags.Items.DYES_PINK, "pink_candle");
+        addCandleDyeRecipe(output, Items.PURPLE_CANDLE, Tags.Items.DYES_PURPLE, "purple_candle");
+        addCandleDyeRecipe(output, Items.RED_CANDLE, Tags.Items.DYES_RED, "red_candle");
+        addCandleDyeRecipe(output, Items.WHITE_CANDLE, Tags.Items.DYES_WHITE, "white_candle");
+        addCandleDyeRecipe(output, Items.YELLOW_CANDLE, Tags.Items.DYES_YELLOW, "yellow_candle");
+    }
+
+    private static void addCandleDyeRecipe(RecipeOutput output, Item result, TagKey<Item> dye, String name) {
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.DECORATIONS, result)
+                .requires(Items.CANDLE)
+                .requires(dye)
+                .group("dyed_candle")
+                .unlockedBy(getHasName(Items.CANDLE), has(Items.CANDLE))
+                .save(output, ResourceLocation.fromNamespaceAndPath("minecraft", name));
     }
 
     private static void addApiaryBeeBoxRecipes(RecipeOutput output) {

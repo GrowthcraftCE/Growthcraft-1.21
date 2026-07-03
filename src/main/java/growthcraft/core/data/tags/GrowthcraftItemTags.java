@@ -1,6 +1,8 @@
 package growthcraft.core.data.tags;
 
 import growthcraft.core.config.Reference;
+import growthcraft.apiary.init.GrowthcraftApiaryItems;
+import growthcraft.apiary.init.GrowthcraftApiaryTags;
 import growthcraft.core.init.GrowthcraftItems;
 import growthcraft.milk.init.GrowthcraftMilkItems;
 import growthcraft.milk.init.GrowthcraftMilkTags;
@@ -11,6 +13,7 @@ import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -47,6 +50,9 @@ public class GrowthcraftItemTags extends IntrinsicHolderTagsProvider<Item> {
 
         this.tag(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS)
                 .add(GrowthcraftMilkItems.MILK_BUCKET_IRON.get());
+
+        this.tag(GrowthcraftApiaryTags.Items.HONEY_COMB)
+                .add(Items.HONEYCOMB, GrowthcraftApiaryItems.HONEY_COMB_FULL.get());
 
         this.tag(GrowthcraftMilkTags.Items.CHEESE_SLICES)
                 .add(

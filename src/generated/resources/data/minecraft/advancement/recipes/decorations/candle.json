@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_honey_comb": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#growthcraft_apiary:honey_comb"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:candle"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_honey_comb"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:candle"
+    ]
+  }
+}
