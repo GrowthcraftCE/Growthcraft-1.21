@@ -6,6 +6,7 @@ import growthcraft.core.data.recipe.GrowthcraftRecipeProvider;
 import growthcraft.core.data.worldgen.GrowthcraftWorldgenProvider;
 import growthcraft.core.data.tags.GrowthcraftBlockTags;
 import growthcraft.core.data.tags.GrowthcraftItemTags;
+import growthcraft.milk.data.loot.MilkBlockLoot;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -30,8 +31,9 @@ public class GrowthcraftDataGenerators {
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
         LootTableProvider.SubProviderEntry blocks = new LootTableProvider.SubProviderEntry(GrowthcraftBlockLoot::new, LootContextParamSets.BLOCK);
+        LootTableProvider.SubProviderEntry milkBlocks = new LootTableProvider.SubProviderEntry(MilkBlockLoot::new, LootContextParamSets.BLOCK);
 
-        LootTableProvider lootTables = new LootTableProvider(output, Set.of(), List.of(blocks), lookupProvider);
+        LootTableProvider lootTables = new LootTableProvider(output, Set.of(), List.of(blocks, milkBlocks), lookupProvider);
         generator.addProvider(event.includeServer(), lootTables);
 
         // Block tags (mineable, needs_* tool level, etc.)

@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:alternatives",
+          "children": [
+            {
+              "type": "minecraft:item",
+              "conditions": [
+                {
+                  "block": "growthcraft_milk:cheddar_cheese_curds",
+                  "condition": "minecraft:block_state_property",
+                  "properties": {
+                    "age": "7"
+                  }
+                }
+              ],
+              "name": "growthcraft_milk:cheddar_cheese_curds_drained"
+            },
+            {
+              "type": "minecraft:item",
+              "name": "growthcraft_milk:cheddar_cheese_curds"
+            }
+          ]
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "growthcraft_milk:blocks/cheddar_cheese_curds"
+}
