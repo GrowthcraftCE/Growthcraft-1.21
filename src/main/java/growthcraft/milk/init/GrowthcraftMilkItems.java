@@ -58,6 +58,34 @@ public final class GrowthcraftMilkItems {
             registerCheese(Reference.UnlocalizedName.PARMESAN, GrowthcraftMilkBlocks.PARMESAN_CHEESE);
     public static final DeferredHolder<Item, BlockItem> PROVOLONE_CHEESE =
             registerCheese(Reference.UnlocalizedName.PROVOLONE, GrowthcraftMilkBlocks.PROVOLONE_CHEESE);
+    public static final DeferredHolder<Item, BlockItem> APPENZELLER_CHEESE_AGED =
+            registerAgedCheese(Reference.UnlocalizedName.APPENZELLER, GrowthcraftMilkBlocks.APPENZELLER_CHEESE_AGED);
+    public static final DeferredHolder<Item, BlockItem> ASIAGO_CHEESE_AGED =
+            registerAgedCheese(Reference.UnlocalizedName.ASIAGO, GrowthcraftMilkBlocks.ASIAGO_CHEESE_AGED);
+    public static final DeferredHolder<Item, BlockItem> CASU_MARZU_CHEESE_AGED =
+            registerAgedCheese(Reference.UnlocalizedName.CASU_MARZU, GrowthcraftMilkBlocks.CASU_MARZU_CHEESE_AGED);
+    public static final DeferredHolder<Item, BlockItem> CHEDDAR_CHEESE_AGED =
+            registerAgedCheese(Reference.UnlocalizedName.CHEDDAR, GrowthcraftMilkBlocks.CHEDDAR_CHEESE_AGED);
+    public static final DeferredHolder<Item, BlockItem> EMMENTALER_CHEESE_AGED =
+            registerAgedCheese(Reference.UnlocalizedName.EMMENTALER, GrowthcraftMilkBlocks.EMMENTALER_CHEESE_AGED);
+    public static final DeferredHolder<Item, BlockItem> GORGONZOLA_CHEESE_AGED =
+            registerAgedCheese(Reference.UnlocalizedName.GORGONZOLA, GrowthcraftMilkBlocks.GORGONZOLA_CHEESE_AGED);
+    public static final DeferredHolder<Item, BlockItem> GOUDA_CHEESE_AGED =
+            registerAgedCheese(Reference.UnlocalizedName.GOUDA, GrowthcraftMilkBlocks.GOUDA_CHEESE_AGED);
+    public static final DeferredHolder<Item, BlockItem> MONTEREY_CHEESE_AGED =
+            registerAgedCheese(Reference.UnlocalizedName.MONTEREY, GrowthcraftMilkBlocks.MONTEREY_CHEESE_AGED);
+    public static final DeferredHolder<Item, BlockItem> PARMESAN_CHEESE_AGED =
+            registerAgedCheese(Reference.UnlocalizedName.PARMESAN, GrowthcraftMilkBlocks.PARMESAN_CHEESE_AGED);
+    public static final DeferredHolder<Item, BlockItem> PROVOLONE_CHEESE_AGED =
+            registerAgedCheese(Reference.UnlocalizedName.PROVOLONE, GrowthcraftMilkBlocks.PROVOLONE_CHEESE_AGED);
+    public static final DeferredHolder<Item, BlockItem> CHEDDAR_CHEESE_WAXED =
+            registerWaxedCheese(Reference.UnlocalizedName.CHEDDAR, GrowthcraftMilkBlocks.CHEDDAR_CHEESE_WAXED);
+    public static final DeferredHolder<Item, BlockItem> GOUDA_CHEESE_WAXED =
+            registerWaxedCheese(Reference.UnlocalizedName.GOUDA, GrowthcraftMilkBlocks.GOUDA_CHEESE_WAXED);
+    public static final DeferredHolder<Item, BlockItem> MONTEREY_CHEESE_WAXED =
+            registerWaxedCheese(Reference.UnlocalizedName.MONTEREY, GrowthcraftMilkBlocks.MONTEREY_CHEESE_WAXED);
+    public static final DeferredHolder<Item, BlockItem> PROVOLONE_CHEESE_WAXED =
+            registerWaxedCheese(Reference.UnlocalizedName.PROVOLONE, GrowthcraftMilkBlocks.PROVOLONE_CHEESE_WAXED);
 
     public static final DeferredHolder<Item, CheeseCurdsBlockItem> APPENZELLER_CHEESE_CURDS =
             registerCheeseCurds(Reference.UnlocalizedName.APPENZELLER, GrowthcraftMilkBlocks.APPENZELLER_CHEESE_CURDS);
@@ -186,6 +214,14 @@ public final class GrowthcraftMilkItems {
 
     private static DeferredHolder<Item, BlockItem> registerCheese(String cheeseName, DeferredBlock<?> block) {
         return ITEMS.register(cheeseName + "_cheese", () -> new BlockItem(block.get(), new Item.Properties()));
+    }
+
+    private static DeferredHolder<Item, BlockItem> registerAgedCheese(String cheeseName, DeferredBlock<?> block) {
+        return ITEMS.register(cheeseName + "_cheese_aged", () -> new BlockItem(block.get(), new Item.Properties()));
+    }
+
+    private static DeferredHolder<Item, BlockItem> registerWaxedCheese(String cheeseName, DeferredBlock<?> block) {
+        return ITEMS.register(cheeseName + "_cheese_waxed", () -> new BlockItem(block.get(), new Item.Properties()));
     }
 
     private static DeferredHolder<Item, CheeseCurdsBlockItem> registerCheeseCurds(String cheeseName, DeferredBlock<?> block) {
