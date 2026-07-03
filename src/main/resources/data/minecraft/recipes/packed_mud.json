@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "growthcraft_rice",
+  "ingredients": [
+    {
+      "item": "growthcraft_rice:rice_stalk"
+    },
+    {
+      "item": "minecraft:mud"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:packed_mud"
+  }
+}
