@@ -67,6 +67,26 @@ public class GrowthcraftMilk {
             event.accept(GrowthcraftMilkItems.THISTLE.get());
             event.accept(GrowthcraftMilkItems.THISTLE_SEED.get());
 
+            // Foods
+            event.accept(GrowthcraftMilkItems.RICOTTA_CHEESE_SLICE.get());
+            event.accept(GrowthcraftMilkItems.ICE_CREAM_APPLE.get());
+            event.accept(GrowthcraftMilkItems.ICE_CREAM_CHOCOLATE.get());
+            event.accept(GrowthcraftMilkItems.ICE_CREAM_GRAPE_PURPLE.get());
+            event.accept(GrowthcraftMilkItems.ICE_CREAM_GRAPE_RED.get());
+            event.accept(GrowthcraftMilkItems.ICE_CREAM_GRAPE_WHITE.get());
+            event.accept(GrowthcraftMilkItems.ICE_CREAM_HONEY.get());
+            event.accept(GrowthcraftMilkItems.ICE_CREAM_PUMPKIN.get());
+            event.accept(GrowthcraftMilkItems.ICE_CREAM_WATERMELON.get());
+            event.accept(GrowthcraftMilkItems.YOGURT_APPLE.get());
+            event.accept(GrowthcraftMilkItems.YOGURT_CHOCOLATE.get());
+            event.accept(GrowthcraftMilkItems.YOGURT_GRAPE_PURPLE.get());
+            event.accept(GrowthcraftMilkItems.YOGURT_GRAPE_RED.get());
+            event.accept(GrowthcraftMilkItems.YOGURT_GRAPE_WHITE.get());
+            event.accept(GrowthcraftMilkItems.YOGURT_HONEY.get());
+            event.accept(GrowthcraftMilkItems.YOGURT_PLAIN.get());
+            event.accept(GrowthcraftMilkItems.YOGURT_PUMPKIN.get());
+            event.accept(GrowthcraftMilkItems.YOGURT_WATERMELON.get());
+
             // Tools
             event.accept(GrowthcraftMilkItems.MILKING_BUCKET_IRON.get());
 
