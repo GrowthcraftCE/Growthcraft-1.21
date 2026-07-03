@@ -3,6 +3,10 @@
     "growthcraft:salt_ore",
     "growthcraft:salt_ore_deepslate",
     "growthcraft:salt_ore_nether",
-    "growthcraft:salt_ore_end"
+    "growthcraft:salt_ore_end",
+    "growthcraft_cellar:brew_kettle",
+    "growthcraft_cellar:roaster",
+    "growthcraft_milk:mixing_vat",
+    "growthcraft_milk:pancheon"
   ]
 }

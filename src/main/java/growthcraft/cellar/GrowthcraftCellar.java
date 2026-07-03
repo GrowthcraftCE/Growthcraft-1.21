@@ -59,7 +59,11 @@ public class GrowthcraftCellar {
         CreativeModeTab tab = event.getTab();
         if (tab == GrowthcraftCreativeTabs.MAIN.get()) {
             // Blocks
+            event.accept(GrowthcraftCellarItems.BREW_KETTLE);
             event.accept(GrowthcraftCellarItems.CULTURE_JAR);
+            event.accept(GrowthcraftCellarItems.FERMENTATION_BARREL_OAK);
+            event.accept(GrowthcraftCellarItems.FRUIT_PRESS);
+            event.accept(GrowthcraftCellarItems.ROASTER);
 
             // Grains
             event.accept(GrowthcraftCellarItems.GRAIN);

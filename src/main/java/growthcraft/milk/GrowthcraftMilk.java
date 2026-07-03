@@ -66,6 +66,10 @@ public class GrowthcraftMilk {
             event.accept(GrowthcraftMilkItems.STOMACH.get());
             event.accept(GrowthcraftMilkItems.THISTLE.get());
             event.accept(GrowthcraftMilkItems.THISTLE_SEED.get());
+            event.accept(GrowthcraftMilkItems.CHEESE_PRESS.get());
+            event.accept(GrowthcraftMilkItems.CHURN.get());
+            event.accept(GrowthcraftMilkItems.MIXING_VAT.get());
+            event.accept(GrowthcraftMilkItems.PANCHEON.get());
             event.accept(GrowthcraftMilkItems.APPENZELLER_CHEESE.get());
             event.accept(GrowthcraftMilkItems.ASIAGO_CHEESE.get());
             event.accept(GrowthcraftMilkItems.CASU_MARZU_CHEESE.get());

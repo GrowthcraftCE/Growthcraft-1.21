@@ -26,9 +26,17 @@ public class MilkBlockLoot extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
+        dropMachineBlocks();
         dropCheeseWheels();
         dropCheeseCurds();
         dropThistleCrop();
+    }
+
+    private void dropMachineBlocks() {
+        dropSelf(GrowthcraftMilkBlocks.CHEESE_PRESS.get());
+        dropSelf(GrowthcraftMilkBlocks.CHURN.get());
+        dropSelf(GrowthcraftMilkBlocks.MIXING_VAT.get());
+        dropSelf(GrowthcraftMilkBlocks.PANCHEON.get());
     }
 
     private void dropCheeseWheels() {

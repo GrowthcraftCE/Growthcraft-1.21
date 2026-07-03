@@ -4,6 +4,7 @@ import growthcraft.cellar.config.Reference;
 import growthcraft.cellar.item.EtherealYeastItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -15,7 +16,11 @@ public class GrowthcraftCellarItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Reference.MODID);
 
     // Blocks (BlockItems)
+    public static final DeferredItem<Item> BREW_KETTLE = blockItem(Reference.UnlocalizedName.Block.BREW_KETTLE, GrowthcraftCellarBlocks.BREW_KETTLE);
     public static final DeferredItem<Item> CULTURE_JAR = ITEMS.register(Reference.UnlocalizedName.Block.CULTURE_JAR, () -> new BlockItem(GrowthcraftCellarBlocks.CULTURE_JAR.get(), new Item.Properties()));
+    public static final DeferredItem<Item> FERMENTATION_BARREL_OAK = blockItem(Reference.UnlocalizedName.Block.FERMENT_BARREL_OAK, GrowthcraftCellarBlocks.FERMENTATION_BARREL_OAK);
+    public static final DeferredItem<Item> FRUIT_PRESS = blockItem(Reference.UnlocalizedName.Block.FRUIT_PRESS, GrowthcraftCellarBlocks.FRUIT_PRESS);
+    public static final DeferredItem<Item> ROASTER = blockItem(Reference.UnlocalizedName.Block.ROASTER, GrowthcraftCellarBlocks.ROASTER);
 
     // Grains (base + color variants)
     public static final DeferredItem<Item> GRAIN = ITEMS.register(Reference.UnlocalizedName.Item.GRAIN, () -> new Item(new Item.Properties()));
@@ -62,6 +67,10 @@ public class GrowthcraftCellarItems {
     public static final DeferredItem<Item> POTION_ALE = ITEMS.register(Reference.UnlocalizedName.Item.POTION_ALE, () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> POTION_LAGER = ITEMS.register(Reference.UnlocalizedName.Item.POTION_LAGER, () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> POTION_WINE = ITEMS.register(Reference.UnlocalizedName.Item.POTION_WINE, () -> new Item(new Item.Properties()));
+
+    private static DeferredItem<Item> blockItem(String name, net.neoforged.neoforge.registries.DeferredBlock<? extends Block> block) {
+        return ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+    }
 
     private GrowthcraftCellarItems() {}
 }

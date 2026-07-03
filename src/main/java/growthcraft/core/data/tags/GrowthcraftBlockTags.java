@@ -3,8 +3,10 @@ package growthcraft.core.data.tags;
 import growthcraft.apiary.init.GrowthcraftApiaryBlocks;
 import growthcraft.bamboo.init.GrowthcraftBambooBlocks;
 import growthcraft.apples.init.GrowthcraftApplesBlocks;
+import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.core.config.Reference;
 import growthcraft.core.init.GrowthcraftBlocks;
+import growthcraft.milk.init.GrowthcraftMilkBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
@@ -27,11 +29,19 @@ public class GrowthcraftBlockTags extends BlockTagsProvider {
                         GrowthcraftBlocks.SALT_ORE.get(),
                         GrowthcraftBlocks.SALT_ORE_DEEPSLATE.get(),
                         GrowthcraftBlocks.SALT_ORE_NETHER.get(),
-                        GrowthcraftBlocks.SALT_ORE_END.get()
+                        GrowthcraftBlocks.SALT_ORE_END.get(),
+                        GrowthcraftCellarBlocks.BREW_KETTLE.get(),
+                        GrowthcraftCellarBlocks.ROASTER.get(),
+                        GrowthcraftMilkBlocks.MIXING_VAT.get(),
+                        GrowthcraftMilkBlocks.PANCHEON.get()
                 );
 
         this.tag(BlockTags.MINEABLE_WITH_AXE)
                 .add(
+                        GrowthcraftCellarBlocks.FERMENTATION_BARREL_OAK.get(),
+                        GrowthcraftCellarBlocks.FRUIT_PRESS.get(),
+                        GrowthcraftMilkBlocks.CHEESE_PRESS.get(),
+                        GrowthcraftMilkBlocks.CHURN.get(),
                         GrowthcraftApplesBlocks.APPLE_PLANK.get(),
                         GrowthcraftApplesBlocks.APPLE_PLANK_BUTTON.get(),
                         GrowthcraftApplesBlocks.APPLE_PLANK_DOOR.get(),

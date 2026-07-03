@@ -1,6 +1,10 @@
 package growthcraft.cellar.init;
 
 import growthcraft.cellar.block.CultureJarBlock;
+import growthcraft.cellar.block.BrewKettleBlock;
+import growthcraft.cellar.block.FermentationBarrelBlock;
+import growthcraft.cellar.block.FruitPressBlock;
+import growthcraft.cellar.block.RoasterBlock;
 import growthcraft.cellar.config.Reference;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
@@ -16,6 +20,8 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public final class GrowthcraftCellarBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Reference.MODID);
 
+    public static final DeferredBlock<Block> BREW_KETTLE = BLOCKS.register(Reference.UnlocalizedName.Block.BREW_KETTLE, BrewKettleBlock::new);
+
     public static final DeferredBlock<Block> CULTURE_JAR = BLOCKS.register(Reference.UnlocalizedName.Block.CULTURE_JAR,
             () -> new CultureJarBlock(Block.Properties.of()
                     .mapColor(MapColor.COLOR_LIGHT_GRAY)
@@ -23,6 +29,10 @@ public final class GrowthcraftCellarBlocks {
                     .sound(SoundType.GLASS)
                     .noOcclusion()
                     .lightLevel(state -> state.getValue(BlockStateProperties.LIT) ? 13 : 0)));
+
+    public static final DeferredBlock<Block> FERMENTATION_BARREL_OAK = BLOCKS.register(Reference.UnlocalizedName.Block.FERMENT_BARREL_OAK, FermentationBarrelBlock::new);
+    public static final DeferredBlock<Block> FRUIT_PRESS = BLOCKS.register(Reference.UnlocalizedName.Block.FRUIT_PRESS, FruitPressBlock::new);
+    public static final DeferredBlock<Block> ROASTER = BLOCKS.register(Reference.UnlocalizedName.Block.ROASTER, RoasterBlock::new);
 
     private GrowthcraftCellarBlocks() {}
 }

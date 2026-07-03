@@ -38,6 +38,15 @@ public final class GrowthcraftMilkItems {
                     GrowthcraftMilkBlocks.THISTLE_CROP.get(),
                     new Item.Properties()));
 
+    public static final DeferredHolder<Item, BlockItem> CHEESE_PRESS =
+            registerBlockItem(Reference.UnlocalizedName.CHEESE_PRESS, GrowthcraftMilkBlocks.CHEESE_PRESS);
+    public static final DeferredHolder<Item, BlockItem> CHURN =
+            registerBlockItem(Reference.UnlocalizedName.CHURN, GrowthcraftMilkBlocks.CHURN);
+    public static final DeferredHolder<Item, BlockItem> MIXING_VAT =
+            registerBlockItem(Reference.UnlocalizedName.MIXING_VAT, GrowthcraftMilkBlocks.MIXING_VAT);
+    public static final DeferredHolder<Item, BlockItem> PANCHEON =
+            registerBlockItem(Reference.UnlocalizedName.PANCHEON, GrowthcraftMilkBlocks.PANCHEON);
+
     public static final DeferredHolder<Item, BlockItem> APPENZELLER_CHEESE =
             registerCheese(Reference.UnlocalizedName.APPENZELLER, GrowthcraftMilkBlocks.APPENZELLER_CHEESE);
     public static final DeferredHolder<Item, BlockItem> ASIAGO_CHEESE =
@@ -230,5 +239,9 @@ public final class GrowthcraftMilkItems {
 
     private static DeferredHolder<Item, CheeseCurdsDrainedItem> registerDrainedCheeseCurds(String cheeseName) {
         return ITEMS.register(cheeseName + "_cheese_curds_drained", CheeseCurdsDrainedItem::new);
+    }
+
+    private static DeferredHolder<Item, BlockItem> registerBlockItem(String name, DeferredBlock<?> block) {
+        return ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }
 }

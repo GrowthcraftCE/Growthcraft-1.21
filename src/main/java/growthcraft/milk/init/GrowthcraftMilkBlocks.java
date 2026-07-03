@@ -1,7 +1,11 @@
 package growthcraft.milk.init;
 
+import growthcraft.milk.block.CheesePressBlock;
 import growthcraft.milk.block.CheeseCurdBlock;
 import growthcraft.milk.block.CheeseWheelBlock;
+import growthcraft.milk.block.ChurnBlock;
+import growthcraft.milk.block.MixingVatBlock;
+import growthcraft.milk.block.PancheonBlock;
 import growthcraft.milk.block.ThistleCropBlock;
 import growthcraft.milk.config.Reference;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -11,6 +15,11 @@ public final class GrowthcraftMilkBlocks {
     private GrowthcraftMilkBlocks() {}
 
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Reference.MODID);
+
+    public static final DeferredBlock<CheesePressBlock> CHEESE_PRESS = BLOCKS.register(Reference.UnlocalizedName.CHEESE_PRESS, CheesePressBlock::new);
+    public static final DeferredBlock<ChurnBlock> CHURN = BLOCKS.register(Reference.UnlocalizedName.CHURN, ChurnBlock::new);
+    public static final DeferredBlock<MixingVatBlock> MIXING_VAT = BLOCKS.register(Reference.UnlocalizedName.MIXING_VAT, MixingVatBlock::new);
+    public static final DeferredBlock<PancheonBlock> PANCHEON = BLOCKS.register(Reference.UnlocalizedName.PANCHEON, PancheonBlock::new);
 
     public static final DeferredBlock<CheeseWheelBlock> APPENZELLER_CHEESE = registerCheese(Reference.UnlocalizedName.APPENZELLER);
     public static final DeferredBlock<CheeseWheelBlock> ASIAGO_CHEESE = registerCheese(Reference.UnlocalizedName.ASIAGO);

@@ -1,5 +1,9 @@
 {
   "values": [
+    "growthcraft_cellar:fermentation_barrel_oak",
+    "growthcraft_cellar:fruit_press",
+    "growthcraft_milk:cheese_press",
+    "growthcraft_milk:churn",
     "growthcraft_apples:apple_plank",
     "growthcraft_apples:apple_plank_button",
     "growthcraft_apples:apple_plank_door",
