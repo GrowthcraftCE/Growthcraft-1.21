@@ -421,15 +421,22 @@ def scanRegisteredGrowthcraftIds = {
             return
         }
 
-        javaFile.eachLine('UTF-8') { line ->
-            def itemMatcher = (line =~ /\bITEMS\.register\(([^,]+),/)
-            if (itemMatcher.find()) {
-                def path = resolveRegistrationPath(itemMatcher.group(1), namespace, constantsByNamespace)
-                if (path != null) {
-                    registeredItems.add("${namespace}:${path}".toString())
-                }
+        def javaSource = javaFile.getText('UTF-8')
+        (javaSource =~ /(?s)\bITEMS\.register\(\s*([^,]+),/).each { match ->
+            def path = resolveRegistrationPath(match[1], namespace, constantsByNamespace)
+            if (path != null) {
+                registeredItems.add("${namespace}:${path}".toString())
             }
+        }
 
+        (javaSource =~ /(?s)\bBLOCKS\.register\(\s*([^,]+),/).each { match ->
+            def path = resolveRegistrationPath(match[1], namespace, constantsByNamespace)
+            if (path != null) {
+                registeredBlocks.add("${namespace}:${path}".toString())
+            }
+        }
+
+        javaFile.eachLine('UTF-8') { line ->
             def itemHelperMatcher = (line =~ /\bregisterBowlFood\(([^,]+),/)
             if (itemHelperMatcher.find()) {
                 def path = resolveRegistrationPath(itemHelperMatcher.group(1), namespace, constantsByNamespace)
@@ -467,14 +474,6 @@ def scanRegisteredGrowthcraftIds = {
                 def path = resolveRegistrationPath("${cheeseHelperMatcher.group(1)} + \"_cheese\"", namespace, constantsByNamespace)
                 if (path != null) {
                     registeredItems.add("${namespace}:${path}".toString())
-                }
-            }
-
-            def blockMatcher = (line =~ /\bBLOCKS\.register\(([^,]+),/)
-            if (blockMatcher.find()) {
-                def path = resolveRegistrationPath(blockMatcher.group(1), namespace, constantsByNamespace)
-                if (path != null) {
-                    registeredBlocks.add("${namespace}:${path}".toString())
                 }
             }
 
