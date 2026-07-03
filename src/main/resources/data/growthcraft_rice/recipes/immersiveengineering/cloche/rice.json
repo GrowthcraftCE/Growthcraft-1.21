@@ -1,0 +1,30 @@
+{
+  "type": "immersiveengineering:cloche",
+  "conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "immersiveengineering"
+    }
+  ],
+  "input": {
+    "item": "growthcraft_rice:rice_grains"
+  },
+  "render": {
+    "type": "crop",
+    "block": "growthcraft_rice:rice_crop"
+  },
+  "results": [
+    {
+      "count": 2,
+      "item": "growthcraft_rice:rice"
+    },
+    {
+      "count": 3,
+      "item": "growthcraft_rice:rice_stalk"
+    }
+  ],
+  "soil": {
+    "item": "minecraft:dirt"
+  },
+  "time": 1000
+}
