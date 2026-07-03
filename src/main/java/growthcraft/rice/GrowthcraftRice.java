@@ -3,6 +3,7 @@ package growthcraft.rice;
 import com.mojang.logging.LogUtils;
 import growthcraft.core.init.GrowthcraftCreativeTabs;
 import growthcraft.rice.config.Reference;
+import growthcraft.rice.init.GrowthcraftRiceBlocks;
 import growthcraft.rice.init.GrowthcraftRiceFluids;
 import growthcraft.rice.init.GrowthcraftRiceItems;
 import net.minecraft.world.item.CreativeModeTab;
@@ -17,6 +18,7 @@ public class GrowthcraftRice {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public GrowthcraftRice(IEventBus modEventBus) {
+        GrowthcraftRiceBlocks.BLOCKS.register(modEventBus);
         GrowthcraftRiceItems.ITEMS.register(modEventBus);
         GrowthcraftRiceFluids.FLUID_TYPES.register(modEventBus);
         GrowthcraftRiceFluids.FLUIDS.register(modEventBus);
@@ -29,6 +31,7 @@ public class GrowthcraftRice {
     private void buildCreativeTab(BuildCreativeModeTabContentsEvent event) {
         CreativeModeTab tab = event.getTab();
         if (tab == GrowthcraftCreativeTabs.MAIN.get()) {
+            event.accept(GrowthcraftRiceItems.CULTIVATED_FARMLAND.get());
             event.accept(GrowthcraftRiceItems.CULTIVATOR.get());
             event.accept(GrowthcraftRiceItems.KNIFE.get());
             event.accept(GrowthcraftRiceItems.RICE_GRAINS.get());

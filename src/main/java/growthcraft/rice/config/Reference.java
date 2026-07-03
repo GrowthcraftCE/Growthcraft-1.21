@@ -11,6 +11,13 @@ public final class Reference {
     private Reference() {}
 
     public static final class UnlocalizedName {
+        public static final class Block {
+            public static final String CULTIVATED_FARMLAND = "cultivated_farmland";
+            public static final String RICE_CROP = "rice_crop";
+
+            private Block() {}
+        }
+
         public static final class Item {
             public static final String CHICKEN_RICE = "chicken_rice";
             public static final String CULTIVATOR = "cultivator";
