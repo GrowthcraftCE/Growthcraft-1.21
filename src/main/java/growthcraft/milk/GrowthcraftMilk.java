@@ -66,6 +66,8 @@ public class GrowthcraftMilk {
             event.accept(GrowthcraftMilkItems.STOMACH.get());
             event.accept(GrowthcraftMilkItems.THISTLE.get());
             event.accept(GrowthcraftMilkItems.THISTLE_SEED.get());
+            event.accept(GrowthcraftMilkItems.RICOTTA_CHEESE_CURDS.get());
+            event.accept(GrowthcraftMilkItems.RICOTTA_CHEESE_CURDS_DRAINED.get());
 
             // Foods
             event.accept(GrowthcraftMilkItems.RICOTTA_CHEESE_SLICE.get());

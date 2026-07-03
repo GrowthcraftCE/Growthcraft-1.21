@@ -388,6 +388,14 @@ def resolveRegistrationPath = { String expression, String namespace, Map constan
         return literal.group(1)
     }
 
+    def constantWithSuffix = (trimmed =~ /Reference\.UnlocalizedName(?:\.[A-Za-z0-9_]+)*\.([A-Z0-9_]+)\s*\+\s*"([^"]+)"/)
+    if (constantWithSuffix.find()) {
+        def constantPath = constantsByNamespace[namespace][constantWithSuffix.group(1)]
+        if (constantPath != null) {
+            return constantPath + constantWithSuffix.group(2)
+        }
+    }
+
     def constant = (trimmed =~ /Reference\.UnlocalizedName(?:\.[A-Za-z0-9_]+)*\.([A-Z0-9_]+)/)
     if (constant.find()) {
         return constantsByNamespace[namespace][constant.group(1)]

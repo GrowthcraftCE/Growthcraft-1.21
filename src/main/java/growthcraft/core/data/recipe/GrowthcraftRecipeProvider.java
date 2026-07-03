@@ -194,6 +194,17 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
         addYogurtRecipe(output, GrowthcraftMilkItems.YOGURT_PLAIN.get(), null, growthcraft.milk.config.Reference.UnlocalizedName.YOGURT_PLAIN);
         addYogurtRecipe(output, GrowthcraftMilkItems.YOGURT_PUMPKIN.get(), Items.PUMPKIN, growthcraft.milk.config.Reference.UnlocalizedName.YOGURT_PUMPKIN);
         addYogurtRecipe(output, GrowthcraftMilkItems.YOGURT_WATERMELON.get(), Items.MELON_SLICE, growthcraft.milk.config.Reference.UnlocalizedName.YOGURT_WATERMELON);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.RICOTTA_CHEESE_SLICE.get())
+                .requires(Items.BOWL)
+                .requires(GrowthcraftMilkItems.RICOTTA_CHEESE_CURDS_DRAINED.get())
+                .requires(GrowthcraftMilkItems.RICOTTA_CHEESE_CURDS_DRAINED.get())
+                .group("growthcraft_milk")
+                .unlockedBy(getHasName(GrowthcraftMilkItems.RICOTTA_CHEESE_CURDS_DRAINED.get()),
+                        has(GrowthcraftMilkItems.RICOTTA_CHEESE_CURDS_DRAINED.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath(
+                        growthcraft.milk.config.Reference.MODID,
+                        growthcraft.milk.config.Reference.UnlocalizedName.RICOTTA + "_cheese_slice"));
     }
 
     private static void addIceCreamRecipe(RecipeOutput output, Item result, Item flavor, String name) {

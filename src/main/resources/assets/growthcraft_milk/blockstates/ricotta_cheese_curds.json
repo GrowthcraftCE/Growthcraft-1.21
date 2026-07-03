@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "age=0": {
+      "model": "growthcraft_milk:block/cheese_curd/cheese_curd_cloth"
+    },
+    "age=1": {
+      "model": "growthcraft_milk:block/cheese_curd/cheese_curd_cloth"
+    },
+    "age=2": {
+      "model": "growthcraft_milk:block/cheese_curd/cheese_curd_cloth"
+    },
+    "age=3": {
+      "model": "growthcraft_milk:block/cheese_curd/cheese_curd_cloth"
+    },
+    "age=4": {
+      "model": "growthcraft_milk:block/cheese_curd/cheese_curd_cloth"
+    },
+    "age=5": {
+      "model": "growthcraft_milk:block/cheese_curd/cheese_curd_cloth"
+    },
+    "age=6": {
+      "model": "growthcraft_milk:block/cheese_curd/cheese_curd_cloth"
+    },
+    "age=7": {
+      "model": "growthcraft_milk:block/cheese_curd/cheese_curd_cloth"
+    }
+  }
+}

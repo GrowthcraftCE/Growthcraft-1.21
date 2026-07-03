@@ -2,6 +2,8 @@ package growthcraft.milk.init;
 
 import growthcraft.lib.item.GrowthcraftBowlFoodItem;
 import growthcraft.milk.config.Reference;
+import growthcraft.milk.item.CheeseCurdsBlockItem;
+import growthcraft.milk.item.CheeseCurdsDrainedItem;
 import growthcraft.milk.item.GrowthcraftMilkBucketItem;
 import growthcraft.milk.item.MilkingBucketItem;
 import net.minecraft.core.registries.Registries;
@@ -32,6 +34,11 @@ public final class GrowthcraftMilkItems {
             ITEMS.register(Reference.UnlocalizedName.THISTLE_SEED, () -> new ItemNameBlockItem(
                     GrowthcraftMilkBlocks.THISTLE_CROP.get(),
                     new Item.Properties()));
+    public static final DeferredHolder<Item, CheeseCurdsBlockItem> RICOTTA_CHEESE_CURDS =
+            ITEMS.register(Reference.UnlocalizedName.RICOTTA + "_cheese_curds",
+                    () -> new CheeseCurdsBlockItem(GrowthcraftMilkBlocks.RICOTTA_CHEESE_CURDS.get()));
+    public static final DeferredHolder<Item, CheeseCurdsDrainedItem> RICOTTA_CHEESE_CURDS_DRAINED =
+            ITEMS.register(Reference.UnlocalizedName.RICOTTA + "_cheese_curds_drained", CheeseCurdsDrainedItem::new);
 
     public static final DeferredHolder<Item, GrowthcraftBowlFoodItem> RICOTTA_CHEESE_SLICE =
             registerBowlFood(Reference.UnlocalizedName.RICOTTA + "_cheese_slice", 4, 0.4F, 16);
