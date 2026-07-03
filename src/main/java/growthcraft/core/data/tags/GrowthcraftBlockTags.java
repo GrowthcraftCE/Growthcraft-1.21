@@ -55,6 +55,7 @@ public class GrowthcraftBlockTags extends BlockTagsProvider {
                         GrowthcraftApplesBlocks.APPLE_WOOD_LOG.get(),
                         GrowthcraftApplesBlocks.APPLE_WOOD_LOG_STRIPPED.get(),
                         GrowthcraftApplesBlocks.APPLE_WOOD_STRIPPED.get(),
+                        GrowthcraftApplesBlocks.BEE_BOX_APPLE.get(),
                         GrowthcraftApiaryBlocks.BEE_BOX_ACACIA.get(),
                         GrowthcraftApiaryBlocks.BEE_BOX_BAMBOO.get(),
                         GrowthcraftApiaryBlocks.BEE_BOX_BIRCH.get(),

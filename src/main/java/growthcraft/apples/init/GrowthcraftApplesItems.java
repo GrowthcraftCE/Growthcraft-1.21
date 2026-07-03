@@ -22,6 +22,8 @@ public final class GrowthcraftApplesItems {
     public static final DeferredItem<BlockItem> APPLE_WOOD_LOG = blockItem(Reference.UnlocalizedName.Block.APPLE_WOOD_LOG, GrowthcraftApplesBlocks.APPLE_WOOD_LOG);
     public static final DeferredItem<BlockItem> APPLE_WOOD_LOG_STRIPPED = blockItem(Reference.UnlocalizedName.Block.APPLE_WOOD_LOG_STRIPPED, GrowthcraftApplesBlocks.APPLE_WOOD_LOG_STRIPPED);
     public static final DeferredItem<BlockItem> APPLE_WOOD_STRIPPED = blockItem(Reference.UnlocalizedName.Block.APPLE_WOOD_STRIPPED, GrowthcraftApplesBlocks.APPLE_WOOD_STRIPPED);
+    public static final DeferredItem<BlockItem> BEE_BOX_APPLE = blockItem(Reference.UnlocalizedName.Block.BEE_BOX_APPLE, GrowthcraftApplesBlocks.BEE_BOX_APPLE);
+    public static final DeferredItem<Item> APPLE_SEEDS = ITEMS.register(Reference.UnlocalizedName.Item.APPLE_SEEDS, () -> new Item(new Item.Properties()));
 
     private GrowthcraftApplesItems() {}
 

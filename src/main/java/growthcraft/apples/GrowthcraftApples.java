@@ -40,6 +40,8 @@ public class GrowthcraftApples {
             event.accept(GrowthcraftApplesItems.APPLE_WOOD_LOG.get());
             event.accept(GrowthcraftApplesItems.APPLE_WOOD_LOG_STRIPPED.get());
             event.accept(GrowthcraftApplesItems.APPLE_WOOD_STRIPPED.get());
+            event.accept(GrowthcraftApplesItems.BEE_BOX_APPLE.get());
+            event.accept(GrowthcraftApplesItems.APPLE_SEEDS.get());
         }
     }
 }

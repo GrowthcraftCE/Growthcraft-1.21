@@ -346,6 +346,23 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
                 .group(growthcraft.apples.config.Reference.MODID)
                 .unlockedBy(getHasName(GrowthcraftApplesItems.APPLE_WOOD_LOG.get()), has(GrowthcraftApplesItems.APPLE_WOOD_LOG.get()))
                 .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.apples.config.Reference.MODID, growthcraft.apples.config.Reference.UnlocalizedName.Block.APPLE_WOOD));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftApplesItems.APPLE_SEEDS.get())
+                .requires(Items.APPLE)
+                .group(growthcraft.apples.config.Reference.MODID)
+                .unlockedBy(getHasName(Items.APPLE), has(Items.APPLE))
+                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.apples.config.Reference.MODID, growthcraft.apples.config.Reference.UnlocalizedName.Item.APPLE_SEEDS));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, GrowthcraftApplesItems.BEE_BOX_APPLE.get())
+                .pattern("SPS")
+                .pattern("PBP")
+                .pattern("SPS")
+                .define('B', GrowthcraftApplesItems.APPLE_PLANK_SLAB.get())
+                .define('P', GrowthcraftApplesItems.APPLE_PLANK.get())
+                .define('S', Tags.Items.RODS_WOODEN)
+                .group(growthcraft.apples.config.Reference.MODID)
+                .unlockedBy(getHasName(GrowthcraftApplesItems.APPLE_PLANK.get()), has(GrowthcraftApplesItems.APPLE_PLANK.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.apples.config.Reference.MODID, growthcraft.apples.config.Reference.UnlocalizedName.Block.BEE_BOX_APPLE));
     }
 
     private static void addApiaryBeeswaxRecipes(RecipeOutput output) {
