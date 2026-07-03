@@ -72,8 +72,8 @@ public class FluidRegistryContainer {
             }
         });
 
-        this.source = FLUID_REGISTRY.register(name + "_source", () -> new BaseFlowingFluid.Source(this.properties));
-        this.flowing = FLUID_REGISTRY.register(name + "_flowing",
+        this.source = FLUID_REGISTRY.register(name + "_fluid_source", () -> new BaseFlowingFluid.Source(this.properties));
+        this.flowing = FLUID_REGISTRY.register(name + "_fluid_flowing",
                 () -> new BaseFlowingFluid.Flowing(this.properties));
 
         this.properties = new BaseFlowingFluid.Properties(this.type, this.source, this.flowing);
