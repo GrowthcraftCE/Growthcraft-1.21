@@ -3,6 +3,7 @@ package growthcraft.rice;
 import com.mojang.logging.LogUtils;
 import growthcraft.core.init.GrowthcraftCreativeTabs;
 import growthcraft.rice.config.Reference;
+import growthcraft.rice.init.GrowthcraftRiceFluids;
 import growthcraft.rice.init.GrowthcraftRiceItems;
 import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.bus.api.IEventBus;
@@ -17,6 +18,9 @@ public class GrowthcraftRice {
 
     public GrowthcraftRice(IEventBus modEventBus) {
         GrowthcraftRiceItems.ITEMS.register(modEventBus);
+        GrowthcraftRiceFluids.FLUID_TYPES.register(modEventBus);
+        GrowthcraftRiceFluids.FLUIDS.register(modEventBus);
+        GrowthcraftRiceFluids.BLOCKS.register(modEventBus);
         modEventBus.addListener(this::buildCreativeTab);
 
         LOGGER.info("{} module initialized", Reference.NAME);
@@ -35,6 +39,9 @@ public class GrowthcraftRice {
             event.accept(GrowthcraftRiceItems.ONIGIRI.get());
             event.accept(GrowthcraftRiceItems.CHICKEN_RICE.get());
             event.accept(GrowthcraftRiceItems.YEAST_SEISHU.get());
+            for (var container : GrowthcraftRiceFluids.ALL) {
+                event.accept(container.bucket.get());
+            }
         }
     }
 }

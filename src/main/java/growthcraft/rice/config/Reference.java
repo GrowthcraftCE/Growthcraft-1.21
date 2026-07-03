@@ -1,5 +1,7 @@
 package growthcraft.rice.config;
 
+import growthcraft.lib.utils.ColorUtils;
+
 public final class Reference {
     public static final String MODID = "growthcraft_rice";
     public static final String NAME = "Growthcraft Rice";
@@ -25,5 +27,13 @@ public final class Reference {
         }
 
         private UnlocalizedName() {}
+    }
+
+    public static final class FluidColor {
+        public static final ColorUtils.GrowthcraftColor RICE_WATER = new ColorUtils.GrowthcraftColor(0xFFF6F8ED);
+        public static final ColorUtils.GrowthcraftColor RICE_WINE = new ColorUtils.GrowthcraftColor(0xFFD9DADB);
+        public static final ColorUtils.GrowthcraftColor SAKE = new ColorUtils.GrowthcraftColor(0xFFEAECEC);
+
+        private FluidColor() {}
     }
 }

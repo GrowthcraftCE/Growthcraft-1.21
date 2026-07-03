@@ -344,7 +344,7 @@ def scanRecipesWithTypes = {
     }.sort { a, b -> a.id <=> b.id }
 }
 
-def growthcraftNamespaces = ['growthcraft', 'growthcraft_cellar', 'growthcraft_milk'] as Set
+def growthcraftNamespaces = ['growthcraft', 'growthcraft_cellar', 'growthcraft_milk', 'growthcraft_rice'] as Set
 
 def namespaceForJavaFile = { File javaFile ->
     def path = javaFile.toPath().toString().replace('\\', '/')
@@ -353,6 +353,9 @@ def namespaceForJavaFile = { File javaFile ->
     }
     if (path.contains('/growthcraft/milk/')) {
         return 'growthcraft_milk'
+    }
+    if (path.contains('/growthcraft/rice/')) {
+        return 'growthcraft_rice'
     }
     if (path.contains('/growthcraft/core/')) {
         return 'growthcraft'

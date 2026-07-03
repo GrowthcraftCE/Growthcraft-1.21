@@ -1,8 +1,11 @@
 {
   "block.growthcraft_rice.cultivated_farmland": "Cultivated Farmland",
   "block.growthcraft_rice.rice_crop": "Rice Crop",
+  "fluid_type.growthcraft_rice.rice_water": "Rice Water",
   "fluid_type.growthcraft_rice.rice_water_fluid": "Rice Water",
+  "fluid_type.growthcraft_rice.rice_wine": "Rice Wine",
   "fluid_type.growthcraft_rice.rice_wine_fluid": "Rice Wine",
+  "fluid_type.growthcraft_rice.sake": "Sake",
   "fluid_type.growthcraft_rice.sake_fluid": "Sake",
   "item.growthcraft_rice.cultivator": "Cultivator",
   "item.growthcraft_rice.knife": "Knife",
