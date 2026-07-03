@@ -4,10 +4,16 @@ import growthcraft.milk.config.Reference;
 import growthcraft.milk.init.GrowthcraftMilkBlocks;
 import growthcraft.milk.init.GrowthcraftMilkItems;
 import growthcraft.lib.utils.ColorUtils;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -23,7 +29,15 @@ import net.neoforged.neoforge.registries.DeferredHolder;
  */
 @EventBusSubscriber(modid = Reference.MODID, value = Dist.CLIENT)
 public final class GrowthcraftMilkClient {
+    private static final ResourceLocation CHEESE_SLICED_PROPERTY =
+            ResourceLocation.fromNamespaceAndPath(Reference.MODID, "cheese_sliced");
+
     private GrowthcraftMilkClient() {}
+
+    @SubscribeEvent
+    public static void onClientSetup(FMLClientSetupEvent event) {
+        event.enqueueWork(GrowthcraftMilkClient::registerCheeseModelProperties);
+    }
 
     @SubscribeEvent
     public static void onRegisterItemColors(RegisterColorHandlersEvent.Item event) {
@@ -99,5 +113,31 @@ public final class GrowthcraftMilkClient {
                                           ColorUtils.GrowthcraftColor color,
                                           DeferredHolder<Block, ? extends Block> block) {
         event.register((state, level, pos, tintIndex) -> tintIndex == 0 ? color.toIntValue() : 0xFFFFFFFF, block.get());
+    }
+
+    private static void registerCheeseModelProperties() {
+        registerCheeseSlicedProperty(GrowthcraftMilkItems.APPENZELLER_CHEESE_AGED);
+        registerCheeseSlicedProperty(GrowthcraftMilkItems.ASIAGO_CHEESE_AGED);
+        registerCheeseSlicedProperty(GrowthcraftMilkItems.CASU_MARZU_CHEESE_AGED);
+        registerCheeseSlicedProperty(GrowthcraftMilkItems.CHEDDAR_CHEESE_AGED);
+        registerCheeseSlicedProperty(GrowthcraftMilkItems.EMMENTALER_CHEESE_AGED);
+        registerCheeseSlicedProperty(GrowthcraftMilkItems.GORGONZOLA_CHEESE_AGED);
+        registerCheeseSlicedProperty(GrowthcraftMilkItems.GOUDA_CHEESE_AGED);
+        registerCheeseSlicedProperty(GrowthcraftMilkItems.MONTEREY_CHEESE_AGED);
+        registerCheeseSlicedProperty(GrowthcraftMilkItems.PARMESAN_CHEESE_AGED);
+        registerCheeseSlicedProperty(GrowthcraftMilkItems.PROVOLONE_CHEESE_AGED);
+    }
+
+    private static void registerCheeseSlicedProperty(DeferredHolder<Item, ? extends Item> item) {
+        ItemProperties.register(item.get(), CHEESE_SLICED_PROPERTY, (stack, level, entity, seed) -> isCheeseSliced(stack) ? 1.0F : 0.0F);
+    }
+
+    private static boolean isCheeseSliced(ItemStack stack) {
+        CustomData blockEntityData = stack.getOrDefault(DataComponents.BLOCK_ENTITY_DATA, CustomData.EMPTY);
+        if (blockEntityData.isEmpty()) {
+            return false;
+        }
+
+        return blockEntityData.copyTag().getInt("slicesbottom") < 4;
     }
 }
