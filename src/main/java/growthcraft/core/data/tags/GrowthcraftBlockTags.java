@@ -1,5 +1,6 @@
 package growthcraft.core.data.tags;
 
+import growthcraft.bamboo.init.GrowthcraftBambooBlocks;
 import growthcraft.core.config.Reference;
 import growthcraft.core.init.GrowthcraftBlocks;
 import net.minecraft.core.HolderLookup;
@@ -26,5 +27,14 @@ public class GrowthcraftBlockTags extends BlockTagsProvider {
                         GrowthcraftBlocks.SALT_ORE_NETHER.get(),
                         GrowthcraftBlocks.SALT_ORE_END.get()
                 );
+
+        this.tag(BlockTags.MINEABLE_WITH_AXE)
+                .add(
+                        GrowthcraftBambooBlocks.BAMBOO_POST_VERTICAL.get(),
+                        GrowthcraftBambooBlocks.BAMBOO_POST_HORIZONTAL.get()
+                );
+
+        this.tag(BlockTags.CLIMBABLE)
+                .add(GrowthcraftBambooBlocks.BAMBOO_POST_HORIZONTAL.get());
     }
 }

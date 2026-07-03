@@ -2,6 +2,7 @@ package growthcraft.core.data.recipe;
 
 import growthcraft.core.config.ConfigValueCondition;
 import growthcraft.core.config.Reference;
+import growthcraft.bamboo.init.GrowthcraftBambooItems;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.core.init.GrowthcraftItems;
 import growthcraft.milk.init.GrowthcraftMilkItems;
@@ -146,6 +147,17 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
                 .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.cellar.config.Reference.MODID, growthcraft.cellar.config.Reference.UnlocalizedName.Item.CORK_COASTER));
 
         addCellarGrainRecipes(output);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GrowthcraftBambooItems.BAMBOO_POST_VERTICAL.get(), 2)
+                .pattern("B")
+                .pattern("B")
+                .pattern("B")
+                .define('B', Items.BAMBOO_BLOCK)
+                .group(growthcraft.bamboo.config.Reference.MODID)
+                .unlockedBy(getHasName(Items.BAMBOO_BLOCK), has(Items.BAMBOO_BLOCK))
+                .save(output, ResourceLocation.fromNamespaceAndPath(
+                        growthcraft.bamboo.config.Reference.MODID,
+                        growthcraft.bamboo.config.Reference.UnlocalizedName.Block.BAMBOO_POST_VERTICAL));
     }
 
     private static void addMilkIngredientRecipes(RecipeOutput output) {

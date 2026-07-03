@@ -173,3 +173,32 @@ description='''Growthcraft Rice adds rice ingredients, drinks, and Seishu yeast 
     versionRange="[${mod_version},)"
     ordering="AFTER"
     side="BOTH"
+
+
+[[mods]]
+modId="growthcraft_bamboo"
+version="${mod_version}"
+displayName="Growthcraft Bamboo"
+authors="${mod_authors}"
+description='''Growthcraft Bamboo adds bamboo building components and related processing.'''
+
+[[dependencies.growthcraft_bamboo]]
+    modId="neoforge"
+    type="required"
+    versionRange="[${neo_version},)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.growthcraft_bamboo]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.growthcraft_bamboo]]
+    modId="growthcraft"
+    type="required"
+    versionRange="[${mod_version},)"
+    ordering="AFTER"
+    side="BOTH"

@@ -86,7 +86,7 @@ neoForge {
             // gameDirectory = project.file('run-data')
 
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-            programArguments.addAll '--mod', project.mod_id, '--mod', 'growthcraft_cellar', '--mod', 'growthcraft_milk', '--all', '--flat', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+            programArguments.addAll '--mod', project.mod_id, '--mod', 'growthcraft_cellar', '--mod', 'growthcraft_milk', '--mod', 'growthcraft_rice', '--mod', 'growthcraft_bamboo', '--all', '--flat', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
         }
 
         // applies to all the run configs above
@@ -117,6 +117,12 @@ neoForge {
         }
         // Map Milk module as a logical mod within the same source set
         "growthcraft_milk" {
+            sourceSet(sourceSets.main)
+        }
+        "growthcraft_rice" {
+            sourceSet(sourceSets.main)
+        }
+        "growthcraft_bamboo" {
             sourceSet(sourceSets.main)
         }
     }
@@ -344,7 +350,7 @@ def scanRecipesWithTypes = {
     }.sort { a, b -> a.id <=> b.id }
 }
 
-def growthcraftNamespaces = ['growthcraft', 'growthcraft_cellar', 'growthcraft_milk', 'growthcraft_rice'] as Set
+def growthcraftNamespaces = ['growthcraft', 'growthcraft_cellar', 'growthcraft_milk', 'growthcraft_rice', 'growthcraft_bamboo'] as Set
 
 def namespaceForJavaFile = { File javaFile ->
     def path = javaFile.toPath().toString().replace('\\', '/')
@@ -356,6 +362,9 @@ def namespaceForJavaFile = { File javaFile ->
     }
     if (path.contains('/growthcraft/rice/')) {
         return 'growthcraft_rice'
+    }
+    if (path.contains('/growthcraft/bamboo/')) {
+        return 'growthcraft_bamboo'
     }
     if (path.contains('/growthcraft/core/')) {
         return 'growthcraft'
