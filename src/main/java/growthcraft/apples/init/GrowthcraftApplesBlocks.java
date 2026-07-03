@@ -2,6 +2,7 @@ package growthcraft.apples.init;
 
 import growthcraft.apples.config.Reference;
 import growthcraft.apiary.block.BeeBoxBlock;
+import growthcraft.core.block.RopeFenceBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.DoorBlock;
@@ -40,6 +41,10 @@ public final class GrowthcraftApplesBlocks {
     public static final DeferredBlock<FenceGateBlock> APPLE_PLANK_FENCE_GATE = BLOCKS.register(
             Reference.UnlocalizedName.Block.APPLE_PLANK_FENCE_GATE,
             () -> new FenceGateBlock(WoodType.OAK, BlockBehaviour.Properties.of().strength(2.0F, 3.0F))
+    );
+    public static final DeferredBlock<RopeFenceBlock> APPLE_PLANK_FENCE_ROPE_LINEN = BLOCKS.register(
+            Reference.UnlocalizedName.Block.APPLE_PLANK_FENCE_ROPE_LINEN,
+            () -> new RopeFenceBlock(BlockBehaviour.Properties.of().strength(2.0F, 3.0F))
     );
     public static final DeferredBlock<PressurePlateBlock> APPLE_PLANK_PRESSURE_PLATE = BLOCKS.register(
             Reference.UnlocalizedName.Block.APPLE_PLANK_PRESSURE_PLATE,

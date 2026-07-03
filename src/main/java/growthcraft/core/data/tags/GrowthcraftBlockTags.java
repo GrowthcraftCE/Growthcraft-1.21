@@ -47,6 +47,7 @@ public class GrowthcraftBlockTags extends BlockTagsProvider {
                         GrowthcraftApplesBlocks.APPLE_PLANK_DOOR.get(),
                         GrowthcraftApplesBlocks.APPLE_PLANK_FENCE.get(),
                         GrowthcraftApplesBlocks.APPLE_PLANK_FENCE_GATE.get(),
+                        GrowthcraftApplesBlocks.APPLE_PLANK_FENCE_ROPE_LINEN.get(),
                         GrowthcraftApplesBlocks.APPLE_PLANK_PRESSURE_PLATE.get(),
                         GrowthcraftApplesBlocks.APPLE_PLANK_SLAB.get(),
                         GrowthcraftApplesBlocks.APPLE_PLANK_STAIRS.get(),

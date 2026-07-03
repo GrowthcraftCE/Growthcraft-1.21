@@ -3,6 +3,7 @@ package growthcraft.core.item;
 import growthcraft.core.block.RopeBlock;
 import growthcraft.core.block.RopeFenceBlock;
 import growthcraft.core.config.Reference;
+import growthcraft.apples.init.GrowthcraftApplesBlocks;
 import growthcraft.core.init.GrowthcraftBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -103,6 +104,7 @@ public class RopeItem extends Item {
         if (vanilla == Blocks.NETHER_BRICK_FENCE) return GrowthcraftBlocks.ROPE_LINEN_NETHER_BRICK_FENCE.get();
         if (vanilla == Blocks.CRIMSON_FENCE) return GrowthcraftBlocks.ROPE_LINEN_CRIMSON_FENCE.get();
         if (vanilla == Blocks.WARPED_FENCE) return GrowthcraftBlocks.ROPE_LINEN_WARPED_FENCE.get();
+        if (vanilla == GrowthcraftApplesBlocks.APPLE_PLANK_FENCE.get()) return GrowthcraftApplesBlocks.APPLE_PLANK_FENCE_ROPE_LINEN.get();
         return null;
     }
 }

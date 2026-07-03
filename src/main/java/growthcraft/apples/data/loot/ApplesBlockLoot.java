@@ -1,6 +1,7 @@
 package growthcraft.apples.data.loot;
 
 import growthcraft.apples.init.GrowthcraftApplesBlocks;
+import growthcraft.core.init.GrowthcraftItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
@@ -21,6 +22,7 @@ public class ApplesBlockLoot extends BlockLootSubProvider {
         add(GrowthcraftApplesBlocks.APPLE_PLANK_DOOR.get(), createDoorTable(GrowthcraftApplesBlocks.APPLE_PLANK_DOOR.get()));
         dropSelf(GrowthcraftApplesBlocks.APPLE_PLANK_FENCE.get());
         dropSelf(GrowthcraftApplesBlocks.APPLE_PLANK_FENCE_GATE.get());
+        dropOther(GrowthcraftApplesBlocks.APPLE_PLANK_FENCE_ROPE_LINEN.get(), GrowthcraftItems.ROPE_LINEN.get());
         dropSelf(GrowthcraftApplesBlocks.APPLE_PLANK_PRESSURE_PLATE.get());
         add(GrowthcraftApplesBlocks.APPLE_PLANK_SLAB.get(), createSlabItemTable(GrowthcraftApplesBlocks.APPLE_PLANK_SLAB.get()));
         dropSelf(GrowthcraftApplesBlocks.APPLE_PLANK_STAIRS.get());
