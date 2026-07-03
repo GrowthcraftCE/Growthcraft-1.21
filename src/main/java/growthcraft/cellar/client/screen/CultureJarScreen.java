@@ -13,7 +13,7 @@ public class CultureJarScreen extends AbstractContainerScreen<CultureJarMenu> {
     private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("growthcraft_cellar", "textures/gui/culture_jar_screen.png");
 
     // Tank render area inside the GUI (relative to top-left of the GUI)
-    private static final int TANK_X = 80; // adjust as needed to match texture
+    private static final int TANK_X = 80; // aligned with legacy texture layout
     private static final int TANK_Y = 18;
     private static final int TANK_W = 16;
     private static final int TANK_H = 52;
@@ -32,7 +32,19 @@ public class CultureJarScreen extends AbstractContainerScreen<CultureJarMenu> {
 
     @Override
     protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
+        // Background
         graphics.blit(TEXTURE, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
+
+        // Progress bar (uses legacy UVs: u=176,v=0, width=27, height=scaled)
+        int progressH = this.menu.getProgressionScaled(27);
+        if (progressH > 0) {
+            graphics.blit(TEXTURE, this.leftPos + 82, this.topPos + 30, 176, 0, 27, progressH);
+        }
+
+        // Heat/fire indicator (legacy UVs: u=176,v=28, w=13,h=13)
+        if (this.menu.isHeated()) {
+            graphics.blit(TEXTURE, this.leftPos + 59, this.topPos + 57, 176, 28, 13, 13);
+        }
 
         // Draw fluid tank contents via reusable renderer (flowing texture animates via atlas)
         FluidStack stack = this.menu.getClientFluidStack();

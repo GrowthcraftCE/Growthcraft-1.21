@@ -1,0 +1,8 @@
+{
+  "type": "growthcraft_cellar:culture_jar",
+  "ingredient": { "item": "minecraft:stick" },
+  "fluid": { "fluid": "minecraft:water", "amount": 1 },
+  "result": { "id": "growthcraft_cellar:starter_culture", "count": 1 },
+  "time": 10,
+  "requires_heat_source": false
+}

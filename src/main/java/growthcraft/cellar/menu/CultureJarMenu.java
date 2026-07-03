@@ -1,5 +1,6 @@
 package growthcraft.cellar.menu;
 
+import growthcraft.cellar.block.CultureJarBlock;
 import growthcraft.cellar.block.entity.CultureJarBlockEntity;
 import growthcraft.cellar.init.GrowthcraftCellarMenus;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -20,25 +21,39 @@ public class CultureJarMenu extends AbstractContainerMenu {
     @Nullable
     private final CultureJarBlockEntity jarBE; // only present on server side
 
-    // Client-side cached fields for synced tank data
+    // Client-side cached fields for synced data
     private int clientAmount = 0;
     private int clientFluidId = -1;
+    private int clientProcess = 0;
+    private int clientProcessTotal = 0;
+    private int clientLit = 0;
 
     // Synced client-side via data slots
-    private final ContainerData tankData = new ContainerData() {
-        // 0: amount, 1: fluid raw id (BuiltInRegistries.FLUID)
+    private final ContainerData data = new ContainerData() {
+        // indices:
+        // 0: amount (mB)
+        // 1: fluid raw id (BuiltInRegistries.FLUID)
+        // 2: processTime
+        // 3: processTimeTotal
+        // 4: lit (0/1)
         @Override
         public int get(int index) {
             if (jarBE == null) {
                 return switch (index) {
                     case 0 -> clientAmount;
                     case 1 -> clientFluidId;
+                    case 2 -> clientProcess;
+                    case 3 -> clientProcessTotal;
+                    case 4 -> clientLit;
                     default -> 0;
                 };
             }
             return switch (index) {
                 case 0 -> jarBE.getTank().getFluidAmount();
                 case 1 -> jarBE.getTank().getFluid().isEmpty() ? -1 : BuiltInRegistries.FLUID.getId(jarBE.getTank().getFluid().getFluid());
+                case 2 -> jarBE.getProcessTime();
+                case 3 -> jarBE.getProcessTimeTotal();
+                case 4 -> jarBE.getBlockState().getValue(CultureJarBlock.LIT) ? 1 : 0;
                 default -> 0;
             };
         }
@@ -47,14 +62,19 @@ public class CultureJarMenu extends AbstractContainerMenu {
         public void set(int index, int value) {
             // client-side receives values here
             if (jarBE == null) {
-                if (index == 0) clientAmount = value;
-                else if (index == 1) clientFluidId = value;
+                switch (index) {
+                    case 0 -> clientAmount = value;
+                    case 1 -> clientFluidId = value;
+                    case 2 -> clientProcess = value;
+                    case 3 -> clientProcessTotal = value;
+                    case 4 -> clientLit = value;
+                }
             }
         }
 
         @Override
         public int getCount() {
-            return 2;
+            return 5;
         }
     };
 
@@ -93,7 +113,7 @@ public class CultureJarMenu extends AbstractContainerMenu {
             this.addSlot(new Slot(playerInventory, col, startX + col * 18, hotbarY));
         }
 
-        this.addDataSlots(tankData);
+        this.addDataSlots(data);
     }
 
     public Container getContainer() {
@@ -105,11 +125,29 @@ public class CultureJarMenu extends AbstractContainerMenu {
     }
 
     public int getFluidAmount() {
-        return this.tankData.get(0);
+        return this.data.get(0);
     }
 
     public int getFluidRawId() {
-        return this.tankData.get(1);
+        return this.data.get(1);
+    }
+
+    public int getProcess() {
+        return this.data.get(2);
+    }
+
+    public int getProcessTotal() {
+        return this.data.get(3);
+    }
+
+    public boolean isHeated() {
+        return this.data.get(4) == 1;
+    }
+
+    public int getProgressionScaled(int pixels) {
+        int total = getProcessTotal();
+        if (total <= 0) return 0;
+        return Math.min(pixels, (getProcess() * pixels) / total);
     }
 
     public FluidStack getClientFluidStack() {
