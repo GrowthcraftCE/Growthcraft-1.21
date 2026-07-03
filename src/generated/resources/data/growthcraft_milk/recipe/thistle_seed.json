@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "growthcraft_milk",
+  "ingredients": [
+    {
+      "item": "growthcraft_milk:thistle"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "id": "growthcraft_milk:thistle_seed"
+  }
+}

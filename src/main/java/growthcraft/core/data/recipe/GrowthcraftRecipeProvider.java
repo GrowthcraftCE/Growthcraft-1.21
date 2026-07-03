@@ -118,6 +118,8 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
                 .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.milk.config.Reference.MODID, "milking_bucket_iron"));
 
+        addMilkIngredientRecipes(output);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftCellarItems.CULTURE_JAR.get())
                 .pattern("BAB")
                 .pattern("B B")
@@ -141,6 +143,33 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
                 .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.cellar.config.Reference.MODID, growthcraft.cellar.config.Reference.UnlocalizedName.Item.CORK_COASTER));
 
         addCellarGrainRecipes(output);
+    }
+
+    private static void addMilkIngredientRecipes(RecipeOutput output) {
+        TagKey<Item> salt = itemTag("c", "dusts/salt");
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, growthcraft.milk.init.GrowthcraftMilkItems.THISTLE_SEED.get(), 2)
+                .requires(growthcraft.milk.init.GrowthcraftMilkItems.THISTLE.get())
+                .group("growthcraft_milk")
+                .unlockedBy(getHasName(growthcraft.milk.init.GrowthcraftMilkItems.THISTLE.get()), has(growthcraft.milk.init.GrowthcraftMilkItems.THISTLE.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.milk.config.Reference.MODID, growthcraft.milk.config.Reference.UnlocalizedName.THISTLE_SEED));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, growthcraft.milk.init.GrowthcraftMilkItems.CHEESE_CLOTH.get())
+                .pattern("sss")
+                .pattern("s s")
+                .pattern("sss")
+                .define('s', Items.STRING)
+                .group("growthcraft_milk")
+                .unlockedBy(getHasName(Items.STRING), has(Items.STRING))
+                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.milk.config.Reference.MODID, growthcraft.milk.config.Reference.UnlocalizedName.CHEESE_CLOTH));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, growthcraft.milk.init.GrowthcraftMilkItems.BUTTER_SALTED.get())
+                .requires(growthcraft.milk.init.GrowthcraftMilkItems.BUTTER.get())
+                .requires(salt)
+                .group("growthcraft_milk")
+                .unlockedBy(getHasName(growthcraft.milk.init.GrowthcraftMilkItems.BUTTER.get()), has(growthcraft.milk.init.GrowthcraftMilkItems.BUTTER.get()))
+                .unlockedBy("has_salt", has(salt))
+                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.milk.config.Reference.MODID, growthcraft.milk.config.Reference.UnlocalizedName.BUTTER_SALTED));
     }
 
     private static void addCrowbarRecipe(RecipeOutput output, Item result, Item carpet, TagKey<Item> nuggets, TagKey<Item> ingots, String name) {
