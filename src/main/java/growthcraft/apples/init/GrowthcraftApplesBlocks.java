@@ -1,6 +1,9 @@
 package growthcraft.apples.init;
 
+import growthcraft.apples.block.AppleTreeFruitBlock;
+import growthcraft.apples.block.AppleTreeLeavesBlock;
 import growthcraft.apples.config.Reference;
+import growthcraft.apples.world.AppleTreeGrowers;
 import growthcraft.apiary.block.BeeBoxBlock;
 import growthcraft.core.block.RopeFenceBlock;
 import net.minecraft.world.level.block.Block;
@@ -10,6 +13,7 @@ import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.PressurePlateBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.TrapDoorBlock;
@@ -61,6 +65,18 @@ public final class GrowthcraftApplesBlocks {
     public static final DeferredBlock<TrapDoorBlock> APPLE_PLANK_TRAPDOOR = BLOCKS.register(
             Reference.UnlocalizedName.Block.APPLE_PLANK_TRAPDOOR,
             () -> new TrapDoorBlock(BlockSetType.OAK, BlockBehaviour.Properties.of().strength(3.0F).noOcclusion())
+    );
+    public static final DeferredBlock<AppleTreeFruitBlock> APPLE_TREE_FRUIT = BLOCKS.register(
+            Reference.UnlocalizedName.Block.APPLE_TREE_FRUIT,
+            () -> new AppleTreeFruitBlock(AppleTreeFruitBlock.fruitProperties())
+    );
+    public static final DeferredBlock<AppleTreeLeavesBlock> APPLE_TREE_LEAVES = BLOCKS.register(
+            Reference.UnlocalizedName.Block.APPLE_TREE_LEAVES,
+            () -> new AppleTreeLeavesBlock(BlockBehaviour.Properties.ofFullCopy(net.minecraft.world.level.block.Blocks.OAK_LEAVES))
+    );
+    public static final DeferredBlock<SaplingBlock> APPLE_TREE_SAPLING = BLOCKS.register(
+            Reference.UnlocalizedName.Block.APPLE_TREE_SAPLING,
+            () -> new SaplingBlock(AppleTreeGrowers.APPLE, BlockBehaviour.Properties.ofFullCopy(net.minecraft.world.level.block.Blocks.OAK_SAPLING))
     );
     public static final DeferredBlock<RotatedPillarBlock> APPLE_WOOD = BLOCKS.register(
             Reference.UnlocalizedName.Block.APPLE_WOOD,

@@ -3,6 +3,7 @@ package growthcraft.core.data.tags;
 import growthcraft.core.config.Reference;
 import growthcraft.apiary.init.GrowthcraftApiaryItems;
 import growthcraft.apiary.init.GrowthcraftApiaryTags;
+import growthcraft.apples.init.GrowthcraftApplesItems;
 import growthcraft.core.init.GrowthcraftItems;
 import growthcraft.milk.init.GrowthcraftMilkItems;
 import growthcraft.milk.init.GrowthcraftMilkTags;
@@ -11,6 +12,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -53,6 +55,20 @@ public class GrowthcraftItemTags extends IntrinsicHolderTagsProvider<Item> {
 
         this.tag(GrowthcraftApiaryTags.Items.HONEY_COMB)
                 .add(Items.HONEYCOMB, GrowthcraftApiaryItems.HONEY_COMB_FULL.get());
+
+        this.tag(ItemTags.LEAVES)
+                .add(GrowthcraftApplesItems.APPLE_TREE_LEAVES.get());
+
+        this.tag(ItemTags.LOGS)
+                .add(
+                        GrowthcraftApplesItems.APPLE_WOOD.get(),
+                        GrowthcraftApplesItems.APPLE_WOOD_LOG.get(),
+                        GrowthcraftApplesItems.APPLE_WOOD_LOG_STRIPPED.get(),
+                        GrowthcraftApplesItems.APPLE_WOOD_STRIPPED.get()
+                );
+
+        this.tag(ItemTags.SAPLINGS)
+                .add(GrowthcraftApplesItems.APPLE_TREE_SAPLING.get());
 
         this.tag(GrowthcraftMilkTags.Items.CHEESE_SLICES)
                 .add(

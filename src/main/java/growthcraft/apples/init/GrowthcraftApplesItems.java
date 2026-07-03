@@ -18,6 +18,9 @@ public final class GrowthcraftApplesItems {
     public static final DeferredItem<BlockItem> APPLE_PLANK_SLAB = blockItem(Reference.UnlocalizedName.Block.APPLE_PLANK_SLAB, GrowthcraftApplesBlocks.APPLE_PLANK_SLAB);
     public static final DeferredItem<BlockItem> APPLE_PLANK_STAIRS = blockItem(Reference.UnlocalizedName.Block.APPLE_PLANK_STAIRS, GrowthcraftApplesBlocks.APPLE_PLANK_STAIRS);
     public static final DeferredItem<BlockItem> APPLE_PLANK_TRAPDOOR = blockItem(Reference.UnlocalizedName.Block.APPLE_PLANK_TRAPDOOR, GrowthcraftApplesBlocks.APPLE_PLANK_TRAPDOOR);
+    public static final DeferredItem<BlockItem> APPLE_TREE_FRUIT = blockItem(Reference.UnlocalizedName.Block.APPLE_TREE_FRUIT, GrowthcraftApplesBlocks.APPLE_TREE_FRUIT);
+    public static final DeferredItem<BlockItem> APPLE_TREE_LEAVES = blockItem(Reference.UnlocalizedName.Block.APPLE_TREE_LEAVES, GrowthcraftApplesBlocks.APPLE_TREE_LEAVES);
+    public static final DeferredItem<BlockItem> APPLE_TREE_SAPLING = blockItem(Reference.UnlocalizedName.Block.APPLE_TREE_SAPLING, GrowthcraftApplesBlocks.APPLE_TREE_SAPLING);
     public static final DeferredItem<BlockItem> APPLE_WOOD = blockItem(Reference.UnlocalizedName.Block.APPLE_WOOD, GrowthcraftApplesBlocks.APPLE_WOOD);
     public static final DeferredItem<BlockItem> APPLE_WOOD_LOG = blockItem(Reference.UnlocalizedName.Block.APPLE_WOOD_LOG, GrowthcraftApplesBlocks.APPLE_WOOD_LOG);
     public static final DeferredItem<BlockItem> APPLE_WOOD_LOG_STRIPPED = blockItem(Reference.UnlocalizedName.Block.APPLE_WOOD_LOG_STRIPPED, GrowthcraftApplesBlocks.APPLE_WOOD_LOG_STRIPPED);

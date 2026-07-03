@@ -27,6 +27,9 @@ public class ApplesBlockLoot extends BlockLootSubProvider {
         add(GrowthcraftApplesBlocks.APPLE_PLANK_SLAB.get(), createSlabItemTable(GrowthcraftApplesBlocks.APPLE_PLANK_SLAB.get()));
         dropSelf(GrowthcraftApplesBlocks.APPLE_PLANK_STAIRS.get());
         dropSelf(GrowthcraftApplesBlocks.APPLE_PLANK_TRAPDOOR.get());
+        dropOther(GrowthcraftApplesBlocks.APPLE_TREE_FRUIT.get(), net.minecraft.world.item.Items.APPLE);
+        add(GrowthcraftApplesBlocks.APPLE_TREE_LEAVES.get(), block -> createOakLeavesDrops(block, GrowthcraftApplesBlocks.APPLE_TREE_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+        dropSelf(GrowthcraftApplesBlocks.APPLE_TREE_SAPLING.get());
         dropSelf(GrowthcraftApplesBlocks.APPLE_WOOD.get());
         dropSelf(GrowthcraftApplesBlocks.APPLE_WOOD_LOG.get());
         dropSelf(GrowthcraftApplesBlocks.APPLE_WOOD_LOG_STRIPPED.get());

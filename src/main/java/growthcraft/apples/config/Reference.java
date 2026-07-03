@@ -27,6 +27,9 @@ public final class Reference {
             public static final String APPLE_PLANK_SLAB = "apple_plank_slab";
             public static final String APPLE_PLANK_STAIRS = "apple_plank_stairs";
             public static final String APPLE_PLANK_TRAPDOOR = "apple_plank_trapdoor";
+            public static final String APPLE_TREE_FRUIT = "apple_tree_fruit";
+            public static final String APPLE_TREE_LEAVES = "apple_tree_leaves";
+            public static final String APPLE_TREE_SAPLING = "apple_tree_sapling";
             public static final String APPLE_WOOD = "apple_wood";
             public static final String APPLE_WOOD_LOG = "apple_wood_log";
             public static final String APPLE_WOOD_LOG_STRIPPED = "apple_wood_log_stripped";
@@ -40,6 +43,12 @@ public final class Reference {
             public static final String APPLE_SEEDS = "apple_seeds";
 
             private Item() {}
+        }
+
+        public static final class Worldgen {
+            public static final String APPLE_TREE = "apple_tree";
+
+            private Worldgen() {}
         }
 
         private UnlocalizedName() {}

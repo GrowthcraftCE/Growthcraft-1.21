@@ -56,6 +56,7 @@ public class GrowthcraftBlockTags extends BlockTagsProvider {
                         GrowthcraftApplesBlocks.APPLE_PLANK_SLAB.get(),
                         GrowthcraftApplesBlocks.APPLE_PLANK_STAIRS.get(),
                         GrowthcraftApplesBlocks.APPLE_PLANK_TRAPDOOR.get(),
+                        GrowthcraftApplesBlocks.APPLE_TREE_FRUIT.get(),
                         GrowthcraftApplesBlocks.APPLE_WOOD.get(),
                         GrowthcraftApplesBlocks.APPLE_WOOD_LOG.get(),
                         GrowthcraftApplesBlocks.APPLE_WOOD_LOG_STRIPPED.get(),
@@ -75,6 +76,20 @@ public class GrowthcraftBlockTags extends BlockTagsProvider {
                         GrowthcraftBambooBlocks.BAMBOO_POST_VERTICAL.get(),
                         GrowthcraftBambooBlocks.BAMBOO_POST_HORIZONTAL.get()
                 );
+
+        this.tag(BlockTags.LEAVES)
+                .add(GrowthcraftApplesBlocks.APPLE_TREE_LEAVES.get());
+
+        this.tag(BlockTags.LOGS)
+                .add(
+                        GrowthcraftApplesBlocks.APPLE_WOOD.get(),
+                        GrowthcraftApplesBlocks.APPLE_WOOD_LOG.get(),
+                        GrowthcraftApplesBlocks.APPLE_WOOD_LOG_STRIPPED.get(),
+                        GrowthcraftApplesBlocks.APPLE_WOOD_STRIPPED.get()
+                );
+
+        this.tag(BlockTags.SAPLINGS)
+                .add(GrowthcraftApplesBlocks.APPLE_TREE_SAPLING.get());
 
         this.tag(BlockTags.CLIMBABLE)
                 .add(GrowthcraftBambooBlocks.BAMBOO_POST_HORIZONTAL.get());

@@ -46,6 +46,9 @@ public class GrowthcraftApples {
             event.accept(GrowthcraftApplesItems.APPLE_WOOD_STRIPPED.get());
             event.accept(GrowthcraftApplesItems.BEE_BOX_APPLE.get());
             event.accept(GrowthcraftApplesItems.APPLE_SEEDS.get());
+            event.accept(GrowthcraftApplesItems.APPLE_TREE_FRUIT.get());
+            event.accept(GrowthcraftApplesItems.APPLE_TREE_LEAVES.get());
+            event.accept(GrowthcraftApplesItems.APPLE_TREE_SAPLING.get());
             for (var container : GrowthcraftApplesFluids.ALL) {
                 event.accept(container.bucket.get());
             }
