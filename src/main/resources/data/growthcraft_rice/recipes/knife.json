@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "conditions": [
+    {
+      "type": "growthcraft:feature_enabled",
+      "feature": "rice"
+    }
+  ],
+  "group": "growthcraft_rice",
+  "key": {
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "S": {
+      "tag": "forge:rods/wooden"
+    }
+  },
+  "pattern": [
+    "  I",
+    " I ",
+    "S  "
+  ],
+  "result": {
+    "item": "growthcraft_rice:knife"
+  },
+  "show_notification": true
+}

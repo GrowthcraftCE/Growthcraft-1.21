@@ -3,6 +3,7 @@ package growthcraft.rice.init;
 import growthcraft.lib.item.GrowthcraftBowlFoodItem;
 import growthcraft.lib.item.GrowthcraftFoodItem;
 import growthcraft.rice.config.Reference;
+import growthcraft.rice.item.CultivatorItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemNameBlockItem;
@@ -18,7 +19,7 @@ public final class GrowthcraftRiceItems {
     public static final DeferredItem<BlockItem> RICE_CROP = ITEMS.register(
             Reference.UnlocalizedName.Block.RICE_CROP,
             () -> new BlockItem(GrowthcraftRiceBlocks.RICE_CROP.get(), new Item.Properties()));
-    public static final DeferredItem<Item> CULTIVATOR = ITEMS.register(Reference.UnlocalizedName.Item.CULTIVATOR, () -> new Item(new Item.Properties()));
+    public static final DeferredItem<CultivatorItem> CULTIVATOR = ITEMS.register(Reference.UnlocalizedName.Item.CULTIVATOR, CultivatorItem::new);
     public static final DeferredItem<Item> KNIFE = ITEMS.register(Reference.UnlocalizedName.Item.KNIFE, () -> new Item(new Item.Properties()));
     public static final DeferredItem<ItemNameBlockItem> RICE_GRAINS = ITEMS.register(
             Reference.UnlocalizedName.Item.RICE_GRAINS,
