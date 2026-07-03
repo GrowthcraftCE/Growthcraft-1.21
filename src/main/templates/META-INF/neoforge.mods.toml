@@ -144,3 +144,32 @@ description='''Growthcraft Milk centralizes dairy-related machines and processin
     versionRange="[${mod_version},)"
     ordering="AFTER"
     side="BOTH"
+
+
+[[mods]]
+modId="growthcraft_rice"
+version="${mod_version}"
+displayName="Growthcraft Rice"
+authors="${mod_authors}"
+description='''Growthcraft Rice adds rice ingredients, drinks, and Seishu yeast for sake production.'''
+
+[[dependencies.growthcraft_rice]]
+    modId="neoforge"
+    type="required"
+    versionRange="[${neo_version},)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.growthcraft_rice]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.growthcraft_rice]]
+    modId="growthcraft"
+    type="required"
+    versionRange="[${mod_version},)"
+    ordering="AFTER"
+    side="BOTH"
