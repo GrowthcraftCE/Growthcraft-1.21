@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "growthcraft_cellar",
+  "ingredients": [
+    {
+      "item": "minecraft:cauldron"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "growthcraft_cellar:brew_kettle"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_brew_kettle": {
+      "conditions": {
+        "items": [
+          {
+            "items": "growthcraft_cellar:brew_kettle"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "growthcraft_cellar:roaster"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_brew_kettle"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "growthcraft_cellar:roaster"
+    ]
+  }
+}

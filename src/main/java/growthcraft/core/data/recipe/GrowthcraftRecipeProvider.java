@@ -126,6 +126,7 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
 
         addMilkIngredientRecipes(output);
         addMilkBowlFoodRecipes(output);
+        addMilkMachineRecipes(output, IRON_INGOTS);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftCellarItems.CULTURE_JAR.get())
                 .pattern("BAB")
@@ -136,6 +137,8 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
                 .group("growthcraft_cellar")
                 .unlockedBy("has_glass_panes", has(Tags.Items.GLASS_PANES))
                 .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.cellar.config.Reference.MODID, growthcraft.cellar.config.Reference.UnlocalizedName.Block.CULTURE_JAR));
+
+        addCellarMachineRecipes(output, IRON_INGOTS);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, GrowthcraftCellarItems.HOPS_SEEDS.get(), 2)
                 .requires(GrowthcraftCellarItems.HOPS.get())
@@ -166,6 +169,103 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
                 .save(output, ResourceLocation.fromNamespaceAndPath(
                         growthcraft.bamboo.config.Reference.MODID,
                         growthcraft.bamboo.config.Reference.UnlocalizedName.Block.BAMBOO_POST_VERTICAL));
+    }
+
+    private static void addCellarMachineRecipes(RecipeOutput output, TagKey<Item> ironIngots) {
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, GrowthcraftCellarItems.BREW_KETTLE.get())
+                .requires(Blocks.CAULDRON)
+                .group(growthcraft.cellar.config.Reference.MODID)
+                .unlockedBy(getHasName(Items.CAULDRON), has(Items.CAULDRON))
+                .save(output, ResourceLocation.fromNamespaceAndPath(
+                        growthcraft.cellar.config.Reference.MODID,
+                        growthcraft.cellar.config.Reference.UnlocalizedName.Block.BREW_KETTLE));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftCellarItems.FERMENTATION_BARREL_OAK.get())
+                .pattern("AAA")
+                .pattern("BBB")
+                .pattern("AAA")
+                .define('A', ironIngots)
+                .define('B', Blocks.OAK_PLANKS)
+                .group(growthcraft.cellar.config.Reference.MODID)
+                .unlockedBy(getHasName(Items.OAK_PLANKS), has(Items.OAK_PLANKS))
+                .save(output, ResourceLocation.fromNamespaceAndPath(
+                        growthcraft.cellar.config.Reference.MODID,
+                        growthcraft.cellar.config.Reference.UnlocalizedName.Block.FERMENT_BARREL_OAK));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftCellarItems.FRUIT_PRESS.get())
+                .pattern("ABA")
+                .pattern("CCC")
+                .pattern("DDD")
+                .define('A', Tags.Items.FENCES)
+                .define('B', Blocks.PISTON)
+                .define('C', ironIngots)
+                .define('D', ItemTags.PLANKS)
+                .group(growthcraft.cellar.config.Reference.MODID)
+                .unlockedBy(getHasName(Items.PISTON), has(Items.PISTON))
+                .save(output, ResourceLocation.fromNamespaceAndPath(
+                        growthcraft.cellar.config.Reference.MODID,
+                        growthcraft.cellar.config.Reference.UnlocalizedName.Block.FRUIT_PRESS));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftCellarItems.ROASTER.get())
+                .pattern(" I ")
+                .pattern(" B ")
+                .pattern("I I")
+                .define('I', ironIngots)
+                .define('B', GrowthcraftCellarItems.BREW_KETTLE.get())
+                .group(growthcraft.cellar.config.Reference.MODID)
+                .unlockedBy(getHasName(GrowthcraftCellarItems.BREW_KETTLE.get()), has(GrowthcraftCellarItems.BREW_KETTLE.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath(
+                        growthcraft.cellar.config.Reference.MODID,
+                        growthcraft.cellar.config.Reference.UnlocalizedName.Block.ROASTER));
+    }
+
+    private static void addMilkMachineRecipes(RecipeOutput output, TagKey<Item> ironIngots) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftMilkItems.CHEESE_PRESS.get())
+                .pattern("III")
+                .pattern("ICI")
+                .pattern("SSS")
+                .define('I', ironIngots)
+                .define('C', Tags.Items.CHESTS_WOODEN)
+                .define('S', ItemTags.WOODEN_SLABS)
+                .group(growthcraft.milk.config.Reference.MODID)
+                .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
+                .save(output, ResourceLocation.fromNamespaceAndPath(
+                        growthcraft.milk.config.Reference.MODID,
+                        growthcraft.milk.config.Reference.UnlocalizedName.CHEESE_PRESS));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftMilkItems.CHURN.get())
+                .pattern(" S ")
+                .pattern("P P")
+                .pattern("PPP")
+                .define('P', ItemTags.PLANKS)
+                .define('S', Tags.Items.RODS_WOODEN)
+                .group(growthcraft.milk.config.Reference.MODID)
+                .unlockedBy("has_planks", has(ItemTags.PLANKS))
+                .save(output, ResourceLocation.fromNamespaceAndPath(
+                        growthcraft.milk.config.Reference.MODID,
+                        growthcraft.milk.config.Reference.UnlocalizedName.CHURN));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftMilkItems.MIXING_VAT.get())
+                .pattern("   ")
+                .pattern(" B ")
+                .pattern("I I")
+                .define('B', GrowthcraftCellarItems.BREW_KETTLE.get())
+                .define('I', ironIngots)
+                .group(growthcraft.milk.config.Reference.MODID)
+                .unlockedBy(getHasName(GrowthcraftCellarItems.BREW_KETTLE.get()), has(GrowthcraftCellarItems.BREW_KETTLE.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath(
+                        growthcraft.milk.config.Reference.MODID,
+                        growthcraft.milk.config.Reference.UnlocalizedName.MIXING_VAT));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftMilkItems.PANCHEON.get())
+                .pattern("C C")
+                .pattern("CCC")
+                .define('C', Items.CLAY_BALL)
+                .group(growthcraft.milk.config.Reference.MODID)
+                .unlockedBy(getHasName(Items.CLAY_BALL), has(Items.CLAY_BALL))
+                .save(output, ResourceLocation.fromNamespaceAndPath(
+                        growthcraft.milk.config.Reference.MODID,
+                        growthcraft.milk.config.Reference.UnlocalizedName.PANCHEON));
     }
 
     private static void addAppleWoodRecipes(RecipeOutput output) {
