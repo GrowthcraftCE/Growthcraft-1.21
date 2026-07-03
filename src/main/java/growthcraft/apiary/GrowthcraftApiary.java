@@ -3,6 +3,7 @@ package growthcraft.apiary;
 import com.mojang.logging.LogUtils;
 import growthcraft.apiary.config.Reference;
 import growthcraft.apiary.init.GrowthcraftApiaryBlocks;
+import growthcraft.apiary.init.GrowthcraftApiaryFluids;
 import growthcraft.apiary.init.GrowthcraftApiaryItems;
 import growthcraft.core.init.GrowthcraftCreativeTabs;
 import net.minecraft.world.item.CreativeModeTab;
@@ -19,6 +20,9 @@ public class GrowthcraftApiary {
     public GrowthcraftApiary(IEventBus modEventBus) {
         GrowthcraftApiaryBlocks.BLOCKS.register(modEventBus);
         GrowthcraftApiaryItems.ITEMS.register(modEventBus);
+        GrowthcraftApiaryFluids.FLUID_TYPES.register(modEventBus);
+        GrowthcraftApiaryFluids.FLUIDS.register(modEventBus);
+        GrowthcraftApiaryFluids.BLOCKS.register(modEventBus);
         modEventBus.addListener(this::buildCreativeTab);
 
         LOGGER.info("{} module initialized", Reference.NAME);
@@ -30,6 +34,9 @@ public class GrowthcraftApiary {
             GrowthcraftApiaryItems.BEE_BOX_ITEMS.forEach(item -> event.accept(item.get()));
             GrowthcraftApiaryItems.CANDLE_ITEMS.forEach(item -> event.accept(item.get()));
             GrowthcraftApiaryItems.SIMPLE_ITEMS.forEach(item -> event.accept(item.get()));
+            for (var container : GrowthcraftApiaryFluids.ALL) {
+                event.accept(container.bucket.get());
+            }
         }
     }
 }

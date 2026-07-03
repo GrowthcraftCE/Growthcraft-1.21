@@ -26,6 +26,12 @@
   "block.growthcraft_apiary.candle_red": "Candle (Red)",
   "block.growthcraft_apiary.candle_white": "Candle (White)",
   "block.growthcraft_apiary.candle_yellow": "Candle (Yellow)",
+  "fluid_type.growthcraft_apiary.honey": "Honey",
+  "fluid_type.growthcraft_apiary.honey_fluid": "Honey",
+  "fluid_type.growthcraft_apiary.honey_mead": "Honey Mead",
+  "fluid_type.growthcraft_apiary.honey_mead_fluid": "Honey Mead",
+  "fluid_type.growthcraft_apiary.honey_mead_must": "Honey Mead Must",
+  "fluid_type.growthcraft_apiary.honey_mead_must_fluid": "Honey Mead Must",
   "item.growthcraft_apiary.bee": "Bee",
   "item.growthcraft_apiary.bees_wax": "Beeswax",
   "item.growthcraft_apiary.bees_wax_black": "Beeswax (Black)",
@@ -45,5 +51,8 @@
   "item.growthcraft_apiary.bees_wax_white": "Beeswax (White)",
   "item.growthcraft_apiary.bees_wax_yellow": "Beeswax (Yellow)",
   "item.growthcraft_apiary.honey_comb_empty": "Empty Honey Comb",
-  "item.growthcraft_apiary.honey_comb_full": "Full Honey Comb"
+  "item.growthcraft_apiary.honey_comb_full": "Full Honey Comb",
+  "item.growthcraft_apiary.honey_fluid_bucket": "Honey Bucket",
+  "item.growthcraft_apiary.honey_mead_fluid_bucket": "Honey Mead Bucket",
+  "item.growthcraft_apiary.honey_mead_must_fluid_bucket": "Honey Mead Must Bucket"
 }

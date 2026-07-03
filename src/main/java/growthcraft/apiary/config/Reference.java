@@ -1,5 +1,7 @@
 package growthcraft.apiary.config;
 
+import growthcraft.lib.utils.ColorUtils;
+
 public class Reference {
     public static final String MODID = "growthcraft_apiary";
     public static final String NAME = "Growthcraft Apiary";
@@ -66,10 +68,22 @@ public class Reference {
         public static final String CANDLE_RED_WALL = "candle_red_wall";
         public static final String CANDLE_WHITE_WALL = "candle_white_wall";
         public static final String CANDLE_YELLOW_WALL = "candle_yellow_wall";
+        public static final String HONEY = "honey";
         public static final String HONEY_COMB_EMPTY = "honey_comb_empty";
         public static final String HONEY_COMB_FULL = "honey_comb_full";
+        public static final String HONEY_MEAD = "honey_mead";
+        public static final String HONEY_MEAD_MUST = "honey_mead_must";
 
         private UnlocalizedName() {
+        }
+    }
+
+    public static class FluidColor {
+        public static final ColorUtils.GrowthcraftColor HONEY = new ColorUtils.GrowthcraftColor(0xFFF5A61A);
+        public static final ColorUtils.GrowthcraftColor HONEY_MEAD = new ColorUtils.GrowthcraftColor(0xFFD79334);
+        public static final ColorUtils.GrowthcraftColor HONEY_MEAD_MUST = new ColorUtils.GrowthcraftColor(0xFFCD7A00);
+
+        private FluidColor() {
         }
     }
 
