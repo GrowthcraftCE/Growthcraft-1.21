@@ -312,6 +312,68 @@ def scanResourceIds = { String kind ->
     }.toSorted().toSet()
 }
 
+def readRecipeType = { File recipeFile ->
+    def json = new groovy.json.JsonSlurper().parse(recipeFile)
+    return json.type?.toString()
+}
+
+def scanRecipesWithTypes = {
+    def roots = [file('src/main/resources'), file('src/generated/resources')]
+    return roots.collectMany { root ->
+        if (!root.exists()) {
+            return []
+        }
+
+        return fileTree(root) {
+            include 'data/**/recipes/**/*.json'
+            include 'data/**/recipe/**/*.json'
+        }.collect { recipeFile ->
+            def relativePath = root.toPath().relativize(recipeFile.toPath()).toString()
+            def matcher = ~/^data[\\\/]([^\\\/]+)[\\\/]recipes?[\\\/](.+)\.json$/
+            def match = matcher.matcher(relativePath)
+            if (!match.matches()) {
+                return null
+            }
+
+            return [
+                    id  : "${match.group(1)}:${match.group(2).replace('\\', '/')}",
+                    type: readRecipeType(recipeFile),
+                    file: recipeFile
+            ]
+        }.findAll { it != null }
+    }.sort { a, b -> a.id <=> b.id }
+}
+
+def supportedCustomRecipeTypes = [
+        'growthcraft_cellar:culture_jar': 'Culture Jar recipe type and serializer are registered.'
+]
+
+def blockedCustomRecipeTypes = [
+        'growthcraft_apiary:brew_kettle_recipe'              : 'Brew Kettle runtime is not ported yet.',
+        'growthcraft_apiary:fermentation_barrel_recipe'      : 'Fermentation Barrel runtime is not ported yet.',
+        'growthcraft_apiary:fruit_press_recipe'              : 'Fruit Press runtime is not ported yet.',
+        'growthcraft_apples:fermentation_barrel_recipe'      : 'Fermentation Barrel runtime is not ported yet.',
+        'growthcraft_apples:fruit_press_recipe'              : 'Fruit Press runtime is not ported yet.',
+        'growthcraft_cellar:brew_kettle_recipe'              : 'Brew Kettle runtime is not ported yet.',
+        'growthcraft_cellar:culture_jar_recipe'              : 'Legacy Culture Jar recipe type needs migration to the registered 1.21 type.',
+        'growthcraft_cellar:culture_jar_starter_recipe'      : 'Legacy Culture Jar starter recipe type needs migration to the registered 1.21 type.',
+        'growthcraft_cellar:fermentation_barrel_recipe'      : 'Fermentation Barrel runtime is not ported yet.',
+        'growthcraft_cellar:fruit_press_recipe'              : 'Fruit Press runtime is not ported yet.',
+        'growthcraft_cellar:roaster_recipe'                  : 'Roaster runtime is not ported yet.',
+        'growthcraft_milk:brew_kettle_recipe'                : 'Brew Kettle runtime is not ported yet.',
+        'growthcraft_milk:cheese_press_recipe'               : 'Cheese Press runtime is not ported yet.',
+        'growthcraft_milk:churn_recipe'                      : 'Churn runtime is not ported yet.',
+        'growthcraft_milk:culture_jar_recipe'                : 'Legacy Culture Jar recipe type needs migration to the registered 1.21 type.',
+        'growthcraft_milk:culture_jar_starter_recipe'        : 'Legacy Culture Jar starter recipe type needs migration to the registered 1.21 type.',
+        'growthcraft_milk:mixing_vat_fluid_recipe'           : 'Mixing Vat runtime is not ported yet.',
+        'growthcraft_milk:mixing_vat_item_recipe'            : 'Mixing Vat runtime is not ported yet.',
+        'growthcraft_milk:pancheon_recipe'                   : 'Pancheon runtime is not ported yet.',
+        'growthcraft_rice:brew_kettle_recipe'                : 'Brew Kettle runtime is not ported yet.',
+        'growthcraft_rice:culture_jar_recipe'                : 'Legacy Culture Jar recipe type needs migration to the registered 1.21 type.',
+        'growthcraft_rice:culture_jar_starter_recipe'        : 'Legacy Culture Jar starter recipe type needs migration to the registered 1.21 type.',
+        'growthcraft_rice:fermentation_barrel_recipe'        : 'Fermentation Barrel runtime is not ported yet.'
+]
+
 tasks.register('migrationProgress') {
     group = 'verification'
     description = 'Reports current resource ID coverage against the Growthcraft 1.20 content target.'
@@ -351,6 +413,52 @@ tasks.register('migrationProgress') {
                 report.append('None.\n')
             } else {
                 missingIds.each { report.append("- `${it}`\n") }
+            }
+        }
+
+        def recipes = scanRecipesWithTypes()
+        def vanillaRecipes = recipes.findAll { it.type?.startsWith('minecraft:') }
+        def supportedCustomRecipes = recipes.findAll { supportedCustomRecipeTypes.containsKey(it.type) }
+        def blockedCustomRecipes = recipes.findAll { blockedCustomRecipeTypes.containsKey(it.type) }
+        def externalCustomRecipes = recipes.findAll {
+            it.type != null
+                    && !it.type.startsWith('minecraft:')
+                    && !it.type.startsWith('growthcraft')
+        }
+        def unknownCustomRecipes = recipes.findAll {
+            it.type != null
+                    && !it.type.startsWith('minecraft:')
+                    && it.type.startsWith('growthcraft')
+                    && !supportedCustomRecipeTypes.containsKey(it.type)
+                    && !blockedCustomRecipeTypes.containsKey(it.type)
+        }
+
+        report.append('\n## Recipe Runtime Status\n\n')
+        report.append('This separates resource presence from whether the current 1.21 runtime can load/process the recipe type.\n\n')
+        report.append('| Status | Recipes | Meaning |\n')
+        report.append('| --- | ---: | --- |\n')
+        report.append("| Vanilla | ${vanillaRecipes.size()} | Uses a Minecraft recipe type. |\n")
+        report.append("| Supported custom | ${supportedCustomRecipes.size()} | Custom type has current registered runtime support. |\n")
+        report.append("| Blocked custom | ${blockedCustomRecipes.size()} | Legacy/custom type is present but its machine/runtime is not ported yet. |\n")
+        report.append("| External integration | ${externalCustomRecipes.size()} | Uses another mod's recipe type and depends on that integration. |\n")
+        report.append("| Unknown Growthcraft custom | ${unknownCustomRecipes.size()} | Growthcraft custom type is not in the migration catalogue and needs triage. |\n")
+
+        def groupedBlocked = blockedCustomRecipes.groupBy { it.type }.toSorted { a, b -> a.key <=> b.key }
+        report.append('\n### Blocked Custom Recipe Types\n\n')
+        if (groupedBlocked.isEmpty()) {
+            report.append('None.\n')
+        } else {
+            groupedBlocked.each { type, entries ->
+                report.append("- `${type}` (${entries.size()}): ${blockedCustomRecipeTypes[type]}\n")
+            }
+        }
+
+        report.append('\n### Unknown Growthcraft Custom Recipe Types\n\n')
+        if (unknownCustomRecipes.isEmpty()) {
+            report.append('None.\n')
+        } else {
+            unknownCustomRecipes.each { recipe ->
+                report.append("- `${recipe.id}` uses `${recipe.type}`\n")
             }
         }
 
