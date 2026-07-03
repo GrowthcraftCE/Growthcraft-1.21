@@ -24,5 +24,13 @@ public final class GrowthcraftApiaryClient {
                 return IClientFluidTypeExtensions.of(container.source.get()).getTintColor();
             }, container.bucket.get());
         }
+        for (var wax : GrowthcraftApiaryFluids.WAXES) {
+            event.register((stack, tintIndex) -> {
+                if (tintIndex != 0) {
+                    return 0xFFFFFFFF;
+                }
+                return IClientFluidTypeExtensions.of(wax.source.get()).getTintColor();
+            }, wax.bucket.get());
+        }
     }
 }

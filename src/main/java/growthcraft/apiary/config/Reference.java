@@ -73,6 +73,22 @@ public class Reference {
         public static final String HONEY_COMB_FULL = "honey_comb_full";
         public static final String HONEY_MEAD = "honey_mead";
         public static final String HONEY_MEAD_MUST = "honey_mead_must";
+        public static final String WAX_BLACK = "wax_black";
+        public static final String WAX_BLUE = "wax_blue";
+        public static final String WAX_BROWN = "wax_brown";
+        public static final String WAX_CYAN = "wax_cyan";
+        public static final String WAX_GRAY = "wax_gray";
+        public static final String WAX_GREEN = "wax_green";
+        public static final String WAX_LIGHT_BLUE = "wax_light_blue";
+        public static final String WAX_LIGHT_GRAY = "wax_light_gray";
+        public static final String WAX_LIME = "wax_lime";
+        public static final String WAX_MAGENTA = "wax_magenta";
+        public static final String WAX_ORANGE = "wax_orange";
+        public static final String WAX_PINK = "wax_pink";
+        public static final String WAX_PURPLE = "wax_purple";
+        public static final String WAX_RED = "wax_red";
+        public static final String WAX_WHITE = "wax_white";
+        public static final String WAX_YELLOW = "wax_yellow";
 
         private UnlocalizedName() {
         }
@@ -82,6 +98,22 @@ public class Reference {
         public static final ColorUtils.GrowthcraftColor HONEY = new ColorUtils.GrowthcraftColor(0xFFF5A61A);
         public static final ColorUtils.GrowthcraftColor HONEY_MEAD = new ColorUtils.GrowthcraftColor(0xFFD79334);
         public static final ColorUtils.GrowthcraftColor HONEY_MEAD_MUST = new ColorUtils.GrowthcraftColor(0xFFCD7A00);
+        public static final ColorUtils.GrowthcraftColor WAX_BLACK = new ColorUtils.GrowthcraftColor(0xFF232323);
+        public static final ColorUtils.GrowthcraftColor WAX_BLUE = new ColorUtils.GrowthcraftColor(0xFF0000FF);
+        public static final ColorUtils.GrowthcraftColor WAX_BROWN = new ColorUtils.GrowthcraftColor(0xFF964B00);
+        public static final ColorUtils.GrowthcraftColor WAX_CYAN = new ColorUtils.GrowthcraftColor(0xFF00B7EB);
+        public static final ColorUtils.GrowthcraftColor WAX_GRAY = new ColorUtils.GrowthcraftColor(0xFF808080);
+        public static final ColorUtils.GrowthcraftColor WAX_GREEN = new ColorUtils.GrowthcraftColor(0xFF00FF00);
+        public static final ColorUtils.GrowthcraftColor WAX_LIGHT_BLUE = new ColorUtils.GrowthcraftColor(0xFFADD8E6);
+        public static final ColorUtils.GrowthcraftColor WAX_LIGHT_GRAY = new ColorUtils.GrowthcraftColor(0xFFD3D3D3);
+        public static final ColorUtils.GrowthcraftColor WAX_LIME = new ColorUtils.GrowthcraftColor(0xFF32CD32);
+        public static final ColorUtils.GrowthcraftColor WAX_MAGENTA = new ColorUtils.GrowthcraftColor(0xFFFF00FF);
+        public static final ColorUtils.GrowthcraftColor WAX_ORANGE = new ColorUtils.GrowthcraftColor(0xFFFFA500);
+        public static final ColorUtils.GrowthcraftColor WAX_PINK = new ColorUtils.GrowthcraftColor(0xFFFFC0CB);
+        public static final ColorUtils.GrowthcraftColor WAX_PURPLE = new ColorUtils.GrowthcraftColor(0xFF6A0DAD);
+        public static final ColorUtils.GrowthcraftColor WAX_RED = new ColorUtils.GrowthcraftColor(0xFFFF0000);
+        public static final ColorUtils.GrowthcraftColor WAX_WHITE = new ColorUtils.GrowthcraftColor(0xFFF8F0E3);
+        public static final ColorUtils.GrowthcraftColor WAX_YELLOW = new ColorUtils.GrowthcraftColor(0xFFFFFF00);
 
         private FluidColor() {
         }

@@ -37,6 +37,9 @@ public class GrowthcraftApiary {
             for (var container : GrowthcraftApiaryFluids.ALL) {
                 event.accept(container.bucket.get());
             }
+            for (var wax : GrowthcraftApiaryFluids.WAXES) {
+                event.accept(wax.bucket.get());
+            }
         }
     }
 }
