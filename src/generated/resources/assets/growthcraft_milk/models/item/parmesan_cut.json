@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "growthcraft_milk:item/cheese/parmesan_cut"
+  }
+}
