@@ -100,6 +100,11 @@ public final class Reference {
             // Cultures
             public static final String STARTER_CULTURE = "starter_culture";
 
+            // Serving containers
+            public static final String POTION_ALE = "potion_ale";
+            public static final String POTION_LAGER = "potion_lager";
+            public static final String POTION_WINE = "potion_wine";
+
             // Fluid Buckets (match item model names)
             public static final String AMBER_ALE_FLUID_BUCKET = "amber_ale_fluid_bucket";
             public static final String AMBER_LAGER_FLUID_BUCKET = "amber_lager_fluid_bucket";
@@ -164,6 +169,8 @@ public final class Reference {
             public static final String PURPLE_GRAPE_WINE = "purple_grape_wine";
             public static final String RED_GRAPE_JUICE = "red_grape_juice";
             public static final String RED_GRAPE_WINE = "red_grape_wine";
+            public static final String STOUT_ALE = "stout_ale";
+            public static final String VIENNA_LAGER = "vienna_lager";
             public static final String WHITE_GRAPE_JUICE = "white_grape_juice";
             public static final String WHITE_GRAPE_WINE = "white_grape_wine";
             public static final String WORT = "wort";

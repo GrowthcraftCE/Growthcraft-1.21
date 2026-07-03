@@ -58,6 +58,10 @@ public class GrowthcraftCellarItems {
     // Cultures
     public static final DeferredItem<Item> STARTER_CULTURE = ITEMS.register(Reference.UnlocalizedName.Item.STARTER_CULTURE, () -> new Item(new Item.Properties()));
 
+    // Serving containers used by Fermentation Barrel recipes.
+    public static final DeferredItem<Item> POTION_ALE = ITEMS.register(Reference.UnlocalizedName.Item.POTION_ALE, () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> POTION_LAGER = ITEMS.register(Reference.UnlocalizedName.Item.POTION_LAGER, () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> POTION_WINE = ITEMS.register(Reference.UnlocalizedName.Item.POTION_WINE, () -> new Item(new Item.Properties()));
 
     private GrowthcraftCellarItems() {}
 }

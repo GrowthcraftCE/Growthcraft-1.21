@@ -50,6 +50,8 @@ public class GrowthcraftCellarFluids {
     public static final FluidRegistryContainer PURPLE_GRAPE_WINE = register(Reference.UnlocalizedName.Fluid.PURPLE_GRAPE_WINE, Reference.FluidColor.PURPLE_GRAPE_WINE);
     public static final FluidRegistryContainer RED_GRAPE_JUICE = register(Reference.UnlocalizedName.Fluid.RED_GRAPE_JUICE, Reference.FluidColor.RED_GRAPE_JUICE);
     public static final FluidRegistryContainer RED_GRAPE_WINE = register(Reference.UnlocalizedName.Fluid.RED_GRAPE_WINE, Reference.FluidColor.RED_GRAPE_WINE);
+    public static final FluidRegistryContainer STOUT_ALE = register(Reference.UnlocalizedName.Fluid.STOUT_ALE, Reference.FluidColor.STOUT_ALE);
+    public static final FluidRegistryContainer VIENNA_LAGER = register(Reference.UnlocalizedName.Fluid.VIENNA_LAGER, Reference.FluidColor.VIENNA_LAGER);
     public static final FluidRegistryContainer WHITE_GRAPE_JUICE = register(Reference.UnlocalizedName.Fluid.WHITE_GRAPE_JUICE, Reference.FluidColor.WHITE_GRAPE_JUICE);
     public static final FluidRegistryContainer WHITE_GRAPE_WINE = register(Reference.UnlocalizedName.Fluid.WHITE_GRAPE_WINE, Reference.FluidColor.WHITE_GRAPE_WINE);
     public static final FluidRegistryContainer WORT = register(Reference.UnlocalizedName.Fluid.WORT, Reference.FluidColor.WORT);
@@ -70,7 +72,7 @@ public class GrowthcraftCellarFluids {
              IPA_ALE, OLD_PORT_ALE, PALE_ALE,
              PALE_GOLDEN_WORT, PALE_LAGER, PILSNER_LAGER,
              PURPLE_GRAPE_JUICE, PURPLE_GRAPE_WINE,
-             RED_GRAPE_JUICE, RED_GRAPE_WINE,
+             RED_GRAPE_JUICE, RED_GRAPE_WINE, STOUT_ALE, VIENNA_LAGER,
              WHITE_GRAPE_JUICE, WHITE_GRAPE_WINE,
              WORT,
              POTION_ALE, POTION_LAGER, POTION_WINE
