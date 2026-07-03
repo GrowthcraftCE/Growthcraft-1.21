@@ -427,9 +427,20 @@ def scanRegisteredGrowthcraftIds = {
                 }
             }
 
-            def fluidRegisterMatcher = (line =~ /FluidRegistryContainer\s+[A-Z0-9_]+\s*=\s*register\(([^,]+),/)
+            def fluidRegisterMatcher = (line =~ /FluidRegistryContainer\s+[A-Z0-9_]+\s*=\s*register(?:Fluid)?\(([^,]+),/)
             if (fluidRegisterMatcher.find()) {
                 def path = resolveRegistrationPath(fluidRegisterMatcher.group(1), namespace, constantsByNamespace)
+                if (path != null) {
+                    registeredFluids.add("${namespace}:${path}_fluid_source".toString())
+                    registeredFluids.add("${namespace}:${path}_fluid_flowing".toString())
+                    registeredBlocks.add("${namespace}:${path}_fluid".toString())
+                    registeredItems.add("${namespace}:${path}_fluid_bucket".toString())
+                }
+            }
+
+            def delegatedFluidRegisterMatcher = (line =~ /FluidRegistryContainer\s+\w+\s*=\s*registerFluid\(([^,]+),/)
+            if (delegatedFluidRegisterMatcher.find()) {
+                def path = resolveRegistrationPath(delegatedFluidRegisterMatcher.group(1), namespace, constantsByNamespace)
                 if (path != null) {
                     registeredFluids.add("${namespace}:${path}_fluid_source".toString())
                     registeredFluids.add("${namespace}:${path}_fluid_flowing".toString())

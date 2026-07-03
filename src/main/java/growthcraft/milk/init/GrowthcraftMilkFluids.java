@@ -2,6 +2,7 @@ package growthcraft.milk.init;
 
 import growthcraft.lib.client.ClientFluidTypeExtensions;
 import growthcraft.lib.fluid.FluidRegistryContainer;
+import growthcraft.lib.utils.ColorUtils;
 import growthcraft.milk.config.Reference;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Item;
@@ -26,17 +27,35 @@ public final class GrowthcraftMilkFluids {
     public static final DeferredRegister<Item> ITEMS = GrowthcraftMilkItems.ITEMS;
 
     public static final FluidRegistryContainer MILK = registerMilk();
-    // Additional variant bucket items are registered in GrowthcraftMilkItems to control empty returns.
+    public static final FluidRegistryContainer BUTTER_MILK = registerFluid(Reference.UnlocalizedName.BUTTER_MILK, Reference.FluidColor.BUTTER_MILK);
+    public static final FluidRegistryContainer CREAM = registerFluid(Reference.UnlocalizedName.CREAM, Reference.FluidColor.CREAM);
+    public static final FluidRegistryContainer CULTURED_MILK = registerFluid(Reference.UnlocalizedName.CULTURED_MILK, Reference.FluidColor.CULTURED_MILK);
+    public static final FluidRegistryContainer RENNET = registerFluid(Reference.UnlocalizedName.RENNET, Reference.FluidColor.RENNET);
+    public static final FluidRegistryContainer SKIM_MILK = registerFluid(Reference.UnlocalizedName.SKIM_MILK, Reference.FluidColor.SKIM_MILK);
+    public static final FluidRegistryContainer WHEY = registerFluid(Reference.UnlocalizedName.WHEY, Reference.FluidColor.WHEY);
+
+    public static final FluidRegistryContainer[] ALL = new FluidRegistryContainer[] {
+            MILK, BUTTER_MILK, CREAM, CULTURED_MILK, RENNET, SKIM_MILK, WHEY
+    };
 
     private static FluidRegistryContainer registerMilk() {
-        String name = "milk";
-        // Basic type properties
-        FluidType.Properties typeProps = FluidType.Properties.create().canDrown(false).lightLevel(0);
+        FluidRegistryContainer container = registerFluid(Reference.UnlocalizedName.MILK, Reference.FluidColor.MILK, false);
+        // Tie the milk fluid to our custom milk bucket item so vanilla empty buckets can be filled from tanks/blocks.
+        container.getProperties().bucket(() -> growthcraft.milk.init.GrowthcraftMilkItems.MILK_BUCKET_IRON.get());
+        return container;
+    }
 
-        // Client visuals: milk textures expected at assets/growthcraft_milk/block/fluid/milk_*
-        int whiteTint = 0xFFFFFFFF;
+    private static FluidRegistryContainer registerFluid(String name, ColorUtils.GrowthcraftColor color) {
+        return registerFluid(name, color, true);
+    }
+
+    private static FluidRegistryContainer registerFluid(String name, ColorUtils.GrowthcraftColor color, boolean registerBucket) {
+        FluidType.Properties typeProps = FluidType.Properties.create()
+                .canDrown(false)
+                .lightLevel(0);
+
         ClientFluidTypeExtensions client = new ClientFluidTypeExtensions(Reference.MODID, name)
-                .tint(whiteTint);
+                .tint(color);
 
         BlockBehaviour.Properties blockProps = BlockBehaviour.Properties.of()
                 .replaceable()
@@ -48,12 +67,21 @@ public final class GrowthcraftMilkFluids {
                 .sound(net.minecraft.world.level.block.SoundType.EMPTY);
 
         Item.Properties itemProps = new Item.Properties().stacksTo(1);
+        FluidRegistryContainer.AdditionalProperties additionalProperties =
+                new FluidRegistryContainer.AdditionalProperties()
+                        .tickRate(5)
+                        .slopeFindDistance(4)
+                        .levelDecreasePerBlock(1)
+                        .explosionResistance(100f);
+        if (!registerBucket) {
+            additionalProperties.noBucket();
+        }
 
-        FluidRegistryContainer container = new FluidRegistryContainer(
+        return new FluidRegistryContainer(
                 name,
                 typeProps,
                 () -> FluidRegistryContainer.createExtension(client),
-                new FluidRegistryContainer.AdditionalProperties().tickRate(5).slopeFindDistance(4).levelDecreasePerBlock(1).explosionResistance(100f).noBucket(),
+                additionalProperties,
                 blockProps,
                 itemProps,
                 FLUIDS,
@@ -61,8 +89,5 @@ public final class GrowthcraftMilkFluids {
                 BLOCKS,
                 ITEMS
         );
-        // Tie the milk fluid to our custom milk bucket item so vanilla empty buckets can be filled from tanks/blocks
-        container.getProperties().bucket(() -> growthcraft.milk.init.GrowthcraftMilkItems.MILK_BUCKET_IRON.get());
-        return container;
     }
 }
