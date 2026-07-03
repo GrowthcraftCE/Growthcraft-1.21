@@ -4,6 +4,7 @@ import com.mojang.logging.LogUtils;
 import growthcraft.core.init.GrowthcraftCreativeTabs;
 import growthcraft.milk.config.GrowthcraftMilkConfig;
 import growthcraft.milk.config.Reference;
+import growthcraft.milk.init.GrowthcraftMilkBlocks;
 import growthcraft.milk.init.GrowthcraftMilkFluids;
 import growthcraft.milk.init.GrowthcraftMilkItems;
 import net.minecraft.world.item.CreativeModeTab;
@@ -32,6 +33,7 @@ public class GrowthcraftMilk {
         modEventBus.addListener(this::commonSetup);
 
         // Register all Milk module registries
+        GrowthcraftMilkBlocks.BLOCKS.register(modEventBus);
         GrowthcraftMilkItems.ITEMS.register(modEventBus);
         GrowthcraftMilkFluids.FLUID_TYPES.register(modEventBus);
         GrowthcraftMilkFluids.FLUIDS.register(modEventBus);
@@ -63,6 +65,7 @@ public class GrowthcraftMilk {
             event.accept(GrowthcraftMilkItems.STARTER_CULTURE.get());
             event.accept(GrowthcraftMilkItems.STOMACH.get());
             event.accept(GrowthcraftMilkItems.THISTLE.get());
+            event.accept(GrowthcraftMilkItems.THISTLE_SEED.get());
 
             // Tools
             event.accept(GrowthcraftMilkItems.MILKING_BUCKET_IRON.get());

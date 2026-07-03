@@ -4,6 +4,7 @@ import growthcraft.milk.config.Reference;
 import growthcraft.milk.item.GrowthcraftMilkBucketItem;
 import growthcraft.milk.item.MilkingBucketItem;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.item.ItemNameBlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -26,6 +27,10 @@ public final class GrowthcraftMilkItems {
             ITEMS.register(Reference.UnlocalizedName.STOMACH, () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> THISTLE =
             ITEMS.register(Reference.UnlocalizedName.THISTLE, () -> new Item(new Item.Properties()));
+    public static final DeferredHolder<Item, ItemNameBlockItem> THISTLE_SEED =
+            ITEMS.register(Reference.UnlocalizedName.THISTLE_SEED, () -> new ItemNameBlockItem(
+                    GrowthcraftMilkBlocks.THISTLE_CROP.get(),
+                    new Item.Properties()));
 
     // The reusable milking bucket tools (empty). Different materials may have different textures/recipes.
     public static final DeferredHolder<Item, MilkingBucketItem> MILKING_BUCKET_IRON =
