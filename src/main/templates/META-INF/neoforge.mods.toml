@@ -202,3 +202,32 @@ description='''Growthcraft Bamboo adds bamboo building components and related pr
     versionRange="[${mod_version},)"
     ordering="AFTER"
     side="BOTH"
+
+
+[[mods]]
+modId="growthcraft_apples"
+version="${mod_version}"
+displayName="Growthcraft Apples"
+authors="${mod_authors}"
+description='''Growthcraft Apples adds apple wood building blocks and apple processing.'''
+
+[[dependencies.growthcraft_apples]]
+    modId="neoforge"
+    type="required"
+    versionRange="[${neo_version},)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.growthcraft_apples]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.growthcraft_apples]]
+    modId="growthcraft"
+    type="required"
+    versionRange="[${mod_version},)"
+    ordering="AFTER"
+    side="BOTH"

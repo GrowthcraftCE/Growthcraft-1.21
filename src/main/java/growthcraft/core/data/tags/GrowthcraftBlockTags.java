@@ -1,6 +1,7 @@
 package growthcraft.core.data.tags;
 
 import growthcraft.bamboo.init.GrowthcraftBambooBlocks;
+import growthcraft.apples.init.GrowthcraftApplesBlocks;
 import growthcraft.core.config.Reference;
 import growthcraft.core.init.GrowthcraftBlocks;
 import net.minecraft.core.HolderLookup;
@@ -30,6 +31,19 @@ public class GrowthcraftBlockTags extends BlockTagsProvider {
 
         this.tag(BlockTags.MINEABLE_WITH_AXE)
                 .add(
+                        GrowthcraftApplesBlocks.APPLE_PLANK.get(),
+                        GrowthcraftApplesBlocks.APPLE_PLANK_BUTTON.get(),
+                        GrowthcraftApplesBlocks.APPLE_PLANK_DOOR.get(),
+                        GrowthcraftApplesBlocks.APPLE_PLANK_FENCE.get(),
+                        GrowthcraftApplesBlocks.APPLE_PLANK_FENCE_GATE.get(),
+                        GrowthcraftApplesBlocks.APPLE_PLANK_PRESSURE_PLATE.get(),
+                        GrowthcraftApplesBlocks.APPLE_PLANK_SLAB.get(),
+                        GrowthcraftApplesBlocks.APPLE_PLANK_STAIRS.get(),
+                        GrowthcraftApplesBlocks.APPLE_PLANK_TRAPDOOR.get(),
+                        GrowthcraftApplesBlocks.APPLE_WOOD.get(),
+                        GrowthcraftApplesBlocks.APPLE_WOOD_LOG.get(),
+                        GrowthcraftApplesBlocks.APPLE_WOOD_LOG_STRIPPED.get(),
+                        GrowthcraftApplesBlocks.APPLE_WOOD_STRIPPED.get(),
                         GrowthcraftBambooBlocks.BAMBOO_POST_VERTICAL.get(),
                         GrowthcraftBambooBlocks.BAMBOO_POST_HORIZONTAL.get()
                 );

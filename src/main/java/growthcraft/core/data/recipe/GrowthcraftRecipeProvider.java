@@ -2,6 +2,7 @@ package growthcraft.core.data.recipe;
 
 import growthcraft.core.config.ConfigValueCondition;
 import growthcraft.core.config.Reference;
+import growthcraft.apples.init.GrowthcraftApplesItems;
 import growthcraft.bamboo.init.GrowthcraftBambooItems;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.core.init.GrowthcraftItems;
@@ -148,6 +149,8 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
 
         addCellarGrainRecipes(output);
 
+        addAppleWoodRecipes(output);
+
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GrowthcraftBambooItems.BAMBOO_POST_VERTICAL.get(), 2)
                 .pattern("B")
                 .pattern("B")
@@ -158,6 +161,86 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
                 .save(output, ResourceLocation.fromNamespaceAndPath(
                         growthcraft.bamboo.config.Reference.MODID,
                         growthcraft.bamboo.config.Reference.UnlocalizedName.Block.BAMBOO_POST_VERTICAL));
+    }
+
+    private static void addAppleWoodRecipes(RecipeOutput output) {
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, GrowthcraftApplesItems.APPLE_PLANK.get(), 4)
+                .requires(GrowthcraftApplesItems.APPLE_WOOD_LOG.get())
+                .group(growthcraft.apples.config.Reference.MODID)
+                .unlockedBy(getHasName(GrowthcraftApplesItems.APPLE_WOOD_LOG.get()), has(GrowthcraftApplesItems.APPLE_WOOD_LOG.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.apples.config.Reference.MODID, growthcraft.apples.config.Reference.UnlocalizedName.Block.APPLE_PLANK));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, GrowthcraftApplesItems.APPLE_PLANK_BUTTON.get())
+                .requires(GrowthcraftApplesItems.APPLE_PLANK.get())
+                .group("wooden_button")
+                .unlockedBy(getHasName(GrowthcraftApplesItems.APPLE_PLANK.get()), has(GrowthcraftApplesItems.APPLE_PLANK.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.apples.config.Reference.MODID, growthcraft.apples.config.Reference.UnlocalizedName.Block.APPLE_PLANK_BUTTON));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GrowthcraftApplesItems.APPLE_PLANK_DOOR.get(), 3)
+                .pattern("##")
+                .pattern("##")
+                .pattern("##")
+                .define('#', GrowthcraftApplesItems.APPLE_PLANK.get())
+                .group(growthcraft.apples.config.Reference.MODID)
+                .unlockedBy(getHasName(GrowthcraftApplesItems.APPLE_PLANK.get()), has(GrowthcraftApplesItems.APPLE_PLANK.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.apples.config.Reference.MODID, growthcraft.apples.config.Reference.UnlocalizedName.Block.APPLE_PLANK_DOOR));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GrowthcraftApplesItems.APPLE_PLANK_FENCE.get(), 3)
+                .pattern("212")
+                .pattern("212")
+                .define('1', Items.STICK)
+                .define('2', GrowthcraftApplesItems.APPLE_PLANK.get())
+                .group(growthcraft.apples.config.Reference.MODID)
+                .unlockedBy(getHasName(GrowthcraftApplesItems.APPLE_PLANK.get()), has(GrowthcraftApplesItems.APPLE_PLANK.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.apples.config.Reference.MODID, growthcraft.apples.config.Reference.UnlocalizedName.Block.APPLE_PLANK_FENCE));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GrowthcraftApplesItems.APPLE_PLANK_FENCE_GATE.get(), 3)
+                .pattern("121")
+                .pattern("121")
+                .define('1', Items.STICK)
+                .define('2', GrowthcraftApplesItems.APPLE_PLANK.get())
+                .group(growthcraft.apples.config.Reference.MODID)
+                .unlockedBy(getHasName(GrowthcraftApplesItems.APPLE_PLANK.get()), has(GrowthcraftApplesItems.APPLE_PLANK.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.apples.config.Reference.MODID, growthcraft.apples.config.Reference.UnlocalizedName.Block.APPLE_PLANK_FENCE_GATE));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GrowthcraftApplesItems.APPLE_PLANK_PRESSURE_PLATE.get())
+                .pattern("##")
+                .define('#', GrowthcraftApplesItems.APPLE_PLANK.get())
+                .group(growthcraft.apples.config.Reference.MODID)
+                .unlockedBy(getHasName(GrowthcraftApplesItems.APPLE_PLANK.get()), has(GrowthcraftApplesItems.APPLE_PLANK.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.apples.config.Reference.MODID, growthcraft.apples.config.Reference.UnlocalizedName.Block.APPLE_PLANK_PRESSURE_PLATE));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GrowthcraftApplesItems.APPLE_PLANK_SLAB.get(), 6)
+                .pattern("###")
+                .define('#', GrowthcraftApplesItems.APPLE_PLANK.get())
+                .group(growthcraft.apples.config.Reference.MODID)
+                .unlockedBy(getHasName(GrowthcraftApplesItems.APPLE_PLANK.get()), has(GrowthcraftApplesItems.APPLE_PLANK.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.apples.config.Reference.MODID, growthcraft.apples.config.Reference.UnlocalizedName.Block.APPLE_PLANK_SLAB));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GrowthcraftApplesItems.APPLE_PLANK_STAIRS.get(), 4)
+                .pattern("#  ")
+                .pattern("## ")
+                .pattern("###")
+                .define('#', GrowthcraftApplesItems.APPLE_PLANK.get())
+                .group(growthcraft.apples.config.Reference.MODID)
+                .unlockedBy(getHasName(GrowthcraftApplesItems.APPLE_PLANK.get()), has(GrowthcraftApplesItems.APPLE_PLANK.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.apples.config.Reference.MODID, growthcraft.apples.config.Reference.UnlocalizedName.Block.APPLE_PLANK_STAIRS));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GrowthcraftApplesItems.APPLE_PLANK_TRAPDOOR.get())
+                .pattern("###")
+                .pattern("###")
+                .define('#', GrowthcraftApplesItems.APPLE_PLANK.get())
+                .group(growthcraft.apples.config.Reference.MODID)
+                .unlockedBy(getHasName(GrowthcraftApplesItems.APPLE_PLANK.get()), has(GrowthcraftApplesItems.APPLE_PLANK.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.apples.config.Reference.MODID, growthcraft.apples.config.Reference.UnlocalizedName.Block.APPLE_PLANK_TRAPDOOR));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GrowthcraftApplesItems.APPLE_WOOD.get(), 3)
+                .pattern("##")
+                .pattern("##")
+                .define('#', GrowthcraftApplesItems.APPLE_WOOD_LOG.get())
+                .group(growthcraft.apples.config.Reference.MODID)
+                .unlockedBy(getHasName(GrowthcraftApplesItems.APPLE_WOOD_LOG.get()), has(GrowthcraftApplesItems.APPLE_WOOD_LOG.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.apples.config.Reference.MODID, growthcraft.apples.config.Reference.UnlocalizedName.Block.APPLE_WOOD));
     }
 
     private static void addMilkIngredientRecipes(RecipeOutput output) {

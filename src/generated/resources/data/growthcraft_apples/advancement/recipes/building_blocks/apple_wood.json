@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_apple_wood_log": {
+      "conditions": {
+        "items": [
+          {
+            "items": "growthcraft_apples:apple_wood_log"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "growthcraft_apples:apple_wood"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_apple_wood_log"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "growthcraft_apples:apple_wood"
+    ]
+  }
+}
