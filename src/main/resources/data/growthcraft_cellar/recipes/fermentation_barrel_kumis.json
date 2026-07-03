@@ -15,7 +15,7 @@
     "amount": 1000
   },
   "result": {
-    "fluid": "growthcraft_cellar:kumis_fluid_source",
+    "fluid": "growthcraft_milk:kumis_fluid_source",
     "amount": 1000
   },
   "effects": [

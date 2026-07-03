@@ -30,12 +30,13 @@ public final class GrowthcraftMilkFluids {
     public static final FluidRegistryContainer BUTTER_MILK = registerFluid(Reference.UnlocalizedName.BUTTER_MILK, Reference.FluidColor.BUTTER_MILK);
     public static final FluidRegistryContainer CREAM = registerFluid(Reference.UnlocalizedName.CREAM, Reference.FluidColor.CREAM);
     public static final FluidRegistryContainer CULTURED_MILK = registerFluid(Reference.UnlocalizedName.CULTURED_MILK, Reference.FluidColor.CULTURED_MILK);
+    public static final FluidRegistryContainer KUMIS = registerFluid(Reference.UnlocalizedName.KUMIS, Reference.FluidColor.KUMIS);
     public static final FluidRegistryContainer RENNET = registerFluid(Reference.UnlocalizedName.RENNET, Reference.FluidColor.RENNET);
     public static final FluidRegistryContainer SKIM_MILK = registerFluid(Reference.UnlocalizedName.SKIM_MILK, Reference.FluidColor.SKIM_MILK);
     public static final FluidRegistryContainer WHEY = registerFluid(Reference.UnlocalizedName.WHEY, Reference.FluidColor.WHEY);
 
     public static final FluidRegistryContainer[] ALL = new FluidRegistryContainer[] {
-            MILK, BUTTER_MILK, CREAM, CULTURED_MILK, RENNET, SKIM_MILK, WHEY
+            MILK, BUTTER_MILK, CREAM, CULTURED_MILK, KUMIS, RENNET, SKIM_MILK, WHEY
     };
 
     private static FluidRegistryContainer registerMilk() {
