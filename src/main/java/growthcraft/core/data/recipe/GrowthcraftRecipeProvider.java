@@ -4,6 +4,8 @@ import growthcraft.core.config.ConfigValueCondition;
 import growthcraft.core.config.Reference;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.core.init.GrowthcraftItems;
+import growthcraft.milk.init.GrowthcraftMilkItems;
+import growthcraft.milk.init.GrowthcraftMilkTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -109,7 +111,7 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
 
         // --- Milk module recipes ---
         // Iron Milking Bucket
-        net.minecraft.data.recipes.ShapedRecipeBuilder.shaped(RecipeCategory.MISC, growthcraft.milk.init.GrowthcraftMilkItems.MILKING_BUCKET_IRON.get())
+        net.minecraft.data.recipes.ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftMilkItems.MILKING_BUCKET_IRON.get())
                 .pattern("NNN")
                 .pattern("I I")
                 .pattern(" I ")
@@ -119,6 +121,7 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
                 .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.milk.config.Reference.MODID, "milking_bucket_iron"));
 
         addMilkIngredientRecipes(output);
+        addMilkBowlFoodRecipes(output);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftCellarItems.CULTURE_JAR.get())
                 .pattern("BAB")
@@ -148,13 +151,13 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
     private static void addMilkIngredientRecipes(RecipeOutput output) {
         TagKey<Item> salt = itemTag("c", "dusts/salt");
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, growthcraft.milk.init.GrowthcraftMilkItems.THISTLE_SEED.get(), 2)
-                .requires(growthcraft.milk.init.GrowthcraftMilkItems.THISTLE.get())
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, GrowthcraftMilkItems.THISTLE_SEED.get(), 2)
+                .requires(GrowthcraftMilkItems.THISTLE.get())
                 .group("growthcraft_milk")
-                .unlockedBy(getHasName(growthcraft.milk.init.GrowthcraftMilkItems.THISTLE.get()), has(growthcraft.milk.init.GrowthcraftMilkItems.THISTLE.get()))
+                .unlockedBy(getHasName(GrowthcraftMilkItems.THISTLE.get()), has(GrowthcraftMilkItems.THISTLE.get()))
                 .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.milk.config.Reference.MODID, growthcraft.milk.config.Reference.UnlocalizedName.THISTLE_SEED));
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, growthcraft.milk.init.GrowthcraftMilkItems.CHEESE_CLOTH.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftMilkItems.CHEESE_CLOTH.get())
                 .pattern("sss")
                 .pattern("s s")
                 .pattern("sss")
@@ -163,13 +166,58 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(Items.STRING), has(Items.STRING))
                 .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.milk.config.Reference.MODID, growthcraft.milk.config.Reference.UnlocalizedName.CHEESE_CLOTH));
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, growthcraft.milk.init.GrowthcraftMilkItems.BUTTER_SALTED.get())
-                .requires(growthcraft.milk.init.GrowthcraftMilkItems.BUTTER.get())
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftMilkItems.BUTTER_SALTED.get())
+                .requires(GrowthcraftMilkItems.BUTTER.get())
                 .requires(salt)
                 .group("growthcraft_milk")
-                .unlockedBy(getHasName(growthcraft.milk.init.GrowthcraftMilkItems.BUTTER.get()), has(growthcraft.milk.init.GrowthcraftMilkItems.BUTTER.get()))
+                .unlockedBy(getHasName(GrowthcraftMilkItems.BUTTER.get()), has(GrowthcraftMilkItems.BUTTER.get()))
                 .unlockedBy("has_salt", has(salt))
                 .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.milk.config.Reference.MODID, growthcraft.milk.config.Reference.UnlocalizedName.BUTTER_SALTED));
+    }
+
+    private static void addMilkBowlFoodRecipes(RecipeOutput output) {
+        addIceCreamRecipe(output, GrowthcraftMilkItems.ICE_CREAM_APPLE.get(), Items.APPLE, growthcraft.milk.config.Reference.UnlocalizedName.ICE_CREAM_APPLE);
+        addIceCreamRecipe(output, GrowthcraftMilkItems.ICE_CREAM_CHOCOLATE.get(), Items.COCOA_BEANS, growthcraft.milk.config.Reference.UnlocalizedName.ICE_CREAM_CHOCOLATE);
+        addIceCreamRecipe(output, GrowthcraftMilkItems.ICE_CREAM_GRAPE_PURPLE.get(), GrowthcraftCellarItems.GRAPE_PURPLE.get(), growthcraft.milk.config.Reference.UnlocalizedName.ICE_CREAM_GRAPE_PURPLE);
+        addIceCreamRecipe(output, GrowthcraftMilkItems.ICE_CREAM_GRAPE_RED.get(), GrowthcraftCellarItems.GRAPE_RED.get(), growthcraft.milk.config.Reference.UnlocalizedName.ICE_CREAM_GRAPE_RED);
+        addIceCreamRecipe(output, GrowthcraftMilkItems.ICE_CREAM_GRAPE_WHITE.get(), GrowthcraftCellarItems.GRAPE_WHITE.get(), growthcraft.milk.config.Reference.UnlocalizedName.ICE_CREAM_GRAPE_WHITE);
+        addIceCreamRecipe(output, GrowthcraftMilkItems.ICE_CREAM_HONEY.get(), Items.HONEYCOMB, growthcraft.milk.config.Reference.UnlocalizedName.ICE_CREAM_HONEY);
+        addIceCreamRecipe(output, GrowthcraftMilkItems.ICE_CREAM_PUMPKIN.get(), Items.PUMPKIN, growthcraft.milk.config.Reference.UnlocalizedName.ICE_CREAM_PUMPKIN);
+        addIceCreamRecipe(output, GrowthcraftMilkItems.ICE_CREAM_WATERMELON.get(), Items.MELON_SLICE, growthcraft.milk.config.Reference.UnlocalizedName.ICE_CREAM_WATERMELON);
+
+        addYogurtRecipe(output, GrowthcraftMilkItems.YOGURT_APPLE.get(), Items.APPLE, growthcraft.milk.config.Reference.UnlocalizedName.YOGURT_APPLE);
+        addYogurtRecipe(output, GrowthcraftMilkItems.YOGURT_CHOCOLATE.get(), Items.COCOA_BEANS, growthcraft.milk.config.Reference.UnlocalizedName.YOGURT_CHOCOLATE);
+        addYogurtRecipe(output, GrowthcraftMilkItems.YOGURT_GRAPE_PURPLE.get(), GrowthcraftCellarItems.GRAPE_PURPLE.get(), growthcraft.milk.config.Reference.UnlocalizedName.YOGURT_GRAPE_PURPLE);
+        addYogurtRecipe(output, GrowthcraftMilkItems.YOGURT_GRAPE_RED.get(), GrowthcraftCellarItems.GRAPE_RED.get(), growthcraft.milk.config.Reference.UnlocalizedName.YOGURT_GRAPE_RED);
+        addYogurtRecipe(output, GrowthcraftMilkItems.YOGURT_GRAPE_WHITE.get(), GrowthcraftCellarItems.GRAPE_WHITE.get(), growthcraft.milk.config.Reference.UnlocalizedName.YOGURT_GRAPE_WHITE);
+        addYogurtRecipe(output, GrowthcraftMilkItems.YOGURT_HONEY.get(), Items.HONEYCOMB, growthcraft.milk.config.Reference.UnlocalizedName.YOGURT_HONEY);
+        addYogurtRecipe(output, GrowthcraftMilkItems.YOGURT_PLAIN.get(), null, growthcraft.milk.config.Reference.UnlocalizedName.YOGURT_PLAIN);
+        addYogurtRecipe(output, GrowthcraftMilkItems.YOGURT_PUMPKIN.get(), Items.PUMPKIN, growthcraft.milk.config.Reference.UnlocalizedName.YOGURT_PUMPKIN);
+        addYogurtRecipe(output, GrowthcraftMilkItems.YOGURT_WATERMELON.get(), Items.MELON_SLICE, growthcraft.milk.config.Reference.UnlocalizedName.YOGURT_WATERMELON);
+    }
+
+    private static void addIceCreamRecipe(RecipeOutput output, Item result, Item flavor, String name) {
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, result)
+                .requires(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS)
+                .requires(flavor)
+                .requires(Items.SUGAR)
+                .requires(Items.BOWL)
+                .group("growthcraft_milk")
+                .unlockedBy("has_milk_bucket", has(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS))
+                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.milk.config.Reference.MODID, name));
+    }
+
+    private static void addYogurtRecipe(RecipeOutput output, Item result, Item flavor, String name) {
+        ShapelessRecipeBuilder builder = ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, result)
+                .requires(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS)
+                .requires(GrowthcraftMilkItems.STARTER_CULTURE.get())
+                .requires(Items.BOWL)
+                .group("growthcraft_milk")
+                .unlockedBy("has_milk_bucket", has(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS));
+        if (flavor != null) {
+            builder.requires(flavor);
+        }
+        builder.save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.milk.config.Reference.MODID, name));
     }
 
     private static void addCrowbarRecipe(RecipeOutput output, Item result, Item carpet, TagKey<Item> nuggets, TagKey<Item> ingots, String name) {

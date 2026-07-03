@@ -2,6 +2,8 @@ package growthcraft.core.data.tags;
 
 import growthcraft.core.config.Reference;
 import growthcraft.core.init.GrowthcraftItems;
+import growthcraft.milk.init.GrowthcraftMilkItems;
+import growthcraft.milk.init.GrowthcraftMilkTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -42,5 +44,8 @@ public class GrowthcraftItemTags extends IntrinsicHolderTagsProvider<Item> {
                         GrowthcraftItems.CROWBAR_MAGENTA.get(),
                         GrowthcraftItems.CROWBAR_PINK.get()
                 );
+
+        this.tag(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS)
+                .add(GrowthcraftMilkItems.MILK_BUCKET_IRON.get());
     }
 }
