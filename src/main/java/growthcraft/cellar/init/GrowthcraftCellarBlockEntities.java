@@ -1,6 +1,7 @@
 package growthcraft.cellar.init;
 
 import growthcraft.cellar.block.CultureJarBlock;
+import growthcraft.cellar.block.entity.BrewKettleBlockEntity;
 import growthcraft.cellar.block.entity.CultureJarBlockEntity;
 import growthcraft.cellar.block.entity.RoasterBlockEntity;
 import growthcraft.cellar.config.Reference;
@@ -15,6 +16,11 @@ public final class GrowthcraftCellarBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<CultureJarBlockEntity>> CULTURE_JAR = BLOCK_ENTITY_TYPES.register(
             Reference.UnlocalizedName.Block.CULTURE_JAR,
             () -> BlockEntityType.Builder.of(CultureJarBlockEntity::new, GrowthcraftCellarBlocks.CULTURE_JAR.get()).build(null)
+    );
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BrewKettleBlockEntity>> BREW_KETTLE = BLOCK_ENTITY_TYPES.register(
+            Reference.UnlocalizedName.Block.BREW_KETTLE,
+            () -> BlockEntityType.Builder.of(BrewKettleBlockEntity::new, GrowthcraftCellarBlocks.BREW_KETTLE.get()).build(null)
     );
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<RoasterBlockEntity>> ROASTER = BLOCK_ENTITY_TYPES.register(
