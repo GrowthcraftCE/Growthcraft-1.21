@@ -1,6 +1,7 @@
 package growthcraft.milk.client;
 
 import growthcraft.milk.client.particle.ColoredDripParticle;
+import growthcraft.milk.client.screen.MixingVatScreen;
 import growthcraft.milk.config.Reference;
 import growthcraft.milk.init.GrowthcraftMilkBlocks;
 import growthcraft.milk.init.GrowthcraftMilkItems;
@@ -107,7 +108,7 @@ public final class GrowthcraftMilkClient {
     public static void registerScreens(RegisterMenuScreensEvent event) {
         event.register(GrowthcraftMilkMenus.CHEESE_PRESS.get(), MachineScreen::new);
         event.register(GrowthcraftMilkMenus.CHURN.get(), MachineScreen::new);
-        event.register(GrowthcraftMilkMenus.MIXING_VAT.get(), MachineScreen::new);
+        event.register(GrowthcraftMilkMenus.MIXING_VAT.get(), MixingVatScreen::new);
         event.register(GrowthcraftMilkMenus.PANCHEON.get(), MachineScreen::new);
     }
 

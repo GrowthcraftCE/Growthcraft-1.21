@@ -583,6 +583,7 @@ def supportedCustomRecipeTypes = [
         'growthcraft_cellar:culture_jar'       : 'Culture Jar recipe type and serializer are registered.',
         'growthcraft_milk:cheese_press_recipe': 'Cheese Press runtime is ported.',
         'growthcraft_milk:churn_recipe'       : 'Churn runtime is ported.',
+        'growthcraft_milk:mixing_vat_recipe'  : 'Mixing Vat runtime is ported.',
         'growthcraft_milk:pancheon_recipe'    : 'Pancheon runtime is ported.'
 ]
 
@@ -601,8 +602,6 @@ def blockedCustomRecipeTypes = [
         'growthcraft_milk:brew_kettle_recipe'                : 'Brew Kettle runtime is not ported yet.',
         'growthcraft_milk:culture_jar_recipe'                : 'Legacy Culture Jar recipe type needs migration to the registered 1.21 type.',
         'growthcraft_milk:culture_jar_starter_recipe'        : 'Legacy Culture Jar starter recipe type needs migration to the registered 1.21 type.',
-        'growthcraft_milk:mixing_vat_fluid_recipe'           : 'Mixing Vat runtime is not ported yet.',
-        'growthcraft_milk:mixing_vat_item_recipe'            : 'Mixing Vat runtime is not ported yet.',
         'growthcraft_rice:brew_kettle_recipe'                : 'Brew Kettle runtime is not ported yet.',
         'growthcraft_rice:culture_jar_recipe'                : 'Legacy Culture Jar recipe type needs migration to the registered 1.21 type.',
         'growthcraft_rice:culture_jar_starter_recipe'        : 'Legacy Culture Jar starter recipe type needs migration to the registered 1.21 type.',

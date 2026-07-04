@@ -27,6 +27,7 @@ class RecipeRuntimeCatalogTest {
             "growthcraft_cellar:culture_jar",
             "growthcraft_milk:cheese_press_recipe",
             "growthcraft_milk:churn_recipe",
+            "growthcraft_milk:mixing_vat_recipe",
             "growthcraft_milk:pancheon_recipe"
     );
 
@@ -45,8 +46,6 @@ class RecipeRuntimeCatalogTest {
             "growthcraft_milk:brew_kettle_recipe",
             "growthcraft_milk:culture_jar_recipe",
             "growthcraft_milk:culture_jar_starter_recipe",
-            "growthcraft_milk:mixing_vat_fluid_recipe",
-            "growthcraft_milk:mixing_vat_item_recipe",
             "growthcraft_rice:brew_kettle_recipe",
             "growthcraft_rice:culture_jar_recipe",
             "growthcraft_rice:culture_jar_starter_recipe",

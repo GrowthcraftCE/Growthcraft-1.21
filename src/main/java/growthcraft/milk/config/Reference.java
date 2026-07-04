@@ -54,8 +54,6 @@ public final class Reference {
         public static final String MILK = "milk";
         public static final String MILKING_BUCKET_IRON = "milking_bucket_iron";
         public static final String MIXING_VAT = "mixing_vat";
-        public static final String MIXING_VAT_FLUID_RECIPE = "mixing_vat_fluid_recipe";
-        public static final String MIXING_VAT_ITEM_RECIPE = "mixing_vat_item_recipe";
         public static final String MIXING_VAT_RECIPE = "mixing_vat_recipe";
         public static final String MONTEREY = "monterey";
         public static final String PANCHEON = "pancheon";

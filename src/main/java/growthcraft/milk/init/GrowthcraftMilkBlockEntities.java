@@ -2,6 +2,7 @@ package growthcraft.milk.init;
 
 import growthcraft.milk.block.entity.CheesePressBlockEntity;
 import growthcraft.milk.block.entity.ChurnBlockEntity;
+import growthcraft.milk.block.entity.MixingVatBlockEntity;
 import growthcraft.milk.block.entity.PancheonBlockEntity;
 import growthcraft.milk.config.Reference;
 import net.minecraft.core.registries.Registries;
@@ -25,6 +26,11 @@ public final class GrowthcraftMilkBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PancheonBlockEntity>> PANCHEON = BLOCK_ENTITY_TYPES.register(
             Reference.UnlocalizedName.PANCHEON,
             () -> BlockEntityType.Builder.of(PancheonBlockEntity::new, GrowthcraftMilkBlocks.PANCHEON.get()).build(null)
+    );
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MixingVatBlockEntity>> MIXING_VAT = BLOCK_ENTITY_TYPES.register(
+            Reference.UnlocalizedName.MIXING_VAT,
+            () -> BlockEntityType.Builder.of(MixingVatBlockEntity::new, GrowthcraftMilkBlocks.MIXING_VAT.get()).build(null)
     );
 
     private GrowthcraftMilkBlockEntities() {

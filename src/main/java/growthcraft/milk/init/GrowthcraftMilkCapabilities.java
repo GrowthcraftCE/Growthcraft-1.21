@@ -12,5 +12,7 @@ public final class GrowthcraftMilkCapabilities {
                 (be, side) -> be.getTank());
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, GrowthcraftMilkBlockEntities.PANCHEON.get(),
                 (be, side) -> be.getFluidHandler());
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, GrowthcraftMilkBlockEntities.MIXING_VAT.get(),
+                (be, side) -> be.getFluidHandler());
     }
 }
