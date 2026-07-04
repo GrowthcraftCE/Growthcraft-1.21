@@ -95,7 +95,7 @@ public class FermentationBarrelRecipeCategory implements IRecipeCategory<RecipeH
 
     @Override
     public void draw(RecipeHolder<FermentationBarrelRecipe> holder, mezz.jei.api.gui.ingredient.IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
-        progress.draw(graphics, 64, 20);
+        progress.draw(graphics, 48, 20);
 
         Font font = Minecraft.getInstance().font;
         timeIcon.draw(graphics, 2, 57);

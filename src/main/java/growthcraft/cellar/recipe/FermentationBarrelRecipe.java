@@ -10,15 +10,19 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.ExtraCodecs;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.material.Fluids;
+import net.neoforged.neoforge.fluids.FluidStack;
 
 import java.util.List;
 import java.util.Optional;
@@ -51,7 +55,7 @@ public class FermentationBarrelRecipe implements Recipe<FermentationBarrelInput>
         this.ingredientFluid = ingredientFluid;
         this.result = result;
         this.effects = List.copyOf(effects);
-        this.bottle = bottle.copy();
+        this.bottle = createBottleStack(bottle, result);
         this.color = color;
     }
 
@@ -81,6 +85,18 @@ public class FermentationBarrelRecipe implements Recipe<FermentationBarrelInput>
 
     public int getColor() {
         return color;
+    }
+
+    private static ItemStack createBottleStack(ItemStack bottle, FluidAmount result) {
+        ItemStack stack = bottle.copy();
+        if (stack.isEmpty()) return stack;
+
+        var fluid = BuiltInRegistries.FLUID.get(result.fluidId());
+        if (fluid != Fluids.EMPTY) {
+            Component fluidName = new FluidStack(fluid, Math.max(1, result.amount())).getHoverName();
+            stack.set(DataComponents.CUSTOM_NAME, Component.translatable(stack.getDescriptionId(), fluidName));
+        }
+        return stack;
     }
 
     public int getOutputMultiplier(FermentationBarrelInput input) {
