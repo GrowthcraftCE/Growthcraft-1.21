@@ -3,6 +3,7 @@ package growthcraft.cellar.init;
 import growthcraft.cellar.config.Reference;
 import growthcraft.cellar.recipe.BrewKettleRecipe;
 import growthcraft.cellar.recipe.CultureJarRecipe;
+import growthcraft.cellar.recipe.FermentationBarrelRecipe;
 import growthcraft.cellar.recipe.RoasterRecipe;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -24,6 +25,9 @@ public final class GrowthcraftCellarRecipes {
     public static final DeferredHolder<RecipeType<?>, RecipeType<BrewKettleRecipe>> BREW_KETTLE_TYPE =
             TYPES.register(Reference.UnlocalizedName.Recipe.BREW_KETTLE_RECIPE, () -> RecipeType.simple(ResourceLocation.fromNamespaceAndPath(Reference.MODID, Reference.UnlocalizedName.Recipe.BREW_KETTLE_RECIPE)));
 
+    public static final DeferredHolder<RecipeType<?>, RecipeType<FermentationBarrelRecipe>> FERMENTATION_BARREL_TYPE =
+            TYPES.register(Reference.UnlocalizedName.Recipe.FERMENT_BARREL_RECIPE, () -> RecipeType.simple(ResourceLocation.fromNamespaceAndPath(Reference.MODID, Reference.UnlocalizedName.Recipe.FERMENT_BARREL_RECIPE)));
+
     public static final DeferredHolder<RecipeType<?>, RecipeType<RoasterRecipe>> ROASTER_TYPE =
             TYPES.register(Reference.UnlocalizedName.Recipe.ROASTER_RECIPE, () -> RecipeType.simple(ResourceLocation.fromNamespaceAndPath(Reference.MODID, Reference.UnlocalizedName.Recipe.ROASTER_RECIPE)));
 
@@ -32,6 +36,9 @@ public final class GrowthcraftCellarRecipes {
 
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<BrewKettleRecipe>> BREW_KETTLE_SERIALIZER =
             SERIALIZERS.register(Reference.UnlocalizedName.Recipe.BREW_KETTLE_RECIPE, BrewKettleRecipe.Serializer::new);
+
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<FermentationBarrelRecipe>> FERMENTATION_BARREL_SERIALIZER =
+            SERIALIZERS.register(Reference.UnlocalizedName.Recipe.FERMENT_BARREL_RECIPE, FermentationBarrelRecipe.Serializer::new);
 
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<RoasterRecipe>> ROASTER_SERIALIZER =
             SERIALIZERS.register(Reference.UnlocalizedName.Recipe.ROASTER_RECIPE, RoasterRecipe.Serializer::new);
