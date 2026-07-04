@@ -35,24 +35,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: ./gradlew build --info
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.x'
-
-      - name: Update Growthcraft-Updates versions JSON
-        env:
-          # Use a Personal Access Token with "repo" scope stored as UPDATES_TOKEN secret,
-          # because the default GITHUB_TOKEN cannot write to a different repository.
-          GITHUB_TOKEN: ${{ secrets.UPDATES_TOKEN }}
-          UPDATES_OWNER: GrowthcraftCE
-          UPDATES_REPO: Growthcraft-Updates
-          UPDATES_PATH: growthcraft-versions.json
-          UPDATES_BRANCH: master
-        run: |
-          python --version
-          python extra/update_versions.py
-
       - name: GitHub Release
         uses: fnkr/github-action-ghr@v1
         env:
