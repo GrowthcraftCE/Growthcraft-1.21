@@ -103,7 +103,7 @@ public class FermentationBarrelRecipeCategory implements IRecipeCategory<RecipeH
 
         Font font = Minecraft.getInstance().font;
         timeIcon.draw(graphics, 2, 57);
-        graphics.drawString(font, formatTicks(holder.value().getProcessingTime()), 15, 59, 4210752, false);
+        graphics.drawString(font, formatTicks(holder.value().getProcessingTime()), 15, 62, 4210752, false);
     }
 
     @Override
