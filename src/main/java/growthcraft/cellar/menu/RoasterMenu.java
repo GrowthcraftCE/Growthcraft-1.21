@@ -17,7 +17,7 @@ public class RoasterMenu extends AbstractContainerMenu {
     private final ContainerData data;
 
     public RoasterMenu(int containerId, Inventory playerInventory) {
-        this(containerId, playerInventory, new SimpleContainer(RoasterBlockEntity.SLOT_COUNT), new SimpleContainerData(3));
+        this(containerId, playerInventory, new SimpleContainer(RoasterBlockEntity.SLOT_COUNT), new SimpleContainerData(4));
     }
 
     public RoasterMenu(int containerId, Inventory playerInventory, Container container, ContainerData data) {
@@ -51,6 +51,10 @@ public class RoasterMenu extends AbstractContainerMenu {
 
     public int getRoastingLevel() {
         return data.get(2);
+    }
+
+    public boolean isHeated() {
+        return data.get(3) == 1;
     }
 
     public int getProgressionScaled(int pixels) {

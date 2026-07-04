@@ -49,6 +49,7 @@ public class RoasterBlockEntity extends BlockEntity implements WorldlyContainer,
                 case 0 -> processTime;
                 case 1 -> processTimeTotal;
                 case 2 -> getBlockState().getValue(RoasterBlock.ROASTING_LEVEL);
+                case 3 -> getBlockState().getValue(RoasterBlock.LIT) ? 1 : 0;
                 default -> 0;
             };
         }
@@ -65,7 +66,7 @@ public class RoasterBlockEntity extends BlockEntity implements WorldlyContainer,
 
         @Override
         public int getCount() {
-            return 3;
+            return 4;
         }
     };
 

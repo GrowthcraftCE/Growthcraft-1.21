@@ -4,9 +4,26 @@ import growthcraft.cellar.menu.RoasterMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class RoasterScreen extends AbstractContainerScreen<RoasterMenu> {
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("growthcraft_cellar", "textures/gui/roaster_screen.png");
+
+    private static final int PROGRESS_X = 76;
+    private static final int PROGRESS_Y = 44;
+    private static final int PROGRESS_U = 176;
+    private static final int PROGRESS_V = 0;
+    private static final int PROGRESS_WIDTH = 28;
+    private static final int PROGRESS_HEIGHT = 9;
+
+    private static final int HEAT_X = 80;
+    private static final int HEAT_Y = 56;
+    private static final int HEAT_U = 176;
+    private static final int HEAT_V = 28;
+    private static final int HEAT_WIDTH = 14;
+    private static final int HEAT_HEIGHT = 14;
+
     public RoasterScreen(RoasterMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
         this.imageWidth = 176;
@@ -15,17 +32,16 @@ public class RoasterScreen extends AbstractContainerScreen<RoasterMenu> {
 
     @Override
     protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
-        int x = this.leftPos;
-        int y = this.topPos;
-        graphics.fill(x, y, x + this.imageWidth, y + this.imageHeight, 0xFFC6C6C6);
-        graphics.fill(x + 7, y + 17, x + 169, y + 75, 0xFF8B8B8B);
-        graphics.fill(x + 8, y + 18, x + 168, y + 74, 0xFFEFEFEF);
-        graphics.fill(x + 7, y + 83, x + 169, y + 161, 0xFF8B8B8B);
-        graphics.fill(x + 8, y + 84, x + 168, y + 160, 0xFFEFEFEF);
+        graphics.blit(TEXTURE, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
 
-        graphics.fill(x + 78, y + 38, x + 102, y + 43, 0xFF5F5F5F);
-        int progress = this.menu.getProgressionScaled(24);
-        graphics.fill(x + 78, y + 38, x + 78 + progress, y + 43, 0xFFFFB347);
+        int progress = this.menu.getProgressionScaled(PROGRESS_WIDTH);
+        if (progress > 0) {
+            graphics.blit(TEXTURE, this.leftPos + PROGRESS_X, this.topPos + PROGRESS_Y, PROGRESS_U, PROGRESS_V, progress, PROGRESS_HEIGHT);
+        }
+
+        if (this.menu.isHeated()) {
+            graphics.blit(TEXTURE, this.leftPos + HEAT_X, this.topPos + HEAT_Y, HEAT_U, HEAT_V, HEAT_WIDTH, HEAT_HEIGHT);
+        }
     }
 
     @Override
