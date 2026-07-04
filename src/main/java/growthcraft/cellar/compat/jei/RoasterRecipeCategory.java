@@ -21,7 +21,7 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 public class RoasterRecipeCategory implements IRecipeCategory<RecipeHolder<RoasterRecipe>> {
     private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Reference.MODID, "textures/gui/roaster_screen.png");
     private static final int WIDTH = 116;
-    private static final int HEIGHT = 64;
+    private static final int HEIGHT = 60;
 
     private final IDrawableStatic background;
     private final IDrawable icon;
@@ -70,11 +70,12 @@ public class RoasterRecipeCategory implements IRecipeCategory<RecipeHolder<Roast
 
     @Override
     public void draw(RecipeHolder<RoasterRecipe> holder, mezz.jei.api.gui.ingredient.IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
-        progress.draw(graphics, 47, 27);
-        heat.draw(graphics, 50, 39);
+        progress.draw(graphics, 46, 24);
+        heat.draw(graphics, 50, 36);
 
         Component level = Component.translatable("label.growthcraft_cellar.roaster_level", holder.value().getRoastingLevel());
-        graphics.drawString(net.minecraft.client.Minecraft.getInstance().font, level, 18, 0, 4210752, false);
+        var font = net.minecraft.client.Minecraft.getInstance().font;
+        graphics.drawString(font, level, (WIDTH - font.width(level)) / 2, 0, 4210752, false);
     }
 
     @Override
