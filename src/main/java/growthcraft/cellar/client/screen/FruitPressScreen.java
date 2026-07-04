@@ -22,6 +22,11 @@ public class FruitPressScreen extends AbstractContainerScreen<FruitPressMenu> {
     private static final int PROGRESS_V = 0;
     private static final int PROGRESS_W = 8;
     private static final int PROGRESS_H = 28;
+    private static final int OUTPUT_SLOT_X = 141;
+    private static final int OUTPUT_SLOT_Y = 53;
+    private static final int SLOT_U = 7;
+    private static final int SLOT_V = 83;
+    private static final int SLOT_SIZE = 18;
 
     private final FluidTankRenderer tankRenderer;
 
@@ -35,6 +40,8 @@ public class FruitPressScreen extends AbstractContainerScreen<FruitPressMenu> {
     @Override
     protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
         graphics.blit(TEXTURE, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
+        graphics.blit(TEXTURE, this.leftPos + OUTPUT_SLOT_X - 1, this.topPos + OUTPUT_SLOT_Y - 1,
+                SLOT_U, SLOT_V, SLOT_SIZE, SLOT_SIZE);
 
         int progress = this.menu.getProgressionScaled(PROGRESS_H);
         if (progress > 0) {
