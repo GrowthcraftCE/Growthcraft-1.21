@@ -24,8 +24,12 @@ import net.minecraft.world.level.material.Fluids;
 
 public class FermentationBarrelRecipeCategory implements IRecipeCategory<RecipeHolder<FermentationBarrelRecipe>> {
     private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Reference.MODID, "textures/gui/fermentation_barrel_screen.png");
+    private static final int BACKGROUND_U = 30;
+    private static final int BACKGROUND_V = 10;
     private static final int WIDTH = 116;
     private static final int HEIGHT = 70;
+    private static final int PROGRESS_X = 51 - BACKGROUND_U;
+    private static final int PROGRESS_Y = 20 - BACKGROUND_V;
 
     private final IDrawableStatic background;
     private final IDrawable icon;
@@ -33,7 +37,7 @@ public class FermentationBarrelRecipeCategory implements IRecipeCategory<RecipeH
     private final IDrawableStatic timeIcon;
 
     public FermentationBarrelRecipeCategory(IGuiHelper guiHelper) {
-        this.background = guiHelper.drawableBuilder(TEXTURE, 30, 10, WIDTH, HEIGHT)
+        this.background = guiHelper.drawableBuilder(TEXTURE, BACKGROUND_U, BACKGROUND_V, WIDTH, HEIGHT)
                 .setTextureSize(256, 256)
                 .build();
         this.icon = guiHelper.createDrawableItemStack(new ItemStack(GrowthcraftCellarItems.FERMENTATION_BARREL_OAK.get()));
@@ -95,7 +99,7 @@ public class FermentationBarrelRecipeCategory implements IRecipeCategory<RecipeH
 
     @Override
     public void draw(RecipeHolder<FermentationBarrelRecipe> holder, mezz.jei.api.gui.ingredient.IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
-        progress.draw(graphics, 48, 20);
+        progress.draw(graphics, PROGRESS_X, PROGRESS_Y);
 
         Font font = Minecraft.getInstance().font;
         timeIcon.draw(graphics, 2, 57);
