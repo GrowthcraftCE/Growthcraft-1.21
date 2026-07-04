@@ -9,7 +9,7 @@
     "amount": 125
   },
   "input_item": {
-    "tag": "forge:crops/rice",
+    "item": "growthcraft_rice:rice",
     "count": 1
   },
   "output_fluid": {

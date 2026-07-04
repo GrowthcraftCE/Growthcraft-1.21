@@ -1,6 +1,7 @@
 package growthcraft.cellar.init;
 
 import growthcraft.cellar.config.Reference;
+import growthcraft.cellar.recipe.BrewKettleRecipe;
 import growthcraft.cellar.recipe.CultureJarRecipe;
 import growthcraft.cellar.recipe.RoasterRecipe;
 import net.minecraft.core.registries.Registries;
@@ -20,11 +21,17 @@ public final class GrowthcraftCellarRecipes {
     public static final DeferredHolder<RecipeType<?>, RecipeType<CultureJarRecipe>> CULTURE_JAR_TYPE =
             TYPES.register("culture_jar", () -> RecipeType.simple(ResourceLocation.fromNamespaceAndPath(Reference.MODID, "culture_jar")));
 
+    public static final DeferredHolder<RecipeType<?>, RecipeType<BrewKettleRecipe>> BREW_KETTLE_TYPE =
+            TYPES.register(Reference.UnlocalizedName.Recipe.BREW_KETTLE_RECIPE, () -> RecipeType.simple(ResourceLocation.fromNamespaceAndPath(Reference.MODID, Reference.UnlocalizedName.Recipe.BREW_KETTLE_RECIPE)));
+
     public static final DeferredHolder<RecipeType<?>, RecipeType<RoasterRecipe>> ROASTER_TYPE =
             TYPES.register(Reference.UnlocalizedName.Recipe.ROASTER_RECIPE, () -> RecipeType.simple(ResourceLocation.fromNamespaceAndPath(Reference.MODID, Reference.UnlocalizedName.Recipe.ROASTER_RECIPE)));
 
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<CultureJarRecipe>> CULTURE_JAR_SERIALIZER =
             SERIALIZERS.register("culture_jar", CultureJarRecipe.Serializer::new);
+
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<BrewKettleRecipe>> BREW_KETTLE_SERIALIZER =
+            SERIALIZERS.register(Reference.UnlocalizedName.Recipe.BREW_KETTLE_RECIPE, BrewKettleRecipe.Serializer::new);
 
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<RoasterRecipe>> ROASTER_SERIALIZER =
             SERIALIZERS.register(Reference.UnlocalizedName.Recipe.ROASTER_RECIPE, RoasterRecipe.Serializer::new);

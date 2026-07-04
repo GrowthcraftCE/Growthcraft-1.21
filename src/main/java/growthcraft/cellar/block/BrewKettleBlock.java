@@ -156,7 +156,11 @@ public class BrewKettleBlock extends Block implements EntityBlock {
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return null;
+        return level.isClientSide ? null : (lvl, pos, st, be) -> {
+            if (be instanceof BrewKettleBlockEntity kettle) {
+                BrewKettleBlockEntity.serverTick(lvl, pos, st, kettle);
+            }
+        };
     }
 
     @Override
