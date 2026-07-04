@@ -34,11 +34,16 @@ public class FruitPressRecipeCategory implements IRecipeCategory<RecipeHolder<Fr
     private static final int TANK_Y = 17 - BACKGROUND_V;
     private static final int TANK_WIDTH = 50;
     private static final int TANK_HEIGHT = 52;
+    private static final int INPUT_X = 22;
+    private static final int INPUT_Y = 43;
+    private static final int BYPRODUCT_X = 99;
+    private static final int BYPRODUCT_Y = 43;
 
     private final IDrawableStatic background;
     private final IDrawable icon;
     private final IDrawableAnimated progress;
     private final IDrawableStatic timeIcon;
+    private final IDrawableStatic slotBackground;
 
     public FruitPressRecipeCategory(IGuiHelper guiHelper) {
         this.background = guiHelper.drawableBuilder(TEXTURE, BACKGROUND_U, BACKGROUND_V, WIDTH, HEIGHT)
@@ -49,6 +54,9 @@ public class FruitPressRecipeCategory implements IRecipeCategory<RecipeHolder<Fr
                 .setTextureSize(256, 256)
                 .buildAnimated(120, IDrawableAnimated.StartDirection.TOP, false);
         this.timeIcon = guiHelper.drawableBuilder(TEXTURE, 54, 184, 11, 11)
+                .setTextureSize(256, 256)
+                .build();
+        this.slotBackground = guiHelper.drawableBuilder(TEXTURE, 7, 83, 18, 18)
                 .setTextureSize(256, 256)
                 .build();
     }
@@ -77,7 +85,7 @@ public class FruitPressRecipeCategory implements IRecipeCategory<RecipeHolder<Fr
     public void setRecipe(IRecipeLayoutBuilder builder, RecipeHolder<FruitPressRecipe> holder, IFocusGroup focuses) {
         FruitPressRecipe recipe = holder.value();
 
-        builder.addSlot(RecipeIngredientRole.INPUT, 23, 43)
+        builder.addSlot(RecipeIngredientRole.INPUT, INPUT_X, INPUT_Y)
                 .addIngredients(recipe.getInputItem().ingredient());
 
         var outputFluid = BuiltInRegistries.FLUID.get(recipe.getOutputFluid().fluidId());
@@ -89,7 +97,7 @@ public class FruitPressRecipeCategory implements IRecipeCategory<RecipeHolder<Fr
 
         ItemStack byProduct = recipe.getByProduct();
         if (!byProduct.isEmpty()) {
-            builder.addSlot(RecipeIngredientRole.OUTPUT, 99, 43)
+            builder.addSlot(RecipeIngredientRole.OUTPUT, BYPRODUCT_X, BYPRODUCT_Y)
                     .addItemStack(byProduct);
         }
     }
@@ -97,6 +105,9 @@ public class FruitPressRecipeCategory implements IRecipeCategory<RecipeHolder<Fr
     @Override
     public void draw(RecipeHolder<FruitPressRecipe> holder, mezz.jei.api.gui.ingredient.IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
         progress.draw(graphics, PROGRESS_X, PROGRESS_Y);
+        if (!holder.value().getByProduct().isEmpty()) {
+            slotBackground.draw(graphics, BYPRODUCT_X - 1, BYPRODUCT_Y - 1);
+        }
 
         Font font = Minecraft.getInstance().font;
         timeIcon.draw(graphics, 2, 57);
