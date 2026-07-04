@@ -6,7 +6,9 @@ import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.cellar.init.GrowthcraftCellarFluids;
 import growthcraft.lib.fluid.FluidRegistryContainer;
 import growthcraft.lib.utils.ColorUtils;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -58,6 +60,13 @@ public final class GrowthcraftCellarClient {
                 return color == 0 ? 0xFFFFFFFF : color;
             }, container.bucket.get());
         }
+
+        event.register((stack, tintIndex) -> tintIndex == 0
+                        ? stack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).getColor()
+                        : 0xFFFFFFFF,
+                GrowthcraftCellarItems.POTION_ALE.get(),
+                GrowthcraftCellarItems.POTION_LAGER.get(),
+                GrowthcraftCellarItems.POTION_WINE.get());
     }
 
     private static void registerGrainColor(RegisterColorHandlersEvent.Item event,

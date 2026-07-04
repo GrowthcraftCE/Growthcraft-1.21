@@ -1,6 +1,7 @@
 package growthcraft.cellar.init;
 
 import growthcraft.cellar.config.Reference;
+import growthcraft.cellar.item.CellarPotionItem;
 import growthcraft.cellar.item.EtherealYeastItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -64,9 +65,9 @@ public class GrowthcraftCellarItems {
     public static final DeferredItem<Item> STARTER_CULTURE = ITEMS.register(Reference.UnlocalizedName.Item.STARTER_CULTURE, () -> new Item(new Item.Properties()));
 
     // Serving containers used by Fermentation Barrel recipes.
-    public static final DeferredItem<Item> POTION_ALE = ITEMS.register(Reference.UnlocalizedName.Item.POTION_ALE, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> POTION_LAGER = ITEMS.register(Reference.UnlocalizedName.Item.POTION_LAGER, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> POTION_WINE = ITEMS.register(Reference.UnlocalizedName.Item.POTION_WINE, () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> POTION_ALE = ITEMS.register(Reference.UnlocalizedName.Item.POTION_ALE, () -> new CellarPotionItem(new Item.Properties()));
+    public static final DeferredItem<Item> POTION_LAGER = ITEMS.register(Reference.UnlocalizedName.Item.POTION_LAGER, () -> new CellarPotionItem(new Item.Properties()));
+    public static final DeferredItem<Item> POTION_WINE = ITEMS.register(Reference.UnlocalizedName.Item.POTION_WINE, () -> new CellarPotionItem(new Item.Properties()));
 
     private static DeferredItem<Item> blockItem(String name, net.neoforged.neoforge.registries.DeferredBlock<? extends Block> block) {
         return ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));

@@ -15,7 +15,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -55,7 +57,7 @@ public class FermentationBarrelRecipe implements Recipe<FermentationBarrelInput>
         this.ingredientFluid = ingredientFluid;
         this.result = result;
         this.effects = List.copyOf(effects);
-        this.bottle = createBottleStack(bottle, result);
+        this.bottle = createBottleStack(bottle, result, this.effects, color);
         this.color = color;
     }
 
@@ -87,7 +89,7 @@ public class FermentationBarrelRecipe implements Recipe<FermentationBarrelInput>
         return color;
     }
 
-    private static ItemStack createBottleStack(ItemStack bottle, FluidAmount result) {
+    private static ItemStack createBottleStack(ItemStack bottle, FluidAmount result, List<EffectSpec> effects, int color) {
         ItemStack stack = bottle.copy();
         if (stack.isEmpty()) return stack;
 
@@ -96,7 +98,18 @@ public class FermentationBarrelRecipe implements Recipe<FermentationBarrelInput>
             Component fluidName = new FluidStack(fluid, Math.max(1, result.amount())).getHoverName();
             stack.set(DataComponents.CUSTOM_NAME, Component.translatable(stack.getDescriptionId(), fluidName));
         }
+
+        List<MobEffectInstance> potionEffects = effects.stream()
+                .map(FermentationBarrelRecipe::createEffectInstance)
+                .flatMap(Optional::stream)
+                .toList();
+        stack.set(DataComponents.POTION_CONTENTS, new PotionContents(Optional.empty(), Optional.of(color), potionEffects));
         return stack;
+    }
+
+    private static Optional<MobEffectInstance> createEffectInstance(EffectSpec spec) {
+        return BuiltInRegistries.MOB_EFFECT.getHolder(spec.effectId())
+                .map(effect -> new MobEffectInstance(effect, spec.duration(), spec.amplifier()));
     }
 
     public int getOutputMultiplier(FermentationBarrelInput input) {

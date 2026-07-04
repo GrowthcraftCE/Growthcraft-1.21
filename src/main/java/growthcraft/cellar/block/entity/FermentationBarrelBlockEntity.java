@@ -37,6 +37,7 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements Worldl
     public static final int SLOT_YEAST = 0;
     public static final int SLOT_COUNT = 1;
     public static final int TANK_CAPACITY = 4000;
+    public static final int BOTTLE_AMOUNT = 500;
 
     private static final int[] SLOTS = new int[] { SLOT_YEAST };
 
@@ -64,6 +65,34 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements Worldl
 
     public FluidTank getTank() {
         return tank;
+    }
+
+    public ItemStack getResultingPotionItemStack() {
+        if (this.level == null || this.tank.getFluidAmount() < BOTTLE_AMOUNT) {
+            return ItemStack.EMPTY;
+        }
+
+        FluidStack fluid = this.tank.getFluid();
+        if (fluid.isEmpty()) {
+            return ItemStack.EMPTY;
+        }
+
+        return this.level.getRecipeManager().getAllRecipesFor(GrowthcraftCellarRecipes.FERMENTATION_BARREL_TYPE.get()).stream()
+                .map(RecipeHolder::value)
+                .filter(recipe -> matchesFluidId(recipe.getResult().fluidId(), fluid.getFluid()))
+                .map(FermentationBarrelRecipe::getBottle)
+                .filter(stack -> !stack.isEmpty())
+                .findFirst()
+                .orElse(ItemStack.EMPTY);
+    }
+
+    public void drainBottleAmount(BlockState state) {
+        this.tank.drain(BOTTLE_AMOUNT, net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
+        this.resetProgress();
+        this.setChanged();
+        if (this.level != null && !this.level.isClientSide) {
+            this.level.sendBlockUpdated(this.worldPosition, state, state, 3);
+        }
     }
 
     public int getProcessTime() {
