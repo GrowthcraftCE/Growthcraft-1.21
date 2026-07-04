@@ -120,9 +120,9 @@ public class BrewKettleRecipeCategory implements IRecipeCategory<RecipeHolder<Br
         timeIcon.draw(graphics, 2, 27);
         graphics.drawString(font, formatTicks(recipe.getProcessingTime()), 15, 29, 4210752, false);
 
-        infoIcon.draw(graphics, 2, 56);
+        infoIcon.draw(graphics, 2, 60);
         Component lidInfo = recipe.requiresLid() ? INFO_NEED_LID : INFO_NO_LID;
-        graphics.drawString(font, lidInfo, 15, 58, 4210752, false);
+        graphics.drawString(font, lidInfo, 15, 62, 4210752, false);
     }
 
     @Override
