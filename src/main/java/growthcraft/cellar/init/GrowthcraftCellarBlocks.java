@@ -4,6 +4,7 @@ import growthcraft.cellar.block.CultureJarBlock;
 import growthcraft.cellar.block.BrewKettleBlock;
 import growthcraft.cellar.block.FermentationBarrelBlock;
 import growthcraft.cellar.block.FruitPressBlock;
+import growthcraft.cellar.block.FruitPressPistonBlock;
 import growthcraft.cellar.block.RoasterBlock;
 import growthcraft.cellar.config.Reference;
 import net.minecraft.core.registries.Registries;
@@ -32,6 +33,7 @@ public final class GrowthcraftCellarBlocks {
 
     public static final DeferredBlock<Block> FERMENTATION_BARREL_OAK = BLOCKS.register(Reference.UnlocalizedName.Block.FERMENT_BARREL_OAK, FermentationBarrelBlock::new);
     public static final DeferredBlock<Block> FRUIT_PRESS = BLOCKS.register(Reference.UnlocalizedName.Block.FRUIT_PRESS, FruitPressBlock::new);
+    public static final DeferredBlock<Block> FRUIT_PRESS_PISTON = BLOCKS.register(Reference.UnlocalizedName.Block.FRUIT_PRESS_PISTON, FruitPressPistonBlock::new);
     public static final DeferredBlock<Block> ROASTER = BLOCKS.register(Reference.UnlocalizedName.Block.ROASTER, RoasterBlock::new);
 
     private GrowthcraftCellarBlocks() {}

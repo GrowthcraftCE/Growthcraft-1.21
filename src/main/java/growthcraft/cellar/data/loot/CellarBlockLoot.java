@@ -20,6 +20,7 @@ public class CellarBlockLoot extends BlockLootSubProvider {
         dropSelf(GrowthcraftCellarBlocks.CULTURE_JAR.get());
         dropSelf(GrowthcraftCellarBlocks.FERMENTATION_BARREL_OAK.get());
         dropSelf(GrowthcraftCellarBlocks.FRUIT_PRESS.get());
+        add(GrowthcraftCellarBlocks.FRUIT_PRESS_PISTON.get(), noDrop());
         dropSelf(GrowthcraftCellarBlocks.ROASTER.get());
     }
 

@@ -8,7 +8,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -23,61 +22,83 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class FruitPressBlock extends Block {
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
-    private static final VoxelShape SHAPE = Shapes.or(
-            Block.box(1.0D, 0.0D, 1.0D, 15.0D, 3.0D, 15.0D),
-            Block.box(0.0D, 3.0D, 0.0D, 16.0D, 7.0D, 16.0D),
-            Block.box(1.0D, 7.0D, 1.0D, 15.0D, 16.0D, 15.0D));
+import java.util.Collections;
+import java.util.List;
 
-    public FruitPressBlock() {
+public class FruitPressPistonBlock extends Block {
+    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final BooleanProperty PRESSED = BooleanProperty.create("pressed");
+
+    private static final VoxelShape SHAPE_UP = Block.box(3.0D, 0.0D, 3.0D, 13.0D, 16.0D, 13.0D);
+    private static final VoxelShape SHAPE_DOWN = Shapes.or(
+            Block.box(6.5D, 0.0D, 6.5D, 9.5D, 9.0D, 9.5D),
+            Block.box(3.0D, 9.0D, 3.0D, 13.0D, 16.0D, 13.0D));
+
+    public FruitPressPistonBlock() {
         super(Properties.of()
                 .mapColor(MapColor.WOOD)
                 .strength(2.0F)
-                .sound(SoundType.CHAIN)
-                .noOcclusion());
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
+                .sound(SoundType.WOOD)
+                .noOcclusion()
+                .isRedstoneConductor((state, level, pos) -> false));
+        this.registerDefaultState(this.stateDefinition.any()
+                .setValue(FACING, Direction.NORTH)
+                .setValue(PRESSED, false));
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING);
+        builder.add(FACING, PRESSED);
     }
 
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        if (!context.getLevel().getBlockState(context.getClickedPos().above()).isAir()) {
-            return null;
-        }
-        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+        return this.defaultBlockState()
+                .setValue(FACING, context.getHorizontalDirection().getOpposite())
+                .setValue(PRESSED, context.getLevel().hasNeighborSignal(context.getClickedPos()));
     }
 
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return SHAPE;
+        return state.getValue(PRESSED) ? SHAPE_DOWN : SHAPE_UP;
+    }
+
+    @Override
+    protected RenderShape getRenderShape(BlockState state) {
+        return RenderShape.MODEL;
     }
 
     @Override
     protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        BlockState above = level.getBlockState(pos.above());
-        return above.isAir() || above.is(GrowthcraftCellarBlocks.FRUIT_PRESS_PISTON.get());
+        return level.getBlockState(pos.below()).is(GrowthcraftCellarBlocks.FRUIT_PRESS.get());
     }
 
     @Override
-    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        level.setBlock(pos.above(), GrowthcraftCellarBlocks.FRUIT_PRESS_PISTON.get().defaultBlockState()
-                .setValue(FruitPressPistonBlock.FACING, state.getValue(FACING))
-                .setValue(FruitPressPistonBlock.PRESSED, false), Block.UPDATE_ALL_IMMEDIATE);
+    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
+        super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
+        if (level.isClientSide) return;
+
+        if (!state.canSurvive(level, pos)) {
+            level.destroyBlock(pos, false);
+            return;
+        }
+
+        boolean powered = level.hasNeighborSignal(pos);
+        if (state.getValue(PRESSED) != powered) {
+            level.setBlock(pos, state.setValue(PRESSED, powered), Block.UPDATE_CLIENTS);
+        }
     }
 
     @Override
@@ -91,14 +112,8 @@ public class FruitPressBlock extends Block {
     }
 
     @Override
-    protected RenderShape getRenderShape(BlockState state) {
-        return RenderShape.MODEL;
-    }
-
-    @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        BlockState pistonState = level.getBlockState(pos.above());
-        if (pistonState.is(GrowthcraftCellarBlocks.FRUIT_PRESS_PISTON.get()) && pistonState.getValue(FruitPressPistonBlock.PRESSED)) {
+        if (state.getValue(PRESSED)) {
             return InteractionResult.PASS;
         }
         return MachineMenuOpener.open(level, player, GrowthcraftCellarMenus.FRUIT_PRESS.get(),
@@ -106,11 +121,22 @@ public class FruitPressBlock extends Block {
     }
 
     @Override
-    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-        if (!state.is(newState.getBlock()) && level.getBlockState(pos.above()).is(GrowthcraftCellarBlocks.FRUIT_PRESS_PISTON.get())) {
-            level.destroyBlock(pos.above(), false);
+    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        if (!level.isClientSide && level.getBlockState(pos.below()).is(GrowthcraftCellarBlocks.FRUIT_PRESS.get())) {
+            level.destroyBlock(pos.below(), false);
+            popResource(level, pos, new ItemStack(GrowthcraftCellarBlocks.FRUIT_PRESS.get().asItem()));
         }
-        super.onRemove(state, level, pos, newState, movedByPiston);
+        return super.playerWillDestroy(level, pos, state, player);
+    }
+
+    @Override
+    public List<ItemStack> getDrops(BlockState state, LootParams.Builder params) {
+        return Collections.emptyList();
+    }
+
+    @Override
+    public boolean canConnectRedstone(BlockState state, BlockGetter level, BlockPos pos, @Nullable Direction direction) {
+        return false;
     }
 
     @Override
