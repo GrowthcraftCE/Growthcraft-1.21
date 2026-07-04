@@ -4,6 +4,8 @@ import com.mojang.serialization.MapCodec;
 import growthcraft.rice.init.GrowthcraftRiceItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -42,16 +44,26 @@ public class CheeseWheelBlock extends HorizontalDirectionalBlock {
     private final Supplier<? extends Item> sliceItem;
     private final boolean sliceable;
     private final Supplier<? extends Block> agedBlock;
+    private final Supplier<? extends Item> waxItem;
+    private final Supplier<? extends Block> waxedBlock;
 
     public CheeseWheelBlock() {
-        this(() -> null, false, () -> null);
+        this(() -> null, false, () -> null, () -> null, () -> null);
     }
 
-    public CheeseWheelBlock(Supplier<? extends Item> sliceItem, boolean sliceable, Supplier<? extends Block> agedBlock) {
+    public CheeseWheelBlock(
+            Supplier<? extends Item> sliceItem,
+            boolean sliceable,
+            Supplier<? extends Block> agedBlock,
+            Supplier<? extends Item> waxItem,
+            Supplier<? extends Block> waxedBlock
+    ) {
         super(BlockBehaviour.Properties.ofFullCopy(Blocks.CAKE).noOcclusion().randomTicks());
         this.sliceItem = sliceItem;
         this.sliceable = sliceable;
         this.agedBlock = agedBlock;
+        this.waxItem = waxItem;
+        this.waxedBlock = waxedBlock;
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, net.minecraft.core.Direction.NORTH)
                 .setValue(SLICE_COUNT_BOTTOM, 4)
@@ -113,6 +125,22 @@ public class CheeseWheelBlock extends HorizontalDirectionalBlock {
 
     @Override
     protected ItemInteractionResult useItemOn(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (canWaxWith(heldStack)) {
+            if (!level.isClientSide) {
+                Block waxed = waxedBlock.get();
+                level.setBlock(pos, waxed.defaultBlockState()
+                        .setValue(FACING, state.getValue(FACING))
+                        .setValue(SLICE_COUNT_BOTTOM, state.getValue(SLICE_COUNT_BOTTOM))
+                        .setValue(SLICE_COUNT_TOP, state.getValue(SLICE_COUNT_TOP))
+                        .setValue(AGE, 0), Block.UPDATE_ALL);
+                level.playSound(null, pos, SoundEvents.HONEYCOMB_WAX_ON, SoundSource.BLOCKS, 1.0F, 1.0F);
+                if (!player.isCreative()) {
+                    heldStack.shrink(1);
+                }
+            }
+            return ItemInteractionResult.sidedSuccess(level.isClientSide);
+        }
+
         if (heldStack.is(this.asItem())) {
             if (!canAddWholeWheel(state)) {
                 return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
@@ -181,6 +209,11 @@ public class CheeseWheelBlock extends HorizontalDirectionalBlock {
 
     private boolean canAddWholeWheel(BlockState state) {
         return getTotalSlices(state) + 4 <= 8;
+    }
+
+    private boolean canWaxWith(ItemStack stack) {
+        Item wax = waxItem.get();
+        return wax != null && waxedBlock.get() != null && stack.is(wax);
     }
 
     private void takeWholeWheel(BlockState state, Level level, BlockPos pos, Player player) {

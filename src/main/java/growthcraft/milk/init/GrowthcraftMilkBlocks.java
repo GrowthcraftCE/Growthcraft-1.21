@@ -1,5 +1,6 @@
 package growthcraft.milk.init;
 
+import growthcraft.apiary.init.GrowthcraftApiaryItems;
 import growthcraft.milk.block.CheesePressBlock;
 import growthcraft.milk.block.CheeseCurdBlock;
 import growthcraft.milk.block.CheeseWheelBlock;
@@ -80,15 +81,30 @@ public final class GrowthcraftMilkBlocks {
             () -> new WallHangingSignBlock(WoodType.SPRUCE, hangingSignProperties()));
 
     private static DeferredBlock<CheeseWheelBlock> registerCheese(String cheeseName) {
-        return BLOCKS.register(cheeseName + "_cheese", () -> new CheeseWheelBlock(getSliceItem(cheeseName), false, getFreshAgedBlock(cheeseName)));
+        return BLOCKS.register(cheeseName + "_cheese", () -> new CheeseWheelBlock(
+                getSliceItem(cheeseName),
+                false,
+                getFreshAgedBlock(cheeseName),
+                getWaxItem(cheeseName),
+                getWaxedBlock(cheeseName)));
     }
 
     private static DeferredBlock<CheeseWheelBlock> registerAgedCheese(String cheeseName) {
-        return BLOCKS.register(cheeseName + "_cheese_aged", () -> new CheeseWheelBlock(getSliceItem(cheeseName), true, () -> null));
+        return BLOCKS.register(cheeseName + "_cheese_aged", () -> new CheeseWheelBlock(
+                getSliceItem(cheeseName),
+                true,
+                () -> null,
+                () -> null,
+                () -> null));
     }
 
     private static DeferredBlock<CheeseWheelBlock> registerWaxedCheese(String cheeseName) {
-        return BLOCKS.register(cheeseName + "_cheese_waxed", () -> new CheeseWheelBlock(getSliceItem(cheeseName), true, getAgedBlock(cheeseName)));
+        return BLOCKS.register(cheeseName + "_cheese_waxed", () -> new CheeseWheelBlock(
+                getSliceItem(cheeseName),
+                true,
+                getAgedBlock(cheeseName),
+                () -> null,
+                () -> null));
     }
 
     private static java.util.function.Supplier<? extends net.minecraft.world.level.block.Block> getFreshAgedBlock(String cheeseName) {
@@ -113,6 +129,26 @@ public final class GrowthcraftMilkBlocks {
             case Reference.UnlocalizedName.MONTEREY -> GrowthcraftMilkBlocks.MONTEREY_CHEESE_AGED.get();
             case Reference.UnlocalizedName.PARMESAN -> GrowthcraftMilkBlocks.PARMESAN_CHEESE_AGED.get();
             case Reference.UnlocalizedName.PROVOLONE -> GrowthcraftMilkBlocks.PROVOLONE_CHEESE_AGED.get();
+            default -> null;
+        };
+    }
+
+    private static java.util.function.Supplier<? extends net.minecraft.world.level.block.Block> getWaxedBlock(String cheeseName) {
+        return () -> switch (cheeseName) {
+            case Reference.UnlocalizedName.CHEDDAR -> GrowthcraftMilkBlocks.CHEDDAR_CHEESE_WAXED.get();
+            case Reference.UnlocalizedName.GOUDA -> GrowthcraftMilkBlocks.GOUDA_CHEESE_WAXED.get();
+            case Reference.UnlocalizedName.MONTEREY -> GrowthcraftMilkBlocks.MONTEREY_CHEESE_WAXED.get();
+            case Reference.UnlocalizedName.PROVOLONE -> GrowthcraftMilkBlocks.PROVOLONE_CHEESE_WAXED.get();
+            default -> null;
+        };
+    }
+
+    private static java.util.function.Supplier<? extends net.minecraft.world.item.Item> getWaxItem(String cheeseName) {
+        return () -> switch (cheeseName) {
+            case Reference.UnlocalizedName.CHEDDAR -> GrowthcraftApiaryItems.BEES_WAX_RED.get();
+            case Reference.UnlocalizedName.GOUDA -> GrowthcraftApiaryItems.BEES_WAX.get();
+            case Reference.UnlocalizedName.MONTEREY -> GrowthcraftApiaryItems.BEES_WAX_BLACK.get();
+            case Reference.UnlocalizedName.PROVOLONE -> GrowthcraftApiaryItems.BEES_WAX_WHITE.get();
             default -> null;
         };
     }

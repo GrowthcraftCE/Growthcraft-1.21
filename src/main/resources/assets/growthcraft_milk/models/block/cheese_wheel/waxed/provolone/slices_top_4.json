@@ -1,0 +1,8 @@
+{
+  "parent": "growthcraft_milk:block/cheese_wheel/cheese_slab_slices_top_4",
+  "textures": {
+    "0": "growthcraft_milk:block/cheese/provolone_waxed_top",
+    "1": "growthcraft_milk:block/cheese/provolone_waxed_top",
+    "particle": "growthcraft_milk:block/cheese/provolone_waxed_top"
+  }
+}
