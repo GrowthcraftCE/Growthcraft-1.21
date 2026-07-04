@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "growthcraft_apiary",
+  "key": {
+    "B": {
+      "item": "minecraft:dark_oak_slab"
+    },
+    "P": {
+      "item": "minecraft:dark_oak_planks"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "pattern": [
+    "SPS",
+    "PBP",
+    "SPS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "growthcraft_apiary:bee_box_dark_oak"
+  }
+}

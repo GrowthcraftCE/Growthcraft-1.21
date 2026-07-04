@@ -86,8 +86,177 @@ config="${mod_id}.mixins.json"
     ordering="NONE"
     side="BOTH"
 
-# Features are specific properties of the game environment, that you may want to declare you require. This example declares
-# that your mod requires GL version 3.2 or higher. Other features will be added. They are side aware so declaring this won't
-# stop your mod loading on the server for example.
-#[features.${mod_id}]
-#openGLVersion="[3.2,)"
+
+
+[[mods]]
+modId="growthcraft_cellar"
+version="${mod_version}"
+displayName="Growthcraft Cellar"
+authors="${mod_authors}"
+description='''Growthcraft Cellar adds processing and fermentation for various items and drinks.'''
+
+[[dependencies.growthcraft_cellar]]
+    modId="neoforge"
+    type="required"
+    versionRange="[${neo_version},)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.growthcraft_cellar]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.growthcraft_cellar]]
+    modId="growthcraft"
+    type="required"
+    versionRange="[${mod_version},)"
+    ordering="AFTER"
+    side="BOTH"
+
+
+[[mods]]
+modId="growthcraft_milk"
+version="${mod_version}"
+displayName="Growthcraft Milk"
+authors="${mod_authors}"
+description='''Growthcraft Milk centralizes dairy-related machines and processing as part of Cellar integration roadmap.'''
+
+[[dependencies.growthcraft_milk]]
+    modId="neoforge"
+    type="required"
+    versionRange="[${neo_version},)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.growthcraft_milk]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.growthcraft_milk]]
+    modId="growthcraft"
+    type="required"
+    versionRange="[${mod_version},)"
+    ordering="AFTER"
+    side="BOTH"
+
+
+[[mods]]
+modId="growthcraft_rice"
+version="${mod_version}"
+displayName="Growthcraft Rice"
+authors="${mod_authors}"
+description='''Growthcraft Rice adds rice ingredients, drinks, and Seishu yeast for sake production.'''
+
+[[dependencies.growthcraft_rice]]
+    modId="neoforge"
+    type="required"
+    versionRange="[${neo_version},)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.growthcraft_rice]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.growthcraft_rice]]
+    modId="growthcraft"
+    type="required"
+    versionRange="[${mod_version},)"
+    ordering="AFTER"
+    side="BOTH"
+
+
+[[mods]]
+modId="growthcraft_bamboo"
+version="${mod_version}"
+displayName="Growthcraft Bamboo"
+authors="${mod_authors}"
+description='''Growthcraft Bamboo adds bamboo building components and related processing.'''
+
+[[dependencies.growthcraft_bamboo]]
+    modId="neoforge"
+    type="required"
+    versionRange="[${neo_version},)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.growthcraft_bamboo]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.growthcraft_bamboo]]
+    modId="growthcraft"
+    type="required"
+    versionRange="[${mod_version},)"
+    ordering="AFTER"
+    side="BOTH"
+
+
+[[mods]]
+modId="growthcraft_apples"
+version="${mod_version}"
+displayName="Growthcraft Apples"
+authors="${mod_authors}"
+description='''Growthcraft Apples adds apple wood building blocks and apple processing.'''
+
+[[dependencies.growthcraft_apples]]
+    modId="neoforge"
+    type="required"
+    versionRange="[${neo_version},)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.growthcraft_apples]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.growthcraft_apples]]
+    modId="growthcraft"
+    type="required"
+    versionRange="[${mod_version},)"
+    ordering="AFTER"
+    side="BOTH"
+
+
+[[mods]]
+modId="growthcraft_apiary"
+version="${mod_version}"
+displayName="Growthcraft Apiary"
+authors="${mod_authors}"
+description='''Growthcraft Apiary adds bees, wax, honey, and beekeeping progression.'''
+
+[[dependencies.growthcraft_apiary]]
+    modId="neoforge"
+    type="required"
+    versionRange="[${neo_version},)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.growthcraft_apiary]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.growthcraft_apiary]]
+    modId="growthcraft"
+    type="required"
+    versionRange="[${mod_version},)"
+    ordering="AFTER"
+    side="BOTH"

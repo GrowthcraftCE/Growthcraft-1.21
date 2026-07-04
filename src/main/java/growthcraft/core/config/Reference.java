@@ -4,7 +4,7 @@ public class Reference {
     public static final String MODID = "growthcraft";
     public static final String NAME = "Growthcraft";
     public static final String NAME_SHORT = "core";
-    public static final String VERSION = "1.21.1.1";
+    public static final String VERSION = "1.21.1.3";
 
     private Reference() { /* Prevent default public constructor */ }
 
@@ -22,7 +22,6 @@ public class Reference {
         }
 
         public static final class Item {
-            public static final String WRENCH = "wrench";
             public static final String SALT = "salt";
             // Rope items
             public static final String ROPE = "rope";
@@ -45,6 +44,7 @@ public class Reference {
             public static final String CROWBAR_RED = "crowbar_red";
             public static final String CROWBAR_WHITE = "crowbar_white";
             public static final String CROWBAR_YELLOW = "crowbar_yellow";
+            public static final String WRENCH = "wrench";
 
             private Item() {}
         }

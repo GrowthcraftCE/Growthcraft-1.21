@@ -1,0 +1,9 @@
+{
+  "parent": "growthcraft_cellar:block/grape_vine/template/grape_vine_crop_stage4",
+  "textures": {
+    "0": "growthcraft_cellar:block/grape_vine/grape_vine_crop_stage0",
+    "2": "growthcraft_cellar:item/grape_white",
+    "particle": "growthcraft_cellar:block/grape_vine/grape_vine_leaves",
+    "missing": "growthcraft:block/missing"
+  }
+}

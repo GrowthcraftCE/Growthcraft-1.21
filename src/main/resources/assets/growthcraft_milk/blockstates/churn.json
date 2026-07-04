@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "plunged=false": {
+      "model": "growthcraft_milk:block/churn_up"
+    },
+    "plunged=true": {
+      "model": "growthcraft_milk:block/churn_down"
+    }
+  }
+}

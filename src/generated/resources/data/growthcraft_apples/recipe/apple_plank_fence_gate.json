@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "growthcraft_apples",
+  "key": {
+    "1": {
+      "item": "minecraft:stick"
+    },
+    "2": {
+      "item": "growthcraft_apples:apple_plank"
+    }
+  },
+  "pattern": [
+    "121",
+    "121"
+  ],
+  "result": {
+    "count": 3,
+    "id": "growthcraft_apples:apple_plank_fence_gate"
+  }
+}

@@ -1,0 +1,152 @@
+{
+	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11. Model by Kisutora.",
+	"textures": {
+		"0": "growthcraft_cellar:block/fruit_press/fruit_press_bottom",
+		"1": "growthcraft_cellar:block/fruit_press/fruit_press_piston_bottom",
+		"2": "growthcraft_cellar:block/fruit_press/fruit_press_piston_head",
+		"3": "growthcraft_cellar:block/fruit_press/fruit_press_piston_side",
+		"4": "growthcraft_cellar:block/fruit_press/fruit_press_piston_inner",
+		"particle": "growthcraft_cellar:block/fruit_press/fruit_press_piston_head"
+	},
+	"elements": [
+		{
+			"name": "support_n",
+			"from": [14, 0, 7],
+			"to": [16, 16, 9],
+			"faces": {
+				"north": {"uv": [14, 0, 16, 16], "texture": "#0"},
+				"east": {"uv": [14, 0, 16, 16], "texture": "#0"},
+				"south": {"uv": [14, 0, 16, 16], "texture": "#0"},
+				"west": {"uv": [14, 0, 16, 16], "texture": "#0"},
+				"up": {"uv": [0, 14, 2, 16], "rotation": 90, "texture": "#0"}
+			}
+		},
+		{
+			"name": "support_s",
+			"from": [0, 0, 7],
+			"to": [2, 16, 9],
+			"faces": {
+				"north": {"uv": [14, 0, 16, 16], "texture": "#0"},
+				"east": {"uv": [14, 0, 16, 16], "texture": "#0"},
+				"south": {"uv": [14, 0, 16, 16], "texture": "#0"},
+				"west": {"uv": [14, 0, 16, 16], "texture": "#0"},
+				"up": {"uv": [0, 14, 2, 16], "rotation": 90, "texture": "#0"}
+			}
+		},
+		{
+			"name": "support_filler",
+			"from": [2, 13, 7],
+			"to": [3, 15, 9],
+			"faces": {
+				"north": {"uv": [0, 14, 1, 16], "texture": "#0"},
+				"south": {"uv": [0, 14, 1, 16], "texture": "#0"},
+				"up": {"uv": [0, 14, 2, 15], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [0, 14, 2, 15], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "support_filler",
+			"from": [2, 9, 7],
+			"to": [3, 11, 9],
+			"faces": {
+				"north": {"uv": [0, 14, 1, 16], "texture": "#0"},
+				"south": {"uv": [0, 14, 1, 16], "texture": "#0"},
+				"up": {"uv": [0, 14, 2, 15], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [0, 14, 2, 15], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "support_filler",
+			"from": [13, 13, 7],
+			"to": [14, 15, 9],
+			"faces": {
+				"north": {"uv": [0, 14, 1, 16], "texture": "#0"},
+				"south": {"uv": [0, 14, 1, 16], "texture": "#0"},
+				"up": {"uv": [0, 14, 2, 15], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [0, 14, 2, 15], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "support_filler",
+			"from": [13, 9, 7],
+			"to": [14, 11, 9],
+			"faces": {
+				"north": {"uv": [0, 14, 1, 16], "texture": "#0"},
+				"south": {"uv": [0, 14, 1, 16], "texture": "#0"},
+				"up": {"uv": [0, 14, 2, 15], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [0, 14, 2, 15], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "piston_head",
+			"from": [3, -3, 3],
+			"to": [13, 0, 13],
+			"faces": {
+				"north": {"uv": [0, 11, 10, 14], "texture": "#2"},
+				"east": {"uv": [0, 11, 10, 14], "texture": "#2"},
+				"south": {"uv": [0, 11, 10, 14], "texture": "#2"},
+				"west": {"uv": [0, 11, 10, 14], "texture": "#2"},
+				"up": {"uv": [0, 0, 10, 10], "rotation": 90, "texture": "#2"},
+				"down": {"uv": [0, 0, 10, 10], "rotation": 270, "texture": "#2"}
+			}
+		},
+		{
+			"name": "piston_base",
+			"from": [3, 9, 3],
+			"to": [13, 16, 13],
+			"faces": {
+				"north": {"uv": [3, 1, 13, 8], "texture": "#3"},
+				"east": {"uv": [3, 1, 13, 8], "texture": "#3"},
+				"south": {"uv": [3, 1, 13, 8], "texture": "#3"},
+				"west": {"uv": [3, 1, 13, 8], "texture": "#3"},
+				"up": {"uv": [3, 3, 13, 13], "rotation": 90, "texture": "#1"},
+				"down": {"uv": [3, 3, 13, 13], "rotation": 270, "texture": "#4"}
+			}
+		},
+		{
+			"name": "piston_extended",
+			"from": [6.5, 0, 6.5],
+			"to": [9.5, 9, 9.5],
+			"faces": {
+				"north": {"uv": [12, 0, 15, 9], "texture": "#2"},
+				"east": {"uv": [12, 0, 15, 9], "texture": "#2"},
+				"south": {"uv": [12, 0, 15, 9], "texture": "#2"},
+				"west": {"uv": [12, 0, 15, 9], "texture": "#2"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [75, 45, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, 45, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, 225, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"ground": {
+			"translation": [0, 3, 0],
+			"scale": [0.25, 0.25, 0.25]
+		},
+		"gui": {
+			"rotation": [30, 225, 0],
+			"scale": [0.625, 0.625, 0.625]
+		},
+		"fixed": {
+			"scale": [0.5, 0.5, 0.5]
+		}
+	},
+	"groups": [
+		{
+			"name": "fruit_press_piston_down",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+		}
+	]
+}

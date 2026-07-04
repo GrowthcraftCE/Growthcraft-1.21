@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "growthcraft_apples:block/bee_box_apple"
+    },
+    "facing=south": {
+      "model": "growthcraft_apples:block/bee_box_apple",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "growthcraft_apples:block/bee_box_apple",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "growthcraft_apples:block/bee_box_apple",
+      "y": 270
+    }
+  }
+}

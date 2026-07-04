@@ -1,0 +1,81 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "growthcraft_milk:block/cheese_press_base"
+      }
+    },
+    {
+      "when": {
+        "rotation": "0"
+      },
+      "apply": {
+        "model": "growthcraft_milk:block/cheese_press_topper_0",
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "rotation": "1"
+      },
+      "apply": {
+        "model": "growthcraft_milk:block/cheese_press_topper_1",
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "rotation": "2"
+      },
+      "apply": {
+        "model": "growthcraft_milk:block/cheese_press_topper_2",
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "rotation": "3"
+      },
+      "apply": {
+        "model": "growthcraft_milk:block/cheese_press_topper_3",
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "rotation": "4"
+      },
+      "apply": {
+        "model": "growthcraft_milk:block/cheese_press_topper_4",
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "rotation": "5"
+      },
+      "apply": {
+        "model": "growthcraft_milk:block/cheese_press_topper_5",
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "rotation": "6"
+      },
+      "apply": {
+        "model": "growthcraft_milk:block/cheese_press_topper_6",
+        "uvlock": true
+      }
+    },
+    {
+      "when": {
+        "rotation": "7"
+      },
+      "apply": {
+        "model": "growthcraft_milk:block/cheese_press_topper_7",
+        "uvlock": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+package growthcraft.milk.init;
+
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import growthcraft.milk.config.Reference;
+import growthcraft.milk.particle.ColoredDripLandParticleOption;
+import growthcraft.milk.particle.ColoredDripParticleOption;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
+
+public final class GrowthcraftMilkParticles {
+    public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(Registries.PARTICLE_TYPE, Reference.MODID);
+
+    public static final DeferredHolder<ParticleType<?>, ParticleType<ColoredDripParticleOption>> COLORED_DRIP = PARTICLE_TYPES.register(
+            "colored_drip",
+            () -> new ParticleType<>(false) {
+                private final MapCodec<ColoredDripParticleOption> codec = RecordCodecBuilder.mapCodec(instance -> instance.group(
+                        com.mojang.serialization.Codec.INT.fieldOf("color").forGetter(ColoredDripParticleOption::color)
+                ).apply(instance, ColoredDripParticleOption::new));
+
+                private final StreamCodec<? super RegistryFriendlyByteBuf, ColoredDripParticleOption> streamCodec = ByteBufCodecs.INT.map(
+                        ColoredDripParticleOption::new,
+                        ColoredDripParticleOption::color
+                );
+
+                @Override
+                public MapCodec<ColoredDripParticleOption> codec() {
+                    return codec;
+                }
+
+                @Override
+                public StreamCodec<? super RegistryFriendlyByteBuf, ColoredDripParticleOption> streamCodec() {
+                    return streamCodec;
+                }
+            }
+    );
+
+    public static final DeferredHolder<ParticleType<?>, ParticleType<ColoredDripLandParticleOption>> COLORED_DRIP_LAND = PARTICLE_TYPES.register(
+            "colored_drip_land",
+            () -> new ParticleType<>(false) {
+                private final MapCodec<ColoredDripLandParticleOption> codec = RecordCodecBuilder.mapCodec(instance -> instance.group(
+                        com.mojang.serialization.Codec.INT.fieldOf("color").forGetter(ColoredDripLandParticleOption::color),
+                        com.mojang.serialization.Codec.INT.optionalFieldOf("linger_ticks", 24).forGetter(ColoredDripLandParticleOption::lingerTicks)
+                ).apply(instance, ColoredDripLandParticleOption::new));
+
+                private final StreamCodec<? super RegistryFriendlyByteBuf, ColoredDripLandParticleOption> streamCodec = StreamCodec.composite(
+                        ByteBufCodecs.INT, ColoredDripLandParticleOption::color,
+                        ByteBufCodecs.INT, ColoredDripLandParticleOption::lingerTicks,
+                        ColoredDripLandParticleOption::new
+                );
+
+                @Override
+                public MapCodec<ColoredDripLandParticleOption> codec() {
+                    return codec;
+                }
+
+                @Override
+                public StreamCodec<? super RegistryFriendlyByteBuf, ColoredDripLandParticleOption> streamCodec() {
+                    return streamCodec;
+                }
+            }
+    );
+
+    private GrowthcraftMilkParticles() {
+    }
+}

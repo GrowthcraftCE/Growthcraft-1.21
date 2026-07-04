@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "growthcraft_apiary",
+  "key": {
+    "B": [
+      {
+        "item": "minecraft:bamboo_slab"
+      },
+      {
+        "item": "minecraft:bamboo_mosaic_slab"
+      }
+    ],
+    "P": [
+      {
+        "item": "minecraft:bamboo_planks"
+      },
+      {
+        "item": "minecraft:bamboo_mosaic"
+      }
+    ],
+    "S": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "pattern": [
+    "SPS",
+    "PBP",
+    "SPS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "growthcraft_apiary:bee_box_bamboo"
+  }
+}

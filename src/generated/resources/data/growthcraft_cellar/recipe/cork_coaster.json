@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "growthcraft_cellar",
+  "ingredients": [
+    {
+      "item": "growthcraft_cellar:cork_bark"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "id": "growthcraft_cellar:cork_coaster"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "lit=false,has_lid=false": {
+      "model": "growthcraft_cellar:block/brew_kettle"
+    },
+    "lit=false,has_lid=true": {
+      "model": "growthcraft_cellar:block/brew_kettle_lid"
+    },
+    "lit=true,has_lid=true": {
+      "model": "growthcraft_cellar:block/brew_kettle_lid"
+    },
+    "lit=true,has_lid=false": {
+      "model": "growthcraft_cellar:block/brew_kettle"
+    }
+  }
+}

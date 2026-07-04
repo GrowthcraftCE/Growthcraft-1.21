@@ -25,4 +25,9 @@ run-data
 
 repo
 /src/generated/resources/.cache/
-.aider*
+
+# Local decompiled Minecraft/NeoForge references for porting.
+.decompiled/
+
+# Local migration planning notes generated during the port.
+docs/

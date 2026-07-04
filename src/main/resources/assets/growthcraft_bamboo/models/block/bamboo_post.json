@@ -1,0 +1,50 @@
+{
+  "credit": "Made with Blockbench",
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "0": "minecraft:block/bamboo_fence",
+    "particle": "minecraft:block/bamboo_fence_particle"
+  },
+  "elements": [
+    {
+      "from": [8, 0, 8],
+      "to": [13, 16, 13],
+      "faces": {
+        "east": { "uv": [0, 0, 4, 16], "texture": "#0" },
+        "south": { "uv": [0, 0, 4, 16], "texture": "#0" },
+        "up": { "uv": [4, 0, 8, 4], "texture": "#0" },
+        "down": { "uv": [4, 0, 8, 4], "texture": "#0" }
+      }
+    },
+    {
+      "from": [3, 0, 8],
+      "to": [8, 16, 13],
+      "faces": {
+        "south": { "uv": [0, 0, 4, 16], "texture": "#0" },
+        "west": { "uv": [0, 0, 4, 16], "texture": "#0" },
+        "up": { "uv": [4, 0, 8, 4], "texture": "#0" },
+        "down": { "uv": [4, 0, 8, 4], "texture": "#0" }
+      }
+    },
+    {
+      "from": [8, 0, 3],
+      "to": [13, 16, 8],
+      "faces": {
+        "north": { "uv": [0, 0, 4, 16], "texture": "#0" },
+        "east": { "uv": [0, 0, 4, 16], "texture": "#0" },
+        "up": { "uv": [4, 0, 8, 4], "texture": "#0" },
+        "down": { "uv": [4, 0, 8, 4], "texture": "#0" }
+      }
+    },
+    {
+      "from": [3, 0, 3],
+      "to": [8, 16, 8],
+      "faces": {
+        "north": { "uv": [0, 0, 4, 16], "texture": "#0" },
+        "west": { "uv": [0, 0, 4, 16], "texture": "#0" },
+        "up": { "uv": [4, 0, 8, 4], "texture": "#0" },
+        "down": { "uv": [4, 0, 8, 4], "texture": "#0" }
+      }
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "particle": "growthcraft_cellar:block/culture_jar"
+    }
+  },
+  "variants": {
+    "facing=north,lit=true": {
+      "model": "growthcraft_cellar:block/culture_jar"
+    },
+    "facing=south,lit=true": {
+      "model": "growthcraft_cellar:block/culture_jar",
+      "y": 180
+    },
+    "facing=east,lit=true": {
+      "model": "growthcraft_cellar:block/culture_jar",
+      "y": 90
+    },
+    "facing=west,lit=true": {
+      "model": "growthcraft_cellar:block/culture_jar",
+      "y": 270
+    },
+    "facing=north,lit=false": {
+      "model": "growthcraft_cellar:block/culture_jar"
+    },
+    "facing=south,lit=false": {
+      "model": "growthcraft_cellar:block/culture_jar",
+      "y": 180
+    },
+    "facing=east,lit=false": {
+      "model": "growthcraft_cellar:block/culture_jar",
+      "y": 90
+    },
+    "facing=west,lit=false": {
+      "model": "growthcraft_cellar:block/culture_jar",
+      "y": 270
+    }
+  }
+}

@@ -1,5 +1,6 @@
 package growthcraft.core.block;
 
+import growthcraft.apples.init.GrowthcraftApplesBlocks;
 import growthcraft.core.init.GrowthcraftBlocks;
 import growthcraft.core.init.GrowthcraftItems;
 import net.minecraft.core.BlockPos;
@@ -83,8 +84,9 @@ public class RopeFenceBlock extends FenceBlock {
 
     @Override
     public boolean connectsTo(BlockState neighborState, boolean neighborIsFullBlock, Direction side) {
-        // Allow normal fence connections plus connect to RopeBlock
+        // Allow normal fence connections plus connect to RopeBlock and other RopeFenceBlocks
         if (neighborState.getBlock() instanceof RopeBlock) return true;
+        if (neighborState.getBlock() instanceof RopeFenceBlock) return true;
         return super.connectsTo(neighborState, neighborIsFullBlock, side);
     }
 
@@ -116,6 +118,7 @@ public class RopeFenceBlock extends FenceBlock {
         if (ropeFenceBlock == GrowthcraftBlocks.ROPE_LINEN_NETHER_BRICK_FENCE.get()) return Blocks.NETHER_BRICK_FENCE;
         if (ropeFenceBlock == GrowthcraftBlocks.ROPE_LINEN_CRIMSON_FENCE.get()) return Blocks.CRIMSON_FENCE;
         if (ropeFenceBlock == GrowthcraftBlocks.ROPE_LINEN_WARPED_FENCE.get()) return Blocks.WARPED_FENCE;
+        if (ropeFenceBlock == GrowthcraftApplesBlocks.APPLE_PLANK_FENCE_ROPE_LINEN.get()) return GrowthcraftApplesBlocks.APPLE_PLANK_FENCE.get();
         return null;
     }
 }
