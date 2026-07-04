@@ -131,6 +131,7 @@
   "item.growthcraft_cellar.cork_bark": "Cork Bark",
   "growthcraft_cellar.tooltip.roaster.progress": "Roast Level %s (%d%%)",
   "growthcraft_cellar.tooltip.fermentation.progress": "Fermenting %s%%",
+  "growthcraft_cellar.tooltip.fruit_press.progress": "Pressing %s%%",
   "growthcraft_cellar.tooltip.fermentation.yeast_warning": "Insufficient yeast.",
   "growthcraft_cellar.tooltip.fermentation.yeast_error": "Not a valid yeast for this fluid.",
   "jei.growthcraft_cellar.category.culture_jar": "Culture Jar (Culturing)",

@@ -1,13 +1,12 @@
 package growthcraft.cellar.block;
 
-import growthcraft.cellar.config.Reference;
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
-import growthcraft.cellar.init.GrowthcraftCellarMenus;
-import growthcraft.lib.block.MachineMenuOpener;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -31,6 +30,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.fluids.FluidUtil;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
@@ -116,8 +116,23 @@ public class FruitPressPistonBlock extends Block {
         if (state.getValue(PRESSED)) {
             return InteractionResult.PASS;
         }
-        return MachineMenuOpener.open(level, player, GrowthcraftCellarMenus.FRUIT_PRESS.get(),
-                Component.translatable("block." + Reference.MODID + "." + Reference.UnlocalizedName.Block.FRUIT_PRESS));
+        if (!level.isClientSide) {
+            BlockEntity blockEntity = level.getBlockEntity(pos.below());
+            if (blockEntity instanceof net.minecraft.world.MenuProvider provider) {
+                player.openMenu(provider);
+            }
+            return InteractionResult.CONSUME;
+        }
+        return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (FluidUtil.getFluidHandler(heldStack).isPresent()
+                && FluidUtil.interactWithFluidHandler(player, hand, level, pos.below(), hitResult.getDirection())) {
+            return ItemInteractionResult.sidedSuccess(level.isClientSide);
+        }
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     @Override

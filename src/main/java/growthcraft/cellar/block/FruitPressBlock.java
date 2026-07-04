@@ -1,13 +1,15 @@
 package growthcraft.cellar.block;
 
 import growthcraft.cellar.config.Reference;
+import growthcraft.cellar.block.entity.FruitPressBlockEntity;
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
-import growthcraft.cellar.init.GrowthcraftCellarMenus;
-import growthcraft.lib.block.MachineMenuOpener;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -16,11 +18,15 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
@@ -30,9 +36,10 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.fluids.FluidUtil;
 import org.jetbrains.annotations.Nullable;
 
-public class FruitPressBlock extends Block {
+public class FruitPressBlock extends Block implements EntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     private static final VoxelShape SHAPE = Shapes.or(
             Block.box(1.0D, 0.0D, 1.0D, 15.0D, 3.0D, 15.0D),
@@ -101,16 +108,51 @@ public class FruitPressBlock extends Block {
         if (pistonState.is(GrowthcraftCellarBlocks.FRUIT_PRESS_PISTON.get()) && pistonState.getValue(FruitPressPistonBlock.PRESSED)) {
             return InteractionResult.PASS;
         }
-        return MachineMenuOpener.open(level, player, GrowthcraftCellarMenus.FRUIT_PRESS.get(),
-                Component.translatable("block." + Reference.MODID + "." + Reference.UnlocalizedName.Block.FRUIT_PRESS));
+        if (!level.isClientSide) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof net.minecraft.world.MenuProvider provider) {
+                player.openMenu(provider);
+            }
+            return InteractionResult.CONSUME;
+        }
+        return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (FluidUtil.getFluidHandler(heldStack).isPresent() && FluidUtil.interactWithFluidHandler(player, hand, level, pos, hitResult.getDirection())) {
+            return ItemInteractionResult.sidedSuccess(level.isClientSide);
+        }
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
-        if (!state.is(newState.getBlock()) && level.getBlockState(pos.above()).is(GrowthcraftCellarBlocks.FRUIT_PRESS_PISTON.get())) {
-            level.destroyBlock(pos.above(), false);
+        if (!state.is(newState.getBlock())) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof FruitPressBlockEntity press) {
+                Containers.dropContents(level, pos, press);
+                level.updateNeighbourForOutputSignal(pos, this);
+            }
+            if (level.getBlockState(pos.above()).is(GrowthcraftCellarBlocks.FRUIT_PRESS_PISTON.get())) {
+                level.destroyBlock(pos.above(), false);
+            }
+            super.onRemove(state, level, pos, newState, movedByPiston);
         }
-        super.onRemove(state, level, pos, newState, movedByPiston);
+    }
+
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new FruitPressBlockEntity(pos, state);
+    }
+
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        return level.isClientSide ? null : (lvl, pos, st, be) -> {
+            if (be instanceof FruitPressBlockEntity press) {
+                FruitPressBlockEntity.serverTick(lvl, pos, st, press);
+            }
+        };
     }
 
     @Override
