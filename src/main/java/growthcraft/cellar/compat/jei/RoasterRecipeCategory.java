@@ -64,8 +64,8 @@ public class RoasterRecipeCategory implements IRecipeCategory<RecipeHolder<Roast
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, RecipeHolder<RoasterRecipe> holder, IFocusGroup focuses) {
         RoasterRecipe recipe = holder.value();
-        builder.addSlot(RecipeIngredientRole.INPUT, 25, 23).addItemStack(recipe.getInputItem());
-        builder.addSlot(RecipeIngredientRole.OUTPUT, 77, 23).addItemStack(recipe.getResult());
+        builder.addSlot(RecipeIngredientRole.INPUT, 24, 22).addItemStack(recipe.getInputItem());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 76, 22).addItemStack(recipe.getResult());
     }
 
     @Override
