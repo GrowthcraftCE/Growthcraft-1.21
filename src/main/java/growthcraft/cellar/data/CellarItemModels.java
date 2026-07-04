@@ -56,6 +56,9 @@ public class CellarItemModels extends ItemModelProvider {
         bucket(Reference.UnlocalizedName.Item.PALE_GOLDEN_WORT_FLUID_BUCKET);
         bucket(Reference.UnlocalizedName.Item.PALE_LAGER_FLUID_BUCKET);
         bucket(Reference.UnlocalizedName.Item.PILSNER_LAGER_FLUID_BUCKET);
+        bucket(Reference.UnlocalizedName.Item.POTION_ALE_FLUID_BUCKET);
+        bucket(Reference.UnlocalizedName.Item.POTION_LAGER_FLUID_BUCKET);
+        bucket(Reference.UnlocalizedName.Item.POTION_WINE_FLUID_BUCKET);
         bucket(Reference.UnlocalizedName.Item.PURPLE_GRAPE_JUICE_FLUID_BUCKET);
         bucket(Reference.UnlocalizedName.Item.PURPLE_GRAPE_WINE_FLUID_BUCKET);
         bucket(Reference.UnlocalizedName.Item.RED_GRAPE_JUICE_FLUID_BUCKET);

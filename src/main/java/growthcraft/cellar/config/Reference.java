@@ -127,6 +127,9 @@ public final class Reference {
             public static final String PALE_GOLDEN_WORT_FLUID_BUCKET = "pale_golden_wort_fluid_bucket";
             public static final String PALE_LAGER_FLUID_BUCKET = "pale_lager_fluid_bucket";
             public static final String PILSNER_LAGER_FLUID_BUCKET = "pilsner_lager_fluid_bucket";
+            public static final String POTION_ALE_FLUID_BUCKET = "potion_ale_fluid_bucket";
+            public static final String POTION_LAGER_FLUID_BUCKET = "potion_lager_fluid_bucket";
+            public static final String POTION_WINE_FLUID_BUCKET = "potion_wine_fluid_bucket";
             public static final String PURPLE_GRAPE_JUICE_FLUID_BUCKET = "purple_grape_juice_fluid_bucket";
             public static final String PURPLE_GRAPE_WINE_FLUID_BUCKET = "purple_grape_wine_fluid_bucket";
             public static final String RED_GRAPE_JUICE_FLUID_BUCKET = "red_grape_juice_fluid_bucket";
