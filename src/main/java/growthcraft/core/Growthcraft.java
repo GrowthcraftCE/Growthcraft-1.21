@@ -19,7 +19,10 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 
-// The value here should match an entry in the META-INF/neoforge.mods.toml file
+//
+// AIDER_SANITY_TEST_12345
+//
+
 @Mod(Growthcraft.MODID)
 public class Growthcraft {
     public static final String MODID = Reference.MODID;
