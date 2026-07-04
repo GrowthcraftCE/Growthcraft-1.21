@@ -3,6 +3,7 @@ package growthcraft.cellar;
 import growthcraft.cellar.init.GrowthcraftCellarFluids;
 import growthcraft.cellar.init.GrowthcraftCellarMenus;
 import growthcraft.cellar.client.screen.CultureJarScreen;
+import growthcraft.cellar.client.screen.RoasterScreen;
 import growthcraft.core.Growthcraft;
 import growthcraft.lib.client.screen.MachineScreen;
 import growthcraft.lib.fluid.FluidRegistryContainer;
@@ -55,6 +56,6 @@ public class GrowthcraftCellarClient {
         event.register(GrowthcraftCellarMenus.BREW_KETTLE.get(), MachineScreen::new);
         event.register(GrowthcraftCellarMenus.FERMENTATION_BARREL.get(), MachineScreen::new);
         event.register(GrowthcraftCellarMenus.FRUIT_PRESS.get(), MachineScreen::new);
-        event.register(GrowthcraftCellarMenus.ROASTER.get(), MachineScreen::new);
+        event.register(GrowthcraftCellarMenus.ROASTER.get(), RoasterScreen::new);
     }
 }
