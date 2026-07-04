@@ -3,6 +3,7 @@ package growthcraft.cellar.init;
 import growthcraft.cellar.config.Reference;
 import growthcraft.cellar.menu.BrewKettleMenu;
 import growthcraft.cellar.menu.CultureJarMenu;
+import growthcraft.cellar.menu.FermentationBarrelMenu;
 import growthcraft.cellar.menu.RoasterMenu;
 import growthcraft.lib.menu.MachineMenu;
 import net.minecraft.core.registries.Registries;
@@ -23,7 +24,10 @@ public final class GrowthcraftCellarMenus {
             Reference.UnlocalizedName.Block.BREW_KETTLE,
             () -> new MenuType<>(BrewKettleMenu::new, FeatureFlags.DEFAULT_FLAGS)
     );
-    public static final DeferredHolder<MenuType<?>, MenuType<MachineMenu>> FERMENTATION_BARREL = registerMachine(Reference.UnlocalizedName.Block.FERMENT_BARREL_OAK);
+    public static final DeferredHolder<MenuType<?>, MenuType<FermentationBarrelMenu>> FERMENTATION_BARREL = MENUS.register(
+            Reference.UnlocalizedName.Block.FERMENT_BARREL_OAK,
+            () -> new MenuType<>(FermentationBarrelMenu::new, FeatureFlags.DEFAULT_FLAGS)
+    );
     public static final DeferredHolder<MenuType<?>, MenuType<MachineMenu>> FRUIT_PRESS = registerMachine(Reference.UnlocalizedName.Block.FRUIT_PRESS);
     public static final DeferredHolder<MenuType<?>, MenuType<RoasterMenu>> ROASTER = MENUS.register(
             Reference.UnlocalizedName.Block.ROASTER,
@@ -36,7 +40,6 @@ public final class GrowthcraftCellarMenus {
     }
 
     private static MenuType<MachineMenu> machineMenuType(String name) {
-        if (Reference.UnlocalizedName.Block.FERMENT_BARREL_OAK.equals(name)) return FERMENTATION_BARREL.get();
         if (Reference.UnlocalizedName.Block.FRUIT_PRESS.equals(name)) return FRUIT_PRESS.get();
         throw new IllegalArgumentException("Unknown cellar menu: " + name);
     }

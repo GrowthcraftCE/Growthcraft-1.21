@@ -3,6 +3,7 @@ package growthcraft.cellar.init;
 import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.block.entity.BrewKettleBlockEntity;
 import growthcraft.cellar.block.entity.CultureJarBlockEntity;
+import growthcraft.cellar.block.entity.FermentationBarrelBlockEntity;
 import net.minecraft.core.Direction;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
@@ -22,5 +23,9 @@ public final class GrowthcraftCellarCapabilities {
         GrowthcraftCellar.LOGGER.debug("[Capabilities] Registering FluidHandlers for Brew Kettle BE");
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, GrowthcraftCellarBlockEntities.BREW_KETTLE.get(),
                 (BrewKettleBlockEntity be, Direction side) -> side == Direction.UP ? be.getInputTank() : be.getOutputTank());
+
+        GrowthcraftCellar.LOGGER.debug("[Capabilities] Registering FluidHandler for Fermentation Barrel BE");
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, GrowthcraftCellarBlockEntities.FERMENTATION_BARREL.get(),
+                (FermentationBarrelBlockEntity be, Direction side) -> be.getTank());
     }
 }

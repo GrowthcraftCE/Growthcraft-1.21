@@ -4,6 +4,7 @@ import growthcraft.cellar.init.GrowthcraftCellarFluids;
 import growthcraft.cellar.init.GrowthcraftCellarMenus;
 import growthcraft.cellar.client.screen.BrewKettleScreen;
 import growthcraft.cellar.client.screen.CultureJarScreen;
+import growthcraft.cellar.client.screen.FermentationBarrelScreen;
 import growthcraft.cellar.client.screen.RoasterScreen;
 import growthcraft.core.Growthcraft;
 import growthcraft.lib.client.screen.MachineScreen;
@@ -55,7 +56,7 @@ public class GrowthcraftCellarClient {
     static void registerScreens(RegisterMenuScreensEvent event) {
         event.register(GrowthcraftCellarMenus.CULTURE_JAR.get(), CultureJarScreen::new);
         event.register(GrowthcraftCellarMenus.BREW_KETTLE.get(), BrewKettleScreen::new);
-        event.register(GrowthcraftCellarMenus.FERMENTATION_BARREL.get(), MachineScreen::new);
+        event.register(GrowthcraftCellarMenus.FERMENTATION_BARREL.get(), FermentationBarrelScreen::new);
         event.register(GrowthcraftCellarMenus.FRUIT_PRESS.get(), MachineScreen::new);
         event.register(GrowthcraftCellarMenus.ROASTER.get(), RoasterScreen::new);
     }
