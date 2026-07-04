@@ -93,6 +93,9 @@ public final class GrowthcraftApiaryFluids {
                         color.toFloatValues().get("green"),
                         color.toFloatValues().get("blue")
                 );
+        if (Reference.UnlocalizedName.HONEY_MEAD_MUST.equals(name)) {
+            client.useTexturesFrom(Reference.MODID, Reference.UnlocalizedName.HONEY_MEAD);
+        }
 
         BlockBehaviour.Properties blockProperties = BlockBehaviour.Properties.of()
                 .mapColor(MapColor.WATER)

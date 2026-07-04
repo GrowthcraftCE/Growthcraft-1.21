@@ -56,6 +56,22 @@ public class ClientFluidTypeExtensions implements IClientFluidTypeExtensions {
         return this;
     }
 
+    public ClientFluidTypeExtensions sharedFluidTextures(String namespace) {
+        this.still = ResourceLocation.fromNamespaceAndPath(namespace, "block/fluid/fluid_still");
+        this.flowing = ResourceLocation.fromNamespaceAndPath(namespace, "block/fluid/fluid_flowing");
+        this.overlay = ResourceLocation.fromNamespaceAndPath(namespace, "block/fluid/fluid_overlay");
+        this.renderOverlay = ResourceLocation.fromNamespaceAndPath(namespace, "textures/block/fluid/fluid_overlay.png");
+        return this;
+    }
+
+    public ClientFluidTypeExtensions useTexturesFrom(String namespace, String name) {
+        this.still = ResourceLocation.fromNamespaceAndPath(namespace, "block/fluid/" + name + "_fluid_still");
+        this.flowing = ResourceLocation.fromNamespaceAndPath(namespace, "block/fluid/" + name + "_fluid_flowing");
+        this.overlay = ResourceLocation.fromNamespaceAndPath(namespace, "block/fluid/" + name + "_fluid_overlay");
+        this.renderOverlay = ResourceLocation.fromNamespaceAndPath(namespace, "textures/block/fluid/" + name + "_fluid_overlay.png");
+        return this;
+    }
+
     public ClientFluidTypeExtensions still(String name) {
         return still(name, "block/fluid");
     }

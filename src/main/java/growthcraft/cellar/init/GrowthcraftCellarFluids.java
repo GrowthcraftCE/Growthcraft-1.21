@@ -88,6 +88,9 @@ public class GrowthcraftCellarFluids {
         int tint = color.toIntValue();
         ClientFluidTypeExtensions client = new ClientFluidTypeExtensions(Reference.MODID, fluidName)
                 .tint(tint);
+        if (usesSharedFluidTexture(fluidName)) {
+            client.sharedFluidTextures(Reference.MODID);
+        }
 
         // Liquid block properties matching vanilla WATER behavior (no collision, replaceable, strong, no drops, liquid, empty sound)
         BlockBehaviour.Properties blockProps = BlockBehaviour.Properties.of()
@@ -115,6 +118,13 @@ public class GrowthcraftCellarFluids {
                 BLOCKS,
                 ITEMS
         );
+    }
+
+    private static boolean usesSharedFluidTexture(String fluidName) {
+        return Reference.UnlocalizedName.Fluid.DEEP_COPPER_WORT.equals(fluidName)
+                || Reference.UnlocalizedName.Fluid.POTION_ALE.equals(fluidName)
+                || Reference.UnlocalizedName.Fluid.POTION_LAGER.equals(fluidName)
+                || Reference.UnlocalizedName.Fluid.POTION_WINE.equals(fluidName);
     }
 
     private GrowthcraftCellarFluids() {}
