@@ -138,6 +138,7 @@
   "jei.growthcraft_cellar.category.fermentation_barrel": "Fermenting",
   "jei.growthcraft_cellar.category.fruit_press": "Pressing",
   "jei.growthcraft_cellar.category.roaster": "Roasting",
+  "jei.growthcraft_cellar.category.brew_kettle": "Brewing and Steaming",
   "message.growthcraft_cellar.kettle.outside_lid_on": "Lid put on.",
   "message.growthcraft_cellar.kettle.outside_lid_off": "Lid taken off.",
   "message.growthcraft_cellar.kettle.gui_lid_on": "Put the lid on",
