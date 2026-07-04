@@ -1,9 +1,11 @@
 package growthcraft.milk.client;
 
+import growthcraft.milk.client.particle.ColoredDripParticle;
 import growthcraft.milk.config.Reference;
 import growthcraft.milk.init.GrowthcraftMilkBlocks;
 import growthcraft.milk.init.GrowthcraftMilkItems;
 import growthcraft.milk.init.GrowthcraftMilkMenus;
+import growthcraft.milk.init.GrowthcraftMilkParticles;
 import growthcraft.lib.client.screen.MachineScreen;
 import growthcraft.lib.utils.ColorUtils;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -19,6 +21,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 /**
@@ -106,6 +109,12 @@ public final class GrowthcraftMilkClient {
         event.register(GrowthcraftMilkMenus.CHURN.get(), MachineScreen::new);
         event.register(GrowthcraftMilkMenus.MIXING_VAT.get(), MachineScreen::new);
         event.register(GrowthcraftMilkMenus.PANCHEON.get(), MachineScreen::new);
+    }
+
+    @SubscribeEvent
+    public static void registerParticles(RegisterParticleProvidersEvent event) {
+        event.registerSpriteSet(GrowthcraftMilkParticles.COLORED_DRIP.get(), ColoredDripParticle.Provider::new);
+        event.registerSpriteSet(GrowthcraftMilkParticles.COLORED_DRIP_LAND.get(), ColoredDripParticle.Land.Provider::new);
     }
 
     private static void registerContentsTint(RegisterColorHandlersEvent.Item event,

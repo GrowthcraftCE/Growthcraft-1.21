@@ -10,6 +10,7 @@ import growthcraft.milk.init.GrowthcraftMilkCapabilities;
 import growthcraft.milk.init.GrowthcraftMilkFluids;
 import growthcraft.milk.init.GrowthcraftMilkItems;
 import growthcraft.milk.init.GrowthcraftMilkMenus;
+import growthcraft.milk.init.GrowthcraftMilkParticles;
 import growthcraft.milk.init.GrowthcraftMilkRecipes;
 import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.bus.api.IEventBus;
@@ -41,6 +42,7 @@ public class GrowthcraftMilk {
         GrowthcraftMilkItems.ITEMS.register(modEventBus);
         GrowthcraftMilkMenus.MENUS.register(modEventBus);
         GrowthcraftMilkBlockEntities.BLOCK_ENTITY_TYPES.register(modEventBus);
+        GrowthcraftMilkParticles.PARTICLE_TYPES.register(modEventBus);
         GrowthcraftMilkRecipes.SERIALIZERS.register(modEventBus);
         GrowthcraftMilkRecipes.TYPES.register(modEventBus);
         GrowthcraftMilkFluids.FLUID_TYPES.register(modEventBus);

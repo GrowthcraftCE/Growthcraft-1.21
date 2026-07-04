@@ -8,9 +8,9 @@ import growthcraft.milk.init.GrowthcraftMilkBlockEntities;
 import growthcraft.milk.init.GrowthcraftMilkFluids;
 import growthcraft.milk.init.GrowthcraftMilkItems;
 import growthcraft.milk.init.GrowthcraftMilkMenus;
+import growthcraft.milk.particle.ColoredDripParticleOption;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -146,6 +146,9 @@ public class PancheonBlock extends Block implements EntityBlock {
     }
 
     private static Fluid getFluidFromBucket(ItemStack stack) {
+        if (stack.is(Items.MILK_BUCKET)) {
+            return GrowthcraftMilkFluids.MILK.source.get();
+        }
         if (stack.is(GrowthcraftMilkItems.MILK_BUCKET_IRON.get())) {
             return GrowthcraftMilkFluids.MILK.source.get();
         }
@@ -224,11 +227,30 @@ public class PancheonBlock extends Block implements EntityBlock {
         }
 
         RandomSource random = level.getRandom();
-        double x = pos.getX() + random.nextDouble();
+        double x = pos.getX() + 0.2D + random.nextDouble() * 0.6D;
         double y = pos.getY() - 0.05D;
-        double z = pos.getZ() + random.nextDouble();
-        level.addParticle(ParticleTypes.FALLING_HONEY, x, y, z, 0.0D, 0.0D, 0.0D);
+        double z = pos.getZ() + 0.2D + random.nextDouble() * 0.6D;
+        level.addParticle(new ColoredDripParticleOption(getDripColor(pancheon.getInputTank().getFluid())), x, y, z, 0.0D, 0.0D, 0.0D);
     }
+
+    private static int getDripColor(FluidStack fluidStack) {
+        if (fluidStack.isEmpty()) {
+            return Reference.FluidColor.MILK.toIntValue();
+        }
+
+        Fluid fluid = fluidStack.getFluid();
+        if (fluid.getFluidType() == GrowthcraftMilkFluids.BUTTER_MILK.source.get().getFluidType()) return Reference.FluidColor.BUTTER_MILK.toIntValue();
+        if (fluid.getFluidType() == GrowthcraftMilkFluids.CHEESE_BASE.source.get().getFluidType()) return Reference.FluidColor.CHEESE_BASE.toIntValue();
+        if (fluid.getFluidType() == GrowthcraftMilkFluids.CONDENSED_MILK.source.get().getFluidType()) return Reference.FluidColor.CONDENSED_MILK.toIntValue();
+        if (fluid.getFluidType() == GrowthcraftMilkFluids.CREAM.source.get().getFluidType()) return Reference.FluidColor.CREAM.toIntValue();
+        if (fluid.getFluidType() == GrowthcraftMilkFluids.CULTURED_MILK.source.get().getFluidType()) return Reference.FluidColor.CULTURED_MILK.toIntValue();
+        if (fluid.getFluidType() == GrowthcraftMilkFluids.KUMIS.source.get().getFluidType()) return Reference.FluidColor.KUMIS.toIntValue();
+        if (fluid.getFluidType() == GrowthcraftMilkFluids.RENNET.source.get().getFluidType()) return Reference.FluidColor.RENNET.toIntValue();
+        if (fluid.getFluidType() == GrowthcraftMilkFluids.SKIM_MILK.source.get().getFluidType()) return Reference.FluidColor.SKIM_MILK.toIntValue();
+        if (fluid.getFluidType() == GrowthcraftMilkFluids.WHEY.source.get().getFluidType()) return Reference.FluidColor.WHEY.toIntValue();
+        return Reference.FluidColor.MILK.toIntValue();
+    }
+
 
     @Override
     public PushReaction getPistonPushReaction(BlockState state) {
