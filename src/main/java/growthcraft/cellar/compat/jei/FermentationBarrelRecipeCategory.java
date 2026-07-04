@@ -30,6 +30,10 @@ public class FermentationBarrelRecipeCategory implements IRecipeCategory<RecipeH
     private static final int HEIGHT = 70;
     private static final int PROGRESS_X = 51 - BACKGROUND_U;
     private static final int PROGRESS_Y = 20 - BACKGROUND_V;
+    private static final int INPUT_TANK_X = 72 - BACKGROUND_U;
+    private static final int INPUT_TANK_Y = 17 - BACKGROUND_V;
+    private static final int INPUT_TANK_WIDTH = 50;
+    private static final int INPUT_TANK_HEIGHT = 52;
     private static final int OUTPUT_X = 98;
     private static final int OUTPUT_Y = 43;
 
@@ -77,8 +81,8 @@ public class FermentationBarrelRecipeCategory implements IRecipeCategory<RecipeH
 
         var inputFluid = BuiltInRegistries.FLUID.get(recipe.getIngredientFluid().fluidId());
         if (inputFluid != Fluids.EMPTY && recipe.getIngredientFluid().amount() > 0) {
-            builder.addSlot(RecipeIngredientRole.INPUT, 43, 7)
-                    .setFluidRenderer(4000, true, 16, 52)
+            builder.addSlot(RecipeIngredientRole.INPUT, INPUT_TANK_X, INPUT_TANK_Y)
+                    .setFluidRenderer(4000, true, INPUT_TANK_WIDTH, INPUT_TANK_HEIGHT)
                     .addFluidStack(inputFluid, recipe.getIngredientFluid().amount());
         }
 
