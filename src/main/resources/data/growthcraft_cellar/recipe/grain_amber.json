@@ -1,12 +1,12 @@
 {
   "type": "growthcraft_cellar:roaster_recipe",
-  "roasting_level": 1,
+  "roasting_level": 3,
   "input_item": {
-    "item": "minecraft:chicken",
+    "id": "growthcraft_cellar:grain",
     "count": 1
   },
   "result": {
-    "item": "minecraft:cooked_chicken",
+    "id": "growthcraft_cellar:grain_amber",
     "count": 1
   }
 }

@@ -1,12 +1,12 @@
 {
   "type": "growthcraft_cellar:roaster_recipe",
-  "roasting_level": 1,
+  "roasting_level": 7,
   "input_item": {
-    "item": "minecraft:rabbit",
+    "id": "growthcraft_cellar:grain",
     "count": 1
   },
   "result": {
-    "item": "minecraft:cooked_rabbit",
+    "id": "growthcraft_cellar:grain_brown",
     "count": 1
   }
 }

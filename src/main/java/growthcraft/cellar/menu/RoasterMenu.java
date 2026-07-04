@@ -25,8 +25,8 @@ public class RoasterMenu extends AbstractContainerMenu {
         this.container = container;
         this.data = data;
 
-        this.addSlot(new Slot(container, RoasterBlockEntity.SLOT_INPUT, 56, 35));
-        this.addSlot(new Slot(container, RoasterBlockEntity.SLOT_OUTPUT, 116, 35) {
+        this.addSlot(new Slot(container, RoasterBlockEntity.SLOT_INPUT, 54, 42));
+        this.addSlot(new Slot(container, RoasterBlockEntity.SLOT_OUTPUT, 106, 42) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return false;

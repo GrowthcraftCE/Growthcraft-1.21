@@ -2,11 +2,11 @@
   "type": "growthcraft_cellar:roaster_recipe",
   "roasting_level": 1,
   "input_item": {
-    "item": "minecraft:salmon",
+    "id": "growthcraft_cellar:grain",
     "count": 1
   },
   "result": {
-    "item": "minecraft:cooked_salmon",
+    "id": "growthcraft_cellar:grain_pale_golden",
     "count": 1
   }
 }

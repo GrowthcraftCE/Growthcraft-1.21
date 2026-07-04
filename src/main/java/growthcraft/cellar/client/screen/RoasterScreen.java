@@ -54,7 +54,8 @@ public class RoasterScreen extends AbstractContainerScreen<RoasterMenu> {
     @Override
     protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
         graphics.drawString(this.font, this.title, 8, 6, 4210752, false);
-        graphics.drawString(this.font, Component.translatable("label.growthcraft_cellar.roaster_level", this.menu.getRoastingLevel()), 68, 20, 4210752, false);
+        Component levelText = Component.translatable("label.growthcraft_cellar.roaster_level", this.menu.getRoastingLevel());
+        graphics.drawString(this.font, levelText, (this.imageWidth - this.font.width(levelText)) / 2, 20, 4210752, false);
         graphics.drawString(this.font, this.playerInventoryTitle, 8, this.imageHeight - 96 + 2, 4210752, false);
     }
 }

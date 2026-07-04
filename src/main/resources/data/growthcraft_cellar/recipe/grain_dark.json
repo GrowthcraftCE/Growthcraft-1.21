@@ -1,12 +1,12 @@
 {
   "type": "growthcraft_cellar:roaster_recipe",
-  "roasting_level": 1,
+  "roasting_level": 8,
   "input_item": {
-    "item": "minecraft:porkchop",
+    "id": "growthcraft_cellar:grain",
     "count": 1
   },
   "result": {
-    "item": "minecraft:cooked_porkchop",
+    "id": "growthcraft_cellar:grain_dark",
     "count": 1
   }
 }

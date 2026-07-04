@@ -1,12 +1,12 @@
 {
   "type": "growthcraft_cellar:roaster_recipe",
-  "roasting_level": 3,
+  "roasting_level": 1,
   "input_item": {
-    "item": "growthcraft_cellar:grain",
+    "id": "minecraft:cod",
     "count": 1
   },
   "result": {
-    "item": "growthcraft_cellar:grain_amber",
+    "id": "minecraft:cooked_cod",
     "count": 1
   }
 }
