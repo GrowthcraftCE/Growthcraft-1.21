@@ -1,6 +1,14 @@
 package growthcraft.cellar.block;
 
+import growthcraft.cellar.config.Reference;
+import growthcraft.cellar.init.GrowthcraftCellarMenus;
+import growthcraft.lib.block.MachineMenuOpener;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.SoundType;
@@ -9,6 +17,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
 public class BrewKettleBlock extends Block {
@@ -40,6 +49,12 @@ public class BrewKettleBlock extends Block {
     @Override
     protected RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        return MachineMenuOpener.open(level, player, GrowthcraftCellarMenus.BREW_KETTLE.get(),
+                Component.translatable("block." + Reference.MODID + "." + Reference.UnlocalizedName.Block.BREW_KETTLE));
     }
 
     @Override

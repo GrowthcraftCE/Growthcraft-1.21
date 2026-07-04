@@ -1,7 +1,15 @@
 package growthcraft.cellar.block;
 
+import growthcraft.cellar.config.Reference;
+import growthcraft.cellar.init.GrowthcraftCellarMenus;
+import growthcraft.lib.block.MachineMenuOpener;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.Mirror;
@@ -13,6 +21,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
 public class FermentationBarrelBlock extends Block {
@@ -51,6 +60,12 @@ public class FermentationBarrelBlock extends Block {
     @Override
     protected RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        return MachineMenuOpener.open(level, player, GrowthcraftCellarMenus.FERMENTATION_BARREL.get(),
+                Component.translatable("block." + Reference.MODID + "." + Reference.UnlocalizedName.Block.FERMENT_BARREL_OAK));
     }
 
     @Override

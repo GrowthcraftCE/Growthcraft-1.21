@@ -3,6 +3,8 @@ package growthcraft.milk.client;
 import growthcraft.milk.config.Reference;
 import growthcraft.milk.init.GrowthcraftMilkBlocks;
 import growthcraft.milk.init.GrowthcraftMilkItems;
+import growthcraft.milk.init.GrowthcraftMilkMenus;
+import growthcraft.lib.client.screen.MachineScreen;
 import growthcraft.lib.utils.ColorUtils;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.component.DataComponents;
@@ -16,6 +18,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 /**
@@ -95,6 +98,14 @@ public final class GrowthcraftMilkClient {
         registerBlockTint(event, Reference.BlockColor.GOUDA_CHEESE, GrowthcraftMilkBlocks.GOUDA_CHEESE_WAXED);
         registerBlockTint(event, Reference.BlockColor.MONTEREY_CHEESE, GrowthcraftMilkBlocks.MONTEREY_CHEESE_WAXED);
         registerBlockTint(event, Reference.BlockColor.PROVOLONE_CHEESE, GrowthcraftMilkBlocks.PROVOLONE_CHEESE_WAXED);
+    }
+
+    @SubscribeEvent
+    public static void registerScreens(RegisterMenuScreensEvent event) {
+        event.register(GrowthcraftMilkMenus.CHEESE_PRESS.get(), MachineScreen::new);
+        event.register(GrowthcraftMilkMenus.CHURN.get(), MachineScreen::new);
+        event.register(GrowthcraftMilkMenus.MIXING_VAT.get(), MachineScreen::new);
+        event.register(GrowthcraftMilkMenus.PANCHEON.get(), MachineScreen::new);
     }
 
     private static void registerContentsTint(RegisterColorHandlersEvent.Item event,

@@ -7,6 +7,7 @@ import growthcraft.milk.config.Reference;
 import growthcraft.milk.init.GrowthcraftMilkBlocks;
 import growthcraft.milk.init.GrowthcraftMilkFluids;
 import growthcraft.milk.init.GrowthcraftMilkItems;
+import growthcraft.milk.init.GrowthcraftMilkMenus;
 import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -35,6 +36,7 @@ public class GrowthcraftMilk {
         // Register all Milk module registries
         GrowthcraftMilkBlocks.BLOCKS.register(modEventBus);
         GrowthcraftMilkItems.ITEMS.register(modEventBus);
+        GrowthcraftMilkMenus.MENUS.register(modEventBus);
         GrowthcraftMilkFluids.FLUID_TYPES.register(modEventBus);
         GrowthcraftMilkFluids.FLUIDS.register(modEventBus);
         GrowthcraftMilkFluids.BLOCKS.register(modEventBus);
