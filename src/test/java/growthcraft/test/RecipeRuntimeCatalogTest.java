@@ -24,7 +24,10 @@ class RecipeRuntimeCatalogTest {
     private static final Pattern TOP_LEVEL_TYPE_FIELD = Pattern.compile("^\\s{0,4}\"type\"\\s*:\\s*\"([^\"]+)\"");
 
     private static final Set<String> SUPPORTED_CUSTOM_TYPES = Set.of(
-            "growthcraft_cellar:culture_jar"
+            "growthcraft_cellar:culture_jar",
+            "growthcraft_milk:cheese_press_recipe",
+            "growthcraft_milk:churn_recipe",
+            "growthcraft_milk:pancheon_recipe"
     );
 
     private static final Set<String> BLOCKED_CUSTOM_TYPES = Set.of(
@@ -40,13 +43,10 @@ class RecipeRuntimeCatalogTest {
             "growthcraft_cellar:fruit_press_recipe",
             "growthcraft_cellar:roaster_recipe",
             "growthcraft_milk:brew_kettle_recipe",
-            "growthcraft_milk:cheese_press_recipe",
-            "growthcraft_milk:churn_recipe",
             "growthcraft_milk:culture_jar_recipe",
             "growthcraft_milk:culture_jar_starter_recipe",
             "growthcraft_milk:mixing_vat_fluid_recipe",
             "growthcraft_milk:mixing_vat_item_recipe",
-            "growthcraft_milk:pancheon_recipe",
             "growthcraft_rice:brew_kettle_recipe",
             "growthcraft_rice:culture_jar_recipe",
             "growthcraft_rice:culture_jar_starter_recipe",

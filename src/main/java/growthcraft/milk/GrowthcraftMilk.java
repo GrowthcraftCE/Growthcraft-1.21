@@ -5,9 +5,12 @@ import growthcraft.core.init.GrowthcraftCreativeTabs;
 import growthcraft.milk.config.GrowthcraftMilkConfig;
 import growthcraft.milk.config.Reference;
 import growthcraft.milk.init.GrowthcraftMilkBlocks;
+import growthcraft.milk.init.GrowthcraftMilkBlockEntities;
+import growthcraft.milk.init.GrowthcraftMilkCapabilities;
 import growthcraft.milk.init.GrowthcraftMilkFluids;
 import growthcraft.milk.init.GrowthcraftMilkItems;
 import growthcraft.milk.init.GrowthcraftMilkMenus;
+import growthcraft.milk.init.GrowthcraftMilkRecipes;
 import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -37,12 +40,16 @@ public class GrowthcraftMilk {
         GrowthcraftMilkBlocks.BLOCKS.register(modEventBus);
         GrowthcraftMilkItems.ITEMS.register(modEventBus);
         GrowthcraftMilkMenus.MENUS.register(modEventBus);
+        GrowthcraftMilkBlockEntities.BLOCK_ENTITY_TYPES.register(modEventBus);
+        GrowthcraftMilkRecipes.SERIALIZERS.register(modEventBus);
+        GrowthcraftMilkRecipes.TYPES.register(modEventBus);
         GrowthcraftMilkFluids.FLUID_TYPES.register(modEventBus);
         GrowthcraftMilkFluids.FLUIDS.register(modEventBus);
         GrowthcraftMilkFluids.BLOCKS.register(modEventBus);
 
         // Contribute items to the creative tab
         modEventBus.addListener(this::buildCreativeTab);
+        modEventBus.addListener(GrowthcraftMilkCapabilities::registerCapabilities);
 
         // Register to the global event bus for general events
         NeoForge.EVENT_BUS.register(this);
@@ -154,6 +161,11 @@ public class GrowthcraftMilk {
 
             // Fluid buckets (Milk module)
             event.accept(GrowthcraftMilkItems.MILK_BUCKET_IRON.get());
+            for (var container : GrowthcraftMilkFluids.ALL) {
+                if (container.bucket != null) {
+                    event.accept(container.bucket.get());
+                }
+            }
         }
     }
 
