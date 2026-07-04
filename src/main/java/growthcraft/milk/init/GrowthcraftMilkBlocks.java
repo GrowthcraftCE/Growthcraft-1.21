@@ -80,15 +80,58 @@ public final class GrowthcraftMilkBlocks {
             () -> new WallHangingSignBlock(WoodType.SPRUCE, hangingSignProperties()));
 
     private static DeferredBlock<CheeseWheelBlock> registerCheese(String cheeseName) {
-        return BLOCKS.register(cheeseName + "_cheese", CheeseWheelBlock::new);
+        return BLOCKS.register(cheeseName + "_cheese", () -> new CheeseWheelBlock(getSliceItem(cheeseName), false, getFreshAgedBlock(cheeseName)));
     }
 
     private static DeferredBlock<CheeseWheelBlock> registerAgedCheese(String cheeseName) {
-        return BLOCKS.register(cheeseName + "_cheese_aged", CheeseWheelBlock::new);
+        return BLOCKS.register(cheeseName + "_cheese_aged", () -> new CheeseWheelBlock(getSliceItem(cheeseName), true, () -> null));
     }
 
     private static DeferredBlock<CheeseWheelBlock> registerWaxedCheese(String cheeseName) {
-        return BLOCKS.register(cheeseName + "_cheese_waxed", CheeseWheelBlock::new);
+        return BLOCKS.register(cheeseName + "_cheese_waxed", () -> new CheeseWheelBlock(getSliceItem(cheeseName), true, getAgedBlock(cheeseName)));
+    }
+
+    private static java.util.function.Supplier<? extends net.minecraft.world.level.block.Block> getFreshAgedBlock(String cheeseName) {
+        return switch (cheeseName) {
+            case Reference.UnlocalizedName.CHEDDAR,
+                 Reference.UnlocalizedName.GOUDA,
+                 Reference.UnlocalizedName.MONTEREY,
+                 Reference.UnlocalizedName.PROVOLONE -> () -> null;
+            default -> getAgedBlock(cheeseName);
+        };
+    }
+
+    private static java.util.function.Supplier<? extends net.minecraft.world.level.block.Block> getAgedBlock(String cheeseName) {
+        return () -> switch (cheeseName) {
+            case Reference.UnlocalizedName.APPENZELLER -> GrowthcraftMilkBlocks.APPENZELLER_CHEESE_AGED.get();
+            case Reference.UnlocalizedName.ASIAGO -> GrowthcraftMilkBlocks.ASIAGO_CHEESE_AGED.get();
+            case Reference.UnlocalizedName.CASU_MARZU -> GrowthcraftMilkBlocks.CASU_MARZU_CHEESE_AGED.get();
+            case Reference.UnlocalizedName.CHEDDAR -> GrowthcraftMilkBlocks.CHEDDAR_CHEESE_AGED.get();
+            case Reference.UnlocalizedName.EMMENTALER -> GrowthcraftMilkBlocks.EMMENTALER_CHEESE_AGED.get();
+            case Reference.UnlocalizedName.GORGONZOLA -> GrowthcraftMilkBlocks.GORGONZOLA_CHEESE_AGED.get();
+            case Reference.UnlocalizedName.GOUDA -> GrowthcraftMilkBlocks.GOUDA_CHEESE_AGED.get();
+            case Reference.UnlocalizedName.MONTEREY -> GrowthcraftMilkBlocks.MONTEREY_CHEESE_AGED.get();
+            case Reference.UnlocalizedName.PARMESAN -> GrowthcraftMilkBlocks.PARMESAN_CHEESE_AGED.get();
+            case Reference.UnlocalizedName.PROVOLONE -> GrowthcraftMilkBlocks.PROVOLONE_CHEESE_AGED.get();
+            default -> null;
+        };
+    }
+
+    private static java.util.function.Supplier<? extends net.minecraft.world.item.Item> getSliceItem(String cheeseName) {
+        return () -> switch (cheeseName) {
+            case Reference.UnlocalizedName.APPENZELLER -> GrowthcraftMilkItems.APPENZELLER_CHEESE_SLICE.get();
+            case Reference.UnlocalizedName.ASIAGO -> GrowthcraftMilkItems.ASIAGO_CHEESE_SLICE.get();
+            case Reference.UnlocalizedName.CASU_MARZU -> GrowthcraftMilkItems.CASU_MARZU_CHEESE_SLICE.get();
+            case Reference.UnlocalizedName.CHEDDAR -> GrowthcraftMilkItems.CHEDDAR_CHEESE_SLICE.get();
+            case Reference.UnlocalizedName.EMMENTALER -> GrowthcraftMilkItems.EMMENTALER_CHEESE_SLICE.get();
+            case Reference.UnlocalizedName.GORGONZOLA -> GrowthcraftMilkItems.GORGONZOLA_CHEESE_SLICE.get();
+            case Reference.UnlocalizedName.GOUDA -> GrowthcraftMilkItems.GOUDA_CHEESE_SLICE.get();
+            case Reference.UnlocalizedName.MONTEREY -> GrowthcraftMilkItems.MONTEREY_CHEESE_SLICE.get();
+            case Reference.UnlocalizedName.PARMESAN -> GrowthcraftMilkItems.PARMESAN_CHEESE_SLICE.get();
+            case Reference.UnlocalizedName.PROVOLONE -> GrowthcraftMilkItems.PROVOLONE_CHEESE_SLICE.get();
+            case Reference.UnlocalizedName.RICOTTA -> GrowthcraftMilkItems.RICOTTA_CHEESE_SLICE.get();
+            default -> null;
+        };
     }
 
     private static DeferredBlock<CheeseCurdBlock> registerCheeseCurds(String cheeseName) {
