@@ -62,7 +62,7 @@ public final class GrowthcraftCellarClient {
         }
 
         event.register((stack, tintIndex) -> tintIndex == 0
-                        ? stack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).getColor()
+                        ? 0xFF000000 | stack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY).getColor()
                         : 0xFFFFFFFF,
                 GrowthcraftCellarItems.POTION_ALE.get(),
                 GrowthcraftCellarItems.POTION_LAGER.get(),
