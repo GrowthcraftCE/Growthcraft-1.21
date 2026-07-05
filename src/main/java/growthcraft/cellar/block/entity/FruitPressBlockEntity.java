@@ -90,31 +90,31 @@ public class FruitPressBlockEntity extends BlockEntity implements WorldlyContain
         if (level.isClientSide) return;
 
         if (!press.isPressed()) {
-            press.resetProgress();
+            press.resetProgress(level, pos, state);
             return;
         }
 
         ItemStack input = press.getItem(SLOT_INPUT);
         if (input.isEmpty()) {
-            press.resetProgress();
+            press.resetProgress(level, pos, state);
             return;
         }
 
         Optional<RecipeHolder<FruitPressRecipe>> match = press.findMatch(level, input);
         if (match.isEmpty()) {
-            press.resetProgress();
+            press.resetProgress(level, pos, state);
             return;
         }
 
         FruitPressRecipe recipe = match.get().value();
         FluidStack output = press.outputFluidStack(recipe);
         if (output.isEmpty() || press.tank.fill(output.copy(), IFluidHandler.FluidAction.SIMULATE) < output.getAmount()) {
-            press.resetProgress();
+            press.resetProgress(level, pos, state);
             return;
         }
 
         if (!press.canOutputByProduct(recipe.getByProduct())) {
-            press.resetProgress();
+            press.resetProgress(level, pos, state);
             return;
         }
 
@@ -129,6 +129,10 @@ public class FruitPressBlockEntity extends BlockEntity implements WorldlyContain
     }
 
     public static void clientTick(Level level, BlockPos pos, BlockState state, FruitPressBlockEntity press) {
+        if (!press.isProcessing() || !press.isPressed()) {
+            return;
+        }
+
         RandomSource random = level.random;
         if (random.nextFloat() < 0.11F) {
             for (int i = 0; i < random.nextInt(2) + 2; i++) {
@@ -192,11 +196,19 @@ public class FruitPressBlockEntity extends BlockEntity implements WorldlyContain
         }
     }
 
-    private void resetProgress() {
+    private boolean resetProgress() {
         if (this.processTime != 0 || this.processTimeTotal != 0) {
             this.processTime = 0;
             this.processTimeTotal = 0;
             setChanged();
+            return true;
+        }
+        return false;
+    }
+
+    private void resetProgress(Level level, BlockPos pos, BlockState state) {
+        if (resetProgress()) {
+            level.sendBlockUpdated(pos, state, state, 3);
         }
     }
 

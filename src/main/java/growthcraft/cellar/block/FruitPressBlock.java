@@ -179,7 +179,7 @@ public class FruitPressBlock extends Block implements EntityBlock {
     }
 
     public static void makeParticles(Level level, BlockPos pos, BlockState state, FruitPressBlockEntity press) {
-        if (!press.isProcessing()) {
+        if (!press.isProcessing() || !press.isPressed()) {
             return;
         }
 
