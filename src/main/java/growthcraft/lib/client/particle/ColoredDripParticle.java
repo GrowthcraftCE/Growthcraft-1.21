@@ -13,10 +13,12 @@ import net.neoforged.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class ColoredDripParticle extends TextureSheetParticle {
     private final int color;
+    private final double landingY;
 
     private ColoredDripParticle(ColoredDripParticleOption option, ClientLevel level, double x, double y, double z, SpriteSet sprites) {
         super(level, x, y, z);
         this.color = option.color();
+        this.landingY = option.landingY();
         this.setSize(0.01F, 0.01F);
         this.gravity = 0.06F;
         this.friction = 0.98F;
@@ -34,10 +36,15 @@ public class ColoredDripParticle extends TextureSheetParticle {
     @Override
     public void tick() {
         super.tick();
-        if (this.onGround) {
-            this.level.addParticle(new ColoredDripLandParticleOption(color), this.x, this.y, this.z, 0.0D, 0.0D, 0.0D);
+        if (this.onGround || hasReachedLandingY()) {
+            double landY = Double.isNaN(landingY) ? this.y : landingY;
+            this.level.addParticle(new ColoredDripLandParticleOption(color), this.x, landY, this.z, 0.0D, 0.0D, 0.0D);
             this.remove();
         }
+    }
+
+    private boolean hasReachedLandingY() {
+        return !Double.isNaN(landingY) && this.y <= landingY;
     }
 
     private void setColor(int color) {

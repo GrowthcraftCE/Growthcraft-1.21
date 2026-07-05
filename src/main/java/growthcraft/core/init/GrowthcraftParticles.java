@@ -21,12 +21,14 @@ public final class GrowthcraftParticles {
             "colored_drip",
             () -> new ParticleType<>(false) {
                 private final MapCodec<ColoredDripParticleOption> codec = RecordCodecBuilder.mapCodec(instance -> instance.group(
-                        com.mojang.serialization.Codec.INT.fieldOf("color").forGetter(ColoredDripParticleOption::color)
+                        com.mojang.serialization.Codec.INT.fieldOf("color").forGetter(ColoredDripParticleOption::color),
+                        com.mojang.serialization.Codec.DOUBLE.optionalFieldOf("landing_y", Double.NaN).forGetter(ColoredDripParticleOption::landingY)
                 ).apply(instance, ColoredDripParticleOption::new));
 
-                private final StreamCodec<? super RegistryFriendlyByteBuf, ColoredDripParticleOption> streamCodec = ByteBufCodecs.INT.map(
-                        ColoredDripParticleOption::new,
-                        ColoredDripParticleOption::color
+                private final StreamCodec<? super RegistryFriendlyByteBuf, ColoredDripParticleOption> streamCodec = StreamCodec.composite(
+                        ByteBufCodecs.INT, ColoredDripParticleOption::color,
+                        ByteBufCodecs.DOUBLE, ColoredDripParticleOption::landingY,
+                        ColoredDripParticleOption::new
                 );
 
                 @Override

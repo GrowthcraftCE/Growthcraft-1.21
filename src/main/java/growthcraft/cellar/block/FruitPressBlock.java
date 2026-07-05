@@ -45,6 +45,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class FruitPressBlock extends Block implements EntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    private static final double DRIP_START_Y_OFFSET = 0.95D;
+    private static final double DRIP_LANDING_Y_OFFSET = 0.2D;
     private static final VoxelShape SHAPE = Shapes.or(
             Block.box(1.0D, 0.0D, 1.0D, 15.0D, 3.0D, 15.0D),
             Block.box(0.0D, 3.0D, 0.0D, 16.0D, 7.0D, 16.0D),
@@ -183,10 +185,11 @@ public class FruitPressBlock extends Block implements EntityBlock {
         }
 
         RandomSource random = level.getRandom();
-        double x = pos.getX() + 0.2D + random.nextDouble() * 0.6D;
-        double y = pos.getY() - 0.05D;
-        double z = pos.getZ() + 0.2D + random.nextDouble() * 0.6D;
-        level.addParticle(ColoredDripParticleOption.fromTintColor(getDripColor(output)), x, y, z, 0.0D, 0.0D, 0.0D);
+        double x = pos.getX() + 0.35D + random.nextDouble() * 0.3D;
+        double y = pos.getY() + DRIP_START_Y_OFFSET;
+        double z = pos.getZ() + 0.35D + random.nextDouble() * 0.3D;
+        double landingY = pos.getY() + DRIP_LANDING_Y_OFFSET;
+        level.addParticle(ColoredDripParticleOption.fromTintColor(getDripColor(output), landingY), x, y, z, 0.0D, 0.0D, 0.0D);
     }
 
     private static int getDripColor(FluidStack fluidStack) {
