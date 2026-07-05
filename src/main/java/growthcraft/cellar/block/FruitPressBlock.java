@@ -45,7 +45,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class FruitPressBlock extends Block implements EntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
-    private static final double DRIP_START_Y_OFFSET = 0.55D;
+    private static final double DRIP_START_Y_OFFSET = 0.42D;
     private static final double DRIP_LANDING_Y_OFFSET = 0.2D;
     private static final VoxelShape SHAPE = Shapes.or(
             Block.box(1.0D, 0.0D, 1.0D, 15.0D, 3.0D, 15.0D),
