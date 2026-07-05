@@ -28,6 +28,7 @@ public class ColoredDripParticle extends TextureSheetParticle {
         this.friction = 0.98F;
         this.lifetime = (int)(64.0D / (Math.random() * 0.8D + 0.2D));
         this.quadSize *= 0.8F;
+        this.hasPhysics = Double.isNaN(landingY);
         setColor(option.color());
         this.pickSprite(sprites);
     }
