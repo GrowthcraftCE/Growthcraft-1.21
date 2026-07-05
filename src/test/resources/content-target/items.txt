@@ -161,7 +161,6 @@ growthcraft_cellar:hopped_golden_wort_fluid_bucket
 growthcraft_cellar:hops
 growthcraft_cellar:hops_seeds
 growthcraft_cellar:ipa_ale_fluid_bucket
-growthcraft_cellar:kindling
 growthcraft_cellar:old_port_ale_fluid_bucket
 growthcraft_cellar:pale_ale_fluid_bucket
 growthcraft_cellar:pale_ale_potion

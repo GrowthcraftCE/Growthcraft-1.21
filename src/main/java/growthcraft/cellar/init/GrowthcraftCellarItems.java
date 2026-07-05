@@ -54,7 +54,6 @@ public class GrowthcraftCellarItems {
     public static final DeferredItem<Item> HOPS_SEEDS = ITEMS.register(Reference.UnlocalizedName.Item.HOPS_SEEDS, () -> new HopsSeedsItem(new Item.Properties()));
 
     // Misc materials
-    public static final DeferredItem<Item> KINDLING = ITEMS.register(Reference.UnlocalizedName.Item.KINDLING, () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> CORK_BARK = ITEMS.register(Reference.UnlocalizedName.Item.CORK_BARK, () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> CORK_COASTER = ITEMS.register(Reference.UnlocalizedName.Item.CORK_COASTER, () -> new Item(new Item.Properties()));
 

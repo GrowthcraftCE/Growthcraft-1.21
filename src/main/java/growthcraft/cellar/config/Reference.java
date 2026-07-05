@@ -84,8 +84,6 @@ public final class Reference {
             public static final String HOPS = "hops";
             public static final String HOPS_SEEDS = "hops_seeds";
 
-            public static final String KINDLING = "kindling";
-
             public static final String CORK_BARK = "cork_bark";
             public static final String CORK_COASTER = "cork_coaster";
 

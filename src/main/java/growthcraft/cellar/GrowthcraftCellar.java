@@ -89,7 +89,6 @@ public class GrowthcraftCellar {
 
             // Hops & misc
             event.accept(GrowthcraftCellarItems.HOPS);
-            event.accept(GrowthcraftCellarItems.KINDLING);
             event.accept(GrowthcraftCellarItems.CORK_BARK);
             event.accept(GrowthcraftCellarItems.CORK_COASTER);
 
