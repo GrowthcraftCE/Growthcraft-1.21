@@ -13,7 +13,7 @@
       "images": [
         "growthcraft:textures/patchouli/blocks/bee_box_flowers.png"
       ],
-      "text": "Place flowers near vanilla nests and hives to keep bees productive."
+      "text": "To start vanilla bee keeping, place flowers within two blocks of an oak or birch sapling before it grows. The tree has a chance to generate with a bee nest."
     },
     {
       "type": "patchouli:spotlight",
