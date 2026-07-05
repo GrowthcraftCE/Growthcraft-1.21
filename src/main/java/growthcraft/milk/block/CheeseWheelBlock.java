@@ -3,6 +3,8 @@ package growthcraft.milk.block;
 import com.mojang.serialization.MapCodec;
 import growthcraft.core.init.GrowthcraftTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -13,6 +15,7 @@ import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -25,10 +28,13 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 
 public class CheeseWheelBlock extends HorizontalDirectionalBlock {
@@ -83,7 +89,9 @@ public class CheeseWheelBlock extends HorizontalDirectionalBlock {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+        int slices = getStoredSliceCount(context.getItemInHand());
+        return withTotalSlices(this.defaultBlockState(), slices)
+                .setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
     @Override
@@ -184,6 +192,14 @@ public class CheeseWheelBlock extends HorizontalDirectionalBlock {
     }
 
     @Override
+    public List<ItemStack> getDrops(BlockState state, LootParams.Builder params) {
+        List<ItemStack> drops = new ArrayList<>(2);
+        addWheelDrop(drops, state.getValue(SLICE_COUNT_BOTTOM));
+        addWheelDrop(drops, state.getValue(SLICE_COUNT_TOP));
+        return drops;
+    }
+
+    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(FACING, SLICE_COUNT_BOTTOM, SLICE_COUNT_TOP, AGE);
     }
@@ -192,11 +208,35 @@ public class CheeseWheelBlock extends HorizontalDirectionalBlock {
         return state.getValue(SLICE_COUNT_BOTTOM) + state.getValue(SLICE_COUNT_TOP);
     }
 
+    private static int getStoredSliceCount(ItemStack stack) {
+        CustomData blockEntityData = stack.getOrDefault(DataComponents.BLOCK_ENTITY_DATA, CustomData.EMPTY);
+        if (blockEntityData.isEmpty()) {
+            return 4;
+        }
+
+        int slices = blockEntityData.copyTag().getInt("slicesbottom");
+        return slices > 0 ? Math.clamp(slices, 1, 4) : 4;
+    }
+
     private static BlockState withTotalSlices(BlockState state, int slices) {
         int clampedSlices = Math.clamp(slices, 0, 8);
         int bottom = Math.min(clampedSlices, 4);
         int top = Math.max(0, clampedSlices - 4);
         return state.setValue(SLICE_COUNT_BOTTOM, bottom).setValue(SLICE_COUNT_TOP, top);
+    }
+
+    private void addWheelDrop(List<ItemStack> drops, int slices) {
+        if (slices <= 0) {
+            return;
+        }
+
+        ItemStack stack = new ItemStack(this.asItem());
+        if (slices < 4) {
+            CompoundTag tag = new CompoundTag();
+            tag.putInt("slicesbottom", slices);
+            stack.set(DataComponents.BLOCK_ENTITY_DATA, CustomData.of(tag));
+        }
+        drops.add(stack);
     }
 
     private static void setOrDestroy(Level level, BlockPos pos, BlockState state) {
