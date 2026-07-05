@@ -43,13 +43,13 @@ Stable Version: 9.2.0
 
 ### Growthcraft 8 (Minecraft 1.19.4)
 
-End of Support: TBD  
+End of Support: 6/9/2023  
 Latest Version: 8.1.0  
 Stable Version: 8.1.0
 
 ### Growthcraft 7 (Minecraft 1.18)
 
-End of Support: TBD  
+End of Support: Never Released  
 Latest Version: 7.0.0 (TBD)  
 Stable Version: TBD
 
