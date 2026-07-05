@@ -22,12 +22,14 @@ public final class GrowthcraftParticles {
             () -> new ParticleType<>(false) {
                 private final MapCodec<ColoredDripParticleOption> codec = RecordCodecBuilder.mapCodec(instance -> instance.group(
                         com.mojang.serialization.Codec.INT.fieldOf("color").forGetter(ColoredDripParticleOption::color),
-                        com.mojang.serialization.Codec.DOUBLE.optionalFieldOf("landing_y", Double.NaN).forGetter(ColoredDripParticleOption::landingY)
+                        com.mojang.serialization.Codec.DOUBLE.optionalFieldOf("landing_y", Double.NaN).forGetter(ColoredDripParticleOption::landingY),
+                        com.mojang.serialization.Codec.FLOAT.optionalFieldOf("landing_scale", 1.0F).forGetter(ColoredDripParticleOption::landingScale)
                 ).apply(instance, ColoredDripParticleOption::new));
 
                 private final StreamCodec<? super RegistryFriendlyByteBuf, ColoredDripParticleOption> streamCodec = StreamCodec.composite(
                         ByteBufCodecs.INT, ColoredDripParticleOption::color,
                         ByteBufCodecs.DOUBLE, ColoredDripParticleOption::landingY,
+                        ByteBufCodecs.FLOAT, ColoredDripParticleOption::landingScale,
                         ColoredDripParticleOption::new
                 );
 
@@ -48,12 +50,14 @@ public final class GrowthcraftParticles {
             () -> new ParticleType<>(false) {
                 private final MapCodec<ColoredDripLandParticleOption> codec = RecordCodecBuilder.mapCodec(instance -> instance.group(
                         com.mojang.serialization.Codec.INT.fieldOf("color").forGetter(ColoredDripLandParticleOption::color),
-                        com.mojang.serialization.Codec.INT.optionalFieldOf("linger_ticks", 24).forGetter(ColoredDripLandParticleOption::lingerTicks)
+                        com.mojang.serialization.Codec.INT.optionalFieldOf("linger_ticks", 24).forGetter(ColoredDripLandParticleOption::lingerTicks),
+                        com.mojang.serialization.Codec.FLOAT.optionalFieldOf("scale", 1.0F).forGetter(ColoredDripLandParticleOption::scale)
                 ).apply(instance, ColoredDripLandParticleOption::new));
 
                 private final StreamCodec<? super RegistryFriendlyByteBuf, ColoredDripLandParticleOption> streamCodec = StreamCodec.composite(
                         ByteBufCodecs.INT, ColoredDripLandParticleOption::color,
                         ByteBufCodecs.INT, ColoredDripLandParticleOption::lingerTicks,
+                        ByteBufCodecs.FLOAT, ColoredDripLandParticleOption::scale,
                         ColoredDripLandParticleOption::new
                 );
 

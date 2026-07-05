@@ -14,11 +14,13 @@ import net.neoforged.api.distmarker.OnlyIn;
 public class ColoredDripParticle extends TextureSheetParticle {
     private final int color;
     private final double landingY;
+    private final float landingScale;
 
     private ColoredDripParticle(ColoredDripParticleOption option, ClientLevel level, double x, double y, double z, SpriteSet sprites) {
         super(level, x, y, z);
         this.color = option.color();
         this.landingY = option.landingY();
+        this.landingScale = option.landingScale();
         this.setSize(0.01F, 0.01F);
         this.gravity = 0.06F;
         this.friction = 0.98F;
@@ -38,7 +40,7 @@ public class ColoredDripParticle extends TextureSheetParticle {
         super.tick();
         if (this.onGround || hasReachedLandingY()) {
             double landY = Double.isNaN(landingY) ? this.y : landingY;
-            this.level.addParticle(new ColoredDripLandParticleOption(color), this.x, landY, this.z, 0.0D, 0.0D, 0.0D);
+            this.level.addParticle(new ColoredDripLandParticleOption(color, 24, landingScale), this.x, landY, this.z, 0.0D, 0.0D, 0.0D);
             this.remove();
         }
     }
@@ -77,7 +79,7 @@ public class ColoredDripParticle extends TextureSheetParticle {
             super(level, x, y, z);
             this.setSize(0.01F, 0.01F);
             this.lifetime = (int)(Math.max(1, option.lingerTicks()) / (Math.random() * 0.8D + 0.2D));
-            this.quadSize *= 0.9F;
+            this.quadSize *= 0.9F * option.scale();
             setColor(option.color());
             this.pickSprite(sprites);
         }
