@@ -46,7 +46,7 @@ import org.jetbrains.annotations.Nullable;
 public class FruitPressBlock extends Block implements EntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     private static final double DRIP_START_Y_OFFSET = 0.34D;
-    private static final double DRIP_LANDING_Y_OFFSET = 0.02D;
+    private static final double DRIP_LANDING_CLEARANCE = 0.02D;
     private static final double DRIP_POOL_MIN_OFFSET = 3.0D / 16.0D;
     private static final double DRIP_POOL_SPREAD = 10.0D / 16.0D;
     private static final float DRIP_LANDING_SCALE = 1.35F;
@@ -192,8 +192,21 @@ public class FruitPressBlock extends Block implements EntityBlock {
         double x = pos.getX() + DRIP_POOL_MIN_OFFSET + random.nextDouble() * DRIP_POOL_SPREAD;
         double y = pos.getY() + DRIP_START_Y_OFFSET;
         double z = pos.getZ() + DRIP_POOL_MIN_OFFSET + random.nextDouble() * DRIP_POOL_SPREAD;
-        double landingY = pos.getY() + DRIP_LANDING_Y_OFFSET;
+        double landingY = findDripLandingY(level, pos, x, z);
         level.addParticle(ColoredDripParticleOption.fromTintColor(getDripColor(output), landingY, DRIP_LANDING_SCALE, DRIP_LANDING_LINGER_TICKS), x, y, z, 0.0D, 0.0D, 0.0D);
+    }
+
+    private static double findDripLandingY(Level level, BlockPos pressPos, double x, double z) {
+        for (int y = pressPos.getY() - 1; y >= level.getMinBuildHeight(); y--) {
+            BlockPos landingPos = BlockPos.containing(x, y, z);
+            BlockState landingState = level.getBlockState(landingPos);
+            VoxelShape landingShape = landingState.getCollisionShape(level, landingPos, CollisionContext.empty());
+            if (!landingShape.isEmpty()) {
+                return landingPos.getY() + landingShape.max(Direction.Axis.Y) + DRIP_LANDING_CLEARANCE;
+            }
+        }
+
+        return Double.NaN;
     }
 
     private static int getDripColor(FluidStack fluidStack) {
