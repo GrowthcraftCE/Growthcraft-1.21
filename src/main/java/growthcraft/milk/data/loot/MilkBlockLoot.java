@@ -119,8 +119,26 @@ public class MilkBlockLoot extends BlockLootSubProvider {
     private void dropShopSigns() {
         dropOther(GrowthcraftMilkBlocks.HANGING_SIGN_1_OAK.get(), Items.OAK_HANGING_SIGN);
         dropOther(GrowthcraftMilkBlocks.HANGING_SIGN_1_SPRUCE.get(), Items.SPRUCE_HANGING_SIGN);
+        dropOther(GrowthcraftMilkBlocks.HANGING_SIGN_1_BIRCH.get(), Items.BIRCH_HANGING_SIGN);
+        dropOther(GrowthcraftMilkBlocks.HANGING_SIGN_1_JUNGLE.get(), Items.JUNGLE_HANGING_SIGN);
+        dropOther(GrowthcraftMilkBlocks.HANGING_SIGN_1_ACACIA.get(), Items.ACACIA_HANGING_SIGN);
+        dropOther(GrowthcraftMilkBlocks.HANGING_SIGN_1_DARK_OAK.get(), Items.DARK_OAK_HANGING_SIGN);
+        dropOther(GrowthcraftMilkBlocks.HANGING_SIGN_1_MANGROVE.get(), Items.MANGROVE_HANGING_SIGN);
+        dropOther(GrowthcraftMilkBlocks.HANGING_SIGN_1_CHERRY.get(), Items.CHERRY_HANGING_SIGN);
+        dropOther(GrowthcraftMilkBlocks.HANGING_SIGN_1_BAMBOO.get(), Items.BAMBOO_HANGING_SIGN);
+        dropOther(GrowthcraftMilkBlocks.HANGING_SIGN_1_CRIMSON.get(), Items.CRIMSON_HANGING_SIGN);
+        dropOther(GrowthcraftMilkBlocks.HANGING_SIGN_1_WARPED.get(), Items.WARPED_HANGING_SIGN);
         dropOther(GrowthcraftMilkBlocks.HANGING_SIGN_2_OAK.get(), Items.OAK_HANGING_SIGN);
         dropOther(GrowthcraftMilkBlocks.HANGING_SIGN_2_SPRUCE.get(), Items.SPRUCE_HANGING_SIGN);
+        dropOther(GrowthcraftMilkBlocks.HANGING_SIGN_2_BIRCH.get(), Items.BIRCH_HANGING_SIGN);
+        dropOther(GrowthcraftMilkBlocks.HANGING_SIGN_2_JUNGLE.get(), Items.JUNGLE_HANGING_SIGN);
+        dropOther(GrowthcraftMilkBlocks.HANGING_SIGN_2_ACACIA.get(), Items.ACACIA_HANGING_SIGN);
+        dropOther(GrowthcraftMilkBlocks.HANGING_SIGN_2_DARK_OAK.get(), Items.DARK_OAK_HANGING_SIGN);
+        dropOther(GrowthcraftMilkBlocks.HANGING_SIGN_2_MANGROVE.get(), Items.MANGROVE_HANGING_SIGN);
+        dropOther(GrowthcraftMilkBlocks.HANGING_SIGN_2_CHERRY.get(), Items.CHERRY_HANGING_SIGN);
+        dropOther(GrowthcraftMilkBlocks.HANGING_SIGN_2_BAMBOO.get(), Items.BAMBOO_HANGING_SIGN);
+        dropOther(GrowthcraftMilkBlocks.HANGING_SIGN_2_CRIMSON.get(), Items.CRIMSON_HANGING_SIGN);
+        dropOther(GrowthcraftMilkBlocks.HANGING_SIGN_2_WARPED.get(), Items.WARPED_HANGING_SIGN);
     }
 
     private LootItemBlockStatePropertyCondition.Builder isCheeseCurdsDrained(Block block) {
