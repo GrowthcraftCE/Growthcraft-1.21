@@ -149,8 +149,12 @@ dependencies {
     // Optional mod dependency with JEI
     // The JEI API can be declared for compile time use if needed, while the full JEI artifact is used at runtime
     compileOnly "mezz.jei:jei-${minecraft_version_short}-neoforge:${jei_version}"
+
     // We add the full version to localRuntime, not runtimeOnly, so that we do not publish a dependency on it
     localRuntime "mezz.jei:jei-${minecraft_version_short}-neoforge:${jei_version}"
+    localRuntime "vazkii.patchouli:Patchouli:${patchouli_version}"
+
+    implementation "vazkii.patchouli:Patchouli:${patchouli_version}"
 
     testImplementation platform('org.junit:junit-bom:5.11.4')
     testImplementation 'org.junit.jupiter:junit-jupiter'
