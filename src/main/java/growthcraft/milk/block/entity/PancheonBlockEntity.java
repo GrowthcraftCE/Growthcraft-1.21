@@ -3,6 +3,7 @@ package growthcraft.milk.block.entity;
 import growthcraft.milk.block.PancheonBlock;
 import growthcraft.milk.init.GrowthcraftMilkBlockEntities;
 import growthcraft.milk.init.GrowthcraftMilkRecipes;
+import growthcraft.milk.menu.PancheonMenu;
 import growthcraft.milk.recipe.PancheonRecipe;
 import growthcraft.milk.recipe.input.PancheonInput;
 import net.minecraft.core.BlockPos;
@@ -12,6 +13,11 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.util.RandomSource;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -23,7 +29,7 @@ import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
 import java.util.Optional;
 
-public class PancheonBlockEntity extends BlockEntity {
+public class PancheonBlockEntity extends BlockEntity implements MenuProvider {
     public static final int INPUT_TANK_CAPACITY = 2000;
     public static final int OUTPUT_TANK_CAPACITY = 1000;
 
@@ -152,6 +158,16 @@ public class PancheonBlockEntity extends BlockEntity {
 
     public IFluidHandler getFluidHandler() {
         return fluidHandler;
+    }
+
+    @Override
+    public Component getDisplayName() {
+        return Component.translatable("container.growthcraft_milk.pancheon");
+    }
+
+    @Override
+    public AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
+        return new PancheonMenu(containerId, playerInventory, this);
     }
 
     @Override

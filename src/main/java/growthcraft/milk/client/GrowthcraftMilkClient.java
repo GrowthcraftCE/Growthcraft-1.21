@@ -3,6 +3,7 @@ package growthcraft.milk.client;
 import growthcraft.milk.client.renderer.MixingVatBlockEntityRenderer;
 import growthcraft.milk.client.renderer.PancheonBlockEntityRenderer;
 import growthcraft.milk.client.screen.MixingVatScreen;
+import growthcraft.milk.client.screen.PancheonScreen;
 import growthcraft.milk.config.Reference;
 import growthcraft.milk.init.GrowthcraftMilkBlockEntities;
 import growthcraft.milk.init.GrowthcraftMilkBlocks;
@@ -149,7 +150,7 @@ public final class GrowthcraftMilkClient {
         event.register(GrowthcraftMilkMenus.CHEESE_PRESS.get(), MachineScreen::new);
         event.register(GrowthcraftMilkMenus.CHURN.get(), MachineScreen::new);
         event.register(GrowthcraftMilkMenus.MIXING_VAT.get(), MixingVatScreen::new);
-        event.register(GrowthcraftMilkMenus.PANCHEON.get(), MachineScreen::new);
+        event.register(GrowthcraftMilkMenus.PANCHEON.get(), PancheonScreen::new);
     }
 
     private static void registerContentsTint(RegisterColorHandlersEvent.Item event,
