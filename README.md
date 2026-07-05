@@ -8,12 +8,14 @@
 [![Discord Channel](https://img.shields.io/discord/333690296334548994.svg?color=green)](https://discord.gg/Quh76Jn)
 
 Welcome to Growthcraft. Growthcraft is a collection of Minecraft mods that adds an extra layer of immersion into the
-world of Minecraft. Growthcraft adds the ability to grow Apple tress, collect honey from bees, grow hops and grapes on vines that will crawl along rope. You can make cheese, yogurt, ice cream, butter, rice for a flavorful meal.  Additionally, you can make Ale, Wine, Juice, Ciders, kumis, and sake and make it extra potent for a stronger affect.
+world of Minecraft. Growthcraft adds apple trees, honey, hops, grapes that grow along rope, cheese, yogurt, ice cream,
+butter, rice, ale, wine, juice, cider, kumis, and sake. Many drinks can also be aged or fermented further for stronger
+effects.
 
 ## Getting Started
 
-There are multiple starting points to Growthcraft. As we continue to develop and expand Growthcraft, we will be adding
-to our GitHub wiki documentation. As of version 9 we have included an in-game manual.
+There are multiple starting points to Growthcraft. The in-game manual is the primary gameplay reference for Growthcraft
+1.21.1 and includes getting started notes, recipes, machine guidance, and release information.
 
 ### IDE Run Configurations
 
@@ -29,8 +31,8 @@ After generation, reload the Gradle project in IntelliJ if run configs do not ap
 
 ### Growthcraft 1.21 (Minecraft 1.21.1)
 
-End of Support: TBD  
-Latest Version: 1.21.1.6
+End of Support: TBD<br>
+Latest Version: 1.21.1.6<br>
 Stable Version: 1.21.1.6
 
 ### Growthcraft 8 (Minecraft 1.19.4)
@@ -47,7 +49,7 @@ Stable Version: TBD
 
 ### Growthcraft 6 (Minecraft 1.16)
 
-Going from Minecraft NeoForge 1.12 to 1.16 made a lot of changes to the MCP mappings to the point that it prompted a
+Going from Minecraft Forge 1.12 to 1.16 made a lot of changes to the MCP mappings to the point that it prompted a
 complete rewrite from the ground.
 
 End of Support: 31 DEC 2023  
@@ -71,9 +73,9 @@ Stable Version: 2.7.2
 Growthcraft 2 was a major re-release of Gwafu's original work. In 2015, the Growthcraft
 "Community Edition" Team was given permission to take over the mod development.
 
-In this version, we added village structures. We added two additional sub-muodules, Growthcraft Milk and Rice. These new
-mods added, Cheese, yogurt, ice cream, Sake, Rice, rice and thistle crops. When we first rolled out the thistle crop, it
-was k nown to wildly grow and take over entire worlds.
+In this version, we added village structures and two additional submodules: Growthcraft Milk and Growthcraft Rice. These
+mods added cheese, yogurt, ice cream, sake, rice, and thistle crops. When we first rolled out the thistle crop, it was
+known to wildly grow and take over entire worlds.
 
 ### Growthcraft 1 (Minecraft 1.7.2)
 
