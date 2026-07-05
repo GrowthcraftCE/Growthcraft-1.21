@@ -1,6 +1,7 @@
 package growthcraft.cellar.block.entity;
 
 import growthcraft.cellar.block.FruitPressPistonBlock;
+import growthcraft.cellar.block.FruitPressBlock;
 import growthcraft.cellar.init.GrowthcraftCellarBlockEntities;
 import growthcraft.cellar.init.GrowthcraftCellarRecipes;
 import growthcraft.cellar.menu.FruitPressMenu;
@@ -17,6 +18,7 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.Clearable;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.WorldlyContainer;
@@ -126,6 +128,15 @@ public class FruitPressBlockEntity extends BlockEntity implements WorldlyContain
         }
     }
 
+    public static void clientTick(Level level, BlockPos pos, BlockState state, FruitPressBlockEntity press) {
+        RandomSource random = level.random;
+        if (random.nextFloat() < 0.11F) {
+            for (int i = 0; i < random.nextInt(2) + 2; i++) {
+                FruitPressBlock.makeParticles(level, pos, state, press);
+            }
+        }
+    }
+
     private Optional<RecipeHolder<FruitPressRecipe>> findMatch(Level level, ItemStack input) {
         FruitPressInput recipeInput = new FruitPressInput(input);
         return level.getRecipeManager().getAllRecipesFor(GrowthcraftCellarRecipes.FRUIT_PRESS_TYPE.get()).stream()
@@ -141,6 +152,15 @@ public class FruitPressBlockEntity extends BlockEntity implements WorldlyContain
         var fluid = BuiltInRegistries.FLUID.get(output.fluidId());
         if (fluid == Fluids.EMPTY) return FluidStack.EMPTY;
         return new FluidStack(fluid, output.amount());
+    }
+
+    public FluidStack getActiveOutputFluidStack(Level level) {
+        if (!isProcessing()) {
+            return FluidStack.EMPTY;
+        }
+        return findMatch(level, getItem(SLOT_INPUT))
+                .map(holder -> outputFluidStack(holder.value()))
+                .orElse(FluidStack.EMPTY);
     }
 
     private boolean canOutputByProduct(ItemStack stack) {
@@ -178,6 +198,10 @@ public class FruitPressBlockEntity extends BlockEntity implements WorldlyContain
             this.processTimeTotal = 0;
             setChanged();
         }
+    }
+
+    public boolean isProcessing() {
+        return processTime > 0 && processTimeTotal > 0;
     }
 
     @Override

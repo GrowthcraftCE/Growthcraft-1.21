@@ -3,9 +3,11 @@ package growthcraft.cellar.block;
 import growthcraft.cellar.config.Reference;
 import growthcraft.cellar.block.entity.FruitPressBlockEntity;
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
+import growthcraft.lib.particle.ColoredDripParticleOption;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -36,6 +38,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidUtil;
 import org.jetbrains.annotations.Nullable;
 
@@ -148,7 +152,15 @@ public class FruitPressBlock extends Block implements EntityBlock {
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return level.isClientSide ? null : (lvl, pos, st, be) -> {
+        if (level.isClientSide) {
+            return (lvl, pos, st, be) -> {
+                if (be instanceof FruitPressBlockEntity press) {
+                    FruitPressBlockEntity.clientTick(lvl, pos, st, press);
+                }
+            };
+        }
+
+        return (lvl, pos, st, be) -> {
             if (be instanceof FruitPressBlockEntity press) {
                 FruitPressBlockEntity.serverTick(lvl, pos, st, press);
             }
@@ -158,5 +170,27 @@ public class FruitPressBlock extends Block implements EntityBlock {
     @Override
     public PushReaction getPistonPushReaction(BlockState state) {
         return PushReaction.DESTROY;
+    }
+
+    public static void makeParticles(Level level, BlockPos pos, BlockState state, FruitPressBlockEntity press) {
+        if (!press.isProcessing()) {
+            return;
+        }
+
+        FluidStack output = press.getActiveOutputFluidStack(level);
+        if (output.isEmpty()) {
+            return;
+        }
+
+        RandomSource random = level.getRandom();
+        double x = pos.getX() + 0.2D + random.nextDouble() * 0.6D;
+        double y = pos.getY() - 0.05D;
+        double z = pos.getZ() + 0.2D + random.nextDouble() * 0.6D;
+        level.addParticle(ColoredDripParticleOption.fromTintColor(getDripColor(output)), x, y, z, 0.0D, 0.0D, 0.0D);
+    }
+
+    private static int getDripColor(FluidStack fluidStack) {
+        int color = IClientFluidTypeExtensions.of(fluidStack.getFluid()).getTintColor(fluidStack);
+        return color == 0 ? 0xFFFFFFFF : color;
     }
 }
