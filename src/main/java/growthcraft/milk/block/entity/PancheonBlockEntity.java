@@ -232,26 +232,28 @@ public class PancheonBlockEntity extends BlockEntity {
 
         @Override
         public FluidStack drain(FluidStack resource, FluidAction action) {
-            if (!inputTank.isEmpty()) {
-                return FluidStack.EMPTY;
-            }
             FluidStack drained = outputTank0.drain(resource, action);
             if (!drained.isEmpty()) {
                 return drained;
             }
-            return outputTank1.drain(resource, action);
+            drained = outputTank1.drain(resource, action);
+            if (!drained.isEmpty() || isProcessing()) {
+                return drained;
+            }
+            return inputTank.drain(resource, action);
         }
 
         @Override
         public FluidStack drain(int maxDrain, FluidAction action) {
-            if (!inputTank.isEmpty()) {
-                return FluidStack.EMPTY;
-            }
             FluidStack drained = outputTank0.drain(maxDrain, action);
             if (!drained.isEmpty()) {
                 return drained;
             }
-            return outputTank1.drain(maxDrain, action);
+            drained = outputTank1.drain(maxDrain, action);
+            if (!drained.isEmpty() || isProcessing()) {
+                return drained;
+            }
+            return inputTank.drain(maxDrain, action);
         }
 
         private FluidTank getTank(int tank) {
