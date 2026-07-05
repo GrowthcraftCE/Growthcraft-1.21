@@ -5,8 +5,10 @@ import growthcraft.apiary.init.GrowthcraftApiaryItems;
 import growthcraft.apiary.init.GrowthcraftApiaryTags;
 import growthcraft.apples.init.GrowthcraftApplesItems;
 import growthcraft.core.init.GrowthcraftItems;
+import growthcraft.core.init.GrowthcraftTags;
 import growthcraft.milk.init.GrowthcraftMilkItems;
 import growthcraft.milk.init.GrowthcraftMilkTags;
+import growthcraft.rice.init.GrowthcraftRiceItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -55,6 +57,9 @@ public class GrowthcraftItemTags extends IntrinsicHolderTagsProvider<Item> {
 
         this.tag(GrowthcraftApiaryTags.Items.HONEY_COMB)
                 .add(Items.HONEYCOMB, GrowthcraftApiaryItems.HONEY_COMB_FULL.get());
+
+        this.tag(GrowthcraftTags.Items.KNIVES)
+                .add(GrowthcraftRiceItems.KNIFE.get());
 
         this.tag(ItemTags.LEAVES)
                 .add(GrowthcraftApplesItems.APPLE_TREE_LEAVES.get());

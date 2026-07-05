@@ -1,7 +1,7 @@
 package growthcraft.milk.block;
 
 import com.mojang.serialization.MapCodec;
-import growthcraft.rice.init.GrowthcraftRiceItems;
+import growthcraft.core.init.GrowthcraftTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -162,7 +162,7 @@ public class CheeseWheelBlock extends HorizontalDirectionalBlock {
             return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
 
-        if (sliceable && heldStack.is(GrowthcraftRiceItems.KNIFE.get())) {
+        if (sliceable && heldStack.is(GrowthcraftTags.Items.KNIVES)) {
             Item slice = sliceItem.get();
             if (slice == null || getTotalSlices(state) <= 0) {
                 return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
