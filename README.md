@@ -35,6 +35,12 @@ End of Support: TBD<br>
 Latest Version: 1.21.1.6<br>
 Stable Version: 1.21.1.6
 
+### Growthcraft 9 (Minecraft 1.20.1)
+
+End of Support: TBD<br>
+Latest Version: 9.2.0<br>
+Stable Version: 9.2.0
+
 ### Growthcraft 8 (Minecraft 1.19.4)
 
 End of Support: TBD  
