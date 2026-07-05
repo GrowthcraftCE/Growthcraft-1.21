@@ -2,6 +2,7 @@ package growthcraft.cellar.init;
 
 import growthcraft.cellar.block.CultureJarBlock;
 import growthcraft.cellar.block.entity.BrewKettleBlockEntity;
+import growthcraft.cellar.block.entity.CorkCoasterBlockEntity;
 import growthcraft.cellar.block.entity.CultureJarBlockEntity;
 import growthcraft.cellar.block.entity.FermentationBarrelBlockEntity;
 import growthcraft.cellar.block.entity.FruitPressBlockEntity;
@@ -38,6 +39,11 @@ public final class GrowthcraftCellarBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<RoasterBlockEntity>> ROASTER = BLOCK_ENTITY_TYPES.register(
             Reference.UnlocalizedName.Block.ROASTER,
             () -> BlockEntityType.Builder.of(RoasterBlockEntity::new, GrowthcraftCellarBlocks.ROASTER.get()).build(null)
+    );
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<CorkCoasterBlockEntity>> CORK_COASTER = BLOCK_ENTITY_TYPES.register(
+            Reference.UnlocalizedName.Item.CORK_COASTER,
+            () -> BlockEntityType.Builder.of(CorkCoasterBlockEntity::new, GrowthcraftCellarBlocks.CORK_COASTER.get()).build(null)
     );
 
     private GrowthcraftCellarBlockEntities() {}

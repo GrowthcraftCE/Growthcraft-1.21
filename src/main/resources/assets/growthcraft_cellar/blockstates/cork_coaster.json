@@ -1,5 +1,12 @@
 {
   "variants": {
-    "": { "model": "growthcraft_cellar:block/cork_coaster" }
+    "facing=north,item=false": { "model": "growthcraft_cellar:block/cork_coaster" },
+    "facing=north,item=true": { "model": "growthcraft_cellar:block/cork_coaster" },
+    "facing=east,item=false": { "model": "growthcraft_cellar:block/cork_coaster" },
+    "facing=east,item=true": { "model": "growthcraft_cellar:block/cork_coaster" },
+    "facing=south,item=false": { "model": "growthcraft_cellar:block/cork_coaster" },
+    "facing=south,item=true": { "model": "growthcraft_cellar:block/cork_coaster" },
+    "facing=west,item=false": { "model": "growthcraft_cellar:block/cork_coaster" },
+    "facing=west,item=true": { "model": "growthcraft_cellar:block/cork_coaster" }
   }
 }

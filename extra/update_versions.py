@@ -19,7 +19,7 @@ Schema assumptions:
 - We expect either the entire JSON to be a mapping of series → info, or a top-level
   object containing a key "versions" with that mapping. We preserve existing structure.
 - For each series key (e.g., "1.21", "1.19"), we store fields:
-  { "minecraft": "1.21.1", "latest": "1.21.1.3", "stable": "1.21.1.3", "endOfSupport": "TBD" }
+  { "minecraft": "1.21.1", "latest": "1.21.1.6", "stable": "1.21.1.6", "endOfSupport": "TBD" }
 
 Notes:
 - EoS dates are computed for legacy series using the last commit date of the release

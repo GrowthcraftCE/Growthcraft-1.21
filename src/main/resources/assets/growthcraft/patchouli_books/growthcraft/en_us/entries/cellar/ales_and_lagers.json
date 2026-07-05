@@ -14,7 +14,7 @@
     },
     {
       "type": "patchouli:spotlight",
-      "item": "growthcraft_cellar:potion_ale{color:-7114959}",
+      "item": "growthcraft_cellar:potion_ale",
       "title": "Ales",
       "text": "Ales are made with $(6)Brewer's Yeast$(). The types of ale are:$(br2)$(bold)Amber Ale$() (from $(t:requires Amber Roasted Grain)$(o)Amber Wort$())$(li)Haste III (3:00)$(br2)$(bold)Brown Ale$() (from $(t:requires Brown Roasted Grain)$(o)Brown Wort$())$(li)Haste IV (6:00)$(br2)$(bold)Copper Ale$() (from $(t:requires Copper Roasted Grain)$(o)Copper Wort$())$(li)Regeneration III (3:00)"
     },
@@ -25,7 +25,7 @@
     },
     {
       "type": "patchouli:spotlight",
-      "item": "growthcraft_cellar:potion_lager{color:-7114959}",
+      "item": "growthcraft_cellar:potion_lager",
       "title": "Lagers",
       "text": "Lagers are made with $(6)Lager Yeast$(). The type of lager are:$(br2)$(bold)Amber Lager$() (from $(t:requires Amber Roasted Grain)$(o)Amber Wort$())$(li)Speed III (3:00)$(br2)$(bold)Brown Lager$() (from $(t:requires Brown Roasted Grain)$(o)Brown Wort$())$(li)Speed IV (5:00)$(br2)$(bold)Copper Lager$() (from $(t:requires Copper Roasted Grain)$(o)Copper Wort$())$(li)Resistance III (3:00)"
     },

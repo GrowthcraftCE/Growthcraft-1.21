@@ -1,5 +1,7 @@
 package growthcraft.core;
 
+import growthcraft.core.init.GrowthcraftParticles;
+import growthcraft.lib.client.particle.ColoredDripParticle;
 import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -9,6 +11,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 
 // This class will not load on dedicated servers. Accessing client side code from here is safe.
 @Mod(value = Growthcraft.MODID, dist = Dist.CLIENT)
@@ -27,5 +30,11 @@ public class GrowthcraftClient {
         // Some client setup code
         Growthcraft.LOGGER.info("HELLO FROM CLIENT SETUP");
         Growthcraft.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+    }
+
+    @SubscribeEvent
+    static void registerParticles(RegisterParticleProvidersEvent event) {
+        event.registerSpriteSet(GrowthcraftParticles.COLORED_DRIP.get(), ColoredDripParticle.Provider::new);
+        event.registerSpriteSet(GrowthcraftParticles.COLORED_DRIP_LAND.get(), ColoredDripParticle.Land.Provider::new);
     }
 }

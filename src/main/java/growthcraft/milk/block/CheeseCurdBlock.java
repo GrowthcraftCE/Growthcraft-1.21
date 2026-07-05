@@ -1,8 +1,8 @@
 package growthcraft.milk.block;
 
 import com.mojang.serialization.MapCodec;
+import growthcraft.lib.particle.ColoredDripParticleOption;
 import growthcraft.milk.config.Reference;
-import growthcraft.milk.particle.ColoredDripParticleOption;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -82,7 +82,7 @@ public class CheeseCurdBlock extends Block {
         double x = pos.getX() + 0.25D + random.nextDouble() * 0.5D;
         double y = pos.getY() - 0.05D;
         double z = pos.getZ() + 0.25D + random.nextDouble() * 0.5D;
-        level.addParticle(new ColoredDripParticleOption(DRIP_COLOR), x, y, z, 0.0D, 0.0D, 0.0D);
+        level.addParticle(ColoredDripParticleOption.fromTintColor(DRIP_COLOR), x, y, z, 0.0D, 0.0D, 0.0D);
     }
 
     protected int getAge(BlockState state) {

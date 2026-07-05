@@ -3,9 +3,11 @@ package growthcraft.cellar.block;
 import growthcraft.cellar.config.Reference;
 import growthcraft.cellar.block.entity.FruitPressBlockEntity;
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
+import growthcraft.lib.particle.ColoredDripParticleOption;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -36,11 +38,19 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.FluidUtil;
 import org.jetbrains.annotations.Nullable;
 
 public class FruitPressBlock extends Block implements EntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    private static final double DRIP_START_Y_OFFSET = 0.34D;
+    private static final double DRIP_LANDING_CLEARANCE = 0.02D;
+    private static final double DRIP_POOL_MIN_OFFSET = 3.0D / 16.0D;
+    private static final double DRIP_POOL_SPREAD = 10.0D / 16.0D;
+    private static final float DRIP_LANDING_SCALE = 1.35F;
+    private static final int DRIP_LANDING_LINGER_TICKS = 10;
     private static final VoxelShape SHAPE = Shapes.or(
             Block.box(1.0D, 0.0D, 1.0D, 15.0D, 3.0D, 15.0D),
             Block.box(0.0D, 3.0D, 0.0D, 16.0D, 7.0D, 16.0D),
@@ -148,7 +158,15 @@ public class FruitPressBlock extends Block implements EntityBlock {
 
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return level.isClientSide ? null : (lvl, pos, st, be) -> {
+        if (level.isClientSide) {
+            return (lvl, pos, st, be) -> {
+                if (be instanceof FruitPressBlockEntity press) {
+                    FruitPressBlockEntity.clientTick(lvl, pos, st, press);
+                }
+            };
+        }
+
+        return (lvl, pos, st, be) -> {
             if (be instanceof FruitPressBlockEntity press) {
                 FruitPressBlockEntity.serverTick(lvl, pos, st, press);
             }
@@ -158,5 +176,41 @@ public class FruitPressBlock extends Block implements EntityBlock {
     @Override
     public PushReaction getPistonPushReaction(BlockState state) {
         return PushReaction.DESTROY;
+    }
+
+    public static void makeParticles(Level level, BlockPos pos, BlockState state, FruitPressBlockEntity press) {
+        if (!press.isProcessing() || !press.isPressed()) {
+            return;
+        }
+
+        FluidStack output = press.getActiveOutputFluidStack(level);
+        if (output.isEmpty()) {
+            return;
+        }
+
+        RandomSource random = level.getRandom();
+        double x = pos.getX() + DRIP_POOL_MIN_OFFSET + random.nextDouble() * DRIP_POOL_SPREAD;
+        double y = pos.getY() + DRIP_START_Y_OFFSET;
+        double z = pos.getZ() + DRIP_POOL_MIN_OFFSET + random.nextDouble() * DRIP_POOL_SPREAD;
+        double landingY = findDripLandingY(level, pos, x, z);
+        level.addParticle(ColoredDripParticleOption.fromTintColor(getDripColor(output), landingY, DRIP_LANDING_SCALE, DRIP_LANDING_LINGER_TICKS), x, y, z, 0.0D, 0.0D, 0.0D);
+    }
+
+    private static double findDripLandingY(Level level, BlockPos pressPos, double x, double z) {
+        for (int y = pressPos.getY() - 1; y >= level.getMinBuildHeight(); y--) {
+            BlockPos landingPos = BlockPos.containing(x, y, z);
+            BlockState landingState = level.getBlockState(landingPos);
+            VoxelShape landingShape = landingState.getCollisionShape(level, landingPos, CollisionContext.empty());
+            if (!landingShape.isEmpty()) {
+                return landingPos.getY() + landingShape.max(Direction.Axis.Y) + DRIP_LANDING_CLEARANCE;
+            }
+        }
+
+        return Double.NaN;
+    }
+
+    private static int getDripColor(FluidStack fluidStack) {
+        int color = IClientFluidTypeExtensions.of(fluidStack.getFluid()).getTintColor(fluidStack);
+        return color == 0 ? 0xFFFFFFFF : color;
     }
 }

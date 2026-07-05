@@ -4,6 +4,7 @@ import growthcraft.milk.block.entity.CheesePressBlockEntity;
 import growthcraft.milk.block.entity.ChurnBlockEntity;
 import growthcraft.milk.block.entity.MixingVatBlockEntity;
 import growthcraft.milk.block.entity.PancheonBlockEntity;
+import growthcraft.milk.block.entity.ShopSignBlockEntity;
 import growthcraft.milk.config.Reference;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -31,6 +32,33 @@ public final class GrowthcraftMilkBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MixingVatBlockEntity>> MIXING_VAT = BLOCK_ENTITY_TYPES.register(
             Reference.UnlocalizedName.MIXING_VAT,
             () -> BlockEntityType.Builder.of(MixingVatBlockEntity::new, GrowthcraftMilkBlocks.MIXING_VAT.get()).build(null)
+    );
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ShopSignBlockEntity>> SHOP_SIGN = BLOCK_ENTITY_TYPES.register(
+            Reference.UnlocalizedName.SHOP_SIGN,
+            () -> BlockEntityType.Builder.of(ShopSignBlockEntity::new,
+                    GrowthcraftMilkBlocks.HANGING_SIGN_1_OAK.get(),
+                    GrowthcraftMilkBlocks.HANGING_SIGN_1_SPRUCE.get(),
+                    GrowthcraftMilkBlocks.HANGING_SIGN_1_BIRCH.get(),
+                    GrowthcraftMilkBlocks.HANGING_SIGN_1_JUNGLE.get(),
+                    GrowthcraftMilkBlocks.HANGING_SIGN_1_ACACIA.get(),
+                    GrowthcraftMilkBlocks.HANGING_SIGN_1_DARK_OAK.get(),
+                    GrowthcraftMilkBlocks.HANGING_SIGN_1_MANGROVE.get(),
+                    GrowthcraftMilkBlocks.HANGING_SIGN_1_CHERRY.get(),
+                    GrowthcraftMilkBlocks.HANGING_SIGN_1_BAMBOO.get(),
+                    GrowthcraftMilkBlocks.HANGING_SIGN_1_CRIMSON.get(),
+                    GrowthcraftMilkBlocks.HANGING_SIGN_1_WARPED.get(),
+                    GrowthcraftMilkBlocks.HANGING_SIGN_2_OAK.get(),
+                    GrowthcraftMilkBlocks.HANGING_SIGN_2_SPRUCE.get(),
+                    GrowthcraftMilkBlocks.HANGING_SIGN_2_BIRCH.get(),
+                    GrowthcraftMilkBlocks.HANGING_SIGN_2_JUNGLE.get(),
+                    GrowthcraftMilkBlocks.HANGING_SIGN_2_ACACIA.get(),
+                    GrowthcraftMilkBlocks.HANGING_SIGN_2_DARK_OAK.get(),
+                    GrowthcraftMilkBlocks.HANGING_SIGN_2_MANGROVE.get(),
+                    GrowthcraftMilkBlocks.HANGING_SIGN_2_CHERRY.get(),
+                    GrowthcraftMilkBlocks.HANGING_SIGN_2_BAMBOO.get(),
+                    GrowthcraftMilkBlocks.HANGING_SIGN_2_CRIMSON.get(),
+                    GrowthcraftMilkBlocks.HANGING_SIGN_2_WARPED.get()).build(null)
     );
 
     private GrowthcraftMilkBlockEntities() {

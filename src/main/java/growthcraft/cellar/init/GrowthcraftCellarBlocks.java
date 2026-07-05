@@ -1,6 +1,7 @@
 package growthcraft.cellar.init;
 
 import growthcraft.cellar.block.CultureJarBlock;
+import growthcraft.cellar.block.CorkCoasterBlock;
 import growthcraft.cellar.block.CorkLogBlock;
 import growthcraft.cellar.block.BrewKettleBlock;
 import growthcraft.cellar.block.FermentationBarrelBlock;
@@ -64,12 +65,7 @@ public final class GrowthcraftCellarBlocks {
             () -> new GrapeVineCropBlock(WHITE_GRAPE_VINE_LEAVES));
     public static final DeferredBlock<HopsCropBlock> HOPS_VINE = BLOCKS.register(Reference.UnlocalizedName.Block.HOPS_VINE, HopsCropBlock::new);
 
-    public static final DeferredBlock<Block> CORK_COASTER = BLOCKS.register(Reference.UnlocalizedName.Item.CORK_COASTER,
-            () -> new Block(BlockBehaviour.Properties.of()
-                    .mapColor(MapColor.COLOR_BROWN)
-                    .strength(0.3F)
-                    .sound(SoundType.WOOD)
-                    .noOcclusion()));
+    public static final DeferredBlock<Block> CORK_COASTER = BLOCKS.register(Reference.UnlocalizedName.Item.CORK_COASTER, () -> new CorkCoasterBlock());
     public static final DeferredBlock<LeavesBlock> CORK_TREE_LEAVES = BLOCKS.register(Reference.UnlocalizedName.Block.CORK_TREE_LEAVES,
             () -> new LeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES)));
     public static final DeferredBlock<SaplingBlock> CORK_TREE_SAPLING = BLOCKS.register(Reference.UnlocalizedName.Block.CORK_TREE_SAPLING,

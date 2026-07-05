@@ -1,12 +1,15 @@
 package growthcraft.milk.client;
 
-import growthcraft.milk.client.particle.ColoredDripParticle;
+import growthcraft.milk.client.renderer.MixingVatBlockEntityRenderer;
+import growthcraft.milk.client.renderer.PancheonBlockEntityRenderer;
+import growthcraft.milk.client.renderer.ShopSignRenderer;
 import growthcraft.milk.client.screen.MixingVatScreen;
+import growthcraft.milk.client.screen.PancheonScreen;
 import growthcraft.milk.config.Reference;
+import growthcraft.milk.init.GrowthcraftMilkBlockEntities;
 import growthcraft.milk.init.GrowthcraftMilkBlocks;
 import growthcraft.milk.init.GrowthcraftMilkItems;
 import growthcraft.milk.init.GrowthcraftMilkMenus;
-import growthcraft.milk.init.GrowthcraftMilkParticles;
 import growthcraft.lib.client.screen.MachineScreen;
 import growthcraft.lib.utils.ColorUtils;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -20,9 +23,9 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
-import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 /**
@@ -44,6 +47,13 @@ public final class GrowthcraftMilkClient {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(GrowthcraftMilkClient::registerCheeseModelProperties);
+    }
+
+    @SubscribeEvent
+    public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(GrowthcraftMilkBlockEntities.MIXING_VAT.get(), MixingVatBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(GrowthcraftMilkBlockEntities.PANCHEON.get(), PancheonBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(GrowthcraftMilkBlockEntities.SHOP_SIGN.get(), ShopSignRenderer::new);
     }
 
     @SubscribeEvent
@@ -74,6 +84,28 @@ public final class GrowthcraftMilkClient {
         registerItemTint(event, Reference.ItemColor.GOUDA_CHEESE, GrowthcraftMilkItems.GOUDA_CHEESE_WAXED);
         registerItemTint(event, Reference.ItemColor.MONTEREY_CHEESE, GrowthcraftMilkItems.MONTEREY_CHEESE_WAXED);
         registerItemTint(event, Reference.ItemColor.PROVOLONE_CHEESE, GrowthcraftMilkItems.PROVOLONE_CHEESE_WAXED);
+        registerItemTint(event, Reference.ItemColor.APPENZELLER_CHEESE, GrowthcraftMilkItems.APPENZELLER_CHEESE_CURDS);
+        registerItemTint(event, Reference.ItemColor.ASIAGO_CHEESE, GrowthcraftMilkItems.ASIAGO_CHEESE_CURDS);
+        registerItemTint(event, Reference.ItemColor.CASU_MARZU_CHEESE, GrowthcraftMilkItems.CASU_MARZU_CHEESE_CURDS);
+        registerItemTint(event, Reference.ItemColor.CHEDDAR_CHEESE, GrowthcraftMilkItems.CHEDDAR_CHEESE_CURDS);
+        registerItemTint(event, Reference.ItemColor.EMMENTALER_CHEESE, GrowthcraftMilkItems.EMMENTALER_CHEESE_CURDS);
+        registerItemTint(event, Reference.ItemColor.GORGONZOLA_CHEESE, GrowthcraftMilkItems.GORGONZOLA_CHEESE_CURDS);
+        registerItemTint(event, Reference.ItemColor.GOUDA_CHEESE, GrowthcraftMilkItems.GOUDA_CHEESE_CURDS);
+        registerItemTint(event, Reference.ItemColor.MONTEREY_CHEESE, GrowthcraftMilkItems.MONTEREY_CHEESE_CURDS);
+        registerItemTint(event, Reference.ItemColor.PARMESAN_CHEESE, GrowthcraftMilkItems.PARMESAN_CHEESE_CURDS);
+        registerItemTint(event, Reference.ItemColor.PROVOLONE_CHEESE, GrowthcraftMilkItems.PROVOLONE_CHEESE_CURDS);
+        registerItemTint(event, Reference.ItemColor.RICOTTA_CHEESE, GrowthcraftMilkItems.RICOTTA_CHEESE_CURDS);
+        registerItemTint(event, Reference.ItemColor.APPENZELLER_CHEESE, GrowthcraftMilkItems.APPENZELLER_CHEESE_CURDS_DRAINED);
+        registerItemTint(event, Reference.ItemColor.ASIAGO_CHEESE, GrowthcraftMilkItems.ASIAGO_CHEESE_CURDS_DRAINED);
+        registerItemTint(event, Reference.ItemColor.CASU_MARZU_CHEESE, GrowthcraftMilkItems.CASU_MARZU_CHEESE_CURDS_DRAINED);
+        registerItemTint(event, Reference.ItemColor.CHEDDAR_CHEESE, GrowthcraftMilkItems.CHEDDAR_CHEESE_CURDS_DRAINED);
+        registerItemTint(event, Reference.ItemColor.EMMENTALER_CHEESE, GrowthcraftMilkItems.EMMENTALER_CHEESE_CURDS_DRAINED);
+        registerItemTint(event, Reference.ItemColor.GORGONZOLA_CHEESE, GrowthcraftMilkItems.GORGONZOLA_CHEESE_CURDS_DRAINED);
+        registerItemTint(event, Reference.ItemColor.GOUDA_CHEESE, GrowthcraftMilkItems.GOUDA_CHEESE_CURDS_DRAINED);
+        registerItemTint(event, Reference.ItemColor.MONTEREY_CHEESE, GrowthcraftMilkItems.MONTEREY_CHEESE_CURDS_DRAINED);
+        registerItemTint(event, Reference.ItemColor.PARMESAN_CHEESE, GrowthcraftMilkItems.PARMESAN_CHEESE_CURDS_DRAINED);
+        registerItemTint(event, Reference.ItemColor.PROVOLONE_CHEESE, GrowthcraftMilkItems.PROVOLONE_CHEESE_CURDS_DRAINED);
+        registerItemTint(event, Reference.ItemColor.RICOTTA_CHEESE, GrowthcraftMilkItems.RICOTTA_CHEESE_CURDS_DRAINED);
     }
 
     @SubscribeEvent
@@ -102,6 +134,17 @@ public final class GrowthcraftMilkClient {
         registerBlockTint(event, Reference.BlockColor.GOUDA_CHEESE, GrowthcraftMilkBlocks.GOUDA_CHEESE_WAXED);
         registerBlockTint(event, Reference.BlockColor.MONTEREY_CHEESE, GrowthcraftMilkBlocks.MONTEREY_CHEESE_WAXED);
         registerBlockTint(event, Reference.BlockColor.PROVOLONE_CHEESE, GrowthcraftMilkBlocks.PROVOLONE_CHEESE_WAXED);
+        registerBlockTint(event, Reference.BlockColor.APPENZELLER_CHEESE, GrowthcraftMilkBlocks.APPENZELLER_CHEESE_CURDS);
+        registerBlockTint(event, Reference.BlockColor.ASIAGO_CHEESE, GrowthcraftMilkBlocks.ASIAGO_CHEESE_CURDS);
+        registerBlockTint(event, Reference.BlockColor.CASU_MARZU_CHEESE, GrowthcraftMilkBlocks.CASU_MARZU_CHEESE_CURDS);
+        registerBlockTint(event, Reference.BlockColor.CHEDDAR_CHEESE, GrowthcraftMilkBlocks.CHEDDAR_CHEESE_CURDS);
+        registerBlockTint(event, Reference.BlockColor.EMMENTALER_CHEESE, GrowthcraftMilkBlocks.EMMENTALER_CHEESE_CURDS);
+        registerBlockTint(event, Reference.BlockColor.GORGONZOLA_CHEESE, GrowthcraftMilkBlocks.GORGONZOLA_CHEESE_CURDS);
+        registerBlockTint(event, Reference.BlockColor.GOUDA_CHEESE, GrowthcraftMilkBlocks.GOUDA_CHEESE_CURDS);
+        registerBlockTint(event, Reference.BlockColor.MONTEREY_CHEESE, GrowthcraftMilkBlocks.MONTEREY_CHEESE_CURDS);
+        registerBlockTint(event, Reference.BlockColor.PARMESAN_CHEESE, GrowthcraftMilkBlocks.PARMESAN_CHEESE_CURDS);
+        registerBlockTint(event, Reference.BlockColor.PROVOLONE_CHEESE, GrowthcraftMilkBlocks.PROVOLONE_CHEESE_CURDS);
+        registerBlockTint(event, Reference.BlockColor.RICOTTA_CHEESE, GrowthcraftMilkBlocks.RICOTTA_CHEESE_CURDS);
     }
 
     @SubscribeEvent
@@ -109,13 +152,7 @@ public final class GrowthcraftMilkClient {
         event.register(GrowthcraftMilkMenus.CHEESE_PRESS.get(), MachineScreen::new);
         event.register(GrowthcraftMilkMenus.CHURN.get(), MachineScreen::new);
         event.register(GrowthcraftMilkMenus.MIXING_VAT.get(), MixingVatScreen::new);
-        event.register(GrowthcraftMilkMenus.PANCHEON.get(), MachineScreen::new);
-    }
-
-    @SubscribeEvent
-    public static void registerParticles(RegisterParticleProvidersEvent event) {
-        event.registerSpriteSet(GrowthcraftMilkParticles.COLORED_DRIP.get(), ColoredDripParticle.Provider::new);
-        event.registerSpriteSet(GrowthcraftMilkParticles.COLORED_DRIP_LAND.get(), ColoredDripParticle.Land.Provider::new);
+        event.register(GrowthcraftMilkMenus.PANCHEON.get(), PancheonScreen::new);
     }
 
     private static void registerContentsTint(RegisterColorHandlersEvent.Item event,
@@ -127,13 +164,17 @@ public final class GrowthcraftMilkClient {
     private static void registerItemTint(RegisterColorHandlersEvent.Item event,
                                          ColorUtils.GrowthcraftColor color,
                                          DeferredHolder<Item, ? extends Item> item) {
-        event.register((stack, tintIndex) -> tintIndex == 0 ? color.toIntValue() : 0xFFFFFFFF, item.get());
+        event.register((stack, tintIndex) -> tintIndex == 0 ? opaqueColor(color) : 0xFFFFFFFF, item.get());
     }
 
     private static void registerBlockTint(RegisterColorHandlersEvent.Block event,
                                           ColorUtils.GrowthcraftColor color,
                                           DeferredHolder<Block, ? extends Block> block) {
         event.register((state, level, pos, tintIndex) -> tintIndex == 0 ? color.toIntValue() : 0xFFFFFFFF, block.get());
+    }
+
+    private static int opaqueColor(ColorUtils.GrowthcraftColor color) {
+        return color.toIntValue() | 0xFF000000;
     }
 
     private static void registerCheeseModelProperties() {

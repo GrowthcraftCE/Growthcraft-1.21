@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_butter": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#forge:butter"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_cocoa_beans": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:cocoa_beans"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "growthcraft_milk:butter_cookies"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_butter",
+      "has_cocoa_beans"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "growthcraft_milk:butter_cookies"
+    ]
+  }
+}

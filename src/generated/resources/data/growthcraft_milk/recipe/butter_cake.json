@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "growthcraft_milk",
+  "key": {
+    "B": {
+      "tag": "forge:butter"
+    },
+    "E": {
+      "item": "minecraft:egg"
+    },
+    "M": {
+      "tag": "growthcraft_milk:milk_buckets"
+    },
+    "S": {
+      "item": "minecraft:sugar"
+    },
+    "W": {
+      "item": "minecraft:wheat"
+    }
+  },
+  "pattern": [
+    "MBM",
+    "SES",
+    "WWW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:cake"
+  }
+}

@@ -1,17 +1,14 @@
 package growthcraft.milk.block;
 
 import growthcraft.milk.block.entity.PancheonBlockEntity;
-import growthcraft.lib.block.MachineMenuOpener;
 import growthcraft.lib.fluid.FluidRegistryContainer;
 import growthcraft.milk.config.Reference;
 import growthcraft.milk.init.GrowthcraftMilkBlockEntities;
 import growthcraft.milk.init.GrowthcraftMilkFluids;
 import growthcraft.milk.init.GrowthcraftMilkItems;
-import growthcraft.milk.init.GrowthcraftMilkMenus;
-import growthcraft.milk.particle.ColoredDripParticleOption;
+import growthcraft.lib.particle.ColoredDripParticleOption;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -96,8 +93,11 @@ public class PancheonBlock extends Block implements EntityBlock {
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        return MachineMenuOpener.open(level, player, GrowthcraftMilkMenus.PANCHEON.get(),
-                Component.translatable("block." + Reference.MODID + "." + Reference.UnlocalizedName.PANCHEON));
+        if (!level.isClientSide && level.getBlockEntity(pos) instanceof net.minecraft.world.MenuProvider provider) {
+            player.openMenu(provider);
+            return InteractionResult.CONSUME;
+        }
+        return InteractionResult.SUCCESS;
     }
 
     @Override
@@ -230,7 +230,7 @@ public class PancheonBlock extends Block implements EntityBlock {
         double x = pos.getX() + 0.2D + random.nextDouble() * 0.6D;
         double y = pos.getY() - 0.05D;
         double z = pos.getZ() + 0.2D + random.nextDouble() * 0.6D;
-        level.addParticle(new ColoredDripParticleOption(getDripColor(pancheon.getInputTank().getFluid())), x, y, z, 0.0D, 0.0D, 0.0D);
+        level.addParticle(ColoredDripParticleOption.fromTintColor(getDripColor(pancheon.getInputTank().getFluid())), x, y, z, 0.0D, 0.0D, 0.0D);
     }
 
     private static int getDripColor(FluidStack fluidStack) {

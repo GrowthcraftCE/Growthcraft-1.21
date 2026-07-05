@@ -5,12 +5,16 @@
   "sortnum": 1,
   "pages": [
     {
-      "type": "text",
-      "text": "Honey can be used for a wide range of beneficial elixirs through out the world.$(br2)Our master brewsmiths have been hard at work and have perfected the recipe for mead are are willing to share it with you."
+      "type": "patchouli:text",
+      "text": "Honey can be fermented into mead, a sweet drink with a useful health boost.$(br2)Start by making Mead Must in the Brew Kettle."
     },
     {
-      "type": "text",
-      "text": "To get started you will need to place four filled honey comb and a bucket of water in the Brew Kettle to produce one bucket of Mead Must. The process doesn't take long to complete.$(br2)Next, take your bucket of Mead Must and one bayanus yeast and place them into a ferment barrel. After the yeast has fermented the Mead Must, use a glass bottle or a wine bottle to extract the fresh mead from the barrel.$(br2)The ferment barrel can hold up to four buckets of Mead Must. If you want to ferment all four buckets, you will need four bayanus yeast."
+      "type": "patchouli:text",
+      "text": "Add water and honeycomb to a heated Brew Kettle. Growthcraft honey comb creates a small batch of Mead Must. Vanilla honeycomb creates a larger batch."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Move Mead Must into a Fermentation Barrel and add Bayanus Yeast.$(br2)Each bucket of Mead Must needs one yeast. After fermentation, bottle the mead with a glass bottle or wine bottle."
     },
     {
       "type": "patchouli:spotlight",

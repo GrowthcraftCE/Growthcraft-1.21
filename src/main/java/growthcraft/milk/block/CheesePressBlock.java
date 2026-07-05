@@ -1,11 +1,12 @@
 package growthcraft.milk.block;
 
 import growthcraft.core.init.GrowthcraftItems;
+import growthcraft.lib.particle.ColoredDripParticleOption;
 import growthcraft.milk.block.entity.CheesePressBlockEntity;
+import growthcraft.milk.config.Reference;
 import growthcraft.milk.init.GrowthcraftMilkBlockEntities;
 import growthcraft.milk.init.GrowthcraftMilkItems;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.sounds.SoundEvents;
@@ -219,7 +220,22 @@ public class CheesePressBlock extends Block implements EntityBlock {
         double x = pos.getX() + random.nextDouble();
         double y = pos.getY() - 0.05D;
         double z = pos.getZ() + random.nextDouble();
-        level.addParticle(ParticleTypes.FALLING_HONEY, x, y, z, 0.0D, 0.0D, 0.0D);
+        level.addParticle(ColoredDripParticleOption.fromTintColor(getDripColor(press.getItem(CheesePressBlockEntity.SLOT_INPUT))), x, y, z, 0.0D, 0.0D, 0.0D);
+    }
+
+    private static int getDripColor(ItemStack input) {
+        if (input.is(GrowthcraftMilkItems.APPENZELLER_CHEESE_CURDS_DRAINED.get())) return Reference.ItemColor.APPENZELLER_CHEESE.toIntValue();
+        if (input.is(GrowthcraftMilkItems.ASIAGO_CHEESE_CURDS_DRAINED.get())) return Reference.ItemColor.ASIAGO_CHEESE.toIntValue();
+        if (input.is(GrowthcraftMilkItems.CASU_MARZU_CHEESE_CURDS_DRAINED.get())) return Reference.ItemColor.CASU_MARZU_CHEESE.toIntValue();
+        if (input.is(GrowthcraftMilkItems.CHEDDAR_CHEESE_CURDS_DRAINED.get())) return Reference.ItemColor.CHEDDAR_CHEESE.toIntValue();
+        if (input.is(GrowthcraftMilkItems.EMMENTALER_CHEESE_CURDS_DRAINED.get())) return Reference.ItemColor.EMMENTALER_CHEESE.toIntValue();
+        if (input.is(GrowthcraftMilkItems.GORGONZOLA_CHEESE_CURDS_DRAINED.get())) return Reference.ItemColor.GORGONZOLA_CHEESE.toIntValue();
+        if (input.is(GrowthcraftMilkItems.GOUDA_CHEESE_CURDS_DRAINED.get())) return Reference.ItemColor.GOUDA_CHEESE.toIntValue();
+        if (input.is(GrowthcraftMilkItems.MONTEREY_CHEESE_CURDS_DRAINED.get())) return Reference.ItemColor.MONTEREY_CHEESE.toIntValue();
+        if (input.is(GrowthcraftMilkItems.PARMESAN_CHEESE_CURDS_DRAINED.get())) return Reference.ItemColor.PARMESAN_CHEESE.toIntValue();
+        if (input.is(GrowthcraftMilkItems.PROVOLONE_CHEESE_CURDS_DRAINED.get())) return Reference.ItemColor.PROVOLONE_CHEESE.toIntValue();
+        if (input.is(GrowthcraftMilkItems.RICOTTA_CHEESE_CURDS_DRAINED.get())) return Reference.ItemColor.RICOTTA_CHEESE.toIntValue();
+        return Reference.FluidColor.RENNET.toIntValue();
     }
 
     @Override

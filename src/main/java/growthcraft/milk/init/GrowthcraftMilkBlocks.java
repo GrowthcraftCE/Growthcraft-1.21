@@ -8,8 +8,13 @@ import growthcraft.milk.block.ChurnBlock;
 import growthcraft.milk.block.MixingVatBlock;
 import growthcraft.milk.block.PancheonBlock;
 import growthcraft.milk.block.ThistleCropBlock;
+import growthcraft.milk.block.signs.ShopCeilingHangingSignBlock;
+import growthcraft.milk.block.signs.ShopWallHangingSignBlock;
 import growthcraft.milk.config.Reference;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CeilingHangingSignBlock;
+import net.minecraft.world.level.block.SignBlock;
 import net.minecraft.world.level.block.WallHangingSignBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.WoodType;
@@ -69,16 +74,70 @@ public final class GrowthcraftMilkBlocks {
     );
     public static final DeferredBlock<CeilingHangingSignBlock> HANGING_SIGN_1_OAK = BLOCKS.register(
             Reference.UnlocalizedName.HANGING_SIGN_1_OAK,
-            () -> new CeilingHangingSignBlock(WoodType.OAK, hangingSignProperties()));
+            () -> new ShopCeilingHangingSignBlock(WoodType.OAK, hangingSignProperties(), (SignBlock) Blocks.OAK_HANGING_SIGN));
     public static final DeferredBlock<CeilingHangingSignBlock> HANGING_SIGN_1_SPRUCE = BLOCKS.register(
             Reference.UnlocalizedName.HANGING_SIGN_1_SPRUCE,
-            () -> new CeilingHangingSignBlock(WoodType.SPRUCE, hangingSignProperties()));
+            () -> new ShopCeilingHangingSignBlock(WoodType.SPRUCE, hangingSignProperties(), (SignBlock) Blocks.SPRUCE_HANGING_SIGN));
+    public static final DeferredBlock<CeilingHangingSignBlock> HANGING_SIGN_1_BIRCH = BLOCKS.register(
+            Reference.UnlocalizedName.HANGING_SIGN_1_BIRCH,
+            () -> new ShopCeilingHangingSignBlock(WoodType.BIRCH, hangingSignProperties(), (SignBlock) Blocks.BIRCH_HANGING_SIGN));
+    public static final DeferredBlock<CeilingHangingSignBlock> HANGING_SIGN_1_JUNGLE = BLOCKS.register(
+            Reference.UnlocalizedName.HANGING_SIGN_1_JUNGLE,
+            () -> new ShopCeilingHangingSignBlock(WoodType.JUNGLE, hangingSignProperties(), (SignBlock) Blocks.JUNGLE_HANGING_SIGN));
+    public static final DeferredBlock<CeilingHangingSignBlock> HANGING_SIGN_1_ACACIA = BLOCKS.register(
+            Reference.UnlocalizedName.HANGING_SIGN_1_ACACIA,
+            () -> new ShopCeilingHangingSignBlock(WoodType.ACACIA, hangingSignProperties(), (SignBlock) Blocks.ACACIA_HANGING_SIGN));
+    public static final DeferredBlock<CeilingHangingSignBlock> HANGING_SIGN_1_DARK_OAK = BLOCKS.register(
+            Reference.UnlocalizedName.HANGING_SIGN_1_DARK_OAK,
+            () -> new ShopCeilingHangingSignBlock(WoodType.DARK_OAK, hangingSignProperties(), (SignBlock) Blocks.DARK_OAK_HANGING_SIGN));
+    public static final DeferredBlock<CeilingHangingSignBlock> HANGING_SIGN_1_MANGROVE = BLOCKS.register(
+            Reference.UnlocalizedName.HANGING_SIGN_1_MANGROVE,
+            () -> new ShopCeilingHangingSignBlock(WoodType.MANGROVE, hangingSignProperties(), (SignBlock) Blocks.MANGROVE_HANGING_SIGN));
+    public static final DeferredBlock<CeilingHangingSignBlock> HANGING_SIGN_1_CHERRY = BLOCKS.register(
+            Reference.UnlocalizedName.HANGING_SIGN_1_CHERRY,
+            () -> new ShopCeilingHangingSignBlock(WoodType.CHERRY, hangingSignProperties(), (SignBlock) Blocks.CHERRY_HANGING_SIGN));
+    public static final DeferredBlock<CeilingHangingSignBlock> HANGING_SIGN_1_BAMBOO = BLOCKS.register(
+            Reference.UnlocalizedName.HANGING_SIGN_1_BAMBOO,
+            () -> new ShopCeilingHangingSignBlock(WoodType.BAMBOO, hangingSignProperties(), (SignBlock) Blocks.BAMBOO_HANGING_SIGN));
+    public static final DeferredBlock<CeilingHangingSignBlock> HANGING_SIGN_1_CRIMSON = BLOCKS.register(
+            Reference.UnlocalizedName.HANGING_SIGN_1_CRIMSON,
+            () -> new ShopCeilingHangingSignBlock(WoodType.CRIMSON, hangingSignProperties(), (SignBlock) Blocks.CRIMSON_HANGING_SIGN));
+    public static final DeferredBlock<CeilingHangingSignBlock> HANGING_SIGN_1_WARPED = BLOCKS.register(
+            Reference.UnlocalizedName.HANGING_SIGN_1_WARPED,
+            () -> new ShopCeilingHangingSignBlock(WoodType.WARPED, hangingSignProperties(), (SignBlock) Blocks.WARPED_HANGING_SIGN));
     public static final DeferredBlock<WallHangingSignBlock> HANGING_SIGN_2_OAK = BLOCKS.register(
             Reference.UnlocalizedName.HANGING_SIGN_2_OAK,
-            () -> new WallHangingSignBlock(WoodType.OAK, hangingSignProperties()));
+            () -> new ShopWallHangingSignBlock(WoodType.OAK, hangingSignProperties(), (SignBlock) Blocks.OAK_WALL_HANGING_SIGN));
     public static final DeferredBlock<WallHangingSignBlock> HANGING_SIGN_2_SPRUCE = BLOCKS.register(
             Reference.UnlocalizedName.HANGING_SIGN_2_SPRUCE,
-            () -> new WallHangingSignBlock(WoodType.SPRUCE, hangingSignProperties()));
+            () -> new ShopWallHangingSignBlock(WoodType.SPRUCE, hangingSignProperties(), (SignBlock) Blocks.SPRUCE_WALL_HANGING_SIGN));
+    public static final DeferredBlock<WallHangingSignBlock> HANGING_SIGN_2_BIRCH = BLOCKS.register(
+            Reference.UnlocalizedName.HANGING_SIGN_2_BIRCH,
+            () -> new ShopWallHangingSignBlock(WoodType.BIRCH, hangingSignProperties(), (SignBlock) Blocks.BIRCH_WALL_HANGING_SIGN));
+    public static final DeferredBlock<WallHangingSignBlock> HANGING_SIGN_2_JUNGLE = BLOCKS.register(
+            Reference.UnlocalizedName.HANGING_SIGN_2_JUNGLE,
+            () -> new ShopWallHangingSignBlock(WoodType.JUNGLE, hangingSignProperties(), (SignBlock) Blocks.JUNGLE_WALL_HANGING_SIGN));
+    public static final DeferredBlock<WallHangingSignBlock> HANGING_SIGN_2_ACACIA = BLOCKS.register(
+            Reference.UnlocalizedName.HANGING_SIGN_2_ACACIA,
+            () -> new ShopWallHangingSignBlock(WoodType.ACACIA, hangingSignProperties(), (SignBlock) Blocks.ACACIA_WALL_HANGING_SIGN));
+    public static final DeferredBlock<WallHangingSignBlock> HANGING_SIGN_2_DARK_OAK = BLOCKS.register(
+            Reference.UnlocalizedName.HANGING_SIGN_2_DARK_OAK,
+            () -> new ShopWallHangingSignBlock(WoodType.DARK_OAK, hangingSignProperties(), (SignBlock) Blocks.DARK_OAK_WALL_HANGING_SIGN));
+    public static final DeferredBlock<WallHangingSignBlock> HANGING_SIGN_2_MANGROVE = BLOCKS.register(
+            Reference.UnlocalizedName.HANGING_SIGN_2_MANGROVE,
+            () -> new ShopWallHangingSignBlock(WoodType.MANGROVE, hangingSignProperties(), (SignBlock) Blocks.MANGROVE_WALL_HANGING_SIGN));
+    public static final DeferredBlock<WallHangingSignBlock> HANGING_SIGN_2_CHERRY = BLOCKS.register(
+            Reference.UnlocalizedName.HANGING_SIGN_2_CHERRY,
+            () -> new ShopWallHangingSignBlock(WoodType.CHERRY, hangingSignProperties(), (SignBlock) Blocks.CHERRY_WALL_HANGING_SIGN));
+    public static final DeferredBlock<WallHangingSignBlock> HANGING_SIGN_2_BAMBOO = BLOCKS.register(
+            Reference.UnlocalizedName.HANGING_SIGN_2_BAMBOO,
+            () -> new ShopWallHangingSignBlock(WoodType.BAMBOO, hangingSignProperties(), (SignBlock) Blocks.BAMBOO_WALL_HANGING_SIGN));
+    public static final DeferredBlock<WallHangingSignBlock> HANGING_SIGN_2_CRIMSON = BLOCKS.register(
+            Reference.UnlocalizedName.HANGING_SIGN_2_CRIMSON,
+            () -> new ShopWallHangingSignBlock(WoodType.CRIMSON, hangingSignProperties(), (SignBlock) Blocks.CRIMSON_WALL_HANGING_SIGN));
+    public static final DeferredBlock<WallHangingSignBlock> HANGING_SIGN_2_WARPED = BLOCKS.register(
+            Reference.UnlocalizedName.HANGING_SIGN_2_WARPED,
+            () -> new ShopWallHangingSignBlock(WoodType.WARPED, hangingSignProperties(), (SignBlock) Blocks.WARPED_WALL_HANGING_SIGN));
 
     private static DeferredBlock<CheeseWheelBlock> registerCheese(String cheeseName) {
         return BLOCKS.register(cheeseName + "_cheese", () -> new CheeseWheelBlock(
@@ -180,5 +239,31 @@ public final class GrowthcraftMilkBlocks {
                 .noCollission()
                 .strength(1.0F)
                 .ignitedByLava();
+    }
+
+    public static Block getShopSignFromOriginal(SignBlock original) {
+        if (original == Blocks.OAK_HANGING_SIGN) return HANGING_SIGN_1_OAK.get();
+        if (original == Blocks.SPRUCE_HANGING_SIGN) return HANGING_SIGN_1_SPRUCE.get();
+        if (original == Blocks.BIRCH_HANGING_SIGN) return HANGING_SIGN_1_BIRCH.get();
+        if (original == Blocks.JUNGLE_HANGING_SIGN) return HANGING_SIGN_1_JUNGLE.get();
+        if (original == Blocks.ACACIA_HANGING_SIGN) return HANGING_SIGN_1_ACACIA.get();
+        if (original == Blocks.DARK_OAK_HANGING_SIGN) return HANGING_SIGN_1_DARK_OAK.get();
+        if (original == Blocks.MANGROVE_HANGING_SIGN) return HANGING_SIGN_1_MANGROVE.get();
+        if (original == Blocks.CHERRY_HANGING_SIGN) return HANGING_SIGN_1_CHERRY.get();
+        if (original == Blocks.BAMBOO_HANGING_SIGN) return HANGING_SIGN_1_BAMBOO.get();
+        if (original == Blocks.CRIMSON_HANGING_SIGN) return HANGING_SIGN_1_CRIMSON.get();
+        if (original == Blocks.WARPED_HANGING_SIGN) return HANGING_SIGN_1_WARPED.get();
+        if (original == Blocks.OAK_WALL_HANGING_SIGN) return HANGING_SIGN_2_OAK.get();
+        if (original == Blocks.SPRUCE_WALL_HANGING_SIGN) return HANGING_SIGN_2_SPRUCE.get();
+        if (original == Blocks.BIRCH_WALL_HANGING_SIGN) return HANGING_SIGN_2_BIRCH.get();
+        if (original == Blocks.JUNGLE_WALL_HANGING_SIGN) return HANGING_SIGN_2_JUNGLE.get();
+        if (original == Blocks.ACACIA_WALL_HANGING_SIGN) return HANGING_SIGN_2_ACACIA.get();
+        if (original == Blocks.DARK_OAK_WALL_HANGING_SIGN) return HANGING_SIGN_2_DARK_OAK.get();
+        if (original == Blocks.MANGROVE_WALL_HANGING_SIGN) return HANGING_SIGN_2_MANGROVE.get();
+        if (original == Blocks.CHERRY_WALL_HANGING_SIGN) return HANGING_SIGN_2_CHERRY.get();
+        if (original == Blocks.BAMBOO_WALL_HANGING_SIGN) return HANGING_SIGN_2_BAMBOO.get();
+        if (original == Blocks.CRIMSON_WALL_HANGING_SIGN) return HANGING_SIGN_2_CRIMSON.get();
+        if (original == Blocks.WARPED_WALL_HANGING_SIGN) return HANGING_SIGN_2_WARPED.get();
+        return null;
     }
 }

@@ -7,7 +7,15 @@
     {
       "type": "patchouli:spotlight",
       "item": "growthcraft_cellar:fruit_press",
-      "text": "The fruit press is primarily used to make $(o)juice$() from grapes or apples that can then be fermented into $(l:cellar/wines_and_ciders)Wines and Ciders$().$(br2)Activate the piston top with a redstone signal (usually by attaching a lever to the top), and watch for drainage particles until completed.$(br2)Typically requires 4 fruit to produce 1 bucket of juice."
+      "text": "The Fruit Press makes $(o)juice$() from grapes or apples. The juice can then be fermented into $(l:cellar/wines_and_ciders)Wines and Ciders$()."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Add fruit to the press, then activate the piston top with a redstone signal. A lever attached to the top works well.$(br2)Drainage particles appear while the press is processing."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Most fruit press recipes produce 250 mB of juice per fruit, so four fruit will fill one bucket."
     },
     {
       "type": "patchouli:crafting",

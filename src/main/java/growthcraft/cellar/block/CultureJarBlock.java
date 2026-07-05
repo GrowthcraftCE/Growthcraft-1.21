@@ -276,12 +276,15 @@ public class CultureJarBlock extends HorizontalDirectionalBlock implements Entit
                 level.sendBlockUpdated(pos, state, state, 3);
                 return ItemInteractionResult.SUCCESS;
             }
+            if (!heldStack.is(Items.BUCKET) && !isMilkingBucket) {
+                GrowthcraftCellar.LOGGER.debug("[CultureJar] Filled bucket interaction targeted jar but did not act; consuming to prevent world placement");
+                return ItemInteractionResult.SUCCESS;
+            }
             GrowthcraftCellar.LOGGER.debug("[CultureJar] FluidUtil fallback did not act; passing to default block interaction");
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
-        // On client, do not consume the interaction; allow item (e.g., vanilla BucketItem) to handle if needed.
-        GrowthcraftCellar.LOGGER.debug("[CultureJar] useItemOn(Client): passing to default item handling. Player={} Hand={} Item={} (class={})", player.getGameProfile().getName(), hand, heldStack.getItem(), heldStack.getItem().getClass().getName());
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        GrowthcraftCellar.LOGGER.debug("[CultureJar] useItemOn(Client): consuming bucket interaction for jar target. Player={} Hand={} Item={} (class={})", player.getGameProfile().getName(), hand, heldStack.getItem(), heldStack.getItem().getClass().getName());
+        return ItemInteractionResult.SUCCESS;
     }
 
     @Override

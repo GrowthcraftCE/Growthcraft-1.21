@@ -1,6 +1,7 @@
 package growthcraft.cellar.block.entity;
 
 import growthcraft.cellar.block.FruitPressPistonBlock;
+import growthcraft.cellar.block.FruitPressBlock;
 import growthcraft.cellar.init.GrowthcraftCellarBlockEntities;
 import growthcraft.cellar.init.GrowthcraftCellarRecipes;
 import growthcraft.cellar.menu.FruitPressMenu;
@@ -17,6 +18,7 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.Clearable;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.WorldlyContainer;
@@ -88,31 +90,31 @@ public class FruitPressBlockEntity extends BlockEntity implements WorldlyContain
         if (level.isClientSide) return;
 
         if (!press.isPressed()) {
-            press.resetProgress();
+            press.resetProgress(level, pos, state);
             return;
         }
 
         ItemStack input = press.getItem(SLOT_INPUT);
         if (input.isEmpty()) {
-            press.resetProgress();
+            press.resetProgress(level, pos, state);
             return;
         }
 
         Optional<RecipeHolder<FruitPressRecipe>> match = press.findMatch(level, input);
         if (match.isEmpty()) {
-            press.resetProgress();
+            press.resetProgress(level, pos, state);
             return;
         }
 
         FruitPressRecipe recipe = match.get().value();
         FluidStack output = press.outputFluidStack(recipe);
         if (output.isEmpty() || press.tank.fill(output.copy(), IFluidHandler.FluidAction.SIMULATE) < output.getAmount()) {
-            press.resetProgress();
+            press.resetProgress(level, pos, state);
             return;
         }
 
         if (!press.canOutputByProduct(recipe.getByProduct())) {
-            press.resetProgress();
+            press.resetProgress(level, pos, state);
             return;
         }
 
@@ -123,6 +125,19 @@ public class FruitPressBlockEntity extends BlockEntity implements WorldlyContain
         } else if ((press.processTime & 15) == 0) {
             press.setChanged();
             level.sendBlockUpdated(pos, state, state, 3);
+        }
+    }
+
+    public static void clientTick(Level level, BlockPos pos, BlockState state, FruitPressBlockEntity press) {
+        if (!press.isProcessing() || !press.isPressed()) {
+            return;
+        }
+
+        RandomSource random = level.random;
+        if (random.nextFloat() < 0.11F) {
+            for (int i = 0; i < random.nextInt(2) + 2; i++) {
+                FruitPressBlock.makeParticles(level, pos, state, press);
+            }
         }
     }
 
@@ -141,6 +156,15 @@ public class FruitPressBlockEntity extends BlockEntity implements WorldlyContain
         var fluid = BuiltInRegistries.FLUID.get(output.fluidId());
         if (fluid == Fluids.EMPTY) return FluidStack.EMPTY;
         return new FluidStack(fluid, output.amount());
+    }
+
+    public FluidStack getActiveOutputFluidStack(Level level) {
+        if (!isProcessing()) {
+            return FluidStack.EMPTY;
+        }
+        return findMatch(level, getItem(SLOT_INPUT))
+                .map(holder -> outputFluidStack(holder.value()))
+                .orElse(FluidStack.EMPTY);
     }
 
     private boolean canOutputByProduct(ItemStack stack) {
@@ -172,12 +196,24 @@ public class FruitPressBlockEntity extends BlockEntity implements WorldlyContain
         }
     }
 
-    private void resetProgress() {
+    private boolean resetProgress() {
         if (this.processTime != 0 || this.processTimeTotal != 0) {
             this.processTime = 0;
             this.processTimeTotal = 0;
             setChanged();
+            return true;
         }
+        return false;
+    }
+
+    private void resetProgress(Level level, BlockPos pos, BlockState state) {
+        if (resetProgress()) {
+            level.sendBlockUpdated(pos, state, state, 3);
+        }
+    }
+
+    public boolean isProcessing() {
+        return processTime > 0 && processTimeTotal > 0;
     }
 
     @Override

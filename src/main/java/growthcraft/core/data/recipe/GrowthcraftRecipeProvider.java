@@ -125,6 +125,7 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
                 .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.milk.config.Reference.MODID, "milking_bucket_iron"));
 
         addMilkIngredientRecipes(output);
+        addMilkBakingRecipes(output);
         addMilkBowlFoodRecipes(output);
         addMilkMachineRecipes(output, IRON_INGOTS);
 
@@ -446,6 +447,35 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(GrowthcraftMilkItems.BUTTER.get()), has(GrowthcraftMilkItems.BUTTER.get()))
                 .unlockedBy("has_salt", has(salt))
                 .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.milk.config.Reference.MODID, growthcraft.milk.config.Reference.UnlocalizedName.BUTTER_SALTED));
+    }
+
+    private static void addMilkBakingRecipes(RecipeOutput output) {
+        TagKey<Item> butter = itemTag("forge", "butter");
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, Items.CAKE)
+                .pattern("MBM")
+                .pattern("SES")
+                .pattern("WWW")
+                .define('M', GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS)
+                .define('B', butter)
+                .define('S', Items.SUGAR)
+                .define('E', Items.EGG)
+                .define('W', Items.WHEAT)
+                .group("growthcraft_milk")
+                .unlockedBy("has_butter", has(butter))
+                .unlockedBy("has_milk_bucket", has(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS))
+                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.milk.config.Reference.MODID, "butter_cake"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, Items.COOKIE, 12)
+                .pattern("WBW")
+                .pattern(" C ")
+                .define('W', Items.WHEAT)
+                .define('B', butter)
+                .define('C', Items.COCOA_BEANS)
+                .group("growthcraft_milk")
+                .unlockedBy("has_butter", has(butter))
+                .unlockedBy(getHasName(Items.COCOA_BEANS), has(Items.COCOA_BEANS))
+                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.milk.config.Reference.MODID, "butter_cookies"));
     }
 
     private static void addMilkBowlFoodRecipes(RecipeOutput output) {

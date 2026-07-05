@@ -1,9 +1,14 @@
 package growthcraft.cellar.client;
 
 import growthcraft.cellar.GrowthcraftCellar;
+import growthcraft.cellar.client.renderer.BrewKettleBlockEntityRenderer;
+import growthcraft.cellar.client.renderer.CorkCoasterBlockEntityRenderer;
 import growthcraft.cellar.config.Reference;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.cellar.init.GrowthcraftCellarFluids;
+import growthcraft.cellar.client.renderer.CultureJarBlockEntityRenderer;
+import growthcraft.cellar.client.renderer.FruitPressBlockEntityRenderer;
+import growthcraft.cellar.init.GrowthcraftCellarBlockEntities;
 import growthcraft.lib.fluid.FluidRegistryContainer;
 import growthcraft.lib.utils.ColorUtils;
 import net.minecraft.core.component.DataComponents;
@@ -28,11 +33,10 @@ public final class GrowthcraftCellarClient {
 
     @SubscribeEvent
     public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        GrowthcraftCellar.LOGGER.info("[CellarClient] Registering CultureJarBlockEntityRenderer");
-        event.registerBlockEntityRenderer(
-                growthcraft.cellar.init.GrowthcraftCellarBlockEntities.CULTURE_JAR.get(),
-                growthcraft.cellar.client.renderer.CultureJarBlockEntityRenderer::new
-        );
+        event.registerBlockEntityRenderer(GrowthcraftCellarBlockEntities.CULTURE_JAR.get(), CultureJarBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(GrowthcraftCellarBlockEntities.BREW_KETTLE.get(), BrewKettleBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(GrowthcraftCellarBlockEntities.FRUIT_PRESS.get(), FruitPressBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(GrowthcraftCellarBlockEntities.CORK_COASTER.get(), CorkCoasterBlockEntityRenderer::new);
     }
 
     @SubscribeEvent

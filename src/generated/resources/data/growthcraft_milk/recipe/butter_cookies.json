@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "growthcraft_milk",
+  "key": {
+    "B": {
+      "tag": "forge:butter"
+    },
+    "C": {
+      "item": "minecraft:cocoa_beans"
+    },
+    "W": {
+      "item": "minecraft:wheat"
+    }
+  },
+  "pattern": [
+    "WBW",
+    " C "
+  ],
+  "result": {
+    "count": 12,
+    "id": "minecraft:cookie"
+  }
+}
