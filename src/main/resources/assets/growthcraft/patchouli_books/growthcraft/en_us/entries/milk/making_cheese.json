@@ -32,21 +32,6 @@
       "recipe": "growthcraft_milk:mixing_vat"
     },
     {
-      "title": "Ingredients",
-      "type": "text",
-      "text": "Cheddar Cheese$(li)1 Salt$(li)1 Orange Dye$(br2)Gorgonzola Cheese$(li)1 Salt$(li)1 Grape$(br2)Emmentaler Cheese$(li)1 Salt$(li)1 Wheat"
-    },
-    {
-      "title": "Ingredients",
-      "type": "text",
-      "text": "Appenzeller Cheese$(li)1 Salt$(li)1 Grape$(li)1 Bayanus Yeast$(br2)Asiago Cheese$(li)1 Salt$(li)1 Salt$(li)1 Yellow Dye$(br2)Parmesan Cheese$(li)1 Salt$(li)1 White Dye"
-    },
-    {
-      "title": "Ingredients",
-      "type": "text",
-      "text": "Monterey Cheese$(li)1 Salt$(li)1 Red Dye$(br2)Provolone Cheese$(li)1 Salt$(li)1 Yellow Dye$(br2)Gouda Cheese$(li)1 Salt$(li)1 Gray Dye"
-    },
-    {
       "type": "image",
       "title": "Draining Curds",
       "border": true,
@@ -65,14 +50,29 @@
       "text": "Finally, you will need to place the drained curds into a $(l:milk/mixing_vat)Cheese Press$(/l)."
     },
     {
+      "type": "patchouli:text",
+      "title": "Cheese Aging",
+      "text": "In order to make cheese edible, you will need to age your cheese. This is done by simply placing your cheese wheel down and waiting for it to age.$(br2)Once the cheese wheel has become aged, it will change colors."
+    },
+    {
+      "title": "Ingredients",
+      "type": "text",
+      "text": "Cheddar Cheese$(li)1 Salt$(li)1 Orange Dye$(br2)Gorgonzola Cheese$(li)1 Salt$(li)1 Grape$(br2)Emmentaler Cheese$(li)1 Salt$(li)1 Wheat"
+    },
+    {
+      "title": "Ingredients",
+      "type": "text",
+      "text": "Appenzeller Cheese$(li)1 Salt$(li)1 Grape$(li)1 Bayanus Yeast$(br2)Asiago Cheese$(li)1 Salt$(li)1 Salt$(li)1 Yellow Dye$(br2)Parmesan Cheese$(li)1 Salt$(li)1 White Dye"
+    },
+    {
+      "title": "Ingredients",
+      "type": "text",
+      "text": "Monterey Cheese$(li)1 Salt$(li)1 Red Dye$(br2)Provolone Cheese$(li)1 Salt$(li)1 Yellow Dye$(br2)Gouda Cheese$(li)1 Salt$(li)1 Gray Dye"
+    },
+    {
       "title": "Ingredients",
       "type": "text",
       "text": "Casu Marzu Cheese$(li)1 Salt$(li)1 Rotten Flesh"
-    },
-    {
-      "type": "patchouli:text",
-      "title": "Cheese Aging",
-      "text": "In order to make cheese editable, you will need to age your cheese. This is done by simply placing your cheese wheel down and waiting for it to age.$(br2)Once the cheese wheel has become aged, it will change colors."
     }
   ]
 }
