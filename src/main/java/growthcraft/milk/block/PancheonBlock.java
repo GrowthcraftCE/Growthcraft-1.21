@@ -8,7 +8,7 @@ import growthcraft.milk.init.GrowthcraftMilkBlockEntities;
 import growthcraft.milk.init.GrowthcraftMilkFluids;
 import growthcraft.milk.init.GrowthcraftMilkItems;
 import growthcraft.milk.init.GrowthcraftMilkMenus;
-import growthcraft.milk.particle.ColoredDripParticleOption;
+import growthcraft.lib.particle.ColoredDripParticleOption;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -230,7 +230,7 @@ public class PancheonBlock extends Block implements EntityBlock {
         double x = pos.getX() + 0.2D + random.nextDouble() * 0.6D;
         double y = pos.getY() - 0.05D;
         double z = pos.getZ() + 0.2D + random.nextDouble() * 0.6D;
-        level.addParticle(new ColoredDripParticleOption(getDripColor(pancheon.getInputTank().getFluid())), x, y, z, 0.0D, 0.0D, 0.0D);
+        level.addParticle(ColoredDripParticleOption.fromTintColor(getDripColor(pancheon.getInputTank().getFluid())), x, y, z, 0.0D, 0.0D, 0.0D);
     }
 
     private static int getDripColor(FluidStack fluidStack) {

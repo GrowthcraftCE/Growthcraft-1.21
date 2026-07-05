@@ -1,6 +1,6 @@
-package growthcraft.milk.particle;
+package growthcraft.lib.particle;
 
-import growthcraft.milk.init.GrowthcraftMilkParticles;
+import growthcraft.core.init.GrowthcraftParticles;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 
@@ -11,6 +11,6 @@ public record ColoredDripLandParticleOption(int color, int lingerTicks) implemen
 
     @Override
     public ParticleType<?> getType() {
-        return GrowthcraftMilkParticles.COLORED_DRIP_LAND.get();
+        return GrowthcraftParticles.COLORED_DRIP_LAND.get();
     }
 }

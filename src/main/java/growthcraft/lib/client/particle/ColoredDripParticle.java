@@ -1,7 +1,7 @@
-package growthcraft.milk.client.particle;
+package growthcraft.lib.client.particle;
 
-import growthcraft.milk.particle.ColoredDripLandParticleOption;
-import growthcraft.milk.particle.ColoredDripParticleOption;
+import growthcraft.lib.particle.ColoredDripLandParticleOption;
+import growthcraft.lib.particle.ColoredDripParticleOption;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.ParticleRenderType;

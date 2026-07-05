@@ -6,6 +6,7 @@ import growthcraft.core.init.GrowthcraftBlocks;
 import growthcraft.core.init.GrowthcraftConditions;
 import growthcraft.core.init.GrowthcraftCreativeTabs;
 import growthcraft.core.init.GrowthcraftItems;
+import growthcraft.core.init.GrowthcraftParticles;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -37,6 +38,7 @@ public class Growthcraft {
         GrowthcraftBlocks.BLOCKS.register(modEventBus);
         GrowthcraftCreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
         GrowthcraftConditions.CONDITION_CODECS.register(modEventBus);
+        GrowthcraftParticles.PARTICLE_TYPES.register(modEventBus);
 
         NeoForge.EVENT_BUS.register(this);
 

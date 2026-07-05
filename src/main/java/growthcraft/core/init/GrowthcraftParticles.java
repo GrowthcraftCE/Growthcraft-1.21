@@ -1,10 +1,10 @@
-package growthcraft.milk.init;
+package growthcraft.core.init;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import growthcraft.milk.config.Reference;
-import growthcraft.milk.particle.ColoredDripLandParticleOption;
-import growthcraft.milk.particle.ColoredDripParticleOption;
+import growthcraft.core.config.Reference;
+import growthcraft.lib.particle.ColoredDripLandParticleOption;
+import growthcraft.lib.particle.ColoredDripParticleOption;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -13,8 +13,9 @@ import net.minecraft.network.codec.StreamCodec;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-public final class GrowthcraftMilkParticles {
-    public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES = DeferredRegister.create(Registries.PARTICLE_TYPE, Reference.MODID);
+public final class GrowthcraftParticles {
+    public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES =
+            DeferredRegister.create(Registries.PARTICLE_TYPE, Reference.MODID);
 
     public static final DeferredHolder<ParticleType<?>, ParticleType<ColoredDripParticleOption>> COLORED_DRIP = PARTICLE_TYPES.register(
             "colored_drip",
@@ -66,6 +67,6 @@ public final class GrowthcraftMilkParticles {
             }
     );
 
-    private GrowthcraftMilkParticles() {
+    private GrowthcraftParticles() {
     }
 }
