@@ -1,0 +1,6 @@
+{
+  "name": "Developer Notes",
+  "description": "Reference notes for version history, compatibility, migration details, and other maintainer-facing information.",
+  "icon": "growthcraft:textures/patchouli/logos/github.png",
+  "sortnum": 99
+}

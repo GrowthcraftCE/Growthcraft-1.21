@@ -1,7 +1,7 @@
 {
   "name": "Developer's note",
   "icon": "minecraft:stripped_bamboo_block",
-  "category": "growthcraft:bamboo",
+  "category": "growthcraft:developer",
   "sortnum": 1,
   "pages": [
     {

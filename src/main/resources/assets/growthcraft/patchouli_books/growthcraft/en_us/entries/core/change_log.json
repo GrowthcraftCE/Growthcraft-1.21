@@ -1,7 +1,7 @@
 {
   "name": "Change Log",
   "icon": "growthcraft:textures/patchouli/logos/github.png",
-  "category": "growthcraft:core",
+  "category": "growthcraft:developer",
   "sortnum": 3,
   "pages": [
     {
