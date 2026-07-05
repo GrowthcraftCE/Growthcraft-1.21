@@ -47,7 +47,10 @@ public class FruitPressBlock extends Block implements EntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     private static final double DRIP_START_Y_OFFSET = 0.34D;
     private static final double DRIP_LANDING_Y_OFFSET = 0.02D;
-    private static final float DRIP_LANDING_SCALE = 2.5F;
+    private static final double DRIP_POOL_MIN_OFFSET = 3.0D / 16.0D;
+    private static final double DRIP_POOL_SPREAD = 10.0D / 16.0D;
+    private static final float DRIP_LANDING_SCALE = 1.35F;
+    private static final int DRIP_LANDING_LINGER_TICKS = 10;
     private static final VoxelShape SHAPE = Shapes.or(
             Block.box(1.0D, 0.0D, 1.0D, 15.0D, 3.0D, 15.0D),
             Block.box(0.0D, 3.0D, 0.0D, 16.0D, 7.0D, 16.0D),
@@ -186,11 +189,11 @@ public class FruitPressBlock extends Block implements EntityBlock {
         }
 
         RandomSource random = level.getRandom();
-        double x = pos.getX() + 0.35D + random.nextDouble() * 0.3D;
+        double x = pos.getX() + DRIP_POOL_MIN_OFFSET + random.nextDouble() * DRIP_POOL_SPREAD;
         double y = pos.getY() + DRIP_START_Y_OFFSET;
-        double z = pos.getZ() + 0.35D + random.nextDouble() * 0.3D;
+        double z = pos.getZ() + DRIP_POOL_MIN_OFFSET + random.nextDouble() * DRIP_POOL_SPREAD;
         double landingY = pos.getY() + DRIP_LANDING_Y_OFFSET;
-        level.addParticle(ColoredDripParticleOption.fromTintColor(getDripColor(output), landingY, DRIP_LANDING_SCALE), x, y, z, 0.0D, 0.0D, 0.0D);
+        level.addParticle(ColoredDripParticleOption.fromTintColor(getDripColor(output), landingY, DRIP_LANDING_SCALE, DRIP_LANDING_LINGER_TICKS), x, y, z, 0.0D, 0.0D, 0.0D);
     }
 
     private static int getDripColor(FluidStack fluidStack) {

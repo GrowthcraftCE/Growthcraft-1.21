@@ -4,13 +4,17 @@ import growthcraft.core.init.GrowthcraftParticles;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 
-public record ColoredDripParticleOption(int color, double landingY, float landingScale) implements ParticleOptions {
+public record ColoredDripParticleOption(int color, double landingY, float landingScale, int landingLingerTicks) implements ParticleOptions {
     public ColoredDripParticleOption(int color) {
-        this(color, Double.NaN, 1.0F);
+        this(color, Double.NaN, 1.0F, 24);
     }
 
     public ColoredDripParticleOption(int color, double landingY) {
-        this(color, landingY, 1.0F);
+        this(color, landingY, 1.0F, 24);
+    }
+
+    public ColoredDripParticleOption(int color, double landingY, float landingScale) {
+        this(color, landingY, landingScale, 24);
     }
 
     public static ColoredDripParticleOption fromTintColor(int tintColor) {
@@ -23,6 +27,10 @@ public record ColoredDripParticleOption(int color, double landingY, float landin
 
     public static ColoredDripParticleOption fromTintColor(int tintColor, double landingY, float landingScale) {
         return new ColoredDripParticleOption(tintColor & 0xFFFFFF, landingY, landingScale);
+    }
+
+    public static ColoredDripParticleOption fromTintColor(int tintColor, double landingY, float landingScale, int landingLingerTicks) {
+        return new ColoredDripParticleOption(tintColor & 0xFFFFFF, landingY, landingScale, landingLingerTicks);
     }
 
     @Override

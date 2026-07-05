@@ -15,12 +15,14 @@ public class ColoredDripParticle extends TextureSheetParticle {
     private final int color;
     private final double landingY;
     private final float landingScale;
+    private final int landingLingerTicks;
 
     private ColoredDripParticle(ColoredDripParticleOption option, ClientLevel level, double x, double y, double z, SpriteSet sprites) {
         super(level, x, y, z);
         this.color = option.color();
         this.landingY = option.landingY();
         this.landingScale = option.landingScale();
+        this.landingLingerTicks = option.landingLingerTicks();
         this.setSize(0.01F, 0.01F);
         this.gravity = 0.06F;
         this.friction = 0.98F;
@@ -40,7 +42,7 @@ public class ColoredDripParticle extends TextureSheetParticle {
         super.tick();
         if (this.onGround || hasReachedLandingY()) {
             double landY = Double.isNaN(landingY) ? this.y : landingY;
-            this.level.addParticle(new ColoredDripLandParticleOption(color, 24, landingScale), this.x, landY, this.z, 0.0D, 0.0D, 0.0D);
+            this.level.addParticle(new ColoredDripLandParticleOption(color, landingLingerTicks, landingScale), this.x, landY, this.z, 0.0D, 0.0D, 0.0D);
             this.remove();
         }
     }

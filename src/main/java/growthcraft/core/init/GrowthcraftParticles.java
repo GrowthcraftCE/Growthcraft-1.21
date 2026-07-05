@@ -23,13 +23,15 @@ public final class GrowthcraftParticles {
                 private final MapCodec<ColoredDripParticleOption> codec = RecordCodecBuilder.mapCodec(instance -> instance.group(
                         com.mojang.serialization.Codec.INT.fieldOf("color").forGetter(ColoredDripParticleOption::color),
                         com.mojang.serialization.Codec.DOUBLE.optionalFieldOf("landing_y", Double.NaN).forGetter(ColoredDripParticleOption::landingY),
-                        com.mojang.serialization.Codec.FLOAT.optionalFieldOf("landing_scale", 1.0F).forGetter(ColoredDripParticleOption::landingScale)
+                        com.mojang.serialization.Codec.FLOAT.optionalFieldOf("landing_scale", 1.0F).forGetter(ColoredDripParticleOption::landingScale),
+                        com.mojang.serialization.Codec.INT.optionalFieldOf("landing_linger_ticks", 24).forGetter(ColoredDripParticleOption::landingLingerTicks)
                 ).apply(instance, ColoredDripParticleOption::new));
 
                 private final StreamCodec<? super RegistryFriendlyByteBuf, ColoredDripParticleOption> streamCodec = StreamCodec.composite(
                         ByteBufCodecs.INT, ColoredDripParticleOption::color,
                         ByteBufCodecs.DOUBLE, ColoredDripParticleOption::landingY,
                         ByteBufCodecs.FLOAT, ColoredDripParticleOption::landingScale,
+                        ByteBufCodecs.INT, ColoredDripParticleOption::landingLingerTicks,
                         ColoredDripParticleOption::new
                 );
 
