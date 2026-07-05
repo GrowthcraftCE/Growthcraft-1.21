@@ -28,6 +28,17 @@ repositories {
     maven {
         url = "https://maven.blamejared.com/"
     }
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        filter {
+            includeGroup "maven.modrinth"
+        }
+    }
 }
 
 base {
@@ -153,6 +164,7 @@ dependencies {
     // We add the full version to localRuntime, not runtimeOnly, so that we do not publish a dependency on it
     localRuntime "mezz.jei:jei-${minecraft_version_short}-neoforge:${jei_version}"
     localRuntime "vazkii.patchouli:Patchouli:${patchouli_version}"
+    localRuntime "maven.modrinth:appleskin:${appleskin_version}"
 
     implementation "vazkii.patchouli:Patchouli:${patchouli_version}"
 
