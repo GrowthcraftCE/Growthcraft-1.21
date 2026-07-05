@@ -24,13 +24,54 @@ public final class MachineFluidRenderer {
             return;
         }
 
+        RenderContext context = context(fluidStack);
+        if (context == null) {
+            return;
+        }
+
+        double fill = Math.clamp(fluidStack.getAmount() / (double) capacity, 0.0D, 1.0D);
+        float y = (float) (bounds.minY() + (bounds.maxY() - bounds.minY()) * fill);
+        VertexConsumer consumer = buffer.getBuffer(RenderType.entityTranslucent(InventoryMenu.BLOCK_ATLAS));
+        putTopQuad(poseStack, consumer, context.sprite(), bounds.minX(), y, bounds.minZ(), bounds.maxX(), bounds.maxZ(),
+                context.red(), context.green(), context.blue(), context.alpha(), light);
+    }
+
+    public static void renderCuboid(PoseStack poseStack, MultiBufferSource buffer, FluidStack fluidStack, int capacity, Bounds bounds, int light) {
+        if (fluidStack.isEmpty() || fluidStack.getAmount() <= 0 || capacity <= 0) {
+            return;
+        }
+
+        RenderContext context = context(fluidStack);
+        if (context == null) {
+            return;
+        }
+
+        double fill = Math.clamp(fluidStack.getAmount() / (double) capacity, 0.0D, 1.0D);
+        float maxY = (float) (bounds.minY() + (bounds.maxY() - bounds.minY()) * fill);
+        VertexConsumer consumer = buffer.getBuffer(RenderType.entityTranslucent(InventoryMenu.BLOCK_ATLAS));
+
+        putTopQuad(poseStack, consumer, context.sprite(), bounds.minX(), maxY, bounds.minZ(), bounds.maxX(), bounds.maxZ(),
+                context.red(), context.green(), context.blue(), context.alpha(), light);
+        putBottomQuad(poseStack, consumer, context.sprite(), bounds.minX(), bounds.minY(), bounds.minZ(), bounds.maxX(), bounds.maxZ(),
+                context.red(), context.green(), context.blue(), context.alpha(), light);
+        putNorthQuad(poseStack, consumer, context.sprite(), bounds.minX(), bounds.minY(), maxY, bounds.minZ(), bounds.maxX(),
+                context.red(), context.green(), context.blue(), context.alpha(), light);
+        putSouthQuad(poseStack, consumer, context.sprite(), bounds.minX(), bounds.minY(), maxY, bounds.maxZ(), bounds.maxX(),
+                context.red(), context.green(), context.blue(), context.alpha(), light);
+        putWestQuad(poseStack, consumer, context.sprite(), bounds.minX(), bounds.minY(), maxY, bounds.minZ(), bounds.maxZ(),
+                context.red(), context.green(), context.blue(), context.alpha(), light);
+        putEastQuad(poseStack, consumer, context.sprite(), bounds.maxX(), bounds.minY(), maxY, bounds.minZ(), bounds.maxZ(),
+                context.red(), context.green(), context.blue(), context.alpha(), light);
+    }
+
+    private static RenderContext context(FluidStack fluidStack) {
         IClientFluidTypeExtensions extensions = IClientFluidTypeExtensions.of(fluidStack.getFluid());
         ResourceLocation texture = extensions.getStillTexture(fluidStack);
         if (texture == null) {
             texture = extensions.getFlowingTexture(fluidStack);
         }
         if (texture == null) {
-            return;
+            return null;
         }
 
         TextureAtlasSprite sprite = Minecraft.getInstance()
@@ -41,12 +82,7 @@ public final class MachineFluidRenderer {
         float red = ((tint >> 16) & 0xFF) / 255.0F;
         float green = ((tint >> 8) & 0xFF) / 255.0F;
         float blue = (tint & 0xFF) / 255.0F;
-
-        double fill = Math.clamp(fluidStack.getAmount() / (double) capacity, 0.0D, 1.0D);
-        float y = (float) (bounds.minY() + (bounds.maxY() - bounds.minY()) * fill);
-        VertexConsumer consumer = buffer.getBuffer(RenderType.entityTranslucent(InventoryMenu.BLOCK_ATLAS));
-        putTopQuad(poseStack, consumer, sprite, bounds.minX(), y, bounds.minZ(), bounds.maxX(), bounds.maxZ(),
-                red, green, blue, alpha, light);
+        return new RenderContext(sprite, red, green, blue, alpha);
     }
 
     private static float alpha(int tint) {
@@ -61,6 +97,51 @@ public final class MachineFluidRenderer {
         vertex(poseStack, consumer, maxX, y, minZ, red, green, blue, alpha, sprite.getU1(), sprite.getV0(), light);
         vertex(poseStack, consumer, maxX, y, maxZ, red, green, blue, alpha, sprite.getU1(), sprite.getV1(), light);
         vertex(poseStack, consumer, minX, y, maxZ, red, green, blue, alpha, sprite.getU0(), sprite.getV1(), light);
+    }
+
+    private static void putBottomQuad(PoseStack poseStack, VertexConsumer consumer, TextureAtlasSprite sprite,
+                                      float minX, float y, float minZ, float maxX, float maxZ,
+                                      float red, float green, float blue, float alpha, int light) {
+        vertex(poseStack, consumer, minX, y, maxZ, red, green, blue, alpha, sprite.getU0(), sprite.getV1(), light);
+        vertex(poseStack, consumer, maxX, y, maxZ, red, green, blue, alpha, sprite.getU1(), sprite.getV1(), light);
+        vertex(poseStack, consumer, maxX, y, minZ, red, green, blue, alpha, sprite.getU1(), sprite.getV0(), light);
+        vertex(poseStack, consumer, minX, y, minZ, red, green, blue, alpha, sprite.getU0(), sprite.getV0(), light);
+    }
+
+    private static void putNorthQuad(PoseStack poseStack, VertexConsumer consumer, TextureAtlasSprite sprite,
+                                     float minX, float minY, float maxY, float z, float maxX,
+                                     float red, float green, float blue, float alpha, int light) {
+        vertex(poseStack, consumer, minX, minY, z, red, green, blue, alpha, sprite.getU0(), sprite.getV1(), light);
+        vertex(poseStack, consumer, minX, maxY, z, red, green, blue, alpha, sprite.getU0(), sprite.getV0(), light);
+        vertex(poseStack, consumer, maxX, maxY, z, red, green, blue, alpha, sprite.getU1(), sprite.getV0(), light);
+        vertex(poseStack, consumer, maxX, minY, z, red, green, blue, alpha, sprite.getU1(), sprite.getV1(), light);
+    }
+
+    private static void putSouthQuad(PoseStack poseStack, VertexConsumer consumer, TextureAtlasSprite sprite,
+                                     float minX, float minY, float maxY, float z, float maxX,
+                                     float red, float green, float blue, float alpha, int light) {
+        vertex(poseStack, consumer, maxX, minY, z, red, green, blue, alpha, sprite.getU1(), sprite.getV1(), light);
+        vertex(poseStack, consumer, maxX, maxY, z, red, green, blue, alpha, sprite.getU1(), sprite.getV0(), light);
+        vertex(poseStack, consumer, minX, maxY, z, red, green, blue, alpha, sprite.getU0(), sprite.getV0(), light);
+        vertex(poseStack, consumer, minX, minY, z, red, green, blue, alpha, sprite.getU0(), sprite.getV1(), light);
+    }
+
+    private static void putWestQuad(PoseStack poseStack, VertexConsumer consumer, TextureAtlasSprite sprite,
+                                    float x, float minY, float maxY, float minZ, float maxZ,
+                                    float red, float green, float blue, float alpha, int light) {
+        vertex(poseStack, consumer, x, minY, maxZ, red, green, blue, alpha, sprite.getU1(), sprite.getV1(), light);
+        vertex(poseStack, consumer, x, maxY, maxZ, red, green, blue, alpha, sprite.getU1(), sprite.getV0(), light);
+        vertex(poseStack, consumer, x, maxY, minZ, red, green, blue, alpha, sprite.getU0(), sprite.getV0(), light);
+        vertex(poseStack, consumer, x, minY, minZ, red, green, blue, alpha, sprite.getU0(), sprite.getV1(), light);
+    }
+
+    private static void putEastQuad(PoseStack poseStack, VertexConsumer consumer, TextureAtlasSprite sprite,
+                                    float x, float minY, float maxY, float minZ, float maxZ,
+                                    float red, float green, float blue, float alpha, int light) {
+        vertex(poseStack, consumer, x, minY, minZ, red, green, blue, alpha, sprite.getU0(), sprite.getV1(), light);
+        vertex(poseStack, consumer, x, maxY, minZ, red, green, blue, alpha, sprite.getU0(), sprite.getV0(), light);
+        vertex(poseStack, consumer, x, maxY, maxZ, red, green, blue, alpha, sprite.getU1(), sprite.getV0(), light);
+        vertex(poseStack, consumer, x, minY, maxZ, red, green, blue, alpha, sprite.getU1(), sprite.getV1(), light);
     }
 
     private static void vertex(PoseStack poseStack, VertexConsumer consumer,
@@ -81,5 +162,8 @@ public final class MachineFluidRenderer {
                 throw new IllegalArgumentException("Fluid render bounds must have positive volume");
             }
         }
+    }
+
+    private record RenderContext(TextureAtlasSprite sprite, float red, float green, float blue, float alpha) {
     }
 }

@@ -17,6 +17,6 @@ public class CultureJarBlockEntityRenderer implements BlockEntityRenderer<Cultur
 
     @Override
     public void render(CultureJarBlockEntity jar, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
-        MachineFluidRenderer.renderSurface(poseStack, buffer, jar.getTank().getFluid(), jar.getTank().getCapacity(), JAR_BOUNDS, packedLight);
+        MachineFluidRenderer.renderCuboid(poseStack, buffer, jar.getTank().getFluid(), jar.getTank().getCapacity(), JAR_BOUNDS, packedLight);
     }
 }
