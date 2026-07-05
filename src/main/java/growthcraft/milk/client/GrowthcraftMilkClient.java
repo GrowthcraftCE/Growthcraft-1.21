@@ -74,6 +74,28 @@ public final class GrowthcraftMilkClient {
         registerItemTint(event, Reference.ItemColor.GOUDA_CHEESE, GrowthcraftMilkItems.GOUDA_CHEESE_WAXED);
         registerItemTint(event, Reference.ItemColor.MONTEREY_CHEESE, GrowthcraftMilkItems.MONTEREY_CHEESE_WAXED);
         registerItemTint(event, Reference.ItemColor.PROVOLONE_CHEESE, GrowthcraftMilkItems.PROVOLONE_CHEESE_WAXED);
+        registerItemTint(event, Reference.ItemColor.APPENZELLER_CHEESE, GrowthcraftMilkItems.APPENZELLER_CHEESE_CURDS);
+        registerItemTint(event, Reference.ItemColor.ASIAGO_CHEESE, GrowthcraftMilkItems.ASIAGO_CHEESE_CURDS);
+        registerItemTint(event, Reference.ItemColor.CASU_MARZU_CHEESE, GrowthcraftMilkItems.CASU_MARZU_CHEESE_CURDS);
+        registerItemTint(event, Reference.ItemColor.CHEDDAR_CHEESE, GrowthcraftMilkItems.CHEDDAR_CHEESE_CURDS);
+        registerItemTint(event, Reference.ItemColor.EMMENTALER_CHEESE, GrowthcraftMilkItems.EMMENTALER_CHEESE_CURDS);
+        registerItemTint(event, Reference.ItemColor.GORGONZOLA_CHEESE, GrowthcraftMilkItems.GORGONZOLA_CHEESE_CURDS);
+        registerItemTint(event, Reference.ItemColor.GOUDA_CHEESE, GrowthcraftMilkItems.GOUDA_CHEESE_CURDS);
+        registerItemTint(event, Reference.ItemColor.MONTEREY_CHEESE, GrowthcraftMilkItems.MONTEREY_CHEESE_CURDS);
+        registerItemTint(event, Reference.ItemColor.PARMESAN_CHEESE, GrowthcraftMilkItems.PARMESAN_CHEESE_CURDS);
+        registerItemTint(event, Reference.ItemColor.PROVOLONE_CHEESE, GrowthcraftMilkItems.PROVOLONE_CHEESE_CURDS);
+        registerItemTint(event, Reference.ItemColor.RICOTTA_CHEESE, GrowthcraftMilkItems.RICOTTA_CHEESE_CURDS);
+        registerItemTint(event, Reference.ItemColor.APPENZELLER_CHEESE, GrowthcraftMilkItems.APPENZELLER_CHEESE_CURDS_DRAINED);
+        registerItemTint(event, Reference.ItemColor.ASIAGO_CHEESE, GrowthcraftMilkItems.ASIAGO_CHEESE_CURDS_DRAINED);
+        registerItemTint(event, Reference.ItemColor.CASU_MARZU_CHEESE, GrowthcraftMilkItems.CASU_MARZU_CHEESE_CURDS_DRAINED);
+        registerItemTint(event, Reference.ItemColor.CHEDDAR_CHEESE, GrowthcraftMilkItems.CHEDDAR_CHEESE_CURDS_DRAINED);
+        registerItemTint(event, Reference.ItemColor.EMMENTALER_CHEESE, GrowthcraftMilkItems.EMMENTALER_CHEESE_CURDS_DRAINED);
+        registerItemTint(event, Reference.ItemColor.GORGONZOLA_CHEESE, GrowthcraftMilkItems.GORGONZOLA_CHEESE_CURDS_DRAINED);
+        registerItemTint(event, Reference.ItemColor.GOUDA_CHEESE, GrowthcraftMilkItems.GOUDA_CHEESE_CURDS_DRAINED);
+        registerItemTint(event, Reference.ItemColor.MONTEREY_CHEESE, GrowthcraftMilkItems.MONTEREY_CHEESE_CURDS_DRAINED);
+        registerItemTint(event, Reference.ItemColor.PARMESAN_CHEESE, GrowthcraftMilkItems.PARMESAN_CHEESE_CURDS_DRAINED);
+        registerItemTint(event, Reference.ItemColor.PROVOLONE_CHEESE, GrowthcraftMilkItems.PROVOLONE_CHEESE_CURDS_DRAINED);
+        registerItemTint(event, Reference.ItemColor.RICOTTA_CHEESE, GrowthcraftMilkItems.RICOTTA_CHEESE_CURDS_DRAINED);
     }
 
     @SubscribeEvent
@@ -102,6 +124,17 @@ public final class GrowthcraftMilkClient {
         registerBlockTint(event, Reference.BlockColor.GOUDA_CHEESE, GrowthcraftMilkBlocks.GOUDA_CHEESE_WAXED);
         registerBlockTint(event, Reference.BlockColor.MONTEREY_CHEESE, GrowthcraftMilkBlocks.MONTEREY_CHEESE_WAXED);
         registerBlockTint(event, Reference.BlockColor.PROVOLONE_CHEESE, GrowthcraftMilkBlocks.PROVOLONE_CHEESE_WAXED);
+        registerBlockTint(event, Reference.BlockColor.APPENZELLER_CHEESE, GrowthcraftMilkBlocks.APPENZELLER_CHEESE_CURDS);
+        registerBlockTint(event, Reference.BlockColor.ASIAGO_CHEESE, GrowthcraftMilkBlocks.ASIAGO_CHEESE_CURDS);
+        registerBlockTint(event, Reference.BlockColor.CASU_MARZU_CHEESE, GrowthcraftMilkBlocks.CASU_MARZU_CHEESE_CURDS);
+        registerBlockTint(event, Reference.BlockColor.CHEDDAR_CHEESE, GrowthcraftMilkBlocks.CHEDDAR_CHEESE_CURDS);
+        registerBlockTint(event, Reference.BlockColor.EMMENTALER_CHEESE, GrowthcraftMilkBlocks.EMMENTALER_CHEESE_CURDS);
+        registerBlockTint(event, Reference.BlockColor.GORGONZOLA_CHEESE, GrowthcraftMilkBlocks.GORGONZOLA_CHEESE_CURDS);
+        registerBlockTint(event, Reference.BlockColor.GOUDA_CHEESE, GrowthcraftMilkBlocks.GOUDA_CHEESE_CURDS);
+        registerBlockTint(event, Reference.BlockColor.MONTEREY_CHEESE, GrowthcraftMilkBlocks.MONTEREY_CHEESE_CURDS);
+        registerBlockTint(event, Reference.BlockColor.PARMESAN_CHEESE, GrowthcraftMilkBlocks.PARMESAN_CHEESE_CURDS);
+        registerBlockTint(event, Reference.BlockColor.PROVOLONE_CHEESE, GrowthcraftMilkBlocks.PROVOLONE_CHEESE_CURDS);
+        registerBlockTint(event, Reference.BlockColor.RICOTTA_CHEESE, GrowthcraftMilkBlocks.RICOTTA_CHEESE_CURDS);
     }
 
     @SubscribeEvent
