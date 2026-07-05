@@ -13,7 +13,11 @@
       "images": [
         "growthcraft:textures/patchouli/blocks/bee_box_flowers.png"
       ],
-      "text": "To start vanilla bee keeping, place flowers within two blocks of an oak or birch sapling before it grows. The tree has a chance to generate with a bee nest."
+      "text": "Vanilla bee keeping starts with flowers and trees."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Place flowers within two blocks of an oak or birch sapling before it grows.$(br2)When the tree grows, it has a chance to generate with a bee nest."
     },
     {
       "type": "patchouli:spotlight",
