@@ -2,7 +2,13 @@
   "type": "growthcraft_cellar:culture_jar",
   "ingredient": { "item": "growthcraft_cellar:yeast_brewers" },
   "fluid": { "fluid": "growthcraft_milk:milk_fluid_source", "amount": 1000 },
-  "result": { "id": "growthcraft_cellar:starter_culture", "count": 1 },
+  "result": { "id": "growthcraft_milk:starter_culture", "count": 1 },
   "time": 300,
-  "requires_heat_source": true
+  "requires_heat_source": true,
+  "conditions": [
+    {
+      "type": "growthcraft:feature_enabled",
+      "feature": "milk"
+    }
+  ]
 }

@@ -91,6 +91,12 @@ public class GrowthcraftCellar {
             event.accept(GrowthcraftCellarItems.HOPS);
             event.accept(GrowthcraftCellarItems.CORK_BARK);
             event.accept(GrowthcraftCellarItems.CORK_COASTER);
+            event.accept(GrowthcraftCellarItems.CORK_TREE_SAPLING);
+            event.accept(GrowthcraftCellarItems.CORK_TREE_LEAVES);
+            event.accept(GrowthcraftCellarItems.CORK_WOOD_LOG);
+            event.accept(GrowthcraftCellarItems.CORK_WOOD_LOG_STRIPPED);
+            event.accept(GrowthcraftCellarItems.CORK_WOOD);
+            event.accept(GrowthcraftCellarItems.CORK_WOOD_STRIPPED);
 
             // Yeasts
             event.accept(GrowthcraftCellarItems.YEAST_BAYANUS);

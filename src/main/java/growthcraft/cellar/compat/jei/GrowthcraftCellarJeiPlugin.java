@@ -14,6 +14,7 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -33,6 +34,7 @@ public class GrowthcraftCellarJeiPlugin implements IModPlugin {
             new RecipeType<>(ResourceLocation.fromNamespaceAndPath(Reference.MODID, Reference.UnlocalizedName.Recipe.FRUIT_PRESS_RECIPE), GrowthcraftCellarJeiPlugin.<FruitPressRecipe>recipeHolderClass());
     public static final RecipeType<RecipeHolder<RoasterRecipe>> ROASTER =
             new RecipeType<>(ResourceLocation.fromNamespaceAndPath(Reference.MODID, Reference.UnlocalizedName.Recipe.ROASTER_RECIPE), GrowthcraftCellarJeiPlugin.<RoasterRecipe>recipeHolderClass());
+    private boolean recipesRegisteredDuringSetup;
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
     private static <T extends Recipe<?>> Class<? extends RecipeHolder<T>> recipeHolderClass() {
@@ -61,11 +63,32 @@ public class GrowthcraftCellarJeiPlugin implements IModPlugin {
         Minecraft minecraft = Minecraft.getInstance();
         if (minecraft.level == null) return;
 
-        registration.addRecipes(BREW_KETTLE, minecraft.level.getRecipeManager().getAllRecipesFor(GrowthcraftCellarRecipes.BREW_KETTLE_TYPE.get()));
-        registration.addRecipes(CULTURE_JAR, minecraft.level.getRecipeManager().getAllRecipesFor(GrowthcraftCellarRecipes.CULTURE_JAR_TYPE.get()));
-        registration.addRecipes(FERMENTATION_BARREL, minecraft.level.getRecipeManager().getAllRecipesFor(GrowthcraftCellarRecipes.FERMENTATION_BARREL_TYPE.get()));
-        registration.addRecipes(FRUIT_PRESS, minecraft.level.getRecipeManager().getAllRecipesFor(GrowthcraftCellarRecipes.FRUIT_PRESS_TYPE.get()));
-        registration.addRecipes(ROASTER, minecraft.level.getRecipeManager().getAllRecipesFor(GrowthcraftCellarRecipes.ROASTER_TYPE.get()));
+        registration.addRecipes(BREW_KETTLE, brewKettleRecipes(minecraft));
+        registration.addRecipes(CULTURE_JAR, cultureJarRecipes(minecraft));
+        registration.addRecipes(FERMENTATION_BARREL, fermentationBarrelRecipes(minecraft));
+        registration.addRecipes(FRUIT_PRESS, fruitPressRecipes(minecraft));
+        registration.addRecipes(ROASTER, roasterRecipes(minecraft));
+        recipesRegisteredDuringSetup = true;
+    }
+
+    @Override
+    public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {
+        if (recipesRegisteredDuringSetup) return;
+
+        Minecraft minecraft = Minecraft.getInstance();
+        if (minecraft.level == null) return;
+
+        var recipeManager = jeiRuntime.getRecipeManager();
+        recipeManager.addRecipes(BREW_KETTLE, brewKettleRecipes(minecraft));
+        recipeManager.addRecipes(CULTURE_JAR, cultureJarRecipes(minecraft));
+        recipeManager.addRecipes(FERMENTATION_BARREL, fermentationBarrelRecipes(minecraft));
+        recipeManager.addRecipes(FRUIT_PRESS, fruitPressRecipes(minecraft));
+        recipeManager.addRecipes(ROASTER, roasterRecipes(minecraft));
+    }
+
+    @Override
+    public void onRuntimeUnavailable() {
+        recipesRegisteredDuringSetup = false;
     }
 
     @Override
@@ -75,5 +98,25 @@ public class GrowthcraftCellarJeiPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(GrowthcraftCellarItems.FERMENTATION_BARREL_OAK.get()), FERMENTATION_BARREL);
         registration.addRecipeCatalyst(new ItemStack(GrowthcraftCellarItems.FRUIT_PRESS.get()), FRUIT_PRESS);
         registration.addRecipeCatalyst(new ItemStack(GrowthcraftCellarItems.ROASTER.get()), ROASTER);
+    }
+
+    private static java.util.List<RecipeHolder<BrewKettleRecipe>> brewKettleRecipes(Minecraft minecraft) {
+        return minecraft.level.getRecipeManager().getAllRecipesFor(GrowthcraftCellarRecipes.BREW_KETTLE_TYPE.get());
+    }
+
+    private static java.util.List<RecipeHolder<CultureJarRecipe>> cultureJarRecipes(Minecraft minecraft) {
+        return minecraft.level.getRecipeManager().getAllRecipesFor(GrowthcraftCellarRecipes.CULTURE_JAR_TYPE.get());
+    }
+
+    private static java.util.List<RecipeHolder<FermentationBarrelRecipe>> fermentationBarrelRecipes(Minecraft minecraft) {
+        return minecraft.level.getRecipeManager().getAllRecipesFor(GrowthcraftCellarRecipes.FERMENTATION_BARREL_TYPE.get());
+    }
+
+    private static java.util.List<RecipeHolder<FruitPressRecipe>> fruitPressRecipes(Minecraft minecraft) {
+        return minecraft.level.getRecipeManager().getAllRecipesFor(GrowthcraftCellarRecipes.FRUIT_PRESS_TYPE.get());
+    }
+
+    private static java.util.List<RecipeHolder<RoasterRecipe>> roasterRecipes(Minecraft minecraft) {
+        return minecraft.level.getRecipeManager().getAllRecipesFor(GrowthcraftCellarRecipes.ROASTER_TYPE.get());
     }
 }

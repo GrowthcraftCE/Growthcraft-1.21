@@ -211,7 +211,7 @@ public class FermentationBarrelRecipe implements Recipe<FermentationBarrelInput>
                 for (int i = 0; i < effectCount; i++) {
                     effects.add(new EffectSpec(buf.readResourceLocation(), buf.readVarInt(), buf.readVarInt()));
                 }
-                ItemStack bottle = ItemStack.STREAM_CODEC.decode(buf);
+                ItemStack bottle = ItemStack.OPTIONAL_STREAM_CODEC.decode(buf);
                 int color = buf.readVarInt();
                 return new FermentationBarrelRecipe(processingTime, new CountedIngredient(ingredient, ingredientCount),
                         ingredientFluid, result, effects, bottle, color);
@@ -232,7 +232,7 @@ public class FermentationBarrelRecipe implements Recipe<FermentationBarrelInput>
                     buf.writeVarInt(effect.duration());
                     buf.writeVarInt(effect.amplifier());
                 }
-                ItemStack.STREAM_CODEC.encode(buf, recipe.bottle);
+                ItemStack.OPTIONAL_STREAM_CODEC.encode(buf, recipe.bottle);
                 buf.writeVarInt(recipe.color);
             }
         };

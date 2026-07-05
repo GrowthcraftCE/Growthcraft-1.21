@@ -159,7 +159,7 @@ public class BrewKettleRecipe implements Recipe<BrewKettleInput> {
                 Ingredient ingredient = Ingredient.CONTENTS_STREAM_CODEC.decode(buf);
                 int ingredientCount = buf.readVarInt();
                 FluidAmount outputFluid = new FluidAmount(buf.readResourceLocation(), buf.readVarInt());
-                ItemStack byProduct = ItemStack.STREAM_CODEC.decode(buf);
+                ItemStack byProduct = ItemStack.OPTIONAL_STREAM_CODEC.decode(buf);
                 return new BrewKettleRecipe(requiresHeat, requiresLid, processingTime, byProductChance,
                         inputFluid, new CountedIngredient(ingredient, ingredientCount), outputFluid, byProduct);
             }
@@ -176,7 +176,7 @@ public class BrewKettleRecipe implements Recipe<BrewKettleInput> {
                 buf.writeVarInt(recipe.inputItem.count());
                 buf.writeResourceLocation(recipe.outputFluid.fluidId());
                 buf.writeVarInt(recipe.outputFluid.amount());
-                ItemStack.STREAM_CODEC.encode(buf, recipe.byProduct);
+                ItemStack.OPTIONAL_STREAM_CODEC.encode(buf, recipe.byProduct);
             }
         };
 

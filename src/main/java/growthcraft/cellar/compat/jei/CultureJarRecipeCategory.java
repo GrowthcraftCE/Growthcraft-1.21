@@ -5,7 +5,6 @@ import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.cellar.recipe.CultureJarRecipe;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
-import mezz.jei.api.gui.drawable.IDrawableAnimated;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
@@ -34,12 +33,9 @@ public class CultureJarRecipeCategory implements IRecipeCategory<RecipeHolder<Cu
     private static final int INPUT_Y = 25;
     private static final int OUTPUT_X = 73;
     private static final int OUTPUT_Y = 10;
-    private static final int PROGRESS_X = 52;
-    private static final int PROGRESS_Y = 20;
 
     private final IDrawableStatic background;
     private final IDrawable icon;
-    private final IDrawableAnimated progress;
     private final IDrawableStatic heat;
     private final IDrawableStatic timeIcon;
 
@@ -48,9 +44,6 @@ public class CultureJarRecipeCategory implements IRecipeCategory<RecipeHolder<Cu
                 .setTextureSize(256, 256)
                 .build();
         this.icon = guiHelper.createDrawableItemStack(new ItemStack(GrowthcraftCellarItems.CULTURE_JAR.get()));
-        this.progress = guiHelper.drawableBuilder(TEXTURE, 176, 0, 27, 27)
-                .setTextureSize(256, 256)
-                .buildAnimated(120, IDrawableAnimated.StartDirection.TOP, false);
         this.heat = guiHelper.drawableBuilder(TEXTURE, 176, 28, 13, 13)
                 .setTextureSize(256, 256)
                 .build();
@@ -99,7 +92,6 @@ public class CultureJarRecipeCategory implements IRecipeCategory<RecipeHolder<Cu
 
     @Override
     public void draw(RecipeHolder<CultureJarRecipe> holder, mezz.jei.api.gui.ingredient.IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY) {
-        progress.draw(graphics, PROGRESS_X, PROGRESS_Y);
         if (holder.value().requiresHeatSource()) {
             heat.draw(graphics, 29, 47);
         }

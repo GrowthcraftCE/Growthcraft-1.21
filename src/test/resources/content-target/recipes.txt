@@ -1,4 +1,4 @@
-﻿farmersdelight:cooking/apple_cider
+farmersdelight:cooking/apple_cider
 farmersdelight:shepherds_pie_block
 farmersdelight:stuffed_potato
 growthcraft:crowbar_black
@@ -25,17 +25,6 @@ growthcraft:rope_linen_lengthen
 growthcraft:salt
 growthcraft:salt_block
 growthcraft:wrench
-growthcraft_apiary:bee_box_acacia
-growthcraft_apiary:bee_box_bamboo
-growthcraft_apiary:bee_box_birch
-growthcraft_apiary:bee_box_cherry
-growthcraft_apiary:bee_box_crimson
-growthcraft_apiary:bee_box_dark_oak
-growthcraft_apiary:bee_box_jungle
-growthcraft_apiary:bee_box_mangrove
-growthcraft_apiary:bee_box_oak
-growthcraft_apiary:bee_box_spruce
-growthcraft_apiary:bee_box_warped
 growthcraft_apiary:bees_wax_black
 growthcraft_apiary:bees_wax_blue
 growthcraft_apiary:bees_wax_brown
@@ -53,7 +42,6 @@ growthcraft_apiary:bees_wax_red
 growthcraft_apiary:bees_wax_white
 growthcraft_apiary:bees_wax_yellow
 growthcraft_apiary:brew_kettle_mead_must_honey_comb_full
-growthcraft_apiary:brew_kettle_mead_must_vanilla_honeycomb_no_must
 growthcraft_apiary:brew_kettle_mead_must_vanilla_honeycomb_normal
 growthcraft_apiary:brew_kettle_wax_item
 growthcraft_apiary:fermentation_barrel_honey_mead
@@ -70,7 +58,6 @@ growthcraft_apples:apple_plank_stairs
 growthcraft_apples:apple_plank_trapdoor
 growthcraft_apples:apple_seeds
 growthcraft_apples:apple_wood
-growthcraft_apples:bee_box_apple
 growthcraft_apples:fermentation_barrel_apple_cider
 growthcraft_apples:fruit_press_apple_juice
 growthcraft_apples:mystical_agriculture/mystical_agriculture_apple_log

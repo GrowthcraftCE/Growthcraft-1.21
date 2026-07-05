@@ -1,8 +1,10 @@
 package growthcraft.apples.init;
 
 import growthcraft.apples.config.Reference;
+import growthcraft.apples.item.AppleSeedsItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.ComposterBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -25,10 +27,13 @@ public final class GrowthcraftApplesItems {
     public static final DeferredItem<BlockItem> APPLE_WOOD_LOG = blockItem(Reference.UnlocalizedName.Block.APPLE_WOOD_LOG, GrowthcraftApplesBlocks.APPLE_WOOD_LOG);
     public static final DeferredItem<BlockItem> APPLE_WOOD_LOG_STRIPPED = blockItem(Reference.UnlocalizedName.Block.APPLE_WOOD_LOG_STRIPPED, GrowthcraftApplesBlocks.APPLE_WOOD_LOG_STRIPPED);
     public static final DeferredItem<BlockItem> APPLE_WOOD_STRIPPED = blockItem(Reference.UnlocalizedName.Block.APPLE_WOOD_STRIPPED, GrowthcraftApplesBlocks.APPLE_WOOD_STRIPPED);
-    public static final DeferredItem<BlockItem> BEE_BOX_APPLE = blockItem(Reference.UnlocalizedName.Block.BEE_BOX_APPLE, GrowthcraftApplesBlocks.BEE_BOX_APPLE);
-    public static final DeferredItem<Item> APPLE_SEEDS = ITEMS.register(Reference.UnlocalizedName.Item.APPLE_SEEDS, () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> APPLE_SEEDS = ITEMS.register(Reference.UnlocalizedName.Item.APPLE_SEEDS, () -> new AppleSeedsItem(new Item.Properties()));
 
     private GrowthcraftApplesItems() {}
+
+    public static void registerCompostables() {
+        ComposterBlock.COMPOSTABLES.put(APPLE_SEEDS.get(), 0.5F);
+    }
 
     private static DeferredItem<BlockItem> blockItem(String name, net.neoforged.neoforge.registries.DeferredBlock<? extends net.minecraft.world.level.block.Block> block) {
         return ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));

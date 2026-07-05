@@ -1,7 +1,10 @@
 {
     "variants": {
-        "axis=y":  { "model": "growthcraft_cellar:block/cork_wood_log" },
-        "axis=z":   { "model": "growthcraft_cellar:block/cork_wood_log", "x": 90 },
-        "axis=x":   { "model": "growthcraft_cellar:block/cork_wood_log", "x": 90, "y": 90 }
+        "axis=y,regrow=false": { "model": "growthcraft_cellar:block/cork_wood_log" },
+        "axis=z,regrow=false": { "model": "growthcraft_cellar:block/cork_wood_log", "x": 90 },
+        "axis=x,regrow=false": { "model": "growthcraft_cellar:block/cork_wood_log", "x": 90, "y": 90 },
+        "axis=y,regrow=true": { "model": "growthcraft_cellar:block/cork_wood_log" },
+        "axis=z,regrow=true": { "model": "growthcraft_cellar:block/cork_wood_log", "x": 90 },
+        "axis=x,regrow=true": { "model": "growthcraft_cellar:block/cork_wood_log", "x": 90, "y": 90 }
     }
 }

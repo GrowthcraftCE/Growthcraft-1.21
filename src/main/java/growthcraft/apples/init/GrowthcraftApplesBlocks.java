@@ -4,7 +4,6 @@ import growthcraft.apples.block.AppleTreeFruitBlock;
 import growthcraft.apples.block.AppleTreeLeavesBlock;
 import growthcraft.apples.config.Reference;
 import growthcraft.apples.world.AppleTreeGrowers;
-import growthcraft.apiary.block.BeeBoxBlock;
 import growthcraft.core.block.RopeFenceBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ButtonBlock;
@@ -94,10 +93,5 @@ public final class GrowthcraftApplesBlocks {
             Reference.UnlocalizedName.Block.APPLE_WOOD_STRIPPED,
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().strength(2.0F))
     );
-    public static final DeferredBlock<Block> BEE_BOX_APPLE = BLOCKS.register(
-            Reference.UnlocalizedName.Block.BEE_BOX_APPLE,
-            () -> new BeeBoxBlock(BeeBoxBlock.beeBoxProperties())
-    );
-
     private GrowthcraftApplesBlocks() {}
 }

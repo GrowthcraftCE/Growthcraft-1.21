@@ -1,0 +1,24 @@
+{
+  "type": "growthcraft_cellar:brew_kettle_recipe",
+  "requires_heat": true,
+  "requires_lid": false,
+  "processing_time": 100,
+  "input_fluid": {
+    "fluid": "minecraft:water",
+    "amount": 100
+  },
+  "input_item": {
+    "item": "growthcraft_apiary:bees_wax_light_blue",
+    "count": 1
+  },
+  "output_fluid": {
+    "fluid": "growthcraft_apiary:wax_light_blue_fluid_source",
+    "amount": 100
+  },
+  "conditions": [
+    {
+      "type": "growthcraft:feature_enabled",
+      "feature": "apiary/basic_wax"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-﻿growthcraft:rope_linen
+growthcraft:rope_linen
 growthcraft:rope_linen_acacia_fence
 growthcraft:rope_linen_bamboo_fence
 growthcraft:rope_linen_birch_fence
@@ -16,17 +16,6 @@ growthcraft:salt_ore
 growthcraft:salt_ore_deepslate
 growthcraft:salt_ore_end
 growthcraft:salt_ore_nether
-growthcraft_apiary:bee_box_acacia
-growthcraft_apiary:bee_box_bamboo
-growthcraft_apiary:bee_box_birch
-growthcraft_apiary:bee_box_cherry
-growthcraft_apiary:bee_box_crimson
-growthcraft_apiary:bee_box_dark_oak
-growthcraft_apiary:bee_box_jungle
-growthcraft_apiary:bee_box_mangrove
-growthcraft_apiary:bee_box_oak
-growthcraft_apiary:bee_box_spruce
-growthcraft_apiary:bee_box_warped
 growthcraft_apiary:candle_black
 growthcraft_apiary:candle_black_wall
 growthcraft_apiary:candle_blue
@@ -97,7 +86,6 @@ growthcraft_apples:apple_wood
 growthcraft_apples:apple_wood_log
 growthcraft_apples:apple_wood_log_stripped
 growthcraft_apples:apple_wood_stripped
-growthcraft_apples:bee_box_apple
 growthcraft_bamboo:bamboo_post_horizontal
 growthcraft_bamboo:bamboo_post_vertical
 growthcraft_cellar:amber_ale_fluid

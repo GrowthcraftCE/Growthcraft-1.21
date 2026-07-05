@@ -1,6 +1,7 @@
 package growthcraft.cellar.init;
 
 import growthcraft.cellar.block.CultureJarBlock;
+import growthcraft.cellar.block.CorkLogBlock;
 import growthcraft.cellar.block.BrewKettleBlock;
 import growthcraft.cellar.block.FermentationBarrelBlock;
 import growthcraft.cellar.block.FruitPressBlock;
@@ -11,9 +12,13 @@ import growthcraft.cellar.block.GrapeVineLeavesCropBlock;
 import growthcraft.cellar.block.HopsCropBlock;
 import growthcraft.cellar.block.RoasterBlock;
 import growthcraft.cellar.config.Reference;
-import net.minecraft.core.registries.Registries;
+import growthcraft.cellar.world.CorkTreeGrowers;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LeavesBlock;
+import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -58,6 +63,29 @@ public final class GrowthcraftCellarBlocks {
     public static final DeferredBlock<GrapeVineCropBlock> WHITE_GRAPE_VINE = BLOCKS.register(Reference.UnlocalizedName.Block.WHITE_GRAPE_VINE,
             () -> new GrapeVineCropBlock(WHITE_GRAPE_VINE_LEAVES));
     public static final DeferredBlock<HopsCropBlock> HOPS_VINE = BLOCKS.register(Reference.UnlocalizedName.Block.HOPS_VINE, HopsCropBlock::new);
+
+    public static final DeferredBlock<Block> CORK_COASTER = BLOCKS.register(Reference.UnlocalizedName.Item.CORK_COASTER,
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.COLOR_BROWN)
+                    .strength(0.3F)
+                    .sound(SoundType.WOOD)
+                    .noOcclusion()));
+    public static final DeferredBlock<LeavesBlock> CORK_TREE_LEAVES = BLOCKS.register(Reference.UnlocalizedName.Block.CORK_TREE_LEAVES,
+            () -> new LeavesBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LEAVES)));
+    public static final DeferredBlock<SaplingBlock> CORK_TREE_SAPLING = BLOCKS.register(Reference.UnlocalizedName.Block.CORK_TREE_SAPLING,
+            () -> new SaplingBlock(CorkTreeGrowers.CORK, BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SAPLING)));
+    public static final DeferredBlock<CorkLogBlock> CORK_WOOD = BLOCKS.register(Reference.UnlocalizedName.Block.CORK_WOOD,
+            () -> new CorkLogBlock(corkWoodProperties()));
+    public static final DeferredBlock<CorkLogBlock> CORK_WOOD_LOG = BLOCKS.register(Reference.UnlocalizedName.Block.CORK_WOOD_LOG,
+            () -> new CorkLogBlock(corkWoodProperties()));
+    public static final DeferredBlock<CorkLogBlock> CORK_WOOD_LOG_STRIPPED = BLOCKS.register(Reference.UnlocalizedName.Block.CORK_WOOD_LOG_STRIPPED,
+            () -> new CorkLogBlock(corkWoodProperties()));
+    public static final DeferredBlock<CorkLogBlock> CORK_WOOD_STRIPPED = BLOCKS.register(Reference.UnlocalizedName.Block.CORK_WOOD_STRIPPED,
+            () -> new CorkLogBlock(corkWoodProperties()));
+
+    private static BlockBehaviour.Properties corkWoodProperties() {
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_LOG).randomTicks();
+    }
 
     private GrowthcraftCellarBlocks() {}
 }

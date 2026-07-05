@@ -1,0 +1,8 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#growthcraft_cellar:has_cork_tree_rare",
+  "features": [
+    "growthcraft_cellar:trees_cork_rare"
+  ],
+  "step": "vegetal_decoration"
+}

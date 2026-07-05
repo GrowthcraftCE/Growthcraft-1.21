@@ -25,6 +25,13 @@ public class GrowthcraftCellarItems {
     public static final DeferredItem<Item> FERMENTATION_BARREL_OAK = blockItem(Reference.UnlocalizedName.Block.FERMENT_BARREL_OAK, GrowthcraftCellarBlocks.FERMENTATION_BARREL_OAK);
     public static final DeferredItem<Item> FRUIT_PRESS = blockItem(Reference.UnlocalizedName.Block.FRUIT_PRESS, GrowthcraftCellarBlocks.FRUIT_PRESS);
     public static final DeferredItem<Item> ROASTER = blockItem(Reference.UnlocalizedName.Block.ROASTER, GrowthcraftCellarBlocks.ROASTER);
+    public static final DeferredItem<Item> CORK_COASTER = blockItem(Reference.UnlocalizedName.Item.CORK_COASTER, GrowthcraftCellarBlocks.CORK_COASTER);
+    public static final DeferredItem<Item> CORK_TREE_LEAVES = blockItem(Reference.UnlocalizedName.Block.CORK_TREE_LEAVES, GrowthcraftCellarBlocks.CORK_TREE_LEAVES);
+    public static final DeferredItem<Item> CORK_TREE_SAPLING = blockItem(Reference.UnlocalizedName.Block.CORK_TREE_SAPLING, GrowthcraftCellarBlocks.CORK_TREE_SAPLING);
+    public static final DeferredItem<Item> CORK_WOOD = blockItem(Reference.UnlocalizedName.Block.CORK_WOOD, GrowthcraftCellarBlocks.CORK_WOOD);
+    public static final DeferredItem<Item> CORK_WOOD_LOG = blockItem(Reference.UnlocalizedName.Block.CORK_WOOD_LOG, GrowthcraftCellarBlocks.CORK_WOOD_LOG);
+    public static final DeferredItem<Item> CORK_WOOD_LOG_STRIPPED = blockItem(Reference.UnlocalizedName.Block.CORK_WOOD_LOG_STRIPPED, GrowthcraftCellarBlocks.CORK_WOOD_LOG_STRIPPED);
+    public static final DeferredItem<Item> CORK_WOOD_STRIPPED = blockItem(Reference.UnlocalizedName.Block.CORK_WOOD_STRIPPED, GrowthcraftCellarBlocks.CORK_WOOD_STRIPPED);
 
     // Grains (base + color variants)
     public static final DeferredItem<Item> GRAIN = ITEMS.register(Reference.UnlocalizedName.Item.GRAIN, () -> new Item(new Item.Properties()));
@@ -55,7 +62,6 @@ public class GrowthcraftCellarItems {
 
     // Misc materials
     public static final DeferredItem<Item> CORK_BARK = ITEMS.register(Reference.UnlocalizedName.Item.CORK_BARK, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> CORK_COASTER = ITEMS.register(Reference.UnlocalizedName.Item.CORK_COASTER, () -> new Item(new Item.Properties()));
 
     // Yeasts
     public static final DeferredItem<Item> YEAST_BAYANUS = ITEMS.register(Reference.UnlocalizedName.Item.YEAST_BAYANUS, () -> new Item(new Item.Properties()));
