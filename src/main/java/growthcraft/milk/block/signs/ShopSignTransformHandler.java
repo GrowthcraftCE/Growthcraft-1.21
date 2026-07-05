@@ -1,6 +1,7 @@
 package growthcraft.milk.block.signs;
 
 import growthcraft.milk.init.GrowthcraftMilkBlocks;
+import growthcraft.milk.block.entity.ShopSignBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -20,17 +21,26 @@ public final class ShopSignTransformHandler {
     }
 
     public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-        if (!event.getEntity().isCreative() || event.getHand() != InteractionHand.MAIN_HAND) {
-            return;
-        }
-
-        ItemStack heldStack = event.getItemStack();
-        if (heldStack.isEmpty() || ShopSignBehavior.isWax(heldStack) || event.getFace() == Direction.DOWN) {
+        if (event.getHand() != InteractionHand.MAIN_HAND) {
             return;
         }
 
         Level level = event.getLevel();
         BlockPos pos = event.getPos();
+        ItemStack heldStack = event.getItemStack();
+        if (level.getBlockEntity(pos) instanceof ShopSignBlockEntity shopSign) {
+            handleShopSignUse(event, shopSign, heldStack);
+            return;
+        }
+
+        if (!event.getEntity().isCreative()) {
+            return;
+        }
+
+        if (heldStack.isEmpty() || ShopSignBehavior.isWax(heldStack) || event.getFace() == Direction.DOWN) {
+            return;
+        }
+
         BlockState state = level.getBlockState(pos);
         if (!(state.getBlock() instanceof SignBlock original)) {
             return;
@@ -62,6 +72,44 @@ public final class ShopSignTransformHandler {
 
             level.setBlock(pos, newState, Block.UPDATE_ALL);
             if (level.getBlockEntity(pos) instanceof growthcraft.milk.block.entity.ShopSignBlockEntity shopSign) {
+                shopSign.setItem(heldStack);
+            }
+        }
+
+        event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide));
+        event.setCanceled(true);
+    }
+
+    private static void handleShopSignUse(PlayerInteractEvent.RightClickBlock event, ShopSignBlockEntity shopSign, ItemStack heldStack) {
+        Level level = event.getLevel();
+        BlockPos pos = event.getPos();
+        BlockState state = level.getBlockState(pos);
+
+        if (shopSign.isWaxed()) {
+            event.setCancellationResult(InteractionResult.FAIL);
+            event.setCanceled(true);
+            return;
+        }
+
+        if (!level.isClientSide) {
+            if (heldStack.isEmpty()) {
+                Block original = null;
+                if (state.getBlock() instanceof ShopCeilingHangingSignBlock ceilingSign) {
+                    original = ceilingSign.getOriginalBlock();
+                } else if (state.getBlock() instanceof ShopWallHangingSignBlock wallSign) {
+                    original = wallSign.getOriginalBlock();
+                }
+
+                if (original != null) {
+                    level.setBlock(pos, original.withPropertiesOf(state), Block.UPDATE_ALL);
+                }
+            } else if (!shopSign.getItem().isEmpty() && ShopSignBehavior.isWax(heldStack)) {
+                shopSign.setWaxed(true);
+                level.levelEvent(event.getEntity(), 3003, pos, 0);
+                if (!event.getEntity().isCreative()) {
+                    heldStack.shrink(1);
+                }
+            } else {
                 shopSign.setItem(heldStack);
             }
         }

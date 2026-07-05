@@ -3,6 +3,8 @@ package growthcraft.milk.block.signs;
 import growthcraft.apiary.init.GrowthcraftApiaryItems;
 import growthcraft.milk.block.entity.ShopSignBlockEntity;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
@@ -55,7 +57,11 @@ final class ShopSignBehavior {
     }
 
     static boolean isWax(ItemStack stack) {
+        ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(stack.getItem());
+        boolean growthcraftBeesWax = "growthcraft_apiary".equals(itemId.getNamespace())
+                && itemId.getPath().startsWith("bees_wax");
         return stack.is(Items.HONEYCOMB)
+                || growthcraftBeesWax
                 || stack.is(GrowthcraftApiaryItems.BEES_WAX.get())
                 || stack.is(GrowthcraftApiaryItems.BEES_WAX_BLACK.get())
                 || stack.is(GrowthcraftApiaryItems.BEES_WAX_BLUE.get())
