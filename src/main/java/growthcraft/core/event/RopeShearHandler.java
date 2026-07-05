@@ -2,7 +2,6 @@ package growthcraft.core.event;
 
 import growthcraft.core.block.RopeBlock;
 import growthcraft.core.block.RopeFenceBlock;
-import growthcraft.core.config.Reference;
 import growthcraft.core.init.GrowthcraftItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -17,18 +16,14 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 /**
  * Handles shearing of rope: for RopeFenceBlock, drops one rope and restores the original fence.
  * For RopeBlock, drops one rope and clears the rope, preserving water if waterlogged.
  */
-@EventBusSubscriber(modid = Reference.MODID, bus = EventBusSubscriber.Bus.GAME)
 public class RopeShearHandler {
 
-    @SubscribeEvent
     public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
         Player player = event.getEntity();
         Level level = event.getLevel();
