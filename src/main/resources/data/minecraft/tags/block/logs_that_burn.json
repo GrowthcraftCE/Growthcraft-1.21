@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "growthcraft_cellar:cork_wood",
+    "growthcraft_cellar:cork_wood_log",
+    "growthcraft_cellar:cork_wood_log_stripped",
+    "growthcraft_cellar:cork_wood_stripped"
+  ]
+}

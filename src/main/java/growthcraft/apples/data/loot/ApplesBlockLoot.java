@@ -34,7 +34,6 @@ public class ApplesBlockLoot extends BlockLootSubProvider {
         dropSelf(GrowthcraftApplesBlocks.APPLE_WOOD_LOG.get());
         dropSelf(GrowthcraftApplesBlocks.APPLE_WOOD_LOG_STRIPPED.get());
         dropSelf(GrowthcraftApplesBlocks.APPLE_WOOD_STRIPPED.get());
-        dropSelf(GrowthcraftApplesBlocks.BEE_BOX_APPLE.get());
     }
 
     @Override

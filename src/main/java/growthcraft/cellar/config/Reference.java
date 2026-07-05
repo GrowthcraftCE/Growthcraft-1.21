@@ -39,6 +39,7 @@ public final class Reference {
             public static final String GRAPE_VINE = "grape_vine";
             public static final String GRAPE_VINE_CROP = "grape_vine_crop";
             public static final String GRAPE_VINE_LEAVES = "grape_vine_leaves";
+            public static final String HOPS_VINE = "hops_vine";
             public static final String PURPLE_GRAPE_VINE = "purple_grape_vine";
             public static final String PURPLE_GRAPE_VINE_FRUIT = "purple_grape_vine_crop";
             public static final String PURPLE_GRAPE_VINE_LEAVES = "purple_grape_vine_leaves";
@@ -82,8 +83,6 @@ public final class Reference {
 
             public static final String HOPS = "hops";
             public static final String HOPS_SEEDS = "hops_seeds";
-
-            public static final String KINDLING = "kindling";
 
             public static final String CORK_BARK = "cork_bark";
             public static final String CORK_COASTER = "cork_coaster";

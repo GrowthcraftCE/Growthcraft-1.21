@@ -3,6 +3,10 @@
     "growthcraft_apples:apple_wood",
     "growthcraft_apples:apple_wood_log",
     "growthcraft_apples:apple_wood_log_stripped",
-    "growthcraft_apples:apple_wood_stripped"
+    "growthcraft_apples:apple_wood_stripped",
+    "growthcraft_cellar:cork_wood",
+    "growthcraft_cellar:cork_wood_log",
+    "growthcraft_cellar:cork_wood_log_stripped",
+    "growthcraft_cellar:cork_wood_stripped"
   ]
 }

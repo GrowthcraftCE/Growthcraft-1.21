@@ -1,0 +1,14 @@
+{
+  "type": "neoforge:add_table",
+  "conditions": [
+    {
+      "condition": "minecraft:random_chance",
+      "chance": 0.02
+    },
+    {
+      "condition": "minecraft:block_state_property",
+      "block": "minecraft:short_grass"
+    }
+  ],
+  "table": "growthcraft:gameplay/yeast_brewers"
+}

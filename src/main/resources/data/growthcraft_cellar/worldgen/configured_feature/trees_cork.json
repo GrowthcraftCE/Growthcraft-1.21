@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:random_selector",
+  "config": {
+    "default": "growthcraft_cellar:cork_tree",
+    "features": [
+      {
+        "chance": 0.1,
+        "feature": "growthcraft_cellar:cork_tree"
+      }
+    ]
+  }
+}

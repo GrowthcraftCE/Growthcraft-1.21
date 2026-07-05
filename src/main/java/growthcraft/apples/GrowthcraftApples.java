@@ -9,6 +9,7 @@ import growthcraft.core.init.GrowthcraftCreativeTabs;
 import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import org.slf4j.Logger;
 
@@ -18,6 +19,7 @@ public class GrowthcraftApples {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public GrowthcraftApples(IEventBus modEventBus) {
+        modEventBus.addListener(this::commonSetup);
         GrowthcraftApplesBlocks.BLOCKS.register(modEventBus);
         GrowthcraftApplesItems.ITEMS.register(modEventBus);
         GrowthcraftApplesFluids.FLUID_TYPES.register(modEventBus);
@@ -26,6 +28,10 @@ public class GrowthcraftApples {
         modEventBus.addListener(this::buildCreativeTab);
 
         LOGGER.info("{} module initialized", Reference.NAME);
+    }
+
+    private void commonSetup(FMLCommonSetupEvent event) {
+        event.enqueueWork(GrowthcraftApplesItems::registerCompostables);
     }
 
     private void buildCreativeTab(BuildCreativeModeTabContentsEvent event) {
@@ -44,7 +50,6 @@ public class GrowthcraftApples {
             event.accept(GrowthcraftApplesItems.APPLE_WOOD_LOG.get());
             event.accept(GrowthcraftApplesItems.APPLE_WOOD_LOG_STRIPPED.get());
             event.accept(GrowthcraftApplesItems.APPLE_WOOD_STRIPPED.get());
-            event.accept(GrowthcraftApplesItems.BEE_BOX_APPLE.get());
             event.accept(GrowthcraftApplesItems.APPLE_SEEDS.get());
             event.accept(GrowthcraftApplesItems.APPLE_TREE_FRUIT.get());
             event.accept(GrowthcraftApplesItems.APPLE_TREE_LEAVES.get());

@@ -1,15 +1,18 @@
 {
-  "type": "growthcraft_cellar:culture_jar_starter_recipe",
-  "processing_time": 4800,
-  "requires_heat_source": true,
-  "input_fluid": {
+  "type": "growthcraft_cellar:culture_jar",
+  "ingredient": {
+    "item": "growthcraft_rice:yeast_seishu"
+  },
+  "fluid": {
     "fluid": "growthcraft_rice:rice_water_fluid_source",
     "amount": 1000
   },
-  "output_item": {
-    "item": "growthcraft_rice:yeast_seishu",
+  "result": {
+    "id": "growthcraft_rice:yeast_seishu",
     "count": 1
   },
+  "time": 4800,
+  "requires_heat_source": true,
   "conditions": [
     {
       "type": "growthcraft:feature_enabled",

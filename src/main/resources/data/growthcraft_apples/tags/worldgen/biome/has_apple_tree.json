@@ -1,0 +1,14 @@
+{
+  "values": [
+    "minecraft:forest",
+    "minecraft:plains",
+    {
+      "id": "biomesoplenty:orchard",
+      "required": false
+    },
+    {
+      "id": "biomeswevegone:orchard",
+      "required": false
+    }
+  ]
+}

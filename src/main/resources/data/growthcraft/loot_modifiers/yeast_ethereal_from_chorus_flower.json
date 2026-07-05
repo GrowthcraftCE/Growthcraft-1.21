@@ -1,0 +1,14 @@
+{
+  "type": "neoforge:add_table",
+  "conditions": [
+    {
+      "condition": "minecraft:random_chance",
+      "chance": 0.075
+    },
+    {
+      "condition": "minecraft:block_state_property",
+      "block": "minecraft:chorus_flower"
+    }
+  ],
+  "table": "growthcraft:gameplay/yeast_ethereal"
+}

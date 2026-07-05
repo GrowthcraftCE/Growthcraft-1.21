@@ -3,6 +3,9 @@ package growthcraft.cellar.init;
 import growthcraft.cellar.config.Reference;
 import growthcraft.cellar.item.CellarPotionItem;
 import growthcraft.cellar.item.EtherealYeastItem;
+import growthcraft.cellar.item.GrapeSeedsItem;
+import growthcraft.cellar.item.HopsSeedsItem;
+import growthcraft.lib.item.GrowthcraftFoodItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -22,6 +25,13 @@ public class GrowthcraftCellarItems {
     public static final DeferredItem<Item> FERMENTATION_BARREL_OAK = blockItem(Reference.UnlocalizedName.Block.FERMENT_BARREL_OAK, GrowthcraftCellarBlocks.FERMENTATION_BARREL_OAK);
     public static final DeferredItem<Item> FRUIT_PRESS = blockItem(Reference.UnlocalizedName.Block.FRUIT_PRESS, GrowthcraftCellarBlocks.FRUIT_PRESS);
     public static final DeferredItem<Item> ROASTER = blockItem(Reference.UnlocalizedName.Block.ROASTER, GrowthcraftCellarBlocks.ROASTER);
+    public static final DeferredItem<Item> CORK_COASTER = blockItem(Reference.UnlocalizedName.Item.CORK_COASTER, GrowthcraftCellarBlocks.CORK_COASTER);
+    public static final DeferredItem<Item> CORK_TREE_LEAVES = blockItem(Reference.UnlocalizedName.Block.CORK_TREE_LEAVES, GrowthcraftCellarBlocks.CORK_TREE_LEAVES);
+    public static final DeferredItem<Item> CORK_TREE_SAPLING = blockItem(Reference.UnlocalizedName.Block.CORK_TREE_SAPLING, GrowthcraftCellarBlocks.CORK_TREE_SAPLING);
+    public static final DeferredItem<Item> CORK_WOOD = blockItem(Reference.UnlocalizedName.Block.CORK_WOOD, GrowthcraftCellarBlocks.CORK_WOOD);
+    public static final DeferredItem<Item> CORK_WOOD_LOG = blockItem(Reference.UnlocalizedName.Block.CORK_WOOD_LOG, GrowthcraftCellarBlocks.CORK_WOOD_LOG);
+    public static final DeferredItem<Item> CORK_WOOD_LOG_STRIPPED = blockItem(Reference.UnlocalizedName.Block.CORK_WOOD_LOG_STRIPPED, GrowthcraftCellarBlocks.CORK_WOOD_LOG_STRIPPED);
+    public static final DeferredItem<Item> CORK_WOOD_STRIPPED = blockItem(Reference.UnlocalizedName.Block.CORK_WOOD_STRIPPED, GrowthcraftCellarBlocks.CORK_WOOD_STRIPPED);
 
     // Grains (base + color variants)
     public static final DeferredItem<Item> GRAIN = ITEMS.register(Reference.UnlocalizedName.Item.GRAIN, () -> new Item(new Item.Properties()));
@@ -35,22 +45,23 @@ public class GrowthcraftCellarItems {
     public static final DeferredItem<Item> GRAIN_PALE_GOLDEN = ITEMS.register(Reference.UnlocalizedName.Item.GRAIN_PALE_GOLDEN, () -> new Item(new Item.Properties()));
 
     // Grapes and seeds
-    public static final DeferredItem<Item> GRAPE_PURPLE = ITEMS.register(Reference.UnlocalizedName.Item.GRAPE_PURPLE, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> GRAPE_RED = ITEMS.register(Reference.UnlocalizedName.Item.GRAPE_RED, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> GRAPE_WHITE = ITEMS.register(Reference.UnlocalizedName.Item.GRAPE_WHITE, () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> GRAPE_PURPLE = ITEMS.register(Reference.UnlocalizedName.Item.GRAPE_PURPLE, () -> new GrowthcraftFoodItem(1, 0.2F, 64));
+    public static final DeferredItem<Item> GRAPE_RED = ITEMS.register(Reference.UnlocalizedName.Item.GRAPE_RED, () -> new GrowthcraftFoodItem(1, 0.2F, 64));
+    public static final DeferredItem<Item> GRAPE_WHITE = ITEMS.register(Reference.UnlocalizedName.Item.GRAPE_WHITE, () -> new GrowthcraftFoodItem(1, 0.2F, 64));
 
-    public static final DeferredItem<Item> GRAPE_SEEDS_PURPLE = ITEMS.register(Reference.UnlocalizedName.Item.GRAPE_SEEDS_PURPLE, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> GRAPE_SEEDS_RED = ITEMS.register(Reference.UnlocalizedName.Item.GRAPE_SEEDS_RED, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> GRAPE_SEEDS_WHITE = ITEMS.register(Reference.UnlocalizedName.Item.GRAPE_SEEDS_WHITE, () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> GRAPE_SEEDS_PURPLE = ITEMS.register(Reference.UnlocalizedName.Item.GRAPE_SEEDS_PURPLE,
+            () -> new GrapeSeedsItem(new Item.Properties(), GrowthcraftCellarBlocks.PURPLE_GRAPE_VINE));
+    public static final DeferredItem<Item> GRAPE_SEEDS_RED = ITEMS.register(Reference.UnlocalizedName.Item.GRAPE_SEEDS_RED,
+            () -> new GrapeSeedsItem(new Item.Properties(), GrowthcraftCellarBlocks.RED_GRAPE_VINE));
+    public static final DeferredItem<Item> GRAPE_SEEDS_WHITE = ITEMS.register(Reference.UnlocalizedName.Item.GRAPE_SEEDS_WHITE,
+            () -> new GrapeSeedsItem(new Item.Properties(), GrowthcraftCellarBlocks.WHITE_GRAPE_VINE));
 
     // Hops
     public static final DeferredItem<Item> HOPS = ITEMS.register(Reference.UnlocalizedName.Item.HOPS, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> HOPS_SEEDS = ITEMS.register(Reference.UnlocalizedName.Item.HOPS_SEEDS, () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> HOPS_SEEDS = ITEMS.register(Reference.UnlocalizedName.Item.HOPS_SEEDS, () -> new HopsSeedsItem(new Item.Properties()));
 
     // Misc materials
-    public static final DeferredItem<Item> KINDLING = ITEMS.register(Reference.UnlocalizedName.Item.KINDLING, () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> CORK_BARK = ITEMS.register(Reference.UnlocalizedName.Item.CORK_BARK, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> CORK_COASTER = ITEMS.register(Reference.UnlocalizedName.Item.CORK_COASTER, () -> new Item(new Item.Properties()));
 
     // Yeasts
     public static final DeferredItem<Item> YEAST_BAYANUS = ITEMS.register(Reference.UnlocalizedName.Item.YEAST_BAYANUS, () -> new Item(new Item.Properties()));

@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "growthcraft_cellar",
+  "ingredients": [
+    {
+      "item": "growthcraft_cellar:hops"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "item": "growthcraft_cellar:hops_seeds"
+  }
+}

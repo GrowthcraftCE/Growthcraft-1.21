@@ -156,7 +156,6 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
 
         addAppleWoodRecipes(output);
         addApiaryBeeswaxRecipes(output);
-        addApiaryBeeBoxRecipes(output);
         addApiaryCandleRecipes(output);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GrowthcraftBambooItems.BAMBOO_POST_VERTICAL.get(), 2)
@@ -352,17 +351,6 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
                 .group(growthcraft.apples.config.Reference.MODID)
                 .unlockedBy(getHasName(Items.APPLE), has(Items.APPLE))
                 .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.apples.config.Reference.MODID, growthcraft.apples.config.Reference.UnlocalizedName.Item.APPLE_SEEDS));
-
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, GrowthcraftApplesItems.BEE_BOX_APPLE.get())
-                .pattern("SPS")
-                .pattern("PBP")
-                .pattern("SPS")
-                .define('B', GrowthcraftApplesItems.APPLE_PLANK_SLAB.get())
-                .define('P', GrowthcraftApplesItems.APPLE_PLANK.get())
-                .define('S', Tags.Items.RODS_WOODEN)
-                .group(growthcraft.apples.config.Reference.MODID)
-                .unlockedBy(getHasName(GrowthcraftApplesItems.APPLE_PLANK.get()), has(GrowthcraftApplesItems.APPLE_PLANK.get()))
-                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.apples.config.Reference.MODID, growthcraft.apples.config.Reference.UnlocalizedName.Block.BEE_BOX_APPLE));
     }
 
     private static void addApiaryBeeswaxRecipes(RecipeOutput output) {
@@ -431,40 +419,6 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
                 .group("dyed_candle")
                 .unlockedBy(getHasName(Items.CANDLE), has(Items.CANDLE))
                 .save(output, ResourceLocation.fromNamespaceAndPath("minecraft", name));
-    }
-
-    private static void addApiaryBeeBoxRecipes(RecipeOutput output) {
-        addBeeBoxRecipe(output, GrowthcraftApiaryItems.BEE_BOX_ACACIA.get(), Items.ACACIA_SLAB, Items.ACACIA_PLANKS, growthcraft.apiary.config.Reference.UnlocalizedName.BEE_BOX_ACACIA);
-        addBeeBoxRecipe(output, GrowthcraftApiaryItems.BEE_BOX_BIRCH.get(), Items.BIRCH_SLAB, Items.BIRCH_PLANKS, growthcraft.apiary.config.Reference.UnlocalizedName.BEE_BOX_BIRCH);
-        addBeeBoxRecipe(output, GrowthcraftApiaryItems.BEE_BOX_CHERRY.get(), Items.CHERRY_SLAB, Items.CHERRY_PLANKS, growthcraft.apiary.config.Reference.UnlocalizedName.BEE_BOX_CHERRY);
-        addBeeBoxRecipe(output, GrowthcraftApiaryItems.BEE_BOX_CRIMSON.get(), Items.CRIMSON_SLAB, Items.CRIMSON_PLANKS, growthcraft.apiary.config.Reference.UnlocalizedName.BEE_BOX_CRIMSON);
-        addBeeBoxRecipe(output, GrowthcraftApiaryItems.BEE_BOX_DARK_OAK.get(), Items.DARK_OAK_SLAB, Items.DARK_OAK_PLANKS, growthcraft.apiary.config.Reference.UnlocalizedName.BEE_BOX_DARK_OAK);
-        addBeeBoxRecipe(output, GrowthcraftApiaryItems.BEE_BOX_JUNGLE.get(), Items.JUNGLE_SLAB, Items.JUNGLE_PLANKS, growthcraft.apiary.config.Reference.UnlocalizedName.BEE_BOX_JUNGLE);
-        addBeeBoxRecipe(output, GrowthcraftApiaryItems.BEE_BOX_MANGROVE.get(), Items.MANGROVE_SLAB, Items.MANGROVE_PLANKS, growthcraft.apiary.config.Reference.UnlocalizedName.BEE_BOX_MANGROVE);
-        addBeeBoxRecipe(output, GrowthcraftApiaryItems.BEE_BOX_OAK.get(), Items.OAK_SLAB, Items.OAK_PLANKS, growthcraft.apiary.config.Reference.UnlocalizedName.BEE_BOX_OAK);
-        addBeeBoxRecipe(output, GrowthcraftApiaryItems.BEE_BOX_SPRUCE.get(), Items.SPRUCE_SLAB, Items.SPRUCE_PLANKS, growthcraft.apiary.config.Reference.UnlocalizedName.BEE_BOX_SPRUCE);
-        addBeeBoxRecipe(output, GrowthcraftApiaryItems.BEE_BOX_WARPED.get(), Items.WARPED_SLAB, Items.WARPED_PLANKS, growthcraft.apiary.config.Reference.UnlocalizedName.BEE_BOX_WARPED);
-        addBeeBoxRecipe(output, GrowthcraftApiaryItems.BEE_BOX_BAMBOO.get(),
-                net.minecraft.world.item.crafting.Ingredient.of(Items.BAMBOO_SLAB, Items.BAMBOO_MOSAIC_SLAB),
-                net.minecraft.world.item.crafting.Ingredient.of(Items.BAMBOO_PLANKS, Items.BAMBOO_MOSAIC),
-                growthcraft.apiary.config.Reference.UnlocalizedName.BEE_BOX_BAMBOO);
-    }
-
-    private static void addBeeBoxRecipe(RecipeOutput output, Item result, Item slab, Item planks, String name) {
-        addBeeBoxRecipe(output, result, net.minecraft.world.item.crafting.Ingredient.of(slab), net.minecraft.world.item.crafting.Ingredient.of(planks), name);
-    }
-
-    private static void addBeeBoxRecipe(RecipeOutput output, Item result, net.minecraft.world.item.crafting.Ingredient slab, net.minecraft.world.item.crafting.Ingredient planks, String name) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, result)
-                .pattern("SPS")
-                .pattern("PBP")
-                .pattern("SPS")
-                .define('B', slab)
-                .define('P', planks)
-                .define('S', Tags.Items.RODS_WOODEN)
-                .group(growthcraft.apiary.config.Reference.MODID)
-                .unlockedBy("has_planks", has(ItemTags.PLANKS))
-                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.apiary.config.Reference.MODID, name));
     }
 
     private static void addMilkIngredientRecipes(RecipeOutput output) {
