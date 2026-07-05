@@ -1,7 +1,10 @@
 package growthcraft.milk.client;
 
+import growthcraft.milk.client.renderer.MixingVatBlockEntityRenderer;
+import growthcraft.milk.client.renderer.PancheonBlockEntityRenderer;
 import growthcraft.milk.client.screen.MixingVatScreen;
 import growthcraft.milk.config.Reference;
+import growthcraft.milk.init.GrowthcraftMilkBlockEntities;
 import growthcraft.milk.init.GrowthcraftMilkBlocks;
 import growthcraft.milk.init.GrowthcraftMilkItems;
 import growthcraft.milk.init.GrowthcraftMilkMenus;
@@ -18,6 +21,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -41,6 +45,12 @@ public final class GrowthcraftMilkClient {
     @SubscribeEvent
     public static void onClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(GrowthcraftMilkClient::registerCheeseModelProperties);
+    }
+
+    @SubscribeEvent
+    public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(GrowthcraftMilkBlockEntities.MIXING_VAT.get(), MixingVatBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(GrowthcraftMilkBlockEntities.PANCHEON.get(), PancheonBlockEntityRenderer::new);
     }
 
     @SubscribeEvent
