@@ -13,6 +13,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -36,37 +37,14 @@ public class RopeItem extends Item {
         BlockState target = level.getBlockState(pos);
         Block targetBlock = target.getBlock();
 
-        if (!(targetBlock instanceof FenceBlock)) {
-            // Try placing a rope block adjacent to the clicked face
-            BlockPos placePos = pos.relative(context.getClickedFace());
-            BlockState existing = level.getBlockState(placePos);
-            if (!existing.isAir()) {
-                return InteractionResult.PASS;
-            }
-            Block ropeBlock = GrowthcraftBlocks.ROPE_LINEN.get();
-            BlockState ropeState = ropeBlock.defaultBlockState()
-                    .setValue(RopeBlock.KNOT, Boolean.TRUE);
-            // Waterlogging
-            if (level.getFluidState(placePos).isSource()) {
-                ropeState = ropeState.setValue(BlockStateProperties.WATERLOGGED, Boolean.TRUE);
-            }
-            // Compute horizontal connections to adjacent rope blocks or rope fences
-            for (Direction dir : new Direction[]{Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST}) {
-                BlockPos np = placePos.relative(dir);
-                BlockState ns = level.getBlockState(np);
-                Block nb = ns.getBlock();
-                boolean connect = (nb instanceof growthcraft.core.block.RopeBlock) || (nb instanceof RopeFenceBlock);
-                if (dir == Direction.NORTH && ropeState.hasProperty(FenceBlock.NORTH)) ropeState = ropeState.setValue(FenceBlock.NORTH, connect);
-                if (dir == Direction.EAST && ropeState.hasProperty(FenceBlock.EAST)) ropeState = ropeState.setValue(FenceBlock.EAST, connect);
-                if (dir == Direction.SOUTH && ropeState.hasProperty(FenceBlock.SOUTH)) ropeState = ropeState.setValue(FenceBlock.SOUTH, connect);
-                if (dir == Direction.WEST && ropeState.hasProperty(FenceBlock.WEST)) ropeState = ropeState.setValue(FenceBlock.WEST, connect);
-            }
-            level.setBlock(placePos, ropeState, Block.UPDATE_ALL);
-            if (!context.getPlayer().isCreative()) {
-                context.getItemInHand().shrink(1);
-            }
-            return InteractionResult.SUCCESS;
+        if (targetBlock instanceof RopeBlock || targetBlock instanceof RopeFenceBlock) {
+            return placeRopeNextTo(context, level, pos);
         }
+
+        if (!(targetBlock instanceof FenceBlock)) {
+            return placeRopeNextTo(context, level, pos);
+        }
+
         Block ropeFence = mapFenceToRope(targetBlock);
         if (ropeFence == null) {
             return InteractionResult.PASS;
@@ -82,10 +60,32 @@ public class RopeItem extends Item {
         if (target.hasProperty(FenceBlock.SOUTH)) newState = newState.setValue(FenceBlock.SOUTH, target.getValue(FenceBlock.SOUTH));
         if (target.hasProperty(FenceBlock.WEST)) newState = newState.setValue(FenceBlock.WEST, target.getValue(FenceBlock.WEST));
         if (target.hasProperty(BlockStateProperties.WATERLOGGED)) newState = newState.setValue(BlockStateProperties.WATERLOGGED, target.getValue(BlockStateProperties.WATERLOGGED));
+        newState = newState
+                .setValue(RopeFenceBlock.UP, RopeBlock.canConnect(level.getBlockState(pos.above())))
+                .setValue(RopeFenceBlock.DOWN, RopeBlock.canConnect(level.getBlockState(pos.below())));
 
         level.setBlock(pos, newState, Block.UPDATE_ALL);
 
         if (!context.getPlayer().isCreative()) {
+            context.getItemInHand().shrink(1);
+        }
+        return InteractionResult.SUCCESS;
+    }
+
+    private static InteractionResult placeRopeNextTo(UseOnContext context, Level level, BlockPos pos) {
+        BlockState target = level.getBlockState(pos);
+        BlockPos placePos = target.getBlock() instanceof FarmBlock
+                ? pos.above()
+                : pos.relative(context.getClickedFace());
+        BlockState existing = level.getBlockState(placePos);
+        if (!existing.isAir()) {
+            return InteractionResult.PASS;
+        }
+
+        RopeBlock ropeBlock = GrowthcraftBlocks.ROPE_LINEN.get();
+        BlockState ropeState = ropeBlock.getConnectedState(level, placePos, true);
+        level.setBlock(placePos, ropeState, Block.UPDATE_ALL);
+        if (context.getPlayer() != null && !context.getPlayer().isCreative()) {
             context.getItemInHand().shrink(1);
         }
         return InteractionResult.SUCCESS;

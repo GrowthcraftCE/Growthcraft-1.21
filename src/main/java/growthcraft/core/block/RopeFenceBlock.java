@@ -65,29 +65,35 @@ public class RopeFenceBlock extends FenceBlock {
         BlockState state = super.getStateForPlacement(context);
         if (state == null) return null;
         // Default to having a knot when placed directly, can be adjusted by item logic
-        state = state.setValue(KNOT, Boolean.TRUE);
-        return state.setValue(UP, Boolean.FALSE).setValue(DOWN, Boolean.FALSE);
+        return withRopeConnections(context.getLevel(), context.getClickedPos(), state.setValue(KNOT, Boolean.TRUE));
     }
 
     @Override
     public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
-        // Keep FenceBlock connection updates for horizontal directions and waterlogging
         state = super.updateShape(state, direction, neighborState, level, pos, neighborPos);
-        // Optionally compute UP/DOWN rope connections: we keep it simple for now, off by default.
-        if (direction == Direction.UP) {
-            return state.setValue(UP, Boolean.FALSE);
-        } else if (direction == Direction.DOWN) {
-            return state.setValue(DOWN, Boolean.FALSE);
-        }
-        return state;
+        return withRopeConnections(level, pos, state);
     }
 
     @Override
     public boolean connectsTo(BlockState neighborState, boolean neighborIsFullBlock, Direction side) {
-        // Allow normal fence connections plus connect to RopeBlock and other RopeFenceBlocks
-        if (neighborState.getBlock() instanceof RopeBlock) return true;
-        if (neighborState.getBlock() instanceof RopeFenceBlock) return true;
+        if (RopeBlock.canConnect(neighborState)) return true;
         return super.connectsTo(neighborState, neighborIsFullBlock, side);
+    }
+
+    public BlockState withRopeConnections(LevelAccessor level, BlockPos pos, BlockState state) {
+        return state
+                .setValue(NORTH, connectsTo(level, pos, Direction.NORTH))
+                .setValue(EAST, connectsTo(level, pos, Direction.EAST))
+                .setValue(SOUTH, connectsTo(level, pos, Direction.SOUTH))
+                .setValue(WEST, connectsTo(level, pos, Direction.WEST))
+                .setValue(UP, RopeBlock.canConnect(level.getBlockState(pos.above())))
+                .setValue(DOWN, RopeBlock.canConnect(level.getBlockState(pos.below())));
+    }
+
+    private boolean connectsTo(LevelAccessor level, BlockPos pos, Direction direction) {
+        BlockPos neighborPos = pos.relative(direction);
+        BlockState neighborState = level.getBlockState(neighborPos);
+        return connectsTo(neighborState, neighborState.isFaceSturdy(level, neighborPos, direction.getOpposite()), direction.getOpposite());
     }
 
     @Override

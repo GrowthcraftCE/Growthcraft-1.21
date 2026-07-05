@@ -3,6 +3,8 @@ package growthcraft.cellar.init;
 import growthcraft.cellar.config.Reference;
 import growthcraft.cellar.item.CellarPotionItem;
 import growthcraft.cellar.item.EtherealYeastItem;
+import growthcraft.cellar.item.GrapeSeedsItem;
+import growthcraft.cellar.item.HopsSeedsItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -39,13 +41,16 @@ public class GrowthcraftCellarItems {
     public static final DeferredItem<Item> GRAPE_RED = ITEMS.register(Reference.UnlocalizedName.Item.GRAPE_RED, () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> GRAPE_WHITE = ITEMS.register(Reference.UnlocalizedName.Item.GRAPE_WHITE, () -> new Item(new Item.Properties()));
 
-    public static final DeferredItem<Item> GRAPE_SEEDS_PURPLE = ITEMS.register(Reference.UnlocalizedName.Item.GRAPE_SEEDS_PURPLE, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> GRAPE_SEEDS_RED = ITEMS.register(Reference.UnlocalizedName.Item.GRAPE_SEEDS_RED, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> GRAPE_SEEDS_WHITE = ITEMS.register(Reference.UnlocalizedName.Item.GRAPE_SEEDS_WHITE, () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> GRAPE_SEEDS_PURPLE = ITEMS.register(Reference.UnlocalizedName.Item.GRAPE_SEEDS_PURPLE,
+            () -> new GrapeSeedsItem(new Item.Properties(), GrowthcraftCellarBlocks.PURPLE_GRAPE_VINE));
+    public static final DeferredItem<Item> GRAPE_SEEDS_RED = ITEMS.register(Reference.UnlocalizedName.Item.GRAPE_SEEDS_RED,
+            () -> new GrapeSeedsItem(new Item.Properties(), GrowthcraftCellarBlocks.RED_GRAPE_VINE));
+    public static final DeferredItem<Item> GRAPE_SEEDS_WHITE = ITEMS.register(Reference.UnlocalizedName.Item.GRAPE_SEEDS_WHITE,
+            () -> new GrapeSeedsItem(new Item.Properties(), GrowthcraftCellarBlocks.WHITE_GRAPE_VINE));
 
     // Hops
     public static final DeferredItem<Item> HOPS = ITEMS.register(Reference.UnlocalizedName.Item.HOPS, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> HOPS_SEEDS = ITEMS.register(Reference.UnlocalizedName.Item.HOPS_SEEDS, () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> HOPS_SEEDS = ITEMS.register(Reference.UnlocalizedName.Item.HOPS_SEEDS, () -> new HopsSeedsItem(new Item.Properties()));
 
     // Misc materials
     public static final DeferredItem<Item> KINDLING = ITEMS.register(Reference.UnlocalizedName.Item.KINDLING, () -> new Item(new Item.Properties()));
