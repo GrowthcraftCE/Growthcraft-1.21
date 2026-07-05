@@ -160,13 +160,17 @@ public final class GrowthcraftMilkClient {
     private static void registerItemTint(RegisterColorHandlersEvent.Item event,
                                          ColorUtils.GrowthcraftColor color,
                                          DeferredHolder<Item, ? extends Item> item) {
-        event.register((stack, tintIndex) -> tintIndex == 0 ? color.toIntValue() : 0xFFFFFFFF, item.get());
+        event.register((stack, tintIndex) -> tintIndex == 0 ? opaqueColor(color) : 0xFFFFFFFF, item.get());
     }
 
     private static void registerBlockTint(RegisterColorHandlersEvent.Block event,
                                           ColorUtils.GrowthcraftColor color,
                                           DeferredHolder<Block, ? extends Block> block) {
         event.register((state, level, pos, tintIndex) -> tintIndex == 0 ? color.toIntValue() : 0xFFFFFFFF, block.get());
+    }
+
+    private static int opaqueColor(ColorUtils.GrowthcraftColor color) {
+        return color.toIntValue() | 0xFF000000;
     }
 
     private static void registerCheeseModelProperties() {
