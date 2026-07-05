@@ -33,10 +33,6 @@ public final class ShopSignTransformHandler {
             return;
         }
 
-        if (!event.getEntity().isCreative()) {
-            return;
-        }
-
         if (heldStack.isEmpty() || ShopSignBehavior.isWax(heldStack) || event.getFace() == Direction.DOWN) {
             return;
         }
