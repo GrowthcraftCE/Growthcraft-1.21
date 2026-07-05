@@ -9,6 +9,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.CropBlock;
@@ -116,10 +117,10 @@ public class MilkBlockLoot extends BlockLootSubProvider {
     }
 
     private void dropShopSigns() {
-        add(GrowthcraftMilkBlocks.HANGING_SIGN_1_OAK.get(), noDrop());
-        add(GrowthcraftMilkBlocks.HANGING_SIGN_1_SPRUCE.get(), noDrop());
-        add(GrowthcraftMilkBlocks.HANGING_SIGN_2_OAK.get(), noDrop());
-        add(GrowthcraftMilkBlocks.HANGING_SIGN_2_SPRUCE.get(), noDrop());
+        dropOther(GrowthcraftMilkBlocks.HANGING_SIGN_1_OAK.get(), Items.OAK_HANGING_SIGN);
+        dropOther(GrowthcraftMilkBlocks.HANGING_SIGN_1_SPRUCE.get(), Items.SPRUCE_HANGING_SIGN);
+        dropOther(GrowthcraftMilkBlocks.HANGING_SIGN_2_OAK.get(), Items.OAK_HANGING_SIGN);
+        dropOther(GrowthcraftMilkBlocks.HANGING_SIGN_2_SPRUCE.get(), Items.SPRUCE_HANGING_SIGN);
     }
 
     private LootItemBlockStatePropertyCondition.Builder isCheeseCurdsDrained(Block block) {

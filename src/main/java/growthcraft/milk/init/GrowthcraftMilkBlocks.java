@@ -8,8 +8,13 @@ import growthcraft.milk.block.ChurnBlock;
 import growthcraft.milk.block.MixingVatBlock;
 import growthcraft.milk.block.PancheonBlock;
 import growthcraft.milk.block.ThistleCropBlock;
+import growthcraft.milk.block.signs.ShopCeilingHangingSignBlock;
+import growthcraft.milk.block.signs.ShopWallHangingSignBlock;
 import growthcraft.milk.config.Reference;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CeilingHangingSignBlock;
+import net.minecraft.world.level.block.SignBlock;
 import net.minecraft.world.level.block.WallHangingSignBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.WoodType;
@@ -69,16 +74,16 @@ public final class GrowthcraftMilkBlocks {
     );
     public static final DeferredBlock<CeilingHangingSignBlock> HANGING_SIGN_1_OAK = BLOCKS.register(
             Reference.UnlocalizedName.HANGING_SIGN_1_OAK,
-            () -> new CeilingHangingSignBlock(WoodType.OAK, hangingSignProperties()));
+            () -> new ShopCeilingHangingSignBlock(WoodType.OAK, hangingSignProperties(), (SignBlock) Blocks.OAK_HANGING_SIGN));
     public static final DeferredBlock<CeilingHangingSignBlock> HANGING_SIGN_1_SPRUCE = BLOCKS.register(
             Reference.UnlocalizedName.HANGING_SIGN_1_SPRUCE,
-            () -> new CeilingHangingSignBlock(WoodType.SPRUCE, hangingSignProperties()));
+            () -> new ShopCeilingHangingSignBlock(WoodType.SPRUCE, hangingSignProperties(), (SignBlock) Blocks.SPRUCE_HANGING_SIGN));
     public static final DeferredBlock<WallHangingSignBlock> HANGING_SIGN_2_OAK = BLOCKS.register(
             Reference.UnlocalizedName.HANGING_SIGN_2_OAK,
-            () -> new WallHangingSignBlock(WoodType.OAK, hangingSignProperties()));
+            () -> new ShopWallHangingSignBlock(WoodType.OAK, hangingSignProperties(), (SignBlock) Blocks.OAK_WALL_HANGING_SIGN));
     public static final DeferredBlock<WallHangingSignBlock> HANGING_SIGN_2_SPRUCE = BLOCKS.register(
             Reference.UnlocalizedName.HANGING_SIGN_2_SPRUCE,
-            () -> new WallHangingSignBlock(WoodType.SPRUCE, hangingSignProperties()));
+            () -> new ShopWallHangingSignBlock(WoodType.SPRUCE, hangingSignProperties(), (SignBlock) Blocks.SPRUCE_WALL_HANGING_SIGN));
 
     private static DeferredBlock<CheeseWheelBlock> registerCheese(String cheeseName) {
         return BLOCKS.register(cheeseName + "_cheese", () -> new CheeseWheelBlock(
@@ -180,5 +185,13 @@ public final class GrowthcraftMilkBlocks {
                 .noCollission()
                 .strength(1.0F)
                 .ignitedByLava();
+    }
+
+    public static Block getShopSignFromOriginal(SignBlock original) {
+        if (original == Blocks.OAK_HANGING_SIGN) return HANGING_SIGN_1_OAK.get();
+        if (original == Blocks.SPRUCE_HANGING_SIGN) return HANGING_SIGN_1_SPRUCE.get();
+        if (original == Blocks.OAK_WALL_HANGING_SIGN) return HANGING_SIGN_2_OAK.get();
+        if (original == Blocks.SPRUCE_WALL_HANGING_SIGN) return HANGING_SIGN_2_SPRUCE.get();
+        return null;
     }
 }
