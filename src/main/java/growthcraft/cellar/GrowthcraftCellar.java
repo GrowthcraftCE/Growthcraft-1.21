@@ -17,8 +17,6 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(GrowthcraftCellar.MODID)
 public class GrowthcraftCellar {
@@ -121,30 +119,5 @@ public class GrowthcraftCellar {
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
         LOGGER.info("HELLO from server starting");
-        // Diagnostics: report our custom recipe registrations and loaded recipes
-        try {
-            var server = event.getServer();
-            var rm = server.getRecipeManager();
-
-            var type = GrowthcraftCellarRecipes.CULTURE_JAR_TYPE.get();
-            var serializer = GrowthcraftCellarRecipes.CULTURE_JAR_SERIALIZER.get();
-
-            LOGGER.info("[Diag][CultureJar] Recipe Registry Size={}", rm.getRecipes().size());
-            AtomicInteger i = new AtomicInteger();
-            rm.getRecipeIds().toList().forEach(rid -> {
-                LOGGER.info(
-                        "[Diag][CultureJar] Recipe Registry Entry[{}/{}] {}:{}", i.getAndIncrement(), rm.getRecipes().size(), rid.getNamespace(), rid.getPath());
-            });
-
-            var typeKey = net.minecraft.core.registries.BuiltInRegistries.RECIPE_TYPE.getKey(type);
-            var serKey = net.minecraft.core.registries.BuiltInRegistries.RECIPE_SERIALIZER.getKey(serializer);
-            LOGGER.info("[Diag][CultureJar] RecipeType key={} Serializer key={}", typeKey, serKey);
-
-            java.util.List<net.minecraft.world.item.crafting.RecipeHolder<growthcraft.cellar.recipe.CultureJarRecipe>> list = rm.getAllRecipesFor(type);
-            java.util.List<net.minecraft.resources.ResourceLocation> ids = list.stream().map(net.minecraft.world.item.crafting.RecipeHolder::id).toList();
-            LOGGER.info("[Diag][CultureJar] Loaded {} culture_jar recipes: {}", list.size(), ids);
-        } catch (Throwable t) {
-            LOGGER.warn("[Diag][CultureJar] Failed to dump recipe diagnostics", t);
-        }
     }
 }
