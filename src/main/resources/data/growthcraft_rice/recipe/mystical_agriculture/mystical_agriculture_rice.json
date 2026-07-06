@@ -1,17 +1,13 @@
 {
   "type": "cucumber:shaped_no_mirror",
-  "conditions": [
+  "neoforge:conditions": [
     {
-      "type": "forge:mod_loaded",
+      "type": "neoforge:mod_loaded",
       "modid": "mysticalagriculture"
     },
     {
       "type": "mysticalagriculture:crop_enabled",
       "crop": "mysticalagriculture:nature"
-    },
-    {
-      "type": "growthcraft:feature_enabled",
-      "feature": "rice"
     }
   ],
   "pattern": [

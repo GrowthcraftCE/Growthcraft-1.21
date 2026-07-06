@@ -1,12 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
-  "conditions": [
-    {
-      "type": "growthcraft:feature_enabled",
-      "feature": "rice"
-    }
-  ],
   "group": "growthcraft_rice",
   "key": {
     "I": {
@@ -22,7 +16,7 @@
     "S  "
   ],
   "result": {
-    "item": "growthcraft_rice:knife"
+    "id": "growthcraft_rice:knife"
   },
   "show_notification": true
 }

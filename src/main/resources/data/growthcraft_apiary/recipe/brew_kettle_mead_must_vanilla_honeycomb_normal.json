@@ -19,11 +19,5 @@
   "by_product": {
     "item": "growthcraft_apiary:honey_comb_empty",
     "count": 1
-  },
-  "conditions": [
-    {
-      "type": "growthcraft:feature_enabled",
-      "feature": "apiary/beverages"
-    }
-  ]
+  }
 }

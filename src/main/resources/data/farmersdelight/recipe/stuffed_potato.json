@@ -16,17 +16,13 @@
     }
   ],
   "result": {
-    "item": "farmersdelight:stuffed_potato",
+    "id": "farmersdelight:stuffed_potato",
     "count": 2
   },
-  "conditions": [
+  "neoforge:conditions": [
     {
-      "type": "forge:mod_loaded",
+      "type": "neoforge:mod_loaded",
       "modid": "farmersdelight"
-    },
-    {
-      "type": "growthcraft:feature_enabled",
-      "feature": "milk"
     }
   ]
 }

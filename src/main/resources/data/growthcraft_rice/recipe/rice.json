@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
-  "conditions": [],
+  "neoforge:conditions": [],
   "group": "growthcraft_rice",
   "ingredients": [
     {
@@ -18,6 +18,6 @@
     }
   ],
   "result": {
-    "item": "growthcraft_rice:rice"
+    "id": "growthcraft_rice:rice"
   }
 }

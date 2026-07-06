@@ -23,11 +23,5 @@
   "bottle": {
     "item": "growthcraft_cellar:potion_wine"
   },
-  "color": "0xEAA6D2",
-  "conditions": [
-    {
-      "type": "growthcraft:feature_enabled",
-      "feature": "rice/beverages"
-    }
-  ]
+  "color": "0xEAA6D2"
 }

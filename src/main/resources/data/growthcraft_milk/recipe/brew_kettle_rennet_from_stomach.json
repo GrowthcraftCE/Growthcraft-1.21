@@ -19,11 +19,5 @@
   "by_product": {
     "item": "minecraft:bone_meal",
     "count": 1
-  },
-  "conditions": [
-    {
-      "type": "growthcraft:feature_enabled",
-      "feature": "milk"
-    }
-  ]
+  }
 }

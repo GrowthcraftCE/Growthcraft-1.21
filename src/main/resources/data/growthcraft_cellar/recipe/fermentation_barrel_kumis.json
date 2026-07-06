@@ -1,8 +1,8 @@
 {
   "type": "growthcraft_cellar:fermentation_barrel_recipe",
-  "conditions": [
+  "neoforge:conditions": [
     {
-      "type": "forge:false"
+      "type": "neoforge:false"
     }
   ],
   "processing_time": 1200,

@@ -17,17 +17,13 @@
   "result": {
     "item": "farmersdelight:apple_cider"
   },
-  "conditions": [
+  "neoforge:conditions": [
     {
-      "type": "forge:mod_loaded",
+      "type": "neoforge:mod_loaded",
       "modid": "farmersdelight"
     },
     {
-      "type": "forge:false"
-    },
-    {
-      "type": "growthcraft:feature_enabled",
-      "feature": "milk"
+      "type": "neoforge:false"
     }
   ]
 }

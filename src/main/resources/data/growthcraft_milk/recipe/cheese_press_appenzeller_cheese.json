@@ -11,11 +11,5 @@
   },
   "slice": {
     "item": "growthcraft_milk:appenzeller_cheese_slice"
-  },
-  "conditions": [
-    {
-      "type": "growthcraft:feature_enabled",
-      "feature": "milk"
-    }
-  ]
+  }
 }

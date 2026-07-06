@@ -2,7 +2,7 @@
   "replace": false,
   "values": [
     "#forge:grain/oat",
-    "#forge:crops/rice",
+    "#c:crops/rice",
     "#forge:grain/corn"
   ]
 }

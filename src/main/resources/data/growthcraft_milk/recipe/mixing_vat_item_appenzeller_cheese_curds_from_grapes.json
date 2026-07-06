@@ -16,7 +16,7 @@
     },
     {
       "ingredient": {
-        "tag": "forge:fruits/grapes"
+        "tag": "c:fruits/grapes"
       },
       "count": 1
     },
@@ -35,11 +35,5 @@
   },
   "result_activation_tool": {
     "item": "growthcraft_milk:cheese_cloth"
-  },
-  "conditions": [
-    {
-      "type": "growthcraft:feature_enabled",
-      "feature": "milk"
-    }
-  ]
+  }
 }

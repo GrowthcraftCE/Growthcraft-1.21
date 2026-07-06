@@ -4,15 +4,15 @@
     "fluid":
     {
         "amount":20,
-        "fluid":"immersiveengineering:ethanol"
+        "id":"immersiveengineering:ethanol"
     },
     "input":
     {
-        "tag":"forge:fruits/grapes"
+        "tag":"c:fruits/grapes"
     },
-    "conditions": [
+    "neoforge:conditions": [
         {
-            "type": "forge:mod_loaded",
+            "type": "neoforge:mod_loaded",
             "modid": "immersiveengineering"
         }
     ]
