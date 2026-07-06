@@ -16,7 +16,7 @@ port so the next repo does not have to rediscover the same traps.
 
 - `gradle.properties` owns the publish version through `mod_version`.
 - Update the README badge and README History section whenever `mod_version` changes.
-- The 1.21.1 line uses Minecraft-version-prefixed versions, such as `1.21.1.6`.
+- The 1.21.1 line uses Minecraft-version-prefixed versions, such as `1.21.1.7`.
 - `VERSION.md` exists to explain the distinction between Minecraft platform version, Growthcraft artifact version, and
   Gradle project version.
 
@@ -50,7 +50,7 @@ port so the next repo does not have to rediscover the same traps.
 - Split crowded pages into multiple `patchouli:text` pages instead of forcing long captions.
 - Image pages should use real 256x256 PNG assets. Missing screenshots render as black/magenta checker pages.
 - Use the Developer Notes category for changelog, migration notes, and maintainer/admin content.
-- The 1.21.1 manual reset the changelog to `1.21.1.6`, the first production release of this port line.
+- The 1.21.1 manual reset the changelog to `1.21.1.7`, the first production release of this port line.
 - Apiary bee boxes are not part of the 1.21.1 gameplay path. Recommend vanilla bee mechanics or Productivity Bees.
 
 ## Rendering And Client Patterns

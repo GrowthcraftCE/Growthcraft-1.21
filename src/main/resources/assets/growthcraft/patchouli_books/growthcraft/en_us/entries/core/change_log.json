@@ -6,11 +6,11 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "1.21.1.6$(br)First production release for the Growthcraft 1.21.1 port."
+      "text": "1.21.1.7$(br)First production release for the Growthcraft 1.21.1 port."
     },
     {
       "type": "patchouli:text",
-      "title": "1.21.1.6",
+      "title": "1.21.1.7",
       "text": "$(li)Ported Growthcraft to Minecraft 1.21.1 and NeoForge.$(li)Restored Growthcraft Core, Apples, Apiary, Cellar, Milk, Rice, and compatibility content.$(li)Updated the in-game manual as the primary documentation source."
     }
   ]
