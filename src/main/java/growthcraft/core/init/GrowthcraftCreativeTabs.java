@@ -1,6 +1,7 @@
 package growthcraft.core.init;
 
 import growthcraft.core.config.Reference;
+import growthcraft.cellar.init.GrowthcraftCellarItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -14,7 +15,7 @@ public class GrowthcraftCreativeTabs {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MAIN = CREATIVE_MODE_TABS.register(
             Reference.UnlocalizedName.CreativeTab.TAB,
             () -> CreativeModeTab.builder()
-                    .icon(() -> new ItemStack(GrowthcraftItems.CROWBAR_WHITE.get()))
+                    .icon(() -> new ItemStack(GrowthcraftCellarItems.FERMENTATION_BARREL_OAK.get()))
                     .title(Component.literal("Growthcraft"))
                     .displayItems((params, output) -> {
                         // Materials

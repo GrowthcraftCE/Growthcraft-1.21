@@ -1,6 +1,6 @@
 {
   "name": "Bee Keeping",
-  "icon": "growthcraft_apiary:bee",
+  "icon": "growthcraft_apiary:bee_box_oak",
   "category": "growthcraft:apiary",
   "sortnum": 0,
   "pages": [
@@ -26,7 +26,7 @@
     },
     {
       "type": "patchouli:spotlight",
-      "item": "growthcraft_apiary:bee",
+      "item": "growthcraft_apiary:bee_box_oak",
       "text": "Growthcraft no longer maintains its own bee box workflow in 1.21.1. For active bee keeping, use vanilla mechanics or Productivity Bees."
     }
   ]

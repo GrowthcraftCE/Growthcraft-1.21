@@ -1,9 +1,7 @@
 package growthcraft.apiary.init;
 
 import growthcraft.apiary.config.Reference;
-import net.minecraft.core.Direction;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.StandingAndWallBlockItem;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -12,7 +10,6 @@ import java.util.List;
 public class GrowthcraftApiaryItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Reference.MODID);
 
-    public static final DeferredItem<Item> BEE = register(Reference.UnlocalizedName.BEE);
     public static final DeferredItem<Item> BEES_WAX = register(Reference.UnlocalizedName.BEES_WAX);
     public static final DeferredItem<Item> BEES_WAX_BLACK = register(Reference.UnlocalizedName.BEES_WAX_BLACK);
     public static final DeferredItem<Item> BEES_WAX_BLUE = register(Reference.UnlocalizedName.BEES_WAX_BLUE);
@@ -30,46 +27,10 @@ public class GrowthcraftApiaryItems {
     public static final DeferredItem<Item> BEES_WAX_RED = register(Reference.UnlocalizedName.BEES_WAX_RED);
     public static final DeferredItem<Item> BEES_WAX_WHITE = register(Reference.UnlocalizedName.BEES_WAX_WHITE);
     public static final DeferredItem<Item> BEES_WAX_YELLOW = register(Reference.UnlocalizedName.BEES_WAX_YELLOW);
-    public static final DeferredItem<StandingAndWallBlockItem> CANDLE_BLACK = candleItem(Reference.UnlocalizedName.CANDLE_BLACK, GrowthcraftApiaryBlocks.CANDLE_BLACK, GrowthcraftApiaryBlocks.CANDLE_BLACK_WALL);
-    public static final DeferredItem<StandingAndWallBlockItem> CANDLE_BLUE = candleItem(Reference.UnlocalizedName.CANDLE_BLUE, GrowthcraftApiaryBlocks.CANDLE_BLUE, GrowthcraftApiaryBlocks.CANDLE_BLUE_WALL);
-    public static final DeferredItem<StandingAndWallBlockItem> CANDLE_BROWN = candleItem(Reference.UnlocalizedName.CANDLE_BROWN, GrowthcraftApiaryBlocks.CANDLE_BROWN, GrowthcraftApiaryBlocks.CANDLE_BROWN_WALL);
-    public static final DeferredItem<StandingAndWallBlockItem> CANDLE_CYAN = candleItem(Reference.UnlocalizedName.CANDLE_CYAN, GrowthcraftApiaryBlocks.CANDLE_CYAN, GrowthcraftApiaryBlocks.CANDLE_CYAN_WALL);
-    public static final DeferredItem<StandingAndWallBlockItem> CANDLE_GRAY = candleItem(Reference.UnlocalizedName.CANDLE_GRAY, GrowthcraftApiaryBlocks.CANDLE_GRAY, GrowthcraftApiaryBlocks.CANDLE_GRAY_WALL);
-    public static final DeferredItem<StandingAndWallBlockItem> CANDLE_GREEN = candleItem(Reference.UnlocalizedName.CANDLE_GREEN, GrowthcraftApiaryBlocks.CANDLE_GREEN, GrowthcraftApiaryBlocks.CANDLE_GREEN_WALL);
-    public static final DeferredItem<StandingAndWallBlockItem> CANDLE_LIGHT_BLUE = candleItem(Reference.UnlocalizedName.CANDLE_LIGHT_BLUE, GrowthcraftApiaryBlocks.CANDLE_LIGHT_BLUE, GrowthcraftApiaryBlocks.CANDLE_LIGHT_BLUE_WALL);
-    public static final DeferredItem<StandingAndWallBlockItem> CANDLE_LIGHT_GRAY = candleItem(Reference.UnlocalizedName.CANDLE_LIGHT_GRAY, GrowthcraftApiaryBlocks.CANDLE_LIGHT_GRAY, GrowthcraftApiaryBlocks.CANDLE_LIGHT_GRAY_WALL);
-    public static final DeferredItem<StandingAndWallBlockItem> CANDLE_LIME = candleItem(Reference.UnlocalizedName.CANDLE_LIME, GrowthcraftApiaryBlocks.CANDLE_LIME, GrowthcraftApiaryBlocks.CANDLE_LIME_WALL);
-    public static final DeferredItem<StandingAndWallBlockItem> CANDLE_MAGENTA = candleItem(Reference.UnlocalizedName.CANDLE_MAGENTA, GrowthcraftApiaryBlocks.CANDLE_MAGENTA, GrowthcraftApiaryBlocks.CANDLE_MAGENTA_WALL);
-    public static final DeferredItem<StandingAndWallBlockItem> CANDLE_ORANGE = candleItem(Reference.UnlocalizedName.CANDLE_ORANGE, GrowthcraftApiaryBlocks.CANDLE_ORANGE, GrowthcraftApiaryBlocks.CANDLE_ORANGE_WALL);
-    public static final DeferredItem<StandingAndWallBlockItem> CANDLE_PINK = candleItem(Reference.UnlocalizedName.CANDLE_PINK, GrowthcraftApiaryBlocks.CANDLE_PINK, GrowthcraftApiaryBlocks.CANDLE_PINK_WALL);
-    public static final DeferredItem<StandingAndWallBlockItem> CANDLE_PURPLE = candleItem(Reference.UnlocalizedName.CANDLE_PURPLE, GrowthcraftApiaryBlocks.CANDLE_PURPLE, GrowthcraftApiaryBlocks.CANDLE_PURPLE_WALL);
-    public static final DeferredItem<StandingAndWallBlockItem> CANDLE_RED = candleItem(Reference.UnlocalizedName.CANDLE_RED, GrowthcraftApiaryBlocks.CANDLE_RED, GrowthcraftApiaryBlocks.CANDLE_RED_WALL);
-    public static final DeferredItem<StandingAndWallBlockItem> CANDLE_WHITE = candleItem(Reference.UnlocalizedName.CANDLE_WHITE, GrowthcraftApiaryBlocks.CANDLE_WHITE, GrowthcraftApiaryBlocks.CANDLE_WHITE_WALL);
-    public static final DeferredItem<StandingAndWallBlockItem> CANDLE_YELLOW = candleItem(Reference.UnlocalizedName.CANDLE_YELLOW, GrowthcraftApiaryBlocks.CANDLE_YELLOW, GrowthcraftApiaryBlocks.CANDLE_YELLOW_WALL);
     public static final DeferredItem<Item> HONEY_COMB_EMPTY = register(Reference.UnlocalizedName.HONEY_COMB_EMPTY);
     public static final DeferredItem<Item> HONEY_COMB_FULL = register(Reference.UnlocalizedName.HONEY_COMB_FULL);
 
-    public static final List<DeferredItem<StandingAndWallBlockItem>> CANDLE_ITEMS = List.of(
-            CANDLE_BLACK,
-            CANDLE_BLUE,
-            CANDLE_BROWN,
-            CANDLE_CYAN,
-            CANDLE_GRAY,
-            CANDLE_GREEN,
-            CANDLE_LIGHT_BLUE,
-            CANDLE_LIGHT_GRAY,
-            CANDLE_LIME,
-            CANDLE_MAGENTA,
-            CANDLE_ORANGE,
-            CANDLE_PINK,
-            CANDLE_PURPLE,
-            CANDLE_RED,
-            CANDLE_WHITE,
-            CANDLE_YELLOW
-    );
-
     public static final List<DeferredItem<Item>> SIMPLE_ITEMS = List.of(
-            BEE,
             BEES_WAX,
             BEES_WAX_BLACK,
             BEES_WAX_BLUE,
@@ -96,13 +57,5 @@ public class GrowthcraftApiaryItems {
 
     private static DeferredItem<Item> register(String name) {
         return ITEMS.register(name, () -> new Item(new Item.Properties()));
-    }
-
-    private static DeferredItem<StandingAndWallBlockItem> candleItem(
-            String name,
-            net.neoforged.neoforge.registries.DeferredBlock<? extends net.minecraft.world.level.block.Block> block,
-            net.neoforged.neoforge.registries.DeferredBlock<? extends net.minecraft.world.level.block.Block> wallBlock
-    ) {
-        return ITEMS.register(name, () -> new StandingAndWallBlockItem(block.get(), wallBlock.get(), new Item.Properties(), Direction.DOWN));
     }
 }

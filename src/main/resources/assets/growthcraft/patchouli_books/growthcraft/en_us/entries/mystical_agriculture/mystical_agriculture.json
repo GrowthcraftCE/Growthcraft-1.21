@@ -13,11 +13,6 @@
     },
     {
       "type": "patchouli:crafting",
-      "title": "Growthcraft Apiary",
-      "recipe": "growthcraft_apiary:mystical_agriculture/mystical_agriculture_bee"
-    },
-    {
-      "type": "patchouli:crafting",
       "title": "Growthcraft Apples",
       "recipe": "growthcraft_apples:mystical_agriculture/mystical_agriculture_apple_log"
     },

@@ -31,7 +31,6 @@ public class GrowthcraftApiary {
     private void buildCreativeTab(BuildCreativeModeTabContentsEvent event) {
         CreativeModeTab tab = event.getTab();
         if (tab == GrowthcraftCreativeTabs.MAIN.get()) {
-            GrowthcraftApiaryItems.CANDLE_ITEMS.forEach(item -> event.accept(item.get()));
             GrowthcraftApiaryItems.SIMPLE_ITEMS.forEach(item -> event.accept(item.get()));
             for (var container : GrowthcraftApiaryFluids.ALL) {
                 event.accept(container.bucket.get());
