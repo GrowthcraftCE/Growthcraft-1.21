@@ -138,7 +138,7 @@ public class FermentationBarrelBlockEntity extends BlockEntity implements Worldl
         }
 
         barrel.setYeastState(false, false, state);
-        barrel.processTimeTotal = recipe.getProcessingTime();
+        barrel.processTimeTotal = recipe.getProcessingTime() * multiplier;
         barrel.processTime++;
         if (barrel.processTime >= barrel.processTimeTotal) {
             barrel.completeRecipe(level, pos, state, recipe, output, multiplier);
