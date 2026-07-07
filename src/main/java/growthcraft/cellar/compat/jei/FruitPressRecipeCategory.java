@@ -22,6 +22,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.material.Fluids;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class FruitPressRecipeCategory implements IRecipeCategory<RecipeHolder<FruitPressRecipe>> {
     private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(Reference.MODID, "textures/gui/fruit_press_screen.png");
     private static final int BACKGROUND_U = 30;
@@ -86,7 +89,7 @@ public class FruitPressRecipeCategory implements IRecipeCategory<RecipeHolder<Fr
         FruitPressRecipe recipe = holder.value();
 
         builder.addSlot(RecipeIngredientRole.INPUT, INPUT_X, INPUT_Y)
-                .addIngredients(recipe.getInputItem().ingredient());
+                .addItemStacks(countedIngredientStacks(recipe));
 
         var outputFluid = BuiltInRegistries.FLUID.get(recipe.getOutputFluid().fluidId());
         if (outputFluid != Fluids.EMPTY && recipe.getOutputFluid().amount() > 0) {
@@ -110,6 +113,10 @@ public class FruitPressRecipeCategory implements IRecipeCategory<RecipeHolder<Fr
         }
 
         Font font = Minecraft.getInstance().font;
+        if (!holder.value().getByProduct().isEmpty() && holder.value().getByProductChance() < 100) {
+            graphics.drawString(font, holder.value().getByProductChance() + "%", BYPRODUCT_X, BYPRODUCT_Y - 10, 4210752, false);
+        }
+
         timeIcon.draw(graphics, 2, 57);
         graphics.drawString(font, formatTicks(holder.value().getProcessingTime()), 15, 62, 4210752, false);
     }
@@ -124,5 +131,12 @@ public class FruitPressRecipeCategory implements IRecipeCategory<RecipeHolder<Fr
         int minutes = seconds / 60;
         int remainingSeconds = seconds % 60;
         return minutes > 0 ? minutes + "m " + remainingSeconds + "s" : seconds + "s";
+    }
+
+    private static List<ItemStack> countedIngredientStacks(FruitPressRecipe recipe) {
+        int count = recipe.getInputItem().count();
+        return Arrays.stream(recipe.getInputItem().ingredient().getItems())
+                .map(stack -> stack.copyWithCount(count))
+                .toList();
     }
 }

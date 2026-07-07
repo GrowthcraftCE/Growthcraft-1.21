@@ -32,12 +32,14 @@ public class FruitPressRecipe implements Recipe<FruitPressInput> {
     private final CountedIngredient inputItem;
     private final FluidAmount outputFluid;
     private final ItemStack byProduct;
+    private final int byProductChance;
 
-    public FruitPressRecipe(int processingTime, CountedIngredient inputItem, FluidAmount outputFluid, ItemStack byProduct) {
+    public FruitPressRecipe(int processingTime, CountedIngredient inputItem, FluidAmount outputFluid, ItemStack byProduct, int byProductChance) {
         this.processingTime = processingTime <= 0 ? 600 : processingTime;
         this.inputItem = inputItem;
         this.outputFluid = outputFluid;
         this.byProduct = byProduct.copy();
+        this.byProductChance = Math.max(0, Math.min(100, byProductChance));
     }
 
     public int getProcessingTime() {
@@ -54,6 +56,10 @@ public class FruitPressRecipe implements Recipe<FruitPressInput> {
 
     public ItemStack getByProduct() {
         return byProduct.copy();
+    }
+
+    public int getByProductChance() {
+        return byProductChance;
     }
 
     @Override
@@ -114,7 +120,8 @@ public class FruitPressRecipe implements Recipe<FruitPressInput> {
                 ExtraCodecs.POSITIVE_INT.optionalFieldOf("processing_time", 600).forGetter(FruitPressRecipe::getProcessingTime),
                 COUNTED_INGREDIENT_CODEC.fieldOf("input_item").forGetter(FruitPressRecipe::getInputItem),
                 FLUID_AMOUNT_CODEC.fieldOf("output_fluid").forGetter(FruitPressRecipe::getOutputFluid),
-                LEGACY_ITEM_STACK_CODEC.optionalFieldOf("by_product", ItemStack.EMPTY).forGetter(FruitPressRecipe::getByProduct)
+                LEGACY_ITEM_STACK_CODEC.optionalFieldOf("by_product", ItemStack.EMPTY).forGetter(FruitPressRecipe::getByProduct),
+                ExtraCodecs.NON_NEGATIVE_INT.optionalFieldOf("by_product_chance", 100).forGetter(FruitPressRecipe::getByProductChance)
         ).apply(instance, FruitPressRecipe::new));
 
         public static final StreamCodec<RegistryFriendlyByteBuf, FruitPressRecipe> STREAM_CODEC = new StreamCodec<>() {
@@ -125,7 +132,8 @@ public class FruitPressRecipe implements Recipe<FruitPressInput> {
                 int ingredientCount = buf.readVarInt();
                 FluidAmount outputFluid = new FluidAmount(buf.readResourceLocation(), buf.readVarInt());
                 ItemStack byProduct = ItemStack.OPTIONAL_STREAM_CODEC.decode(buf);
-                return new FruitPressRecipe(processingTime, new CountedIngredient(ingredient, ingredientCount), outputFluid, byProduct);
+                int byProductChance = buf.readVarInt();
+                return new FruitPressRecipe(processingTime, new CountedIngredient(ingredient, ingredientCount), outputFluid, byProduct, byProductChance);
             }
 
             @Override
@@ -136,6 +144,7 @@ public class FruitPressRecipe implements Recipe<FruitPressInput> {
                 buf.writeResourceLocation(recipe.outputFluid.fluidId());
                 buf.writeVarInt(recipe.outputFluid.amount());
                 ItemStack.OPTIONAL_STREAM_CODEC.encode(buf, recipe.byProduct);
+                buf.writeVarInt(recipe.byProductChance);
             }
         };
 
