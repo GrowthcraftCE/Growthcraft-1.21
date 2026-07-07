@@ -5,11 +5,20 @@ import growthcraft.lib.client.screen.renderer.FluidTankRenderer;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FermentationBarrelScreen extends AbstractContainerScreen<FermentationBarrelMenu> {
     private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("growthcraft_cellar", "textures/gui/fermentation_barrel_screen.png");
+    private static final Component YEAST_WARNING = Component.translatable("growthcraft_cellar.tooltip.fermentation.yeast_warning")
+            .withStyle(Style.EMPTY.withColor(0xd5bb88));
+    private static final Component YEAST_ERROR = Component.translatable("growthcraft_cellar.tooltip.fermentation.yeast_error")
+            .withStyle(Style.EMPTY.withColor(0xd68a71));
 
     private static final int TANK_X = 72;
     private static final int TANK_Y = 17;
@@ -72,6 +81,23 @@ public class FermentationBarrelScreen extends AbstractContainerScreen<Fermentati
     protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
         graphics.drawString(this.font, this.title, 8, 6, 4210752, false);
         graphics.drawString(this.font, this.playerInventoryTitle, 8, this.imageHeight - 96 + 2, 4210752, false);
+    }
+
+    @Override
+    protected void renderTooltip(GuiGraphics graphics, int mouseX, int mouseY) {
+        if (this.menu.getCarried().isEmpty()
+                && this.hoveredSlot != null
+                && this.hoveredSlot.hasItem()
+                && this.hoveredSlot.index == FermentationBarrelMenu.YEAST_SLOT
+                && (this.menu.hasYeastWarning() || this.menu.hasYeastError())) {
+            ItemStack stack = this.hoveredSlot.getItem();
+            List<Component> tooltip = new ArrayList<>(this.getTooltipFromContainerItem(stack));
+            tooltip.add(this.menu.hasYeastWarning() ? YEAST_WARNING : YEAST_ERROR);
+            graphics.renderTooltip(this.font, tooltip, stack.getTooltipImage(), stack, mouseX, mouseY);
+            return;
+        }
+
+        super.renderTooltip(graphics, mouseX, mouseY);
     }
 
     private static boolean isMouseAbove(int mouseX, int mouseY, int x, int y, int width, int height) {

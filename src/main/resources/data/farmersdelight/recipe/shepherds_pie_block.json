@@ -31,16 +31,12 @@
     }
   ],
   "result": {
-    "item": "farmersdelight:shepherds_pie_block"
+    "id": "farmersdelight:shepherds_pie_block"
   },
-  "conditions": [
+  "neoforge:conditions": [
     {
-      "type": "forge:mod_loaded",
+      "type": "neoforge:mod_loaded",
       "modid": "farmersdelight"
-    },
-    {
-      "type": "growthcraft:feature_enabled",
-      "feature": "milk"
     }
   ]
 }

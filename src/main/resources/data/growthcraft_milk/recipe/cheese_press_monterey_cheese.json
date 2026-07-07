@@ -11,11 +11,5 @@
   },
   "slice": {
     "item": "growthcraft_milk:monterey_cheese_slice"
-  },
-  "conditions": [
-    {
-      "type": "growthcraft:feature_enabled",
-      "feature": "milk"
-    }
-  ]
+  }
 }

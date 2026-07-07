@@ -1,12 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "conditions": [
-    {
-      "type": "growthcraft:feature_enabled",
-      "feature": "rice"
-    }
-  ],
   "group": "growthcraft_rice",
   "key": {
     "K": {
@@ -16,7 +10,7 @@
       "item": "growthcraft_rice:rice_cooked"
     },
     "S": {
-      "tag": "growthcraft:salt"
+      "tag": "c:dusts/salt"
     }
   },
   "pattern": [
@@ -25,7 +19,7 @@
     " K "
   ],
   "result": {
-    "item": "growthcraft_rice:onigiri"
+    "id": "growthcraft_rice:onigiri"
   },
   "show_notification": true
 }

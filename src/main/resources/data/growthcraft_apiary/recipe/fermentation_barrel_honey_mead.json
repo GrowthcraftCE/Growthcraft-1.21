@@ -23,11 +23,5 @@
   "bottle": {
     "item": "growthcraft_cellar:potion_wine"
   },
-  "color": "0xE5C7A2",
-  "conditions": [
-    {
-      "type": "growthcraft:feature_enabled",
-      "feature": "apiary/beverages"
-    }
-  ]
+  "color": "0xE5C7A2"
 }

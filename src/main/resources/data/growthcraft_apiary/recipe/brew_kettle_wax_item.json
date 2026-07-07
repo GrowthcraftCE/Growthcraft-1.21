@@ -19,11 +19,5 @@
   "by_product": {
     "item": "growthcraft_apiary:bees_wax",
     "count": 1
-  },
-  "conditions": [
-    {
-      "type": "growthcraft:feature_enabled",
-      "feature": "apiary/basic_wax"
-    }
-  ]
+  }
 }

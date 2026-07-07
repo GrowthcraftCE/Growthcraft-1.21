@@ -14,11 +14,5 @@
       "fluid": "growthcraft_milk:cream_fluid_source",
       "amount": 1000
     }
-  ],
-  "conditions": [
-    {
-      "type": "growthcraft:feature_enabled",
-      "feature": "milk"
-    }
   ]
 }

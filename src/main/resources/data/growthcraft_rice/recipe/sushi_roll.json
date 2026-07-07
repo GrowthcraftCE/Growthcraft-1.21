@@ -1,12 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "misc",
-  "conditions": [
-    {
-      "type": "growthcraft:feature_enabled",
-      "feature": "rice"
-    }
-  ],
   "group": "growthcraft_rice",
   "key": {
     "F": {
@@ -26,7 +20,7 @@
   ],
   "result": {
     "count": 12,
-    "item": "growthcraft_rice:sushi_roll"
+    "id": "growthcraft_rice:sushi_roll"
   },
   "show_notification": true
 }

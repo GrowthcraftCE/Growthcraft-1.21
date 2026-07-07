@@ -1,12 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
-  "conditions": [
-    {
-      "type": "growthcraft:feature_enabled",
-      "feature": "rice"
-    }
-  ],
   "group": "growthcraft_rice",
   "key": {
     "I": {
@@ -25,7 +19,7 @@
     " S "
   ],
   "result": {
-    "item": "growthcraft_rice:cultivator"
+    "id": "growthcraft_rice:cultivator"
   },
   "show_notification": true
 }

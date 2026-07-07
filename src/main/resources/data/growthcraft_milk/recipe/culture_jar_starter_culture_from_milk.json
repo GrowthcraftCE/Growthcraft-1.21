@@ -12,11 +12,5 @@
     "count": 1
   },
   "time": 4800,
-  "requires_heat_source": true,
-  "conditions": [
-    {
-      "type": "growthcraft:feature_enabled",
-      "feature": "milk"
-    }
-  ]
+  "requires_heat_source": true
 }

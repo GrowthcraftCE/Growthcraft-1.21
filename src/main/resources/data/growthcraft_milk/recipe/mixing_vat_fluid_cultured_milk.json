@@ -29,11 +29,5 @@
   },
   "activation_tool": {
     "item": "minecraft:stick"
-  },
-  "conditions": [
-    {
-      "type": "growthcraft:feature_enabled",
-      "feature": "milk"
-    }
-  ]
+  }
 }

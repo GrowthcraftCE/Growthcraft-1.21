@@ -14,11 +14,5 @@
   "output_fluid": {
     "fluid": "growthcraft_apiary:wax_pink_fluid_source",
     "amount": 100
-  },
-  "conditions": [
-    {
-      "type": "growthcraft:feature_enabled",
-      "feature": "apiary/basic_wax"
-    }
-  ]
+  }
 }

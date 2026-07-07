@@ -3,14 +3,15 @@
   "processing_time": 600,
   "input_item": {
     "item": "growthcraft_cellar:grape_red",
-    "count": 1
+    "count": 2
   },
   "output_fluid": {
     "fluid": "growthcraft_cellar:red_grape_juice_fluid_source",
-    "amount": 250
+    "amount": 125
   },
   "by_product": {
     "item": "minecraft:bone_meal",
     "count": 1
-  }
+  },
+  "by_product_chance": 10
 }

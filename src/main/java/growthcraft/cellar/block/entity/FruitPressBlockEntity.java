@@ -113,7 +113,7 @@ public class FruitPressBlockEntity extends BlockEntity implements WorldlyContain
             return;
         }
 
-        if (!press.canOutputByProduct(recipe.getByProduct())) {
+        if (recipe.getByProductChance() >= 100 && !press.canOutputByProduct(recipe.getByProduct())) {
             press.resetProgress(level, pos, state);
             return;
         }
@@ -178,15 +178,17 @@ public class FruitPressBlockEntity extends BlockEntity implements WorldlyContain
     private void completeRecipe(Level level, BlockPos pos, BlockState state, FruitPressRecipe recipe, FluidStack outputFluid) {
         this.getItem(SLOT_INPUT).shrink(recipe.getInputItem().count());
         this.tank.fill(outputFluid, IFluidHandler.FluidAction.EXECUTE);
-        maybeInsertByProduct(recipe);
+        maybeInsertByProduct(level, recipe);
         this.resetProgress();
         this.setChanged();
         level.sendBlockUpdated(pos, state, state, 3);
     }
 
-    private void maybeInsertByProduct(FruitPressRecipe recipe) {
+    private void maybeInsertByProduct(Level level, FruitPressRecipe recipe) {
         ItemStack byProduct = recipe.getByProduct();
-        if (byProduct.isEmpty()) return;
+        if (byProduct.isEmpty() || recipe.getByProductChance() <= 0) return;
+        if (level.random.nextInt(100) >= recipe.getByProductChance()) return;
+        if (!canOutputByProduct(byProduct)) return;
 
         ItemStack output = this.getItem(SLOT_OUTPUT);
         if (output.isEmpty()) {

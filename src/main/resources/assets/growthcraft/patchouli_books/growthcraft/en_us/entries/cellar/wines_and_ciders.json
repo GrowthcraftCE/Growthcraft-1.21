@@ -12,13 +12,13 @@
       "type": "patchouli:spotlight",
       "item": "growthcraft_cellar:potion_wine",
       "title": "Wines",
-      "text": "Wines are made from $(5)Grape Juice$() and $(6)Bayanus Yeast$(). The types of wine are:$(br2)$(bold)Purple Wine$()$(li)Absorption II (1:00)$(br2)$(bold)Red Wine$()$(li)Health II (1:00)$(br2)$(bold)White Wine$()$(li)Saturation II (1:00)"
+      "text": "Wines are made from $(5)Grape Juice$() and $(6)Bayanus Yeast$(). The types of wine are:$(br2)$(bold)Purple Wine$()$(li)Absorption II (5:00)$(br2)$(bold)Red Wine$()$(li)Health II (5:00)$(br2)$(bold)White Wine$()$(li)Saturation II (5:00)"
     },
     {
       "type": "patchouli:spotlight",
       "item": "growthcraft_cellar:potion_wine",
       "title": "Cider",
-      "text": "Cider is made from $(4)Apple Juice$() and $(6)Bayanus Yeast$().$(br2)$(bold)Apple Cider$()$(li)Saturation II (1:00)"
+      "text": "Cider is made from $(4)Apple Juice$() and $(6)Bayanus Yeast$().$(br2)$(bold)Apple Cider$()$(li)Saturation II (3:00)"
     },
     {
       "type": "patchouli:spotlight",

@@ -2,7 +2,7 @@
   "replace": false,
   "values": [
     "#growthcraft_cellar:adjunct_grains_basic",
-    "#forge:crops/rice",
+    "#c:crops/rice",
     "#forge:grain/corn"
   ]
 }

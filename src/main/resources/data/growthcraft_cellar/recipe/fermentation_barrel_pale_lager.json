@@ -16,7 +16,7 @@
   "effects": [
     {
       "effect": "minecraft:speed",
-      "duration": 600,
+      "duration": 3600,
       "amplifier": 1
     }
   ],
