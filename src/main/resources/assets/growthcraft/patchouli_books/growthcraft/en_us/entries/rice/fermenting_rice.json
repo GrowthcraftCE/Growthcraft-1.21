@@ -27,13 +27,13 @@
       "type": "patchouli:spotlight",
       "item": "growthcraft_rice:rice_wine_fluid_bucket",
       "title": "Rice Wine",
-      "text": "$(bold)Ingredients$()$(li)Rice Water$(li)Bayanus Yeast$(br2)$(bold)Fermentation Time$()$(li)1000 mb$(li)30 secs$(br2)$(bold)Effects$()$(li)Strength I (01:00)"
+      "text": "$(bold)Ingredients$()$(li)Rice Water$(li)Bayanus Yeast$(br2)$(bold)Fermentation Time$()$(li)1000 mb$(li)60 secs$(br2)$(bold)Effects$()$(li)Strength I (3:00)"
     },
     {
       "type": "patchouli:spotlight",
       "item": "growthcraft_rice:sake_fluid_bucket",
       "title": "Sake",
-      "text": "$(bold)Ingredients$()$(li)Rice Water$(li)Seishu Yeast$(br2)$(bold)Fermentation Time$()$(li)1000 mb$(li)45 secs$(br2)$(bold)Effects$()$(li)Strength II (05:00)"
+      "text": "$(bold)Ingredients$()$(li)Rice Water$(li)Seishu Yeast$(br2)$(bold)Fermentation Time$()$(li)1000 mb$(li)90 secs$(br2)$(bold)Effects$()$(li)Strength II (5:00)"
     }
   ]
 }

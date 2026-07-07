@@ -16,7 +16,7 @@
   "effects": [
     {
       "effect": "minecraft:strength",
-      "duration": 2400,
+      "duration": 3600,
       "amplifier": 1
     }
   ],
