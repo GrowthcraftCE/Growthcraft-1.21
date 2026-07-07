@@ -4,7 +4,7 @@
   "group": "growthcraft_milk",
   "key": {
     "B": {
-      "tag": "forge:butter"
+      "tag": "c:foods/butter"
     },
     "C": {
       "item": "minecraft:cocoa_beans"
