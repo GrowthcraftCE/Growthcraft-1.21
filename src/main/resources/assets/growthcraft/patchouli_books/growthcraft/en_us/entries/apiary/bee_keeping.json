@@ -1,6 +1,6 @@
 {
   "name": "Bee Keeping",
-  "icon": "growthcraft_apiary:bee_box_oak",
+  "icon": "growthcraft_apiary:honey_comb_full",
   "category": "growthcraft:apiary",
   "sortnum": 0,
   "pages": [
@@ -25,8 +25,7 @@
       "text": "Growthcraft honey combs can be pressed into honey or used in mead production. Vanilla honeycomb can also be used in Growthcraft mead recipes."
     },
     {
-      "type": "patchouli:spotlight",
-      "item": "growthcraft_apiary:bee_box_oak",
+      "type": "patchouli:text",
       "text": "Growthcraft no longer maintains its own bee box workflow in 1.21.1. For active bee keeping, use vanilla mechanics or Productivity Bees."
     }
   ]
