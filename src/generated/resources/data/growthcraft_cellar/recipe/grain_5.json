@@ -4,7 +4,7 @@
       "type": "neoforge:not",
       "value": {
         "type": "neoforge:tag_empty",
-        "tag": "forge:grain/barley"
+        "tag": "c:grains/barleys"
       }
     },
     {
@@ -25,10 +25,10 @@
   "group": "growthcraft_cellar",
   "ingredients": [
     {
-      "tag": "forge:grain/barley"
+      "tag": "c:grains/barleys"
     },
     {
-      "tag": "forge:grain/barley"
+      "tag": "c:grains/barleys"
     },
     {
       "tag": "growthcraft_cellar:adjunct_grains_extended"

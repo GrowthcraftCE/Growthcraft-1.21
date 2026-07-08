@@ -9,7 +9,7 @@
       "item": "minecraft:baked_potato"
     },
     {
-      "tag": "forge:cooked_beef"
+      "tag": "c:foods/cooked_beef"
     },
     {
       "tag": "growthcraft_milk:cheese_slices"

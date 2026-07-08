@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "#forge:grain/oat",
+    "#c:grains/oats",
     "#c:crops/rice",
-    "#forge:grain/corn"
+    "#c:crops/corn"
   ]
 }

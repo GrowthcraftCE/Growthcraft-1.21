@@ -548,7 +548,7 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
     }
 
     private static void addCellarGrainRecipes(RecipeOutput output) {
-        TagKey<Item> barley = itemTag("forge", "grain/barley");
+        TagKey<Item> barley = itemTag("c", "grains/barleys");
         TagKey<Item> basicAdjunctGrains = itemTag(growthcraft.cellar.config.Reference.MODID, "adjunct_grains_basic");
         TagKey<Item> extendedAdjunctGrains = itemTag(growthcraft.cellar.config.Reference.MODID, "adjunct_grains_extended");
         TagKey<Item> extendedAdjunctGrainsMinusWheat = itemTag(growthcraft.cellar.config.Reference.MODID, "adjunct_grains_extended_minus_wheat");
