@@ -4,13 +4,13 @@
   "group": "growthcraft_rice",
   "key": {
     "I": {
-      "tag": "forge:ingots/iron"
+      "tag": "c:ingots/iron"
     },
     "S": {
-      "tag": "forge:rods/wooden"
+      "tag": "c:rods/wooden"
     },
     "i": {
-      "tag": "forge:nuggets/iron"
+      "tag": "c:nuggets/iron"
     }
   },
   "pattern": [

@@ -450,7 +450,7 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
     }
 
     private static void addMilkBakingRecipes(RecipeOutput output) {
-        TagKey<Item> butter = itemTag("forge", "butter");
+        TagKey<Item> butter = itemTag("c", "foods/butter");
 
         ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, Items.CAKE)
                 .pattern("MBM")
