@@ -105,9 +105,6 @@ public class GrowthcraftCellar {
             event.accept(GrowthcraftCellarItems.YEAST_LAGER);
             event.accept(GrowthcraftCellarItems.YEAST_LAGER_ETHEREAL);
 
-            // Cultures
-            event.accept(GrowthcraftCellarItems.STARTER_CULTURE);
-
             // Fluid buckets
             for (var container : GrowthcraftCellarFluids.ALL) {
                 event.accept(container.bucket.get());
