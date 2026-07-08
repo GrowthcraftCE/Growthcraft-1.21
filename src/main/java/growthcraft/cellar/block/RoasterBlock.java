@@ -158,11 +158,7 @@ public class RoasterBlock extends Block implements EntityBlock {
     }
 
     private static boolean isWrench(ItemStack stack) {
-        if (stack.isEmpty()) return false;
-        if (stack.is(WRENCH_TAG)) return true;
-        ResourceLocation key = BuiltInRegistries.ITEM.getKey(stack.getItem());
-        return key != null && growthcraft.core.config.Reference.MODID.equals(key.getNamespace())
-                && (growthcraft.core.config.Reference.UnlocalizedName.Item.WRENCH.equals(key.getPath()) || key.getPath().startsWith("crowbar_"));
+        return stack.is(WRENCH_TAG);
     }
 
     @Override

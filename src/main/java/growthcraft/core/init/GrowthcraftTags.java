@@ -22,7 +22,7 @@ public final class GrowthcraftTags {
     public static final class Items {
         public static final TagKey<Item> KNIVES = TagKey.create(
                 Registries.ITEM,
-                ResourceLocation.fromNamespaceAndPath("c", "tools/knives")
+                ResourceLocation.fromNamespaceAndPath("c", "tools/knife")
         );
 
         private Items() {}
