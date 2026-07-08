@@ -40,6 +40,7 @@ public class GrowthcraftBlockTags extends BlockTagsProvider {
                 .add(
                         GrowthcraftCellarBlocks.FERMENTATION_BARREL_OAK.get(),
                         GrowthcraftCellarBlocks.FRUIT_PRESS.get(),
+                        GrowthcraftCellarBlocks.FRUIT_PRESS_PISTON.get(),
                         GrowthcraftMilkBlocks.CHEESE_PRESS.get(),
                         GrowthcraftMilkBlocks.CHURN.get(),
                         GrowthcraftMilkBlocks.HANGING_SIGN_1_OAK.get(),
