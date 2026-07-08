@@ -12,22 +12,22 @@
       "item": "minecraft:baked_potato"
     },
     {
-      "tag": "forge:cooked_mutton"
+      "tag": "c:foods/cooked_mutton"
     },
     {
-      "tag": "forge:cooked_mutton"
+      "tag": "c:foods/cooked_mutton"
     },
     {
-      "tag": "forge:cooked_mutton"
+      "tag": "c:foods/cooked_mutton"
     },
     {
-      "tag": "forge:crops/onion"
+      "tag": "c:crops/onion"
     },
     {
       "item": "minecraft:bowl"
     },
     {
-      "tag": "forge:crops/onion"
+      "tag": "c:crops/onion"
     }
   ],
   "result": {

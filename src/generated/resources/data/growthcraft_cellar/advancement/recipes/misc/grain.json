@@ -2,7 +2,7 @@
   "neoforge:conditions": [
     {
       "type": "neoforge:tag_empty",
-      "tag": "forge:grain/barley"
+      "tag": "c:grains/barleys"
     }
   ],
   "parent": "minecraft:recipes/root",
