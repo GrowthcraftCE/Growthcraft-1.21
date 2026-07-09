@@ -62,6 +62,18 @@ public class GrowthcraftItemTags extends IntrinsicHolderTagsProvider<Item> {
         this.tag(GrowthcraftTags.Items.KNIVES)
                 .add(GrowthcraftRiceItems.KNIFE.get());
 
+        this.tag(GrowthcraftTags.Items.CHEESE_CUTTING_TOOLS)
+                .addTag(GrowthcraftTags.Items.KNIVES)
+                .add(
+                        Items.WOODEN_SWORD,
+                        Items.STONE_SWORD,
+                        Items.IRON_SWORD,
+                        Items.GOLDEN_SWORD,
+                        Items.DIAMOND_SWORD,
+                        Items.NETHERITE_SWORD
+                )
+                .addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "tools/sword"));
+
         this.tag(ItemTags.LEAVES)
                 .add(GrowthcraftApplesItems.APPLE_TREE_LEAVES.get());
 

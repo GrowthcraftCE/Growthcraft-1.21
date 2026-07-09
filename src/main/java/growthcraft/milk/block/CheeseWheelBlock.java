@@ -176,7 +176,7 @@ public class CheeseWheelBlock extends HorizontalDirectionalBlock {
             return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
 
-        if (sliceable && heldStack.is(GrowthcraftTags.Items.KNIVES)) {
+        if (sliceable && heldStack.is(GrowthcraftTags.Items.CHEESE_CUTTING_TOOLS)) {
             Item slice = sliceItem.get();
             if (slice == null || getTotalSlices(state) <= 0) {
                 return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
