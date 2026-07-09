@@ -77,6 +77,12 @@ public class CheeseWheelBlock extends HorizontalDirectionalBlock {
                 .setValue(AGE, 0));
     }
 
+    public Item getWaxingItem()  // this should possibly return GrowthcraftMilkItems.CheeseEntry and report all it acn. later.
+    { // this is for JEI:
+        return this.waxItem != null && this.waxItem.get() != null ? this.waxItem.get() : null;
+    }
+    /// ////////
+
     @Override
     protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
         return CODEC;

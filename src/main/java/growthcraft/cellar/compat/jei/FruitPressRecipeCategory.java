@@ -96,6 +96,10 @@ public class FruitPressRecipeCategory implements IRecipeCategory<RecipeHolder<Fr
             builder.addSlot(RecipeIngredientRole.OUTPUT, TANK_X, TANK_Y)
                     .setFluidRenderer(4000, true, TANK_WIDTH, TANK_HEIGHT)
                     .addFluidStack(outputFluid, recipe.getOutputFluid().amount());
+            ItemStack bucket = outputFluid.getBucket().getDefaultInstance();
+            if (! bucket.isEmpty()) {
+                builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT).addItemStack(bucket);
+            }
         }
 
         ItemStack byProduct = recipe.getByProduct();

@@ -16,6 +16,9 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public final class GrowthcraftMilkItems {
     private GrowthcraftMilkItems() {}
 
@@ -244,4 +247,41 @@ public final class GrowthcraftMilkItems {
     private static DeferredHolder<Item, BlockItem> registerBlockItem(String name, DeferredBlock<?> block) {
         return ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }
+
+    /////////////////////////////////////////////////////////////////////////
+
+    private static List<CheeseEntry> cheeseRegistry = null; // on first request; item won't be created right away.
+
+    public static List<CheeseEntry> getCheeseRegistry()
+    {
+        if (cheeseRegistry == null)
+        {
+            cheeseRegistry = new ArrayList<>();
+            cheeseRegistry.add(new CheeseEntry(APPENZELLER_CHEESE.get(), null, APPENZELLER_CHEESE_AGED.get(), APPENZELLER_CHEESE_CURDS.get(),
+                    APPENZELLER_CHEESE_CURDS_DRAINED.get(), APPENZELLER_CHEESE_SLICE.get(), GrowthcraftMilkBlocks.APPENZELLER_CHEESE.get().getWaxingItem()));
+            cheeseRegistry.add(new CheeseEntry(ASIAGO_CHEESE.get(), null, ASIAGO_CHEESE_AGED.get(), ASIAGO_CHEESE_CURDS.get(),
+                    ASIAGO_CHEESE_CURDS_DRAINED.get(), ASIAGO_CHEESE_SLICE.get(), GrowthcraftMilkBlocks.ASIAGO_CHEESE.get().getWaxingItem()));
+            cheeseRegistry.add(new CheeseEntry(CASU_MARZU_CHEESE.get(), null, CASU_MARZU_CHEESE_AGED.get(), CASU_MARZU_CHEESE_CURDS.get(),
+                    CASU_MARZU_CHEESE_CURDS_DRAINED.get(), CASU_MARZU_CHEESE_SLICE.get(), GrowthcraftMilkBlocks.CASU_MARZU_CHEESE.get().getWaxingItem()));
+            cheeseRegistry.add(new CheeseEntry(CHEDDAR_CHEESE.get(), CHEDDAR_CHEESE_WAXED.get(), CHEDDAR_CHEESE_AGED.get(), CHEDDAR_CHEESE_CURDS.get(),
+                    CHEDDAR_CHEESE_CURDS_DRAINED.get(), CHEDDAR_CHEESE_SLICE.get(), GrowthcraftMilkBlocks.CHEDDAR_CHEESE.get().getWaxingItem()));
+            cheeseRegistry.add(new CheeseEntry(EMMENTALER_CHEESE.get(), null, EMMENTALER_CHEESE_AGED.get(), EMMENTALER_CHEESE_CURDS.get(),
+                    EMMENTALER_CHEESE_CURDS_DRAINED.get(), EMMENTALER_CHEESE_SLICE.get(), GrowthcraftMilkBlocks.EMMENTALER_CHEESE.get().getWaxingItem()));
+            cheeseRegistry.add(new CheeseEntry(GORGONZOLA_CHEESE.get(), null, GORGONZOLA_CHEESE_AGED.get(), GORGONZOLA_CHEESE_CURDS.get(),
+                    GORGONZOLA_CHEESE_CURDS_DRAINED.get(), GORGONZOLA_CHEESE_SLICE.get(), GrowthcraftMilkBlocks.GORGONZOLA_CHEESE.get().getWaxingItem()));
+            cheeseRegistry.add(new CheeseEntry(GOUDA_CHEESE.get(), GOUDA_CHEESE_WAXED.get(), GOUDA_CHEESE_AGED.get(), GOUDA_CHEESE_CURDS.get(),
+                    GOUDA_CHEESE_CURDS_DRAINED.get(), GOUDA_CHEESE_SLICE.get(), GrowthcraftMilkBlocks.GOUDA_CHEESE.get().getWaxingItem()));
+            cheeseRegistry.add(new CheeseEntry(MONTEREY_CHEESE.get(), MONTEREY_CHEESE_WAXED.get(), MONTEREY_CHEESE_AGED.get(), MONTEREY_CHEESE_CURDS.get(),
+                    MONTEREY_CHEESE_CURDS_DRAINED.get(), MONTEREY_CHEESE_SLICE.get(), GrowthcraftMilkBlocks.MONTEREY_CHEESE.get().getWaxingItem()));
+            cheeseRegistry.add(new CheeseEntry(PARMESAN_CHEESE.get(), null, PARMESAN_CHEESE_AGED.get(), PARMESAN_CHEESE_CURDS.get(),
+                    PARMESAN_CHEESE_CURDS_DRAINED.get(), PARMESAN_CHEESE_SLICE.get(), GrowthcraftMilkBlocks.PARMESAN_CHEESE.get().getWaxingItem()));
+            cheeseRegistry.add(new CheeseEntry(PROVOLONE_CHEESE.get(), PROVOLONE_CHEESE_WAXED.get(), PROVOLONE_CHEESE_AGED.get(), PROVOLONE_CHEESE_CURDS.get(),
+                    PROVOLONE_CHEESE_CURDS_DRAINED.get(), PROVOLONE_CHEESE_SLICE.get(), GrowthcraftMilkBlocks.PROVOLONE_CHEESE.get().getWaxingItem()));
+            cheeseRegistry.add(new CheeseEntry(null, null, null, RICOTTA_CHEESE_CURDS.get(),
+                    RICOTTA_CHEESE_CURDS_DRAINED.get(), RICOTTA_CHEESE_SLICE.get(), null));
+        }
+        return cheeseRegistry;
+    }
+
+    public record CheeseEntry(Item unprocessed, Item waxed, Item aged, Item curds, Item drainedCurds, Item slice, Item waxingItem)   {}
 }
