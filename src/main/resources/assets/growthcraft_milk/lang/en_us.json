@@ -139,6 +139,7 @@
   "jei.growthcraft_milk.category.pancheon": "Pancheon",
   "jei.growthcraft_milk.category.churn": "Churn",
   "jei.growthcraft_milk.category.mixing_vat": "Mixing Vat",
+  "jei.growthcraft_milk.category.curds": "Draining cheese curds",
   "emi.category.growthcraft_milk.pancheon": "Fluid separation",
   "emi.category.growthcraft_milk.drying": "Draining the curds",
   "emi.caption.growthcraft_milk.drying1": "Hang onto the ceiling",
@@ -151,6 +152,8 @@
   "emi.caption.growthcraft_milk.mixing_vat_collector": "Collect result using ",
   "emi.caption.growthcraft_milk.mixing_vat_additions": "Additions: ",
   "emi.category.growthcraft_milk.aging": "Aging",
+  "emi.category.growthcraft_milk.other": "Cutting",
+  "emi.category.growthcraft_milk.waxing": "Waxing",
   "message.growthcraft_milk.get_using_item": "Collect contents using %s.",
   "message.growthcraft_milk.get_using_item_empty_hand": "empty hand",
   "message.growthcraft_milk.churn.jei_plunges": "%s plunges"

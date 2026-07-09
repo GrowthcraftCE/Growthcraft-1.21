@@ -88,6 +88,10 @@ public class BrewKettleRecipeCategory implements IRecipeCategory<RecipeHolder<Br
             builder.addSlot(RecipeIngredientRole.INPUT, 36, 7)
                     .setFluidRenderer(4000, true, 16, 52)
                     .addFluidStack(inputFluid, recipe.getInputFluid().amount());
+            ItemStack bucket = inputFluid.getBucket().getDefaultInstance();
+            if (! bucket.isEmpty()) {
+                builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStack(bucket);
+            }
         }
 
         var outputFluid = BuiltInRegistries.FLUID.get(recipe.getOutputFluid().fluidId());
@@ -95,6 +99,10 @@ public class BrewKettleRecipeCategory implements IRecipeCategory<RecipeHolder<Br
             builder.addSlot(RecipeIngredientRole.OUTPUT, 104, 7)
                     .setFluidRenderer(4000, true, 16, 52)
                     .addFluidStack(outputFluid, recipe.getOutputFluid().amount());
+            ItemStack bucket = outputFluid.getBucket().getDefaultInstance();
+            if (! bucket.isEmpty()) {
+                builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT).addItemStack(bucket);
+            }
         }
 
         ItemStack byProduct = recipe.getByProduct();
