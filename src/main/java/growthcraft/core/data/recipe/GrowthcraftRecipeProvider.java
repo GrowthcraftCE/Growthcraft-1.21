@@ -347,6 +347,30 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(GrowthcraftApplesItems.APPLE_WOOD_LOG.get()), has(GrowthcraftApplesItems.APPLE_WOOD_LOG.get()))
                 .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.apples.config.Reference.MODID, growthcraft.apples.config.Reference.UnlocalizedName.Block.APPLE_WOOD));
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GrowthcraftApplesItems.APPLE_WOOD_STRIPPED.get(), 3)
+                .pattern("##")
+                .pattern("##")
+                .define('#', GrowthcraftApplesItems.APPLE_WOOD_LOG_STRIPPED.get())
+                .group(growthcraft.apples.config.Reference.MODID)
+                .unlockedBy(getHasName(GrowthcraftApplesItems.APPLE_WOOD_LOG_STRIPPED.get()), has(GrowthcraftApplesItems.APPLE_WOOD_LOG_STRIPPED.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.apples.config.Reference.MODID, growthcraft.apples.config.Reference.UnlocalizedName.Block.APPLE_WOOD_STRIPPED));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GrowthcraftCellarItems.CORK_WOOD.get(), 3)
+                .pattern("##")
+                .pattern("##")
+                .define('#', GrowthcraftCellarItems.CORK_WOOD_LOG.get())
+                .group(growthcraft.cellar.config.Reference.MODID)
+                .unlockedBy(getHasName(GrowthcraftCellarItems.CORK_WOOD_LOG.get()), has(GrowthcraftCellarItems.CORK_WOOD_LOG.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.cellar.config.Reference.MODID, growthcraft.cellar.config.Reference.UnlocalizedName.Block.CORK_WOOD));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, GrowthcraftCellarItems.CORK_WOOD_STRIPPED.get(), 3)
+                .pattern("##")
+                .pattern("##")
+                .define('#', GrowthcraftCellarItems.CORK_WOOD_LOG_STRIPPED.get())
+                .group(growthcraft.cellar.config.Reference.MODID)
+                .unlockedBy(getHasName(GrowthcraftCellarItems.CORK_WOOD_LOG_STRIPPED.get()), has(GrowthcraftCellarItems.CORK_WOOD_LOG_STRIPPED.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.cellar.config.Reference.MODID, growthcraft.cellar.config.Reference.UnlocalizedName.Block.CORK_WOOD_STRIPPED));
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, GrowthcraftApplesItems.APPLE_SEEDS.get())
                 .requires(Items.APPLE)
                 .group(growthcraft.apples.config.Reference.MODID)
