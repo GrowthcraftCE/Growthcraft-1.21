@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_cork_wood_log": {
+      "conditions": {
+        "items": [
+          {
+            "items": "growthcraft_cellar:cork_wood_log"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "growthcraft_cellar:cork_wood"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_cork_wood_log"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "growthcraft_cellar:cork_wood"
+    ]
+  }
+}

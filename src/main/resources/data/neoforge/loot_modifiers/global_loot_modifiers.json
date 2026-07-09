@@ -3,6 +3,9 @@
     "growthcraft:yeast_bayanus_from_short_grass",
     "growthcraft:yeast_brewers_from_short_grass",
     "growthcraft:seeds_from_short_grass",
+    "growthcraft:seeds_from_tall_grass",
+    "growthcraft:seeds_from_fern",
+    "growthcraft:seeds_from_large_fern",
     "growthcraft:yeast_ethereal_from_chorus_flower",
     "growthcraft:yeast_lager_from_snow"
   ],
