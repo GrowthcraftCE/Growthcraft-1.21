@@ -30,6 +30,7 @@ public class GrowthcraftBlockTags extends BlockTagsProvider {
                         GrowthcraftBlocks.SALT_ORE_DEEPSLATE.get(),
                         GrowthcraftBlocks.SALT_ORE_NETHER.get(),
                         GrowthcraftBlocks.SALT_ORE_END.get(),
+                        GrowthcraftBlocks.SALT_BLOCK.get(),
                         GrowthcraftCellarBlocks.BREW_KETTLE.get(),
                         GrowthcraftCellarBlocks.ROASTER.get(),
                         GrowthcraftMilkBlocks.MIXING_VAT.get(),
