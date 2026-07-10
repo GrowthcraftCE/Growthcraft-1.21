@@ -110,7 +110,8 @@ public class CultureJarBlockEntity extends BlockEntity implements WorldlyContain
     @Override
     public void setItem(int index, ItemStack stack) {
         items.set(index, stack);
-        if (stack.getCount() > getMaxStackSize()) stack.setCount(getMaxStackSize());
+        int maxStackSize = index == SLOT_INPUT ? 1 : getMaxStackSize();
+        if (stack.getCount() > maxStackSize) stack.setCount(maxStackSize);
         setChanged();
     }
 
@@ -134,8 +135,13 @@ public class CultureJarBlockEntity extends BlockEntity implements WorldlyContain
 
     @Override
     public boolean canPlaceItemThroughFace(int index, ItemStack stack, Direction side) {
+        return this.canPlaceItem(index, stack);
+    }
+
+    @Override
+    public boolean canPlaceItem(int index, ItemStack stack) {
         if (index == SLOT_OUTPUT) return false; // don't insert into output
-        return true;
+        return index == SLOT_INPUT && this.getItem(SLOT_INPUT).isEmpty();
     }
 
     @Override
@@ -258,11 +264,13 @@ public class CultureJarBlockEntity extends BlockEntity implements WorldlyContain
         // Progress
         jar.processTimeTotal = recipe.getTime();
         jar.processTime++;
+        if (jar.processTime == 1 || jar.processTime % 40 == 0) {
+            jar.setChanged();
+        }
         if (jar.processTime >= jar.processTimeTotal) {
-            // Complete: consume inputs and produce output
+            // Complete: consume fluid while preserving the input item as the culture catalyst.
             int toDrain = Math.max(1, recipe.getFluid().amount());
             jar.tank.drain(toDrain, net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
-            input.shrink(1);
             jar.insertOutput(recipe.getResult());
             jar.processTime = 0;
             jar.processTimeTotal = 0;
