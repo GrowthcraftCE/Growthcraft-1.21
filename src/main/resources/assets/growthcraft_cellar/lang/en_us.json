@@ -128,7 +128,7 @@
   "item.growthcraft_cellar.yeast_lager": "Lager Yeast",
   "item.growthcraft_cellar.yeast_lager_ethereal": "Lager Yeast (Ethereal)",
   "item.growthcraft_cellar.cork_bark": "Cork Bark",
-  "growthcraft_cellar.tooltip.roaster.progress": "Roast Level %s (%d%%)",
+  "growthcraft_cellar.tooltip.roaster.progress": "Roasting %s%%",
   "growthcraft_cellar.tooltip.fermentation.progress": "Fermenting %s%%",
   "growthcraft_cellar.tooltip.fruit_press.progress": "Pressing %s%%",
   "growthcraft_cellar.tooltip.fermentation.yeast_warning": "Insufficient yeast.",

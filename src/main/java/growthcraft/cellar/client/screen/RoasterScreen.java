@@ -48,6 +48,13 @@ public class RoasterScreen extends AbstractContainerScreen<RoasterMenu> {
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         this.renderBackground(graphics, mouseX, mouseY, partialTick);
         super.render(graphics, mouseX, mouseY, partialTick);
+
+        int progressLeft = this.leftPos + PROGRESS_X;
+        int progressTop = this.topPos + PROGRESS_Y;
+        if (isMouseAbove(mouseX, mouseY, progressLeft, progressTop, PROGRESS_WIDTH, PROGRESS_HEIGHT)) {
+            graphics.renderTooltip(this.font, Component.translatable("growthcraft_cellar.tooltip.roaster.progress", this.menu.getPercentProgress()), mouseX, mouseY);
+        }
+
         this.renderTooltip(graphics, mouseX, mouseY);
     }
 
@@ -57,5 +64,9 @@ public class RoasterScreen extends AbstractContainerScreen<RoasterMenu> {
         Component levelText = Component.translatable("label.growthcraft_cellar.roaster_level", this.menu.getRoastingLevel());
         graphics.drawString(this.font, levelText, (this.imageWidth - this.font.width(levelText)) / 2, 20, 4210752, false);
         graphics.drawString(this.font, this.playerInventoryTitle, 8, this.imageHeight - 96 + 2, 4210752, false);
+    }
+
+    private static boolean isMouseAbove(int mouseX, int mouseY, int x, int y, int width, int height) {
+        return mouseX >= x && mouseX < x + width && mouseY >= y && mouseY < y + height;
     }
 }
