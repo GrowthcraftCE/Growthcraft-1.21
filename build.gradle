@@ -170,10 +170,7 @@ dependencies {
     //localRuntime "dev.emi:emi-neoforge:${emi_version}"
     localRuntime "vazkii.patchouli:Patchouli:${patchouli_version}"
     localRuntime "maven.modrinth:appleskin:${appleskin_version}"
-
-    if (project.findProperty("withJei") == "true") {
-        localRuntime "maven.modrinth:jei:${jei_runtime_version}"
-    }
+    localRuntime "maven.modrinth:jei:${jei_runtime_version}"
 
     implementation "vazkii.patchouli:Patchouli:${patchouli_version}"
 
