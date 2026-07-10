@@ -49,8 +49,8 @@ public class FruitPressBlock extends Block implements EntityBlock {
     private static final double DRIP_LANDING_CLEARANCE = 0.02D;
     private static final double DRIP_POOL_MIN_OFFSET = 3.0D / 16.0D;
     private static final double DRIP_POOL_SPREAD = 10.0D / 16.0D;
-    private static final float DRIP_LANDING_SCALE = 1.35F;
-    private static final int DRIP_LANDING_LINGER_TICKS = 10;
+    private static final float DRIP_LANDING_SCALE = 0.55F;
+    private static final int DRIP_LANDING_LINGER_TICKS = 4;
     private static final VoxelShape SHAPE = Shapes.or(
             Block.box(1.0D, 0.0D, 1.0D, 15.0D, 3.0D, 15.0D),
             Block.box(0.0D, 3.0D, 0.0D, 16.0D, 7.0D, 16.0D),
