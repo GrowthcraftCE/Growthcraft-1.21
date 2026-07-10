@@ -156,5 +156,14 @@
   "emi.category.growthcraft_milk.waxing": "Waxing",
   "message.growthcraft_milk.get_using_item": "Collect contents using %s.",
   "message.growthcraft_milk.get_using_item_empty_hand": "empty hand",
+  "message.growthcraft_milk.cheese_press.empty": "The cheese press is empty.",
+  "message.growthcraft_milk.cheese_press.processing": "The cheese press is working. About %s seconds remaining.",
+  "message.growthcraft_milk.cheese_press.starting": "The cheese press is ready and will start working shortly.",
+  "message.growthcraft_milk.cheese_press.complete": "Pressing is complete. Open the cheese press to collect the result.",
+  "message.growthcraft_milk.cheese_press.blocked": "The cheese press cannot finish until its output is cleared.",
+  "message.growthcraft_milk.cheese_press.invalid": "The cheese press cannot process its current contents.",
+  "message.growthcraft_milk.cheese_wheel.aging": "The cheese wheel is aging. Progress: %s/%s.",
+  "message.growthcraft_milk.cheese_wheel.needs_wax": "This cheese wheel must be waxed before it can age.",
+  "message.growthcraft_milk.cheese_wheel.aged": "This cheese wheel is aged and ready.",
   "message.growthcraft_milk.churn.jei_plunges": "%s plunges"
 }
