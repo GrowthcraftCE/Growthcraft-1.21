@@ -112,6 +112,14 @@ Use one of the project branch roots with an issue-oriented branch name:
 Open pull requests back into `development`, link the relevant issue, and include the verification performed before
 requesting review.
 
+### Datapack Conditions
+
+Growthcraft registers `growthcraft:config_value` for NeoForge recipe conditions. Use it in `neoforge:conditions` with a
+`module` and dotted config `name` when a recipe should load only if a Growthcraft boolean config value is enabled.
+
+Supported modules in the 1.21 port are `core`/`growthcraft`, `cellar`/`growthcraft_cellar`, and
+`milk`/`growthcraft_milk`. Unknown modules, unknown paths, and non-boolean values fail closed and log a diagnostic.
+
 ## Versioning Policy
 
 We maintain the mod_version in gradle.properties using a Minecraft-version-prefixed scheme (e.g., 1.21.1.x). Whenever a significant feature or behavior change is completed (for example, the Rope block implementation), increment the version:

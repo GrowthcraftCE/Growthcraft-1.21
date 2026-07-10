@@ -2,6 +2,9 @@
   "replace": false,
   "values": [
     "#c:crops/wheat",
-    "#c:grains/oats"
+    {
+      "id": "#c:grains/oats",
+      "required": false
+    }
   ]
 }
