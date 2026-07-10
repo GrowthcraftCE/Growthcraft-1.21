@@ -1,0 +1,82 @@
+{
+  "values": {
+    "growthcraft_apples:apple_tree_leaves": {
+      "chance": 0.3
+    },
+    "growthcraft_apples:apple_tree_sapling": {
+      "chance": 0.3
+    },
+    "growthcraft_apples:apple_seeds": {
+      "chance": 0.07
+    },
+    "growthcraft_cellar:grape_red": {
+      "chance": 0.4
+    },
+    "growthcraft_cellar:grape_purple": {
+      "chance": 0.4
+    },
+    "growthcraft_cellar:grape_white": {
+      "chance": 0.4
+    },
+    "growthcraft_cellar:grape_seeds_purple": {
+      "chance": 0.2
+    },
+    "growthcraft_cellar:grape_seeds_red": {
+      "chance": 0.2
+    },
+    "growthcraft_cellar:grape_seeds_white": {
+      "chance": 0.2
+    },
+    "growthcraft_cellar:hops_seeds": {
+      "chance": 0.2
+    },
+    "growthcraft_cellar:hops": {
+      "chance": 0.5
+    },
+    "growthcraft_cellar:cork_tree_leaves": {
+      "chance": 0.3
+    },
+    "growthcraft_cellar:cork_tree_sapling": {
+      "chance": 0.3
+    },
+    "growthcraft_cellar:yeast_bayanus": {
+      "chance": 0.25
+    },
+    "growthcraft_cellar:yeast_bayanus_ethereal": {
+      "chance": 0.75
+    },
+    "growthcraft_cellar:yeast_brewers": {
+      "chance": 0.25
+    },
+    "growthcraft_cellar:yeast_brewers_ethereal": {
+      "chance": 0.75
+    },
+    "growthcraft_cellar:yeast_ethereal": {
+      "chance": 0.75
+    },
+    "growthcraft_cellar:yeast_lager": {
+      "chance": 0.25
+    },
+    "growthcraft_cellar:yeast_lager_ethereal": {
+      "chance": 0.75
+    },
+    "growthcraft_milk:thistle": {
+      "chance": 0.65
+    },
+    "growthcraft_milk:thistle_seed": {
+      "chance": 0.3
+    },
+    "growthcraft_rice:rice": {
+      "chance": 0.4
+    },
+    "growthcraft_rice:rice_grains": {
+      "chance": 0.1
+    },
+    "growthcraft_rice:rice_stalk": {
+      "chance": 0.2
+    },
+    "growthcraft_rice:yeast_seishu": {
+      "chance": 0.2
+    }
+  }
+}
