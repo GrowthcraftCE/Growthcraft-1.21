@@ -5,6 +5,9 @@ import growthcraft.core.init.GrowthcraftTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -128,7 +131,10 @@ public class CheeseWheelBlock extends HorizontalDirectionalBlock {
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (!player.isCrouching()) {
-            return InteractionResult.PASS;
+            if (!level.isClientSide) {
+                displayAgingStatus(state, player);
+            }
+            return InteractionResult.sidedSuccess(level.isClientSide);
         }
 
         if (!level.isClientSide) {
@@ -189,7 +195,10 @@ public class CheeseWheelBlock extends HorizontalDirectionalBlock {
             return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
 
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        if (!level.isClientSide) {
+            displayAgingStatus(state, player);
+        }
+        return ItemInteractionResult.sidedSuccess(level.isClientSide);
     }
 
     @Override
@@ -260,6 +269,23 @@ public class CheeseWheelBlock extends HorizontalDirectionalBlock {
     private boolean canWaxWith(ItemStack stack) {
         Item wax = waxItem.get();
         return wax != null && waxedBlock.get() != null && stack.is(wax);
+    }
+
+    private void displayAgingStatus(BlockState state, Player player) {
+        player.displayClientMessage(agingStatus(state).withStyle(Style.EMPTY.withColor(0xffddcc88)), true);
+    }
+
+    private MutableComponent agingStatus(BlockState state) {
+        Block agingResult = agedBlock.get();
+        if (agingResult != null && state.getValue(AGE) < MAX_AGE) {
+            return Component.translatable("message.growthcraft_milk.cheese_wheel.aging", state.getValue(AGE), MAX_AGE);
+        }
+
+        if (!sliceable && waxItem.get() != null && waxedBlock.get() != null) {
+            return Component.translatable("message.growthcraft_milk.cheese_wheel.needs_wax");
+        }
+
+        return Component.translatable("message.growthcraft_milk.cheese_wheel.aged");
     }
 
     private void takeWholeWheel(BlockState state, Level level, BlockPos pos, Player player) {

@@ -8,6 +8,7 @@ import growthcraft.milk.init.GrowthcraftMilkBlockEntities;
 import growthcraft.milk.init.GrowthcraftMilkItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -76,6 +77,10 @@ public class CheesePressBlock extends Block implements EntityBlock {
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (!(level.getBlockEntity(pos) instanceof CheesePressBlockEntity press) || !press.isOpen()) {
+            if (!level.isClientSide && level.getBlockEntity(pos) instanceof CheesePressBlockEntity closedPress) {
+                displayClosedPressStatus(closedPress, player, level);
+                return InteractionResult.CONSUME;
+            }
             return InteractionResult.PASS;
         }
 
@@ -106,7 +111,10 @@ public class CheesePressBlock extends Block implements EntityBlock {
         }
 
         if (!press.isOpen()) {
-            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            if (!level.isClientSide) {
+                displayClosedPressStatus(press, player, level);
+            }
+            return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
 
         if (press.hasContent()) {
@@ -129,6 +137,36 @@ public class CheesePressBlock extends Block implements EntityBlock {
         }
 
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
+    private static void displayClosedPressStatus(CheesePressBlockEntity press, Player player, Level level) {
+        player.displayClientMessage(closedPressStatus(press, level).withStyle(Style.EMPTY.withColor(0xffddcc88)), true);
+    }
+
+    private static MutableComponent closedPressStatus(CheesePressBlockEntity press, Level level) {
+        if (!press.getItem(CheesePressBlockEntity.SLOT_OUTPUT).isEmpty()) {
+            return Component.translatable("message.growthcraft_milk.cheese_press.complete");
+        }
+
+        if (press.getItem(CheesePressBlockEntity.SLOT_INPUT).isEmpty()) {
+            return Component.translatable("message.growthcraft_milk.cheese_press.empty");
+        }
+
+        if (press.isProcessing()) {
+            int remainingTicks = Math.max(0, press.getProcessTimeTotal() - press.getProcessTime());
+            int remainingSeconds = Math.max(1, (remainingTicks + 19) / 20);
+            return Component.translatable("message.growthcraft_milk.cheese_press.processing", remainingSeconds);
+        }
+
+        if (press.canProcessInput(level)) {
+            return Component.translatable("message.growthcraft_milk.cheese_press.starting");
+        }
+
+        if (press.hasMatchingRecipe(level)) {
+            return Component.translatable("message.growthcraft_milk.cheese_press.blocked");
+        }
+
+        return Component.translatable("message.growthcraft_milk.cheese_press.invalid");
     }
 
     private static void extractFromPress(CheesePressBlockEntity press, Player player, ItemStack heldStack, BlockPos pos) {
