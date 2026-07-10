@@ -10,6 +10,7 @@ import growthcraft.milk.init.GrowthcraftMilkBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
@@ -88,7 +89,42 @@ public class GrowthcraftBlockTags extends BlockTagsProvider {
         this.tag(BlockTags.LEAVES)
                 .add(GrowthcraftApplesBlocks.APPLE_TREE_LEAVES.get());
 
+        this.tag(BlockTags.PLANKS)
+                .add(GrowthcraftApplesBlocks.APPLE_PLANK.get());
+
+        this.tag(BlockTags.WOODEN_BUTTONS)
+                .add(GrowthcraftApplesBlocks.APPLE_PLANK_BUTTON.get());
+
+        this.tag(BlockTags.WOODEN_DOORS)
+                .add(GrowthcraftApplesBlocks.APPLE_PLANK_DOOR.get());
+
+        this.tag(BlockTags.WOODEN_FENCES)
+                .add(GrowthcraftApplesBlocks.APPLE_PLANK_FENCE.get());
+
+        this.tag(BlockTags.FENCE_GATES)
+                .add(GrowthcraftApplesBlocks.APPLE_PLANK_FENCE_GATE.get());
+
+        this.tag(BlockTags.WOODEN_PRESSURE_PLATES)
+                .add(GrowthcraftApplesBlocks.APPLE_PLANK_PRESSURE_PLATE.get());
+
+        this.tag(BlockTags.WOODEN_SLABS)
+                .add(GrowthcraftApplesBlocks.APPLE_PLANK_SLAB.get());
+
+        this.tag(BlockTags.WOODEN_STAIRS)
+                .add(GrowthcraftApplesBlocks.APPLE_PLANK_STAIRS.get());
+
+        this.tag(BlockTags.WOODEN_TRAPDOORS)
+                .add(GrowthcraftApplesBlocks.APPLE_PLANK_TRAPDOOR.get());
+
         this.tag(BlockTags.LOGS)
+                .add(
+                        GrowthcraftApplesBlocks.APPLE_WOOD.get(),
+                        GrowthcraftApplesBlocks.APPLE_WOOD_LOG.get(),
+                        GrowthcraftApplesBlocks.APPLE_WOOD_LOG_STRIPPED.get(),
+                        GrowthcraftApplesBlocks.APPLE_WOOD_STRIPPED.get()
+                );
+
+        this.tag(BlockTags.LOGS_THAT_BURN)
                 .add(
                         GrowthcraftApplesBlocks.APPLE_WOOD.get(),
                         GrowthcraftApplesBlocks.APPLE_WOOD_LOG.get(),
@@ -98,6 +134,12 @@ public class GrowthcraftBlockTags extends BlockTagsProvider {
 
         this.tag(BlockTags.SAPLINGS)
                 .add(GrowthcraftApplesBlocks.APPLE_TREE_SAPLING.get());
+
+        this.tag(Tags.Blocks.FENCES_WOODEN)
+                .add(GrowthcraftApplesBlocks.APPLE_PLANK_FENCE.get());
+
+        this.tag(Tags.Blocks.FENCE_GATES_WOODEN)
+                .add(GrowthcraftApplesBlocks.APPLE_PLANK_FENCE_GATE.get());
 
         this.tag(BlockTags.CLIMBABLE)
                 .add(GrowthcraftBambooBlocks.BAMBOO_POST_HORIZONTAL.get());
