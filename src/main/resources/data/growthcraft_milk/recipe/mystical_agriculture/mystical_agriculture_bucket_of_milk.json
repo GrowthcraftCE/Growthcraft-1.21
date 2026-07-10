@@ -6,8 +6,10 @@
       "modid": "mysticalagriculture"
     },
     {
-      "type": "mysticalagriculture:crop_enabled",
-      "crop": "mysticalagriculture:cow"
+      "type": "growthcraft:third_party_condition",
+      "target_type": "mysticalagriculture:crop_enabled",
+      "target_content": "{ \"crop\": \"mysticalagriculture:cow\" }",
+      "value_if_not_present": false
     }
   ],
   "pattern": [
