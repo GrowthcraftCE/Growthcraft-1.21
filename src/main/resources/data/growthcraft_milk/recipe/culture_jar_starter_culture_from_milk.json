@@ -5,12 +5,12 @@
   },
   "fluid": {
     "fluid": "growthcraft_milk:milk_fluid_source",
-    "amount": 1000
+    "amount": 250
   },
   "result": {
     "id": "growthcraft_milk:starter_culture",
     "count": 1
   },
-  "time": 4800,
+  "time": 1200,
   "requires_heat_source": true
 }

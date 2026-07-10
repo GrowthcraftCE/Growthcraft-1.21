@@ -17,6 +17,9 @@ public class CultureJarScreen extends AbstractContainerScreen<CultureJarMenu> {
     private static final int TANK_Y = 18;
     private static final int TANK_W = 16;
     private static final int TANK_H = 52;
+    private static final int PROGRESS_X = 106;
+    private static final int PROGRESS_Y = 43;
+    private static final int PROGRESS_W = 9;
     private static final int PROGRESS_H = 27;
     private static final int[][] BUBBLE_PIXELS = new int[][] {
             { 108, 43 },
@@ -117,6 +120,10 @@ public class CultureJarScreen extends AbstractContainerScreen<CultureJarMenu> {
             graphics.renderTooltip(this.font, tooltip, mouseX, mouseY);
         }
 
+        if (this.menu.getProcessTotal() > 0 && isMouseAbove(mouseX, mouseY, this.leftPos + PROGRESS_X, this.topPos + PROGRESS_Y, PROGRESS_W, PROGRESS_H)) {
+            graphics.renderTooltip(this.font, Component.literal(this.menu.getPercentProgress() + "%"), mouseX, mouseY);
+        }
+
         this.renderTooltip(graphics, mouseX, mouseY);
     }
 
@@ -140,6 +147,10 @@ public class CultureJarScreen extends AbstractContainerScreen<CultureJarMenu> {
                 graphics.fill(this.leftPos + x, this.topPos + y, this.leftPos + x + 1, this.topPos + y + 1, 0xFFEDEDED);
             }
         }
+    }
+
+    private static boolean isMouseAbove(int mouseX, int mouseY, int x, int y, int width, int height) {
+        return mouseX >= x && mouseX < x + width && mouseY >= y && mouseY < y + height;
     }
 }
 
