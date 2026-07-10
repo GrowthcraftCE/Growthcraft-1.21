@@ -1,5 +1,6 @@
 package growthcraft.milk.compat.jei;
 
+import growthcraft.core.init.GrowthcraftTags;
 import growthcraft.milk.config.Reference;
 import growthcraft.milk.init.GrowthcraftMilkItems;
 import growthcraft.milk.init.GrowthcraftMilkRecipes;
@@ -16,10 +17,7 @@ import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
@@ -132,12 +130,11 @@ public class GrowthcraftMilkJeiPlugin implements IModPlugin {
         }
         registration.addRecipes(WAXING, list3);
 
-        TagKey<Item> knives = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("c", "tools/knife"));
         List<CheesePreppingRecipeCategory.Recipe> list4 = new ArrayList<>();
         for (var cheese : GrowthcraftMilkItems.getCheeseRegistry()) {
             if (cheese.slice() != null) {
                 if (cheese.aged() != null) {
-                    list4.add(new CheesePreppingRecipeCategory.Recipe(cheese.aged(), knives, cheese.slice()));
+                    list4.add(new CheesePreppingRecipeCategory.Recipe(cheese.aged(), GrowthcraftTags.Items.CHEESE_CUTTING_TOOLS, cheese.slice()));
                 }
                 else {
                     //list4.add(new CheesePreppingRecipeCategory.Recipe(cheese.drainedCurds(), Items.BOWL, cheese.slice()));
