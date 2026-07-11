@@ -131,7 +131,7 @@ public class MixingVatScreen extends AbstractContainerScreen<MixingVatMenu> {
     @Override
     protected void renderTooltip(GuiGraphics guiGraphics, int x, int y) {
 
-        if (this.menu.getCarried().isEmpty() && this.hoveredSlot != null && this.hoveredSlot.getSlotIndex() == 3 && this.hoveredSlot.hasItem()) {
+        if (this.menu.getCarried().isEmpty() && this.hoveredSlot != null && this.hoveredSlot.index == 3 && this.hoveredSlot.hasItem()) {
             // result slot
             ItemStack finalizerItem = this.getMenu().getResultActivationTool();
             ItemStack resultItemStack = this.hoveredSlot.getItem();
