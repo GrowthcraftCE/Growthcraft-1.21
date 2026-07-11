@@ -16,11 +16,18 @@ public final class GrowthcraftMilkConfig {
     private static ModConfigSpec.BooleanValue featureEnabledBeverages; // _master_switch_.feature_exception_beverages
 
     // GUIs and debug
+    private static ModConfigSpec.BooleanValue debugEnabled;             // debug.enabled
     private static ModConfigSpec.BooleanValue churnGuiEnabled;           // churn.guiEnabled
+    private static ModConfigSpec.BooleanValue churnDebugEnabled;         // churn.debugEnabled
     private static ModConfigSpec.BooleanValue pancheonGuiEnabled;        // pancheon.guiEnabled
+    private static ModConfigSpec.BooleanValue pancheonDebugEnabled;      // pancheon.debugEnabled
     private static ModConfigSpec.BooleanValue mixingVatGuiEnabled;       // mixing_vat.guiEnabled
     private static ModConfigSpec.BooleanValue mixingVatDebugEnabled;     // mixing_vat.debugEnabled
     private static ModConfigSpec.BooleanValue mixingVatConsumeActivator; // mixing_vat.consumeMixingVatActivator
+    private static ModConfigSpec.BooleanValue bucketsDebugEnabled;        // buckets.debugEnabled
+    private static ModConfigSpec.BooleanValue cheesePressDebugEnabled;   // cheese_press.debugEnabled
+    private static ModConfigSpec.BooleanValue capabilitiesDebugEnabled;   // capabilities.debugEnabled
+    private static ModConfigSpec.BooleanValue shopSignsDebugEnabled;      // shop_signs.debugEnabled
 
     // Loot
     private static ModConfigSpec.BooleanValue stomachLootEnabled;        // loot_modifiers.stomachLootEnabled
@@ -40,11 +47,21 @@ public final class GrowthcraftMilkConfig {
                 .define("feature_exception_beverages", true);
         SERVER_BUILDER.pop();
 
+        // Module debug
+        SERVER_BUILDER.push("debug");
+        debugEnabled = SERVER_BUILDER
+                .comment("Set to true to add additional Growthcraft Milk debug logging.")
+                .define("enabled", false);
+        SERVER_BUILDER.pop();
+
         // Churn
         SERVER_BUILDER.push("churn");
         churnGuiEnabled = SERVER_BUILDER
                 .comment("Set to true to allow users to access the Churn GUI.")
                 .define("guiEnabled", true);
+        churnDebugEnabled = SERVER_BUILDER
+                .comment("Set to true to add additional logging to debug the Churn.")
+                .define("debugEnabled", false);
         SERVER_BUILDER.pop();
 
         // Mixing Vat
@@ -65,6 +82,23 @@ public final class GrowthcraftMilkConfig {
         pancheonGuiEnabled = SERVER_BUILDER
                 .comment("Set to true to allow users to access the Pancheon GUI.")
                 .define("guiEnabled", true);
+        pancheonDebugEnabled = SERVER_BUILDER
+                .comment("Set to true to add additional logging to debug the Pancheon.")
+                .define("debugEnabled", false);
+        SERVER_BUILDER.pop();
+
+        // Buckets
+        SERVER_BUILDER.push("buckets");
+        bucketsDebugEnabled = SERVER_BUILDER
+                .comment("Set to true to add additional logging to debug Growthcraft Milk bucket interactions.")
+                .define("debugEnabled", false);
+        SERVER_BUILDER.pop();
+
+        // Cheese Press
+        SERVER_BUILDER.push("cheese_press");
+        cheesePressDebugEnabled = SERVER_BUILDER
+                .comment("Set to true to add additional logging to debug the Cheese Press.")
+                .define("debugEnabled", false);
         SERVER_BUILDER.pop();
 
         // Loot Modifiers
@@ -84,6 +118,20 @@ public final class GrowthcraftMilkConfig {
                 .define("debugEnabled", false);
         SERVER_BUILDER.pop();
 
+        // Capabilities
+        SERVER_BUILDER.push("capabilities");
+        capabilitiesDebugEnabled = SERVER_BUILDER
+                .comment("Set to true to log Milk capability registration details.")
+                .define("debugEnabled", false);
+        SERVER_BUILDER.pop();
+
+        // Shop Signs
+        SERVER_BUILDER.push("shop_signs");
+        shopSignsDebugEnabled = SERVER_BUILDER
+                .comment("Set to true to add additional logging to debug Milk shop sign behavior.")
+                .define("debugEnabled", false);
+        SERVER_BUILDER.pop();
+
         SPEC = SERVER_BUILDER.build();
     }
 
@@ -91,16 +139,23 @@ public final class GrowthcraftMilkConfig {
     public static boolean getModuleEnabled() { return moduleEnabled.get(); }
     public static boolean getFeatureEnabledBeverages() { return featureEnabledBeverages.get(); }
 
+    public static boolean isDebugEnabled() { return debugEnabled.get(); }
     public static boolean isChurnGuiEnabled() { return churnGuiEnabled.get(); }
+    public static boolean isChurnDebugEnabled() { return churnDebugEnabled.get(); }
     public static boolean isPancheonGuiEnabled() { return pancheonGuiEnabled.get(); }
+    public static boolean isPancheonDebugEnabled() { return pancheonDebugEnabled.get(); }
     public static boolean isMixingVatGuiEnabled() { return mixingVatGuiEnabled.get(); }
     public static boolean isMixingDebugEnabled() { return mixingVatDebugEnabled.get(); }
     public static boolean isConsumeMixingVatActivator() { return mixingVatConsumeActivator.get(); }
+    public static boolean isBucketsDebugEnabled() { return bucketsDebugEnabled.get(); }
+    public static boolean isCheesePressDebugEnabled() { return cheesePressDebugEnabled.get(); }
 
     public static boolean isStomachLootingEnabled() { return stomachLootEnabled.get(); }
     public static int getStomachLootChance() { return Boolean.TRUE.equals(stomachLootEnabled.get()) ? stomachLootChance.get() : 0; }
 
     public static boolean isCheeseDebugEnabled() { return cheeseDebugEnabled.get(); }
+    public static boolean isCapabilitiesDebugEnabled() { return capabilitiesDebugEnabled.get(); }
+    public static boolean isShopSignsDebugEnabled() { return shopSignsDebugEnabled.get(); }
 
     private GrowthcraftMilkConfig() {}
 }

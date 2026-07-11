@@ -1,6 +1,7 @@
 package growthcraft.apples;
 
 import com.mojang.logging.LogUtils;
+import growthcraft.apples.config.GrowthcraftApplesConfig;
 import growthcraft.apples.config.Reference;
 import growthcraft.apples.init.GrowthcraftApplesBlocks;
 import growthcraft.apples.init.GrowthcraftApplesFluids;
@@ -11,7 +12,9 @@ import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.NeoForge;
@@ -24,7 +27,7 @@ public class GrowthcraftApples {
     public static final String MODID = Reference.MODID;
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public GrowthcraftApples(IEventBus modEventBus) {
+    public GrowthcraftApples(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(this::commonSetup);
         GrowthcraftApplesBlocks.BLOCKS.register(modEventBus);
         GrowthcraftApplesItems.ITEMS.register(modEventBus);
@@ -33,6 +36,8 @@ public class GrowthcraftApples {
         GrowthcraftApplesFluids.BLOCKS.register(modEventBus);
         modEventBus.addListener(this::buildCreativeTab);
         NeoForge.EVENT_BUS.register(this);
+
+        modContainer.registerConfig(ModConfig.Type.COMMON, GrowthcraftApplesConfig.SPEC);
 
         LOGGER.info("{} module initialized", Reference.NAME);
     }

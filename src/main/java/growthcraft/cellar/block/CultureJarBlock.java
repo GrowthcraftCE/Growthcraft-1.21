@@ -3,6 +3,7 @@ package growthcraft.cellar.block;
 import com.mojang.serialization.MapCodec;
 import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.block.entity.CultureJarBlockEntity;
+import growthcraft.cellar.config.GrowthcraftCellarConfig;
 import growthcraft.milk.item.GrowthcraftMilkBucketItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -42,6 +43,12 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 public class CultureJarBlock extends HorizontalDirectionalBlock implements EntityBlock, net.minecraft.world.level.block.BucketPickup {
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
+
+    private static void debug(String message, Object... args) {
+        if (GrowthcraftCellarConfig.isCultureJarDebugEnabled()) {
+            GrowthcraftCellar.LOGGER.debug(message, args);
+        }
+    }
     public static final MapCodec<CultureJarBlock> CODEC = simpleCodec(CultureJarBlock::new);
 
     private static final TagKey<Block> HEAT_SOURCE_TAG = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Reference.MODID, Reference.UnlocalizedName.Tag.HEATSOURCES));
@@ -147,17 +154,17 @@ public class CultureJarBlock extends HorizontalDirectionalBlock implements Entit
         boolean mainIsBucket = main.getItem() instanceof BucketItem || main.getItem() instanceof growthcraft.milk.item.MilkingBucketItem || main.is(Items.MILK_BUCKET);
         boolean offIsBucket = off.getItem() instanceof BucketItem || off.getItem() instanceof growthcraft.milk.item.MilkingBucketItem || off.is(Items.MILK_BUCKET);
         if (mainIsBucket || offIsBucket) {
-            GrowthcraftCellar.LOGGER.debug("[CultureJar] useWithoutItem: Player={} MainHand={} OffHand={} mainIsBucket={} offIsBucket={} -> passing to useItemOn", player.getGameProfile().getName(), main.getItem(), off.getItem(), mainIsBucket, offIsBucket);
+            debug("[CultureJar] useWithoutItem: Player={} MainHand={} OffHand={} mainIsBucket={} offIsBucket={} -> passing to useItemOn", player.getGameProfile().getName(), main.getItem(), off.getItem(), mainIsBucket, offIsBucket);
             return InteractionResult.PASS;
         }
 
         if (!level.isClientSide) {
             net.minecraft.world.level.block.entity.BlockEntity be = level.getBlockEntity(pos);
             if (be instanceof net.minecraft.world.MenuProvider provider) {
-                GrowthcraftCellar.LOGGER.debug("[CultureJar] Opening menu at {} for player {}", pos, player.getGameProfile().getName());
+                debug("[CultureJar] Opening menu at {} for player {}", pos, player.getGameProfile().getName());
                 player.openMenu(provider);
             } else {
-                GrowthcraftCellar.LOGGER.debug("[CultureJar] No MenuProvider at {} when player {} used without item", pos, player.getGameProfile().getName());
+                debug("[CultureJar] No MenuProvider at {} when player {} used without item", pos, player.getGameProfile().getName());
             }
             return InteractionResult.CONSUME;
         }
@@ -177,7 +184,7 @@ public class CultureJarBlock extends HorizontalDirectionalBlock implements Entit
 
         BlockEntity be = level.getBlockEntity(pos);
         if (!(be instanceof CultureJarBlockEntity jar)) {
-            GrowthcraftCellar.LOGGER.debug("[CultureJar] useItemOn: No CultureJarBlockEntity at {} (got {}), passing.", pos, be);
+            debug("[CultureJar] useItemOn: No CultureJarBlockEntity at {} (got {}), passing.", pos, be);
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
 
@@ -188,29 +195,29 @@ public class CultureJarBlock extends HorizontalDirectionalBlock implements Entit
             var before = jar.getTank().getFluid().copy();
             String beforeName = before.isEmpty() ? "<empty>" : before.getHoverName().getString();
             int capacity = jar.getTank().getTankCapacity(0);
-            GrowthcraftCellar.LOGGER.debug("[CultureJar] useItemOn(Server): Player={} Hand={} HeldItem={} (class={}) Facing={} TankBefore={}mB/{} {}",
+            debug("[CultureJar] useItemOn(Server): Player={} Hand={} HeldItem={} (class={}) Facing={} TankBefore={}mB/{} {}",
                     player.getGameProfile().getName(), hand, heldStack.getItem(), heldStack.getItem().getClass().getName(), hit.getDirection(), before.getAmount(), capacity, beforeName);
 
             // 1) If holding a vanilla Milk Bucket, deposit Growthcraft milk into the jar and return an empty vanilla bucket.
             if (heldStack.is(Items.MILK_BUCKET)) {
                 net.neoforged.neoforge.fluids.FluidStack toInsert = new net.neoforged.neoforge.fluids.FluidStack(
                         growthcraft.milk.init.GrowthcraftMilkFluids.MILK.source.get(), 1000);
-                GrowthcraftCellar.LOGGER.debug("[CultureJar] Vanilla milk bucket deposit: request={}mB spaceAvailable={}mB", 1000, capacity - jar.getTank().getFluidAmount());
+                debug("[CultureJar] Vanilla milk bucket deposit: request={}mB spaceAvailable={}mB", 1000, capacity - jar.getTank().getFluidAmount());
                 int filled = jar.getTank().fill(toInsert, IFluidHandler.FluidAction.EXECUTE);
-                GrowthcraftCellar.LOGGER.debug("[CultureJar] Vanilla milk bucket deposit result: filled={} newTank={}mB", filled, jar.getTank().getFluidAmount());
+                debug("[CultureJar] Vanilla milk bucket deposit result: filled={} newTank={}mB", filled, jar.getTank().getFluidAmount());
                 if (filled == 1000) {
                     if (!player.getAbilities().instabuild) {
                         ItemStack remainder = new ItemStack(Items.BUCKET);
                         player.setItemInHand(hand, remainder);
-                        GrowthcraftCellar.LOGGER.debug("[CultureJar] Consumed vanilla milk bucket, returned {}", remainder.getItem());
+                        debug("[CultureJar] Consumed vanilla milk bucket, returned {}", remainder.getItem());
                     } else {
-                        GrowthcraftCellar.LOGGER.debug("[CultureJar] Player in creative, not consuming bucket");
+                        debug("[CultureJar] Player in creative, not consuming bucket");
                     }
                     be.setChanged();
                     level.sendBlockUpdated(pos, state, state, 3);
                     return ItemInteractionResult.SUCCESS;
                 } else {
-                    GrowthcraftCellar.LOGGER.debug("[CultureJar] Vanilla milk bucket deposit could not insert full 1000mB (inserted={}), will continue", filled);
+                    debug("[CultureJar] Vanilla milk bucket deposit could not insert full 1000mB (inserted={}), will continue", filled);
                 }
             }
 
@@ -218,22 +225,22 @@ public class CultureJarBlock extends HorizontalDirectionalBlock implements Entit
             if (heldStack.getItem() instanceof GrowthcraftMilkBucketItem milkBucket) {
                 net.neoforged.neoforge.fluids.FluidStack toInsert = new net.neoforged.neoforge.fluids.FluidStack(
                         growthcraft.milk.init.GrowthcraftMilkFluids.MILK.source.get(), 1000);
-                GrowthcraftCellar.LOGGER.debug("[CultureJar] Attempting priority milk deposit: request={}mB spaceAvailable={}mB", 1000, capacity - jar.getTank().getFluidAmount());
+                debug("[CultureJar] Attempting priority milk deposit: request={}mB spaceAvailable={}mB", 1000, capacity - jar.getTank().getFluidAmount());
                 int filled = jar.getTank().fill(toInsert, IFluidHandler.FluidAction.EXECUTE);
-                GrowthcraftCellar.LOGGER.debug("[CultureJar] Priority milk deposit result: filled={} newTank={}mB", filled, jar.getTank().getFluidAmount());
+                debug("[CultureJar] Priority milk deposit result: filled={} newTank={}mB", filled, jar.getTank().getFluidAmount());
                 if (filled == 1000) {
                     if (!player.getAbilities().instabuild) {
                         ItemStack remainder = milkBucket.getCraftingRemainingItem(heldStack);
                         player.setItemInHand(hand, remainder.copy());
-                        GrowthcraftCellar.LOGGER.debug("[CultureJar] Consumed filled Growthcraft milk bucket, returned {}", remainder.getItem());
+                        debug("[CultureJar] Consumed filled Growthcraft milk bucket, returned {}", remainder.getItem());
                     } else {
-                        GrowthcraftCellar.LOGGER.debug("[CultureJar] Player in creative, not consuming bucket");
+                        debug("[CultureJar] Player in creative, not consuming bucket");
                     }
                     be.setChanged();
                     level.sendBlockUpdated(pos, state, state, 3);
                     return ItemInteractionResult.SUCCESS;
                 } else {
-                    GrowthcraftCellar.LOGGER.debug("[CultureJar] Priority milk deposit could not insert full 1000mB (inserted={}), will continue", filled);
+                    debug("[CultureJar] Priority milk deposit could not insert full 1000mB (inserted={}), will continue", filled);
                 }
             }
 
@@ -241,10 +248,10 @@ public class CultureJarBlock extends HorizontalDirectionalBlock implements Entit
             if (isMilkingBucket) {
                 net.neoforged.neoforge.fluids.FluidStack inTank = jar.getTank().getFluid();
                 boolean correctFluid = !inTank.isEmpty() && inTank.getFluid() == growthcraft.milk.init.GrowthcraftMilkFluids.MILK.source.get();
-                GrowthcraftCellar.LOGGER.debug("[CultureJar] Milking bucket fill check: hasMilk={} amount={}mB", correctFluid, inTank.getAmount());
+                debug("[CultureJar] Milking bucket fill check: hasMilk={} amount={}mB", correctFluid, inTank.getAmount());
                 if (correctFluid && inTank.getAmount() >= 1000) {
                     net.neoforged.neoforge.fluids.FluidStack drained = jar.getTank().drain(1000, IFluidHandler.FluidAction.EXECUTE);
-                    GrowthcraftCellar.LOGGER.debug("[CultureJar] Drained from jar for milking bucket: {}mB", drained.getAmount());
+                    debug("[CultureJar] Drained from jar for milking bucket: {}mB", drained.getAmount());
                     if (drained.getAmount() == 1000) {
                         ItemStack filledStack = new ItemStack(growthcraft.milk.init.GrowthcraftMilkItems.MILK_BUCKET_IRON.get());
                         if (!player.getAbilities().instabuild) {
@@ -252,24 +259,24 @@ public class CultureJarBlock extends HorizontalDirectionalBlock implements Entit
                         }
                         be.setChanged();
                         level.sendBlockUpdated(pos, state, state, 3);
-                        GrowthcraftCellar.LOGGER.debug("[CultureJar] Filled milking bucket from jar. Now {}mB left", jar.getTank().getFluidAmount());
+                        debug("[CultureJar] Filled milking bucket from jar. Now {}mB left", jar.getTank().getFluidAmount());
                         return ItemInteractionResult.SUCCESS;
                     } else {
-                        GrowthcraftCellar.LOGGER.debug("[CultureJar] Unexpected: drained {}mB for milking bucket (expected 1000)", drained.getAmount());
+                        debug("[CultureJar] Unexpected: drained {}mB for milking bucket (expected 1000)", drained.getAmount());
                     }
                 } else {
-                    GrowthcraftCellar.LOGGER.debug("[CultureJar] Not enough milk to fill milking bucket or wrong fluid");
+                    debug("[CultureJar] Not enough milk to fill milking bucket or wrong fluid");
                 }
             }
 
             // 4) Fallback to generic fluid interaction (vanilla buckets and others)
-            GrowthcraftCellar.LOGGER.debug("[CultureJar] Fallback FluidUtil.interactWithFluidHandler: player={} hand={} face={} item={} (class={})",
+            debug("[CultureJar] Fallback FluidUtil.interactWithFluidHandler: player={} hand={} face={} item={} (class={})",
                     player.getGameProfile().getName(), hand, hit.getDirection(), heldStack.getItem(), heldStack.getItem().getClass().getName());
             boolean acted = FluidUtil.interactWithFluidHandler(player, hand, level, pos, hit.getDirection());
 
             var after = jar.getTank().getFluid();
             String afterName = after.isEmpty() ? "<empty>" : after.getHoverName().getString();
-            GrowthcraftCellar.LOGGER.debug("[CultureJar] useItemOn(Server): acted={} AfterTank={}mB {}", acted, jar.getTank().getFluidAmount(), afterName);
+            debug("[CultureJar] useItemOn(Server): acted={} AfterTank={}mB {}", acted, jar.getTank().getFluidAmount(), afterName);
             if (acted) {
                 be.setChanged();
                 // notify clients so GUIs/models can refresh
@@ -277,13 +284,13 @@ public class CultureJarBlock extends HorizontalDirectionalBlock implements Entit
                 return ItemInteractionResult.SUCCESS;
             }
             if (!heldStack.is(Items.BUCKET) && !isMilkingBucket) {
-                GrowthcraftCellar.LOGGER.debug("[CultureJar] Filled bucket interaction targeted jar but did not act; consuming to prevent world placement");
+                debug("[CultureJar] Filled bucket interaction targeted jar but did not act; consuming to prevent world placement");
                 return ItemInteractionResult.SUCCESS;
             }
-            GrowthcraftCellar.LOGGER.debug("[CultureJar] FluidUtil fallback did not act; passing to default block interaction");
+            debug("[CultureJar] FluidUtil fallback did not act; passing to default block interaction");
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
-        GrowthcraftCellar.LOGGER.debug("[CultureJar] useItemOn(Client): consuming bucket interaction for jar target. Player={} Hand={} Item={} (class={})", player.getGameProfile().getName(), hand, heldStack.getItem(), heldStack.getItem().getClass().getName());
+        debug("[CultureJar] useItemOn(Client): consuming bucket interaction for jar target. Player={} Hand={} Item={} (class={})", player.getGameProfile().getName(), hand, heldStack.getItem(), heldStack.getItem().getClass().getName());
         return ItemInteractionResult.SUCCESS;
     }
 
@@ -306,17 +313,17 @@ public class CultureJarBlock extends HorizontalDirectionalBlock implements Entit
     public net.minecraft.world.item.ItemStack pickupBlock(net.minecraft.world.entity.player.Player player, net.minecraft.world.level.LevelAccessor level, BlockPos pos, BlockState state) {
         BlockEntity be = level.getBlockEntity(pos);
         if (!(be instanceof CultureJarBlockEntity jar)) {
-            GrowthcraftCellar.LOGGER.debug("[CultureJar] BucketPickup: No CultureJarBlockEntity at {} (got {}), returning EMPTY", pos, be);
+            debug("[CultureJar] BucketPickup: No CultureJarBlockEntity at {} (got {}), returning EMPTY", pos, be);
             return net.minecraft.world.item.ItemStack.EMPTY;
         }
         var tank = jar.getTank();
         net.neoforged.neoforge.fluids.FluidStack inTank = tank.getFluid();
         boolean isMilk = !inTank.isEmpty() && inTank.getFluid() == growthcraft.milk.init.GrowthcraftMilkFluids.MILK.source.get();
         int amount = inTank.getAmount();
-        GrowthcraftCellar.LOGGER.debug("[CultureJar] BucketPickup: isMilk={} amount={}mB", isMilk, amount);
+        debug("[CultureJar] BucketPickup: isMilk={} amount={}mB", isMilk, amount);
         if (isMilk && amount >= 1000) {
             net.neoforged.neoforge.fluids.FluidStack drained = tank.drain(1000, IFluidHandler.FluidAction.EXECUTE);
-            GrowthcraftCellar.LOGGER.debug("[CultureJar] BucketPickup: drained {}mB", drained.getAmount());
+            debug("[CultureJar] BucketPickup: drained {}mB", drained.getAmount());
             if (drained.getAmount() == 1000) {
                 if (level instanceof Level lvl) {
                     be.setChanged();

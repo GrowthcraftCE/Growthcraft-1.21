@@ -2,6 +2,7 @@ package growthcraft.cellar.block.entity;
 
 import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.block.CultureJarBlock;
+import growthcraft.cellar.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.init.GrowthcraftCellarBlockEntities;
 import growthcraft.cellar.init.GrowthcraftCellarRecipes;
 import growthcraft.cellar.recipe.CultureJarRecipe;
@@ -33,6 +34,12 @@ public class CultureJarBlockEntity extends BlockEntity implements WorldlyContain
     public static final int SLOT_COUNT = 2;
     public static final int TANK_CAPACITY = 1000; // 1 bucket
 
+    private static void debug(String message, Object... args) {
+        if (GrowthcraftCellarConfig.isCultureJarDebugEnabled()) {
+            GrowthcraftCellar.LOGGER.debug(message, args);
+        }
+    }
+
     private final NonNullList<ItemStack> items = NonNullList.withSize(SLOT_COUNT, ItemStack.EMPTY);
     private final int[] TOP_SLOTS = new int[] { SLOT_INPUT };
     private final int[] BOTTOM_SLOTS = new int[] { SLOT_OUTPUT };
@@ -44,7 +51,7 @@ public class CultureJarBlockEntity extends BlockEntity implements WorldlyContain
             setChanged();
             var fluid = getFluid();
             String name = fluid.isEmpty() ? "<empty>" : fluid.getHoverName().getString();
-            GrowthcraftCellar.LOGGER.debug("[CultureJarBE] Tank changed at {}: {} mB {}", worldPosition, fluid.getAmount(), name);
+            debug("[CultureJarBE] Tank changed at {}: {} mB {}", worldPosition, fluid.getAmount(), name);
             // Ensure clients are notified so GUIs and rendering update
             if (level != null && !level.isClientSide) {
                 BlockState state = getBlockState();
@@ -53,7 +60,7 @@ public class CultureJarBlockEntity extends BlockEntity implements WorldlyContain
                 if (level instanceof net.minecraft.server.level.ServerLevel serverLevel) {
                     serverLevel.getChunkSource().blockChanged(worldPosition);
                 }
-                GrowthcraftCellar.LOGGER.debug("[CultureJarBE] Sent block update for GUI sync at {}", worldPosition);
+                debug("[CultureJarBE] Sent block update for GUI sync at {}", worldPosition);
             }
         }
     };
@@ -179,7 +186,7 @@ public class CultureJarBlockEntity extends BlockEntity implements WorldlyContain
         // Processing
         tag.putInt("ProcessTime", this.processTime);
         tag.putInt("ProcessTimeTotal", this.processTimeTotal);
-        GrowthcraftCellar.LOGGER.debug("[CultureJarBE] saveAdditional at {}: items={} tank={}mB time={}/{}", worldPosition, this.items.stream().filter(s -> !s.isEmpty()).count(), this.tank.getFluidAmount(), this.processTime, this.processTimeTotal);
+        debug("[CultureJarBE] saveAdditional at {}: items={} tank={}mB time={}/{}", worldPosition, this.items.stream().filter(s -> !s.isEmpty()).count(), this.tank.getFluidAmount(), this.processTime, this.processTimeTotal);
     }
 
     @Override
@@ -194,7 +201,7 @@ public class CultureJarBlockEntity extends BlockEntity implements WorldlyContain
         // Processing
         this.processTime = tag.getInt("ProcessTime");
         this.processTimeTotal = tag.getInt("ProcessTimeTotal");
-        GrowthcraftCellar.LOGGER.debug("[CultureJarBE] loadAdditional at {}: items={} tank={}mB time={}/{}", worldPosition, this.items.stream().filter(s -> !s.isEmpty()).count(), this.tank.getFluidAmount(), this.processTime, this.processTimeTotal);
+        debug("[CultureJarBE] loadAdditional at {}: items={} tank={}mB time={}/{}", worldPosition, this.items.stream().filter(s -> !s.isEmpty()).count(), this.tank.getFluidAmount(), this.processTime, this.processTimeTotal);
     }
 
     // --- Client sync for renderer/GUI ---
