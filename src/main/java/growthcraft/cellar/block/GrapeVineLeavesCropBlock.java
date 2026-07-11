@@ -38,7 +38,7 @@ public class GrapeVineLeavesCropBlock extends GrowthcraftCropsRopeBlock {
 
     @Override
     public boolean connectsAsRope() {
-        return false;
+        return true;
     }
 
     @Override
