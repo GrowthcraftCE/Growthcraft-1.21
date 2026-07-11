@@ -165,5 +165,7 @@
   "message.growthcraft_milk.cheese_wheel.aging": "The cheese wheel is aging. Progress: %s/%s.",
   "message.growthcraft_milk.cheese_wheel.needs_wax": "This cheese wheel must be waxed before it can age.",
   "message.growthcraft_milk.cheese_wheel.aged": "This cheese wheel is aged and ready.",
-  "message.growthcraft_milk.churn.jei_plunges": "%s plunges"
+  "message.growthcraft_milk.churn.jei_plunges": "%s plunges",
+  "tag.item.growthcraft_milk.cheese_slices": "Cheese Slices",
+  "tag.item.growthcraft_milk.milk_buckets": "Milk Buckets"
 }

@@ -154,5 +154,8 @@
   "emi.category.growthcraft_cellar.jar2": "Culturing",
   "emi.category.growthcraft_cellar.book": "Other",
   "label.growthcraft_cellar.roaster_level": "Roaster level: %s",
-  "gui.growthcraft_cellar.empty": "Empty"
+  "gui.growthcraft_cellar.empty": "Empty",
+  "tag.item.growthcraft_cellar.adjunct_grains_basic": "Basic Adjunct Grains",
+  "tag.item.growthcraft_cellar.adjunct_grains_extended": "Extended Adjunct Grains",
+  "tag.item.growthcraft_cellar.adjunct_grains_extended_minus_wheat": "Extended Adjunct Grains (No Wheat)"
 }
