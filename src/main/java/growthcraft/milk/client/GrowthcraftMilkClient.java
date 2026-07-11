@@ -8,9 +8,11 @@ import growthcraft.milk.client.screen.PancheonScreen;
 import growthcraft.milk.config.Reference;
 import growthcraft.milk.init.GrowthcraftMilkBlockEntities;
 import growthcraft.milk.init.GrowthcraftMilkBlocks;
+import growthcraft.milk.init.GrowthcraftMilkFluids;
 import growthcraft.milk.init.GrowthcraftMilkItems;
 import growthcraft.milk.init.GrowthcraftMilkMenus;
 import growthcraft.lib.client.screen.MachineScreen;
+import growthcraft.lib.fluid.FluidRegistryContainer;
 import growthcraft.lib.utils.ColorUtils;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.core.component.DataComponents;
@@ -26,6 +28,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 /**
@@ -60,6 +63,15 @@ public final class GrowthcraftMilkClient {
     public static void onRegisterItemColors(RegisterColorHandlersEvent.Item event) {
         // Contents tint: use milk default color for now (tool is empty by design)
         registerContentsTint(event, GrowthcraftMilkItems.MILKING_BUCKET_IRON);
+        registerFluidBucketTint(event, Reference.FluidColor.MILK, GrowthcraftMilkItems.MILK_BUCKET_IRON);
+        for (FluidRegistryContainer container : GrowthcraftMilkFluids.ALL) {
+            if (container.bucket != null) {
+                registerFluidBucketTint(event, container);
+            }
+        }
+        registerFluidBucketTint(event, new ColorUtils.GrowthcraftColor(0xFFD8B66A), GrowthcraftMilkFluids.RENNET.bucket);
+        registerFluidBucketTint(event, new ColorUtils.GrowthcraftColor(0xFFE5DF93), GrowthcraftMilkFluids.WHEY.bucket);
+
         registerItemTint(event, Reference.ItemColor.APPENZELLER_CHEESE, GrowthcraftMilkItems.APPENZELLER_CHEESE);
         registerItemTint(event, Reference.ItemColor.ASIAGO_CHEESE, GrowthcraftMilkItems.ASIAGO_CHEESE);
         registerItemTint(event, Reference.ItemColor.CASU_MARZU_CHEESE, GrowthcraftMilkItems.CASU_MARZU_CHEESE);
@@ -159,6 +171,22 @@ public final class GrowthcraftMilkClient {
                                              DeferredHolder<Item, ? extends Item> item) {
         int milkColor = growthcraft.milk.config.Reference.FluidColor.MILK.toIntValue();
         event.register((stack, tintIndex) -> tintIndex == 0 ? milkColor : 0xFFFFFFFF, item.get());
+    }
+
+    private static void registerFluidBucketTint(RegisterColorHandlersEvent.Item event,
+                                                FluidRegistryContainer container) {
+        event.register((stack, tintIndex) -> {
+            if (tintIndex != 0) {
+                return 0xFFFFFFFF;
+            }
+            return IClientFluidTypeExtensions.of(container.source.get()).getTintColor();
+        }, container.bucket.get());
+    }
+
+    private static void registerFluidBucketTint(RegisterColorHandlersEvent.Item event,
+                                                ColorUtils.GrowthcraftColor color,
+                                                DeferredHolder<Item, ? extends Item> item) {
+        event.register((stack, tintIndex) -> tintIndex == 0 ? color.toIntValue() : 0xFFFFFFFF, item.get());
     }
 
     private static void registerItemTint(RegisterColorHandlersEvent.Item event,
