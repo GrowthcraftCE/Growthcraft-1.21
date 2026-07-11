@@ -229,7 +229,7 @@ public class MixingVatBlock extends Block implements EntityBlock {
                     }
                     if (i == MixingVatBlockEntity.SLOT_RESULT) {
                         // here's the deal: if there is a pickup-item needed (cloth), no drop. if it can be collected by hand, we drop.
-                        if (! vat.getItem(i).isEmpty()) {
+                        if (! vat.getItem(MixingVatBlockEntity.SLOT_RESULT_TOOL).isEmpty()) {
                             continue;
                         }
                     }
