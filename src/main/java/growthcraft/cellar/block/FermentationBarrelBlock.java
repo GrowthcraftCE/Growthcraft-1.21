@@ -1,6 +1,8 @@
 package growthcraft.cellar.block;
 
 import growthcraft.cellar.block.entity.FermentationBarrelBlockEntity;
+import growthcraft.milk.init.GrowthcraftMilkFluids;
+import growthcraft.milk.item.GrowthcraftMilkBucketItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.Containers;
@@ -10,6 +12,7 @@ import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BottleItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -31,6 +34,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.neoforged.neoforge.fluids.FluidUtil;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.Nullable;
 
 public class FermentationBarrelBlock extends Block implements EntityBlock {
@@ -85,6 +90,10 @@ public class FermentationBarrelBlock extends Block implements EntityBlock {
 
     @Override
     protected ItemInteractionResult useItemOn(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (tryMilkBucketInteraction(heldStack, level, pos, player, hand)) {
+            return ItemInteractionResult.sidedSuccess(level.isClientSide);
+        }
+
         if (heldStack.getItem() instanceof BottleItem) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof FermentationBarrelBlockEntity barrel && !barrel.getResultingPotionItemStack().isEmpty()) {
@@ -99,6 +108,26 @@ public class FermentationBarrelBlock extends Block implements EntityBlock {
             return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
+    private static boolean tryMilkBucketInteraction(ItemStack heldStack, Level level, BlockPos pos, Player player, InteractionHand hand) {
+        boolean vanillaMilk = heldStack.is(Items.MILK_BUCKET);
+        boolean growthcraftMilk = heldStack.getItem() instanceof GrowthcraftMilkBucketItem;
+        if (!vanillaMilk && !growthcraftMilk) {
+            return false;
+        }
+
+        if (!level.isClientSide && level.getBlockEntity(pos) instanceof FermentationBarrelBlockEntity barrel) {
+            int filled = barrel.getTank().fill(new FluidStack(GrowthcraftMilkFluids.MILK.source.get(), 1000),
+                    IFluidHandler.FluidAction.EXECUTE);
+            if (filled == 1000 && !player.getAbilities().instabuild) {
+                ItemStack remainder = vanillaMilk
+                        ? new ItemStack(Items.BUCKET)
+                        : heldStack.getCraftingRemainingItem();
+                player.setItemInHand(hand, remainder);
+            }
+        }
+        return true;
     }
 
     private void fillBottleFromBarrel(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, ItemStack heldStack, FermentationBarrelBlockEntity barrel) {
