@@ -8,6 +8,7 @@ import growthcraft.apiary.init.GrowthcraftApiaryTags;
 import growthcraft.bamboo.init.GrowthcraftBambooItems;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.core.init.GrowthcraftItems;
+import growthcraft.milk.init.GrowthcraftMilkFluids;
 import growthcraft.milk.init.GrowthcraftMilkItems;
 import growthcraft.milk.init.GrowthcraftMilkTags;
 import net.minecraft.core.HolderLookup;
@@ -490,6 +491,18 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_milk_bucket", has(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS))
                 .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.milk.config.Reference.MODID, "butter_cake"));
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, Items.CAKE)
+                .pattern("CBC")
+                .pattern(" E ")
+                .pattern("WWW")
+                .define('C', GrowthcraftMilkFluids.CONDENSED_MILK.bucket.get())
+                .define('B', butter)
+                .define('E', Items.EGG)
+                .define('W', Items.WHEAT)
+                .group("growthcraft_milk")
+                .unlockedBy("has_condensed_milk_bucket", has(GrowthcraftMilkFluids.CONDENSED_MILK.bucket.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.milk.config.Reference.MODID, "condensed_milk_butter_cake"));
+
         ShapedRecipeBuilder.shaped(RecipeCategory.FOOD, Items.COOKIE, 12)
                 .pattern("WBW")
                 .pattern(" C ")
@@ -500,6 +513,17 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
                 .unlockedBy("has_butter", has(butter))
                 .unlockedBy(getHasName(Items.COCOA_BEANS), has(Items.COCOA_BEANS))
                 .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.milk.config.Reference.MODID, "butter_cookies"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, Items.COOKIE, 24)
+                .requires(Items.WHEAT, 2)
+                .requires(butter)
+                .requires(Items.COCOA_BEANS)
+                .requires(GrowthcraftMilkFluids.CONDENSED_MILK.bucket.get())
+                .group("growthcraft_milk")
+                .unlockedBy("has_condensed_milk_bucket", has(GrowthcraftMilkFluids.CONDENSED_MILK.bucket.get()))
+                .unlockedBy("has_butter", has(butter))
+                .unlockedBy(getHasName(Items.COCOA_BEANS), has(Items.COCOA_BEANS))
+                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.milk.config.Reference.MODID, "condensed_milk_butter_cookies"));
     }
 
     private static void addMilkBowlFoodRecipes(RecipeOutput output) {
@@ -511,6 +535,15 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
         addIceCreamRecipe(output, GrowthcraftMilkItems.ICE_CREAM_HONEY.get(), Items.HONEYCOMB, growthcraft.milk.config.Reference.UnlocalizedName.ICE_CREAM_HONEY);
         addIceCreamRecipe(output, GrowthcraftMilkItems.ICE_CREAM_PUMPKIN.get(), Items.PUMPKIN, growthcraft.milk.config.Reference.UnlocalizedName.ICE_CREAM_PUMPKIN);
         addIceCreamRecipe(output, GrowthcraftMilkItems.ICE_CREAM_WATERMELON.get(), Items.MELON_SLICE, growthcraft.milk.config.Reference.UnlocalizedName.ICE_CREAM_WATERMELON);
+
+        addCondensedMilkIceCreamRecipe(output, GrowthcraftMilkItems.ICE_CREAM_APPLE.get(), Items.APPLE, growthcraft.milk.config.Reference.UnlocalizedName.ICE_CREAM_APPLE);
+        addCondensedMilkIceCreamRecipe(output, GrowthcraftMilkItems.ICE_CREAM_CHOCOLATE.get(), Items.COCOA_BEANS, growthcraft.milk.config.Reference.UnlocalizedName.ICE_CREAM_CHOCOLATE);
+        addCondensedMilkIceCreamRecipe(output, GrowthcraftMilkItems.ICE_CREAM_GRAPE_PURPLE.get(), GrowthcraftCellarItems.GRAPE_PURPLE.get(), growthcraft.milk.config.Reference.UnlocalizedName.ICE_CREAM_GRAPE_PURPLE);
+        addCondensedMilkIceCreamRecipe(output, GrowthcraftMilkItems.ICE_CREAM_GRAPE_RED.get(), GrowthcraftCellarItems.GRAPE_RED.get(), growthcraft.milk.config.Reference.UnlocalizedName.ICE_CREAM_GRAPE_RED);
+        addCondensedMilkIceCreamRecipe(output, GrowthcraftMilkItems.ICE_CREAM_GRAPE_WHITE.get(), GrowthcraftCellarItems.GRAPE_WHITE.get(), growthcraft.milk.config.Reference.UnlocalizedName.ICE_CREAM_GRAPE_WHITE);
+        addCondensedMilkIceCreamRecipe(output, GrowthcraftMilkItems.ICE_CREAM_HONEY.get(), Items.HONEYCOMB, growthcraft.milk.config.Reference.UnlocalizedName.ICE_CREAM_HONEY);
+        addCondensedMilkIceCreamRecipe(output, GrowthcraftMilkItems.ICE_CREAM_PUMPKIN.get(), Items.PUMPKIN, growthcraft.milk.config.Reference.UnlocalizedName.ICE_CREAM_PUMPKIN);
+        addCondensedMilkIceCreamRecipe(output, GrowthcraftMilkItems.ICE_CREAM_WATERMELON.get(), Items.MELON_SLICE, growthcraft.milk.config.Reference.UnlocalizedName.ICE_CREAM_WATERMELON);
 
         addYogurtRecipe(output, GrowthcraftMilkItems.YOGURT_APPLE.get(), Items.APPLE, growthcraft.milk.config.Reference.UnlocalizedName.YOGURT_APPLE);
         addYogurtRecipe(output, GrowthcraftMilkItems.YOGURT_CHOCOLATE.get(), Items.COCOA_BEANS, growthcraft.milk.config.Reference.UnlocalizedName.YOGURT_CHOCOLATE);
@@ -543,6 +576,16 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
                 .group("growthcraft_milk")
                 .unlockedBy("has_milk_bucket", has(GrowthcraftMilkTags.Items.TAG_MILK_BUCKETS))
                 .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.milk.config.Reference.MODID, name));
+    }
+
+    private static void addCondensedMilkIceCreamRecipe(RecipeOutput output, Item result, Item flavor, String name) {
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.FOOD, result)
+                .requires(GrowthcraftMilkFluids.CONDENSED_MILK.bucket.get())
+                .requires(flavor)
+                .requires(Items.BOWL)
+                .group("growthcraft_milk")
+                .unlockedBy("has_condensed_milk_bucket", has(GrowthcraftMilkFluids.CONDENSED_MILK.bucket.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath(growthcraft.milk.config.Reference.MODID, name + "_from_condensed_milk"));
     }
 
     private static void addYogurtRecipe(RecipeOutput output, Item result, Item flavor, String name) {

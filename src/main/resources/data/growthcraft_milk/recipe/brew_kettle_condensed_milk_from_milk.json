@@ -1,0 +1,18 @@
+{
+  "type": "growthcraft_cellar:brew_kettle_recipe",
+  "requires_heat": true,
+  "requires_lid": "false",
+  "processing_time": 600,
+  "input_fluid": {
+    "fluid": "growthcraft_milk:milk_fluid_source",
+    "amount": 1000
+  },
+  "input_item": {
+    "item": "minecraft:sugar",
+    "count": 1
+  },
+  "output_fluid": {
+    "fluid": "growthcraft_milk:condensed_milk_fluid_source",
+    "amount": 1000
+  }
+}

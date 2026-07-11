@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "growthcraft_milk",
+  "ingredients": [
+    {
+      "item": "minecraft:wheat"
+    },
+    {
+      "item": "minecraft:wheat"
+    },
+    {
+      "tag": "c:foods/butter"
+    },
+    {
+      "item": "minecraft:cocoa_beans"
+    },
+    {
+      "item": "growthcraft_milk:condensed_milk_fluid_bucket"
+    }
+  ],
+  "result": {
+    "count": 24,
+    "id": "minecraft:cookie"
+  }
+}
