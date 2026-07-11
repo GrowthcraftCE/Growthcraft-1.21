@@ -1,5 +1,7 @@
 package growthcraft.milk.item;
 
+import growthcraft.milk.GrowthcraftMilk;
+import growthcraft.milk.config.GrowthcraftMilkConfig;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -19,6 +21,12 @@ import java.util.function.Supplier;
 public class GrowthcraftMilkBucketItem extends BucketItem {
     private final Supplier<Item> emptyReturn;
 
+    private static void debug(String message, Object... args) {
+        if (GrowthcraftMilkConfig.isBucketsDebugEnabled()) {
+            GrowthcraftMilk.LOGGER.debug(message, args);
+        }
+    }
+
     public GrowthcraftMilkBucketItem(Fluid content, Supplier<Item> emptyReturn, Properties properties) {
         super(content, properties);
         this.emptyReturn = emptyReturn;
@@ -29,14 +37,14 @@ public class GrowthcraftMilkBucketItem extends BucketItem {
         InteractionResultHolder<ItemStack> ret = super.use(level, player, hand);
         if (!level.isClientSide && ret.getResult().consumesAction()) {
             ItemStack out = ret.getObject();
-            growthcraft.milk.GrowthcraftMilk.LOGGER.debug("[MilkBucket] use(Server): Player={} Hand={} ResultActionConsumed outItem={} Creative?={} -> replacing with emptyReturn={}",
+            debug("[MilkBucket] use(Server): Player={} Hand={} ResultActionConsumed outItem={} Creative?={} -> replacing with emptyReturn={}",
                     player.getGameProfile().getName(), hand, out.getItem(), player.getAbilities().instabuild, this.emptyReturn.get());
             if (!player.getAbilities().instabuild) {
                 // Replace vanilla empty bucket with our designated empty return
                 return InteractionResultHolder.sidedSuccess(new ItemStack(this.emptyReturn.get()), level.isClientSide);
             }
         } else if (level.isClientSide) {
-            growthcraft.milk.GrowthcraftMilk.LOGGER.debug("[MilkBucket] use(Client): deferring to server. Player={} Hand={}", player.getGameProfile().getName(), hand);
+            debug("[MilkBucket] use(Client): deferring to server. Player={} Hand={}", player.getGameProfile().getName(), hand);
         }
         return ret;
     }

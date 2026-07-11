@@ -5,6 +5,7 @@ import growthcraft.cellar.block.entity.BrewKettleBlockEntity;
 import growthcraft.cellar.block.entity.CultureJarBlockEntity;
 import growthcraft.cellar.block.entity.FermentationBarrelBlockEntity;
 import growthcraft.cellar.block.entity.FruitPressBlockEntity;
+import growthcraft.cellar.config.GrowthcraftCellarConfig;
 import net.minecraft.core.Direction;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
@@ -17,20 +18,26 @@ public final class GrowthcraftCellarCapabilities {
 
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         // Expose the Culture Jar's internal tank as a fluid handler capability
-        GrowthcraftCellar.LOGGER.debug("[Capabilities] Registering FluidHandler for Culture Jar BE");
+        debug("[Capabilities] Registering FluidHandler for Culture Jar BE");
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, GrowthcraftCellarBlockEntities.CULTURE_JAR.get(),
                 (CultureJarBlockEntity be, net.minecraft.core.Direction side) -> be.getTank());
 
-        GrowthcraftCellar.LOGGER.debug("[Capabilities] Registering FluidHandlers for Brew Kettle BE");
+        debug("[Capabilities] Registering FluidHandlers for Brew Kettle BE");
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, GrowthcraftCellarBlockEntities.BREW_KETTLE.get(),
                 (BrewKettleBlockEntity be, Direction side) -> side == Direction.UP ? be.getInputTank() : be.getOutputTank());
 
-        GrowthcraftCellar.LOGGER.debug("[Capabilities] Registering FluidHandler for Fermentation Barrel BE");
+        debug("[Capabilities] Registering FluidHandler for Fermentation Barrel BE");
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, GrowthcraftCellarBlockEntities.FERMENTATION_BARREL.get(),
                 (FermentationBarrelBlockEntity be, Direction side) -> be.getTank());
 
-        GrowthcraftCellar.LOGGER.debug("[Capabilities] Registering FluidHandler for Fruit Press BE");
+        debug("[Capabilities] Registering FluidHandler for Fruit Press BE");
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, GrowthcraftCellarBlockEntities.FRUIT_PRESS.get(),
                 (FruitPressBlockEntity be, Direction side) -> be.getTank());
+    }
+
+    private static void debug(String message, Object... args) {
+        if (GrowthcraftCellarConfig.isCapabilitiesDebugEnabled()) {
+            GrowthcraftCellar.LOGGER.debug(message, args);
+        }
     }
 }

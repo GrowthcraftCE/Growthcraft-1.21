@@ -1,8 +1,12 @@
 package growthcraft.core.config;
 
+import growthcraft.apiary.config.GrowthcraftApiaryConfig;
+import growthcraft.apples.config.GrowthcraftApplesConfig;
+import growthcraft.bamboo.config.GrowthcraftBambooConfig;
 import growthcraft.cellar.config.GrowthcraftCellarConfig;
 import growthcraft.core.Growthcraft;
 import growthcraft.milk.config.GrowthcraftMilkConfig;
+import growthcraft.rice.config.GrowthcraftRiceConfig;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.util.Arrays;
@@ -11,13 +15,21 @@ import java.util.Map;
 import java.util.Optional;
 
 final class ConfigValueConditionResolver {
-    private static final Map<String, ModConfigSpec> CONFIG_SPECS = Map.of(
-            "core", GrowthcraftConfig.SPEC,
-            "growthcraft", GrowthcraftConfig.SPEC,
-            "cellar", GrowthcraftCellarConfig.SPEC,
-            "growthcraft_cellar", GrowthcraftCellarConfig.SPEC,
-            "milk", GrowthcraftMilkConfig.SPEC,
-            "growthcraft_milk", GrowthcraftMilkConfig.SPEC
+    private static final Map<String, ModConfigSpec> CONFIG_SPECS = Map.ofEntries(
+            Map.entry("core", GrowthcraftConfig.SPEC),
+            Map.entry("growthcraft", GrowthcraftConfig.SPEC),
+            Map.entry("cellar", GrowthcraftCellarConfig.SPEC),
+            Map.entry("growthcraft_cellar", GrowthcraftCellarConfig.SPEC),
+            Map.entry("milk", GrowthcraftMilkConfig.SPEC),
+            Map.entry("growthcraft_milk", GrowthcraftMilkConfig.SPEC),
+            Map.entry("apiary", GrowthcraftApiaryConfig.SPEC),
+            Map.entry("growthcraft_apiary", GrowthcraftApiaryConfig.SPEC),
+            Map.entry("apples", GrowthcraftApplesConfig.SPEC),
+            Map.entry("growthcraft_apples", GrowthcraftApplesConfig.SPEC),
+            Map.entry("bamboo", GrowthcraftBambooConfig.SPEC),
+            Map.entry("growthcraft_bamboo", GrowthcraftBambooConfig.SPEC),
+            Map.entry("rice", GrowthcraftRiceConfig.SPEC),
+            Map.entry("growthcraft_rice", GrowthcraftRiceConfig.SPEC)
     );
 
     private ConfigValueConditionResolver() {}

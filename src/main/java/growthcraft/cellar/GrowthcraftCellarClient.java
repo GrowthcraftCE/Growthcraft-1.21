@@ -9,7 +9,6 @@ import growthcraft.cellar.client.screen.FruitPressScreen;
 import growthcraft.cellar.client.screen.RoasterScreen;
 import growthcraft.core.Growthcraft;
 import growthcraft.lib.fluid.FluidRegistryContainer;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
@@ -37,10 +36,6 @@ public class GrowthcraftCellarClient {
 
     @SubscribeEvent
     static void onClientSetup(FMLClientSetupEvent event) {
-        // Some client setup code
-        Growthcraft.LOGGER.info("HELLO FROM CLIENT SETUP");
-        Growthcraft.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
-
         // Ensure all Growthcraft Cellar fluids render as translucent like water
         event.enqueueWork(() -> {
             RenderType translucent = RenderType.translucent();

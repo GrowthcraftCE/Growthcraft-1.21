@@ -2,13 +2,16 @@ package growthcraft.rice;
 
 import com.mojang.logging.LogUtils;
 import growthcraft.core.init.GrowthcraftCreativeTabs;
+import growthcraft.rice.config.GrowthcraftRiceConfig;
 import growthcraft.rice.config.Reference;
 import growthcraft.rice.init.GrowthcraftRiceBlocks;
 import growthcraft.rice.init.GrowthcraftRiceFluids;
 import growthcraft.rice.init.GrowthcraftRiceItems;
 import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import org.slf4j.Logger;
 
@@ -17,13 +20,15 @@ public class GrowthcraftRice {
     public static final String MODID = Reference.MODID;
     public static final Logger LOGGER = LogUtils.getLogger();
 
-    public GrowthcraftRice(IEventBus modEventBus) {
+    public GrowthcraftRice(IEventBus modEventBus, ModContainer modContainer) {
         GrowthcraftRiceBlocks.BLOCKS.register(modEventBus);
         GrowthcraftRiceItems.ITEMS.register(modEventBus);
         GrowthcraftRiceFluids.FLUID_TYPES.register(modEventBus);
         GrowthcraftRiceFluids.FLUIDS.register(modEventBus);
         GrowthcraftRiceFluids.BLOCKS.register(modEventBus);
         modEventBus.addListener(this::buildCreativeTab);
+
+        modContainer.registerConfig(ModConfig.Type.COMMON, GrowthcraftRiceConfig.SPEC);
 
         LOGGER.info("{} module initialized", Reference.NAME);
     }
