@@ -15,9 +15,9 @@
   },
   "effects": [
     {
-      "effect": "minecraft:hero_of_the_village",
-      "duration": 12000,
-      "amplifier": 1
+      "effect": "minecraft:fire_resistance",
+      "duration": 6000,
+      "amplifier": 0
     }
   ],
   "bottle": {
