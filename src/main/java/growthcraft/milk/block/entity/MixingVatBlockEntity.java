@@ -6,6 +6,7 @@ import growthcraft.milk.init.GrowthcraftMilkRecipes;
 import growthcraft.milk.menu.MixingVatMenu;
 import growthcraft.milk.recipe.MixingVatRecipe;
 import growthcraft.milk.recipe.input.MixingVatInput;
+import growthcraft.lib.utils.HeatSourceUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -258,15 +259,7 @@ public class MixingVatBlockEntity extends BlockEntity implements WorldlyContaine
     }
 
     public static boolean isHeated(Level level, BlockPos pos) {
-        if (level == null) {
-            return false;
-        }
-        BlockState below = level.getBlockState(pos.below());
-        return below.is(net.minecraft.world.level.block.Blocks.FIRE)
-                || below.is(net.minecraft.world.level.block.Blocks.SOUL_FIRE)
-                || below.is(net.minecraft.world.level.block.Blocks.MAGMA_BLOCK)
-                || (below.hasProperty(net.minecraft.world.level.block.state.properties.BlockStateProperties.LIT)
-                        && Boolean.TRUE.equals(below.getValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.LIT)));
+        return HeatSourceUtils.hasHeatSourceBelow(level, pos);
     }
 
     public boolean isProcessing() {
