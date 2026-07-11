@@ -41,7 +41,8 @@ public class MixingVatBlockEntity extends BlockEntity implements WorldlyContaine
     public static final int SLOT_INPUT_1 = 1;
     public static final int SLOT_INPUT_2 = 2;
     public static final int SLOT_RESULT = 3;
-    public static final int SLOT_COUNT = 4;
+    public static final int SLOT_RESULT_TOOL = 4;
+    public static final int SLOT_COUNT = 5;
     public static final int MAIN_TANK_CAPACITY = 4000;
     public static final int SIDE_TANK_CAPACITY = 1000;
 
@@ -70,12 +71,12 @@ public class MixingVatBlockEntity extends BlockEntity implements WorldlyContaine
     }
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, MixingVatBlockEntity vat) {
-        if ((level.getGameTime() & 19L) == 0L) {
+        if ((level.getGameTime() & 19L) == 0L) {    // todo: ????
             updateLitState(level, pos, state);
             state = level.getBlockState(pos);
         }
 
-        Optional<RecipeHolder<MixingVatRecipe>> match = vat.findMatch(level, state);
+        Optional<RecipeHolder<MixingVatRecipe>> match = vat.findMatch(level, state);  // todo: horrible perf issue here
         if (match.isEmpty() || !vat.activated || !vat.canOutput(match.get().value())) {
             if (match.isEmpty()) {
                 vat.resetProgress();
@@ -84,11 +85,11 @@ public class MixingVatBlockEntity extends BlockEntity implements WorldlyContaine
         }
 
         MixingVatRecipe recipe = match.get().value();
-        vat.processTimeTotal = recipe.getProcessingTime();
-        vat.processTime++;
+        vat.processTimeTotal = recipe.getProcessingTime(); // todo  only needed once on start
+        vat.processTime++;        // todo keeps inc after total
         if (vat.processTime >= vat.processTimeTotal) {
-            vat.completeRecipe(level, pos, state, recipe);
-        } else if ((vat.processTime & 15) == 0) {
+            vat.completeRecipe(level, pos, state, recipe); // todo math allows it done multiple times, relies on recipe check
+        } else if ((vat.processTime & 15) == 0) {  // todo why?
             vat.setChanged();
             level.sendBlockUpdated(pos, state, state, Block.UPDATE_CLIENTS);
         }
@@ -155,6 +156,7 @@ public class MixingVatBlockEntity extends BlockEntity implements WorldlyContaine
             mainTank.setFluid(FluidStack.EMPTY);
             sideTank.setFluid(FluidStack.EMPTY);
             setItem(SLOT_RESULT, recipe.getResultItemStack());
+            setItem(SLOT_RESULT_TOOL, recipe.getResultActivationTool());
         }
         activated = false;
         processTime = 0;
@@ -199,18 +201,15 @@ public class MixingVatBlockEntity extends BlockEntity implements WorldlyContaine
             return false;
         }
 
-        Optional<RecipeHolder<MixingVatRecipe>> match = level == null ? Optional.empty()
-                : level.getRecipeManager().getAllRecipesFor(GrowthcraftMilkRecipes.MIXING_VAT_TYPE.get()).stream()
-                        .filter(holder -> ItemStack.isSameItemSameComponents(holder.value().getResultItemStack(), result))
-                        .findFirst();
-        ItemStack tool = match.map(holder -> holder.value().getResultActivationTool()).orElse(ItemStack.EMPTY);
-        if (!tool.isEmpty() && !ItemStack.isSameItem(tool, heldStack)) {
+        ItemStack resultActivationItem = getItem(SLOT_RESULT_TOOL);
+        if (!resultActivationItem.isEmpty() && !ItemStack.isSameItem(resultActivationItem, heldStack)) {
             return false;
         }
 
         ItemStack toGive = result.copy();
         setItem(SLOT_RESULT, ItemStack.EMPTY);
-        if (!tool.isEmpty() && !player.getAbilities().instabuild) {
+        setItem(SLOT_RESULT_TOOL, ItemStack.EMPTY);
+        if (!resultActivationItem.isEmpty() && !player.getAbilities().instabuild) {
             heldStack.shrink(1);
         }
         if (!player.addItem(toGive)) {

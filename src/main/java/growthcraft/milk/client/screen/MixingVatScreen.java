@@ -1,13 +1,18 @@
 package growthcraft.milk.client.screen;
 
 import growthcraft.lib.client.screen.renderer.FluidTankRenderer;
+import growthcraft.milk.block.entity.MixingVatBlockEntity;
 import growthcraft.milk.menu.MixingVatMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.fluids.FluidStack;
+
+import java.util.List;
 
 public class MixingVatScreen extends AbstractContainerScreen<MixingVatMenu> {
     private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("growthcraft_milk", "textures/gui/mixing_vat_screen.png");
@@ -122,6 +127,33 @@ public class MixingVatScreen extends AbstractContainerScreen<MixingVatMenu> {
 
         this.renderTooltip(graphics, mouseX, mouseY);
     }
+
+    @Override
+    protected void renderTooltip(GuiGraphics guiGraphics, int x, int y) {
+
+        if (this.menu.getCarried().isEmpty() && this.hoveredSlot != null && this.hoveredSlot.getSlotIndex() == 3 && this.hoveredSlot.hasItem()) {
+            // result slot
+            ItemStack finalizerItem = this.getMenu().getResultActivationTool();
+            ItemStack resultItemStack = this.hoveredSlot.getItem();
+            if (this.lastResultItem != resultItemStack.hashCode()) {
+                this.tooltipLines = this.getTooltipFromContainerItem(resultItemStack);
+                if (finalizerItem != null) {
+                    Component finalizerText = finalizerItem.isEmpty() ? Component.translatable("message.growthcraft_milk.get_using_item_empty_hand").withStyle(Style.EMPTY.withColor(0xffffff88)) : finalizerItem.getHoverName().copy().withStyle(Style.EMPTY.withColor(0xffffff88));
+                    this.lastComponent = Component.translatable("message.growthcraft_milk.get_using_item", finalizerText).withStyle(Style.EMPTY.withColor(0xffddbb44));
+                    this.tooltipLines.add(this.lastComponent);
+                }
+                this.lastResultItem = resultItemStack.hashCode();
+            }
+            guiGraphics.renderTooltip(this.font, tooltipLines, resultItemStack.getTooltipImage(), resultItemStack, x, y);
+        }
+        else {
+            // not a result slot
+            super.renderTooltip(guiGraphics, x, y);
+        }
+    }
+    private int lastResultItem = 0;
+    private Component lastComponent = null;
+    private List<Component> tooltipLines = null;
 
     @Override
     protected void renderLabels(GuiGraphics graphics, int mouseX, int mouseY) {
