@@ -1,6 +1,9 @@
 {
   "multipart": [
     {
+      "when": {
+        "down": "false"
+      },
       "apply": {
         "model": "growthcraft:block/rope_linen"
       }
