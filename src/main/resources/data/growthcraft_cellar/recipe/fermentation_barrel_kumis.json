@@ -1,10 +1,5 @@
 {
   "type": "growthcraft_cellar:fermentation_barrel_recipe",
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:false"
-    }
-  ],
   "processing_time": 1200,
   "ingredient_item": {
     "item": "growthcraft_cellar:yeast_brewers",
@@ -21,8 +16,8 @@
   "effects": [
     {
       "effect": "minecraft:resistance",
-      "duration": 3600,
-      "amplifier": 1
+      "duration": 6000,
+      "amplifier": 0
     }
   ],
   "bottle": {
