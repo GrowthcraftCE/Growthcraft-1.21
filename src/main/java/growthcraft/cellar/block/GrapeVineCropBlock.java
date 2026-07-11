@@ -6,7 +6,10 @@ import growthcraft.lib.block.GrowthcraftCropsRopeBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -26,10 +29,12 @@ public class GrapeVineCropBlock extends GrowthcraftCropsRopeBlock {
             Block.box(6.0D, 0.0D, 6.0D, 10.0D, 16.0D, 10.0D)
     };
     private final Supplier<? extends GrapeVineLeavesCropBlock> leavesBlock;
+    private final Supplier<? extends Item> seedItem;
 
-    public GrapeVineCropBlock(Supplier<? extends GrapeVineLeavesCropBlock> leavesBlock) {
+    public GrapeVineCropBlock(Supplier<? extends GrapeVineLeavesCropBlock> leavesBlock, Supplier<? extends Item> seedItem) {
         super();
         this.leavesBlock = leavesBlock;
+        this.seedItem = seedItem;
     }
 
     @Override
@@ -44,6 +49,11 @@ public class GrapeVineCropBlock extends GrowthcraftCropsRopeBlock {
                 .setValue(EAST, false)
                 .setValue(SOUTH, false)
                 .setValue(WEST, false);
+    }
+
+    @Override
+    public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
+        return new ItemStack(seedItem.get());
     }
 
     @Override

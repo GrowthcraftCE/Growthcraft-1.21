@@ -66,6 +66,11 @@ public class GrapeVineFruitBlock extends GrowthcraftCropsRopeBlock {
     }
 
     @Override
+    public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
+        return new ItemStack(fruitItem.get());
+    }
+
+    @Override
     protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (!level.isAreaLoaded(pos, 1) || level.getRawBrightness(pos, 0) < 9 || isMaxAge(state)) {
             return;
