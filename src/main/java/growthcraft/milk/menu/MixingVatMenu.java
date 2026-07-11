@@ -12,6 +12,7 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.fluids.FluidStack;
 import org.jetbrains.annotations.Nullable;
 
@@ -105,6 +106,16 @@ public class MixingVatMenu extends AbstractContainerMenu {
             public boolean mayPickup(Player player) {
                 return false;
             }
+        });
+        this.addSlot(new Slot(container, MixingVatBlockEntity.SLOT_RESULT+1, 99999, 99999) {
+            @Override
+            public boolean mayPlace(ItemStack stack) { return false; }
+            @Override
+            public boolean mayPickup(Player player) { return false; }
+            @Override
+            public boolean isFake() { return true; }
+            @Override
+            public boolean isActive() { return false; }
         });
 
         int startX = 8;
@@ -205,5 +216,10 @@ public class MixingVatMenu extends AbstractContainerMenu {
             slot.onTake(player, stackInSlot);
         }
         return itemstack;
+    }
+
+    public ItemStack getResultActivationTool()
+    {
+        return this.slots.get(MixingVatBlockEntity.SLOT_RESULT_TOOL).getItem();
     }
 }

@@ -223,7 +223,19 @@ public class MixingVatBlock extends Block implements EntityBlock {
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
         if (!state.is(newState.getBlock())) {
             if (!level.isClientSide && level.getBlockEntity(pos) instanceof MixingVatBlockEntity vat) {
-                Containers.dropContents(level, pos, vat);
+                for(int i = 0; i < vat.getContainerSize(); ++i) {
+                    if (i == MixingVatBlockEntity.SLOT_RESULT_TOOL) {
+                        continue; // it's a fake/virtual slot for transferring information to screen.
+                    }
+                    if (i == MixingVatBlockEntity.SLOT_RESULT) {
+                        // here's the deal: if there is a pickup-item needed (cloth), no drop. if it can be collected by hand, we drop.
+                        if (! vat.getItem(MixingVatBlockEntity.SLOT_RESULT_TOOL).isEmpty()) {
+                            continue;
+                        }
+                    }
+                    Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), vat.getItem(i));
+                }
+
             }
             super.onRemove(state, level, pos, newState, movedByPiston);
         }
