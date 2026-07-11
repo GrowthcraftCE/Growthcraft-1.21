@@ -1,6 +1,9 @@
 {
   "multipart": [
     {
+      "when": {
+        "age": "0|1|2|3"
+      },
       "apply": {
         "model": "growthcraft:block/rope_linen"
       }
@@ -78,7 +81,8 @@
     },
     {
       "when": {
-        "up": "true"
+        "up": "true",
+        "age": "0|1|2|3"
       },
       "apply": {
         "model": "growthcraft:block/rope_linen_side",
@@ -88,7 +92,8 @@
     },
     {
       "when": {
-        "down": "true"
+        "down": "true",
+        "age": "0|1|2|3"
       },
       "apply": {
         "model": "growthcraft:block/rope_linen_side",
