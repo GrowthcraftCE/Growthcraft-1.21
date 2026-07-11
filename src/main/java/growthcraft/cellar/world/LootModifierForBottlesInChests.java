@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
@@ -93,6 +94,7 @@ public class LootModifierForBottlesInChests extends LootModifier
         int min = 0, max = 2, color = 0;
         MobEffectInstance effect1 = null, effect2 = null;
         String nameKey = "asd";
+        Item baseItem = GrowthcraftCellarItems.POTION_WINE.get();
         if (lootTableId.equals(BuiltInLootTables.PILLAGER_OUTPOST.location()))
         {
             min = 6; max = 14;
@@ -115,6 +117,7 @@ public class LootModifierForBottlesInChests extends LootModifier
             effect1 = new MobEffectInstance(MobEffects.LUCK, 6000, 1, true, false);
             nameKey = "fluid_type.growthcraft_cellar.old_port_ale";
             color = 0x805C2F;
+            baseItem = GrowthcraftCellarItems.POTION_ALE.get();
         }
         else if (lootTableId.getPath().startsWith("chests/village/"))
         {
@@ -137,6 +140,7 @@ public class LootModifierForBottlesInChests extends LootModifier
             effect2 = new MobEffectInstance(MobEffects.TRIAL_OMEN, 20*1200, 0, true, false);
             nameKey = "fluid_type.growthcraft_cellar.copper_lager";
             color = 0x936B53;
+            baseItem = GrowthcraftCellarItems.POTION_LAGER.get();
         }
         else if (lootTableId.equals(BuiltInLootTables.STRONGHOLD_CORRIDOR.location()) || lootTableId.equals(BuiltInLootTables.STRONGHOLD_CROSSING.location()))
         {
@@ -147,7 +151,7 @@ public class LootModifierForBottlesInChests extends LootModifier
         }
 
         // step 3: make a stack of bottles
-        ItemStack bottles = GrowthcraftCellarItems.POTION_WINE.get().getDefaultInstance();
+        ItemStack bottles = baseItem.getDefaultInstance();
         bottles.setCount(lootContext.getRandom().nextIntBetweenInclusive(min, max));
         if (effect1 != null) {
             if (effect2 == null) {
