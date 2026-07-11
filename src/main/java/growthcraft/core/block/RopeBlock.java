@@ -1,8 +1,10 @@
 package growthcraft.core.block;
 
 import growthcraft.lib.block.GrowthcraftCropsRopeBlock;
+import growthcraft.core.init.GrowthcraftItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.BlockGetter;
@@ -90,6 +92,11 @@ public class RopeBlock extends FenceBlock {
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         // Same as FenceBlock (always can survive); ropes are not gravity-affected here.
         return true;
+    }
+
+    @Override
+    public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
+        return new ItemStack(GrowthcraftItems.ROPE_LINEN.get());
     }
 
     @Override
