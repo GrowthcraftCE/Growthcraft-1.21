@@ -16,6 +16,7 @@ import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -94,9 +95,9 @@ public class CorkCoasterBlockEntity extends BlockEntity implements Container, Cl
             BlockState updatedState = state.setValue(CorkCoasterBlock.ITEM, !isEmpty());
             if (state != updatedState) {
                 level.setBlock(worldPosition, updatedState, 3);
-            } else {
-                level.sendBlockUpdated(worldPosition, state, state, 3);
             }
+            BlockState currentState = getBlockState();
+            level.sendBlockUpdated(worldPosition, currentState, currentState, Block.UPDATE_CLIENTS);
         }
     }
 
@@ -111,6 +112,7 @@ public class CorkCoasterBlockEntity extends BlockEntity implements Container, Cl
     @Override
     public void loadAdditional(CompoundTag tag, HolderLookup.Provider provider) {
         super.loadAdditional(tag, provider);
+        items.clear();
         ContainerHelper.loadAllItems(tag.getCompound(ITEMS_TAG), this.items, provider);
     }
 
