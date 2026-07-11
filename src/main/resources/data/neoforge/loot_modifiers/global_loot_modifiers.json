@@ -7,7 +7,8 @@
     "growthcraft:seeds_from_fern",
     "growthcraft:seeds_from_large_fern",
     "growthcraft:yeast_ethereal_from_chorus_flower",
-    "growthcraft:yeast_lager_from_snow"
+    "growthcraft:yeast_lager_from_snow",
+    "growthcraft_cellar:bottles_in_loot_chest"
   ],
   "replace": false
 }
