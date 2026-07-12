@@ -10,7 +10,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "1. Grow wheat (or similar).$(br)2. Make a grain mixture; you can mix grain types. $(br)3. Roast the grain at the correct level in the $(l:cellar/roaster)Roaster$().$(br)4. Place the roasted grain with water in the $(l:cellar/brew_kettle)Brew Kettle$(). $(br)5. Place the resulting wort into a $(l:cellar/ferment_barrel)Fermentation Barrel$() with $(6)Brewer's$() or $(6)Lager yeast$(). $(br)6. Use a glass bottle to draw out the fermented fluid. $(br)7. Enjoy the effects$(br2)The following pages list the ingredients and effects of specific ales and lagers."
+      "text": "1. Grow wheat.$(br)2. Craft the wheat into Grain.$(br)3. Roast the Grain at the correct level in the $(l:cellar/roaster)Roaster$().$(br)4. Place the roasted Grain with water in the $(l:cellar/brew_kettle)Brew Kettle$().$(br)5. Place the resulting wort into a $(l:cellar/ferment_barrel)Fermentation Barrel$() with $(6)Brewer's$() or $(6)Lager Yeast$().$(br)6. Use a glass bottle to draw out the fermented fluid.$(br)7. Enjoy the effects.$(br2)The following pages list the ingredients and effects of specific ales and lagers."
     },
     {
       "type": "patchouli:spotlight",
@@ -21,7 +21,7 @@
     {
       "type": "patchouli:text",
       "title": "Ales (cont.)",
-      "text": "$(bold)IPA$() (from $(t:requires Golden Roasted Grain and Hops)$(o)Hopped Golden Wort*$())$(li)$(o)infused with extra $(2)Hops$()$(li)Jump Boost II (3:00)$(br2)$(bold)Old Port Ale$() (from $(t:requires Deep Copper Roasted Grain)$(o)Deep Copper Wort$())$(li)Luck (5:00)$(br2)$(bold)Pale Ale$() (from $(t:requires Pale Golden Roasted Grain)$(o)Pale Golden Wort$())$(li)Haste II (3:00)$(bold)$(br2)Stout Ale$() (from $(t:requires Dark Roasted Grain)$(o)Dark Wort$())$(li)Hero of the Village (10:00)"
+      "text": "$(bold)IPA$() (from $(t:requires Golden Roasted Grain and Hops)$(o)Hopped Golden Wort*$())$(li)$(o)infused with extra $(2)Hops$()$(li)Jump Boost II (3:00)$(br2)$(bold)Old Port Ale$() (from $(t:requires Deep Copper Roasted Grain)$(o)Deep Copper Wort$())$(li)Luck (5:00)$(br2)$(bold)Pale Ale$() (from $(t:requires Pale Golden Roasted Grain)$(o)Pale Golden Wort$())$(li)Haste II (3:00)$(bold)$(br2)Stout Ale$() (from $(t:requires Dark Roasted Grain)$(o)Dark Wort$())$(li)Fire Resistance (3:00)"
     },
     {
       "type": "patchouli:spotlight",

@@ -10,6 +10,11 @@
       "text": "The culture jar is primarily used to multiply yeasts.$(br2)Put a yeast in a $(bold)Culture Jar$() with its $(l:cellar/yeast)corresponding fluid$(), provide a nearby heat source, and it will grow additional yeasts.$(br2)The culture jar is also used to grow a $(bold)Starter Culture$() for $(l:milk/making_cheese)Making Cheese$()."
     },
     {
+      "type": "patchouli:text",
+      "title": "Your First Culture",
+      "text": "Place Brewer's Yeast in a heated Culture Jar with 1,000 mB of Milk. After 4 minutes, it becomes Starter Culture.$(br2)$(bold)Multiplying Cultures$()$(br)Place an existing Starter Culture in the heated Culture Jar with 250 mB of Milk or Skim Milk. After 1 minute, an additional Starter Culture is produced."
+    },
+    {
       "type": "patchouli:crafting",
       "recipe": "growthcraft_cellar:culture_jar"
     }
