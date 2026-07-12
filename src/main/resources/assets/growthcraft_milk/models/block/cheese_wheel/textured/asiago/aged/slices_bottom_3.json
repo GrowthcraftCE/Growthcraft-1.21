@@ -1,0 +1,8 @@
+{
+    "textures":  {
+                     "0":  "growthcraft_milk:block/cheese/asiago_aged_top",
+                     "1":  "growthcraft_milk:block/cheese/asiago_aged_side",
+                     "particle":  "growthcraft_milk:block/cheese/asiago_aged_top"
+                 },
+    "parent":  "growthcraft_milk:block/cheese_wheel/textured/cheese_slab_slices_bottom_3"
+}
