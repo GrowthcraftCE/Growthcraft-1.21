@@ -16,7 +16,7 @@
   "effects": [
     {
       "effect": "minecraft:fire_resistance",
-      "duration": 6000,
+      "duration": 3600,
       "amplifier": 0
     }
   ],

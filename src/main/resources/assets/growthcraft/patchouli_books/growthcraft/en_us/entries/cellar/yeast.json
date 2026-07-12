@@ -27,6 +27,12 @@
       "type": "patchouli:spotlight",
       "item": "growthcraft_cellar:yeast_ethereal",
       "text": "$(bold)Ethereal Yeast$() - These are magical versions of yeast, which do not have a purpose yet.$(br2)$(bold)Source$() - Ethereal yeast is not currently lootable in the world.$(br2)$(bold)Culturing$() - Needs generic Wort from wheat."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "growthcraft_milk:starter_culture",
+      "title": "Starter Culture",
+      "text": "$(bold)Starter Culture$() - Starter Culture is used to make cultured milk and other dairy products.$(br2)$(bold)Source$() - Create the first culture from Brewer's Yeast in a heated $(l:cellar/culture_jar)Culture Jar$().$(br2)$(bold)Culturing$() - Needs Milk or Skim Milk."
     }
   ]
 }
