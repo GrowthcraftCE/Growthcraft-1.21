@@ -3,6 +3,7 @@ package growthcraft.milk.recipe;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import growthcraft.milk.block.entity.MixingVatBlockEntity;
 import growthcraft.milk.init.GrowthcraftMilkRecipes;
 import growthcraft.milk.recipe.input.MixingVatInput;
 import net.minecraft.core.HolderLookup;
@@ -157,7 +158,8 @@ public class MixingVatRecipe implements Recipe<MixingVatInput> {
         boolean[] used = new boolean[input.size()];
         for (IngredientStack required : ingredients) {
             boolean matched = false;
-            for (int i = 0; i < input.size(); i++) {
+            int limit = Math.min(input.size(), MixingVatBlockEntity.SLOT_RESULT);
+            for (int i = 0; i < limit; i++) {
                 if (!used[i] && required.matches(input.getItem(i))) {
                     used[i] = true;
                     matched = true;
