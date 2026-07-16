@@ -330,6 +330,9 @@ public class MixingVatBlockEntity extends BlockEntity implements WorldlyContaine
 
     @Override
     public void setItem(int index, ItemStack stack) {
+        if (index == SLOT_RESULT && stack.isEmpty()) {
+            this.setItem(SLOT_RESULT_TOOL, ItemStack.EMPTY);
+        }
         items.set(index, stack);
         if (stack.getCount() > getMaxStackSize()) {
             stack.setCount(getMaxStackSize());
