@@ -147,6 +147,7 @@ public class GrowthcraftBlockTags extends BlockTagsProvider {
         this.tag(GrowthcraftTags.Blocks.ROPE)
                 .add(
                         GrowthcraftBlocks.ROPE_LINEN.get(),
+                        GrowthcraftBlocks.ROPE_LINEN2.get(),
                         GrowthcraftBlocks.ROPE_LINEN_ACACIA_FENCE.get(),
                         GrowthcraftBlocks.ROPE_LINEN_BAMBOO_FENCE.get(),
                         GrowthcraftBlocks.ROPE_LINEN_BIRCH_FENCE.get(),

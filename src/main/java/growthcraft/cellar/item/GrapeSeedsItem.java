@@ -11,6 +11,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.Tags;
 
 public class GrapeSeedsItem extends Item {
     private final java.util.function.Supplier<? extends GrapeVineCropBlock> grapeVineCropBlock;
@@ -25,11 +26,11 @@ public class GrapeSeedsItem extends Item {
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
         BlockPos plantPos = pos.above();
-        Block block = level.getBlockState(pos).getBlock();
 
-        if (block instanceof FarmBlock
+        if (level.getBlockState(pos).is(Tags.Blocks.VILLAGER_FARMLANDS)
                 && level.getBlockState(plantPos).isAir()
-                && RopeBlock.canConnect(level.getBlockState(pos.above(2)))) {
+                && (GrowthcraftCropsRopeBlock.canConnect(level.getBlockState(pos.above(2)))
+                )) {
             if (!level.isClientSide) {
                 BlockState state = grapeVineCropBlock.get().getActualBlockStateWithAge(level, plantPos, 0)
                         .setValue(GrowthcraftCropsRopeBlock.UP, true)

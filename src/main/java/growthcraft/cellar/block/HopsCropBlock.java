@@ -3,6 +3,7 @@ package growthcraft.cellar.block;
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.core.block.RopeBlock;
+import growthcraft.core.block.RopeBlock2;
 import growthcraft.lib.block.GrowthcraftCropsRopeBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -66,7 +67,7 @@ public class HopsCropBlock extends GrowthcraftCropsRopeBlock {
         BlockPos above = pos.above();
         BlockState aboveState = level.getBlockState(above);
 
-        if (isMaxAge(state) && aboveState.getBlock() instanceof RopeBlock) {
+        if (isMaxAge(state) && (aboveState.getBlock() instanceof RopeBlock || aboveState.getBlock() instanceof RopeBlock2)) {
             setCropBlock(level, above, GrowthcraftCellarBlocks.HOPS_VINE.get().getActualBlockStateWithAge(level, above, 0));
         }
     }

@@ -2,6 +2,7 @@ package growthcraft.lib.block;
 
 import com.mojang.serialization.MapCodec;
 import growthcraft.core.block.RopeBlock;
+import growthcraft.core.block.RopeFenceBlock;
 import growthcraft.core.init.GrowthcraftBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -23,6 +24,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.neoforged.neoforge.common.Tags;
 
 public class GrowthcraftCropsRopeBlock extends BushBlock implements BonemealableBlock {
     public static final MapCodec<GrowthcraftCropsRopeBlock> CODEC = simpleCodec(GrowthcraftCropsRopeBlock::new);
@@ -66,7 +68,7 @@ public class GrowthcraftCropsRopeBlock extends BushBlock implements Bonemealable
 
     @Override
     protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
-        return state.getBlock() instanceof FarmBlock || RopeBlock.canConnect(state);
+        return state.is(Tags.Blocks.VILLAGER_FARMLANDS) || GrowthcraftCropsRopeBlock.canConnect(state);
     }
 
     @Override
@@ -95,12 +97,12 @@ public class GrowthcraftCropsRopeBlock extends BushBlock implements Bonemealable
     public BlockState getActualBlockStateWithAge(BlockGetter level, BlockPos pos, int age) {
         return defaultBlockState()
                 .setValue(AGE, Mth.clamp(age, 0, getMaxAge()))
-                .setValue(NORTH, RopeBlock.canConnect(level.getBlockState(pos.north())))
-                .setValue(EAST, RopeBlock.canConnect(level.getBlockState(pos.east())))
-                .setValue(SOUTH, RopeBlock.canConnect(level.getBlockState(pos.south())))
-                .setValue(WEST, RopeBlock.canConnect(level.getBlockState(pos.west())))
-                .setValue(UP, RopeBlock.canConnect(level.getBlockState(pos.above())))
-                .setValue(DOWN, RopeBlock.canConnect(level.getBlockState(pos.below())));
+                .setValue(NORTH, GrowthcraftCropsRopeBlock.canConnect(level.getBlockState(pos.north())))
+                .setValue(EAST, GrowthcraftCropsRopeBlock.canConnect(level.getBlockState(pos.east())))
+                .setValue(SOUTH, GrowthcraftCropsRopeBlock.canConnect(level.getBlockState(pos.south())))
+                .setValue(WEST, GrowthcraftCropsRopeBlock.canConnect(level.getBlockState(pos.west())))
+                .setValue(UP, GrowthcraftCropsRopeBlock.canConnect(level.getBlockState(pos.above())))
+                .setValue(DOWN, GrowthcraftCropsRopeBlock.canConnect(level.getBlockState(pos.below())));
     }
 
     public boolean connectsAsRope() {
@@ -166,5 +168,15 @@ public class GrowthcraftCropsRopeBlock extends BushBlock implements Bonemealable
         return !newState.is(state.getBlock())
                 && !(newState.getBlock() instanceof GrowthcraftCropsRopeBlock)
                 && !(level.getBlockState(pos.below()).getBlock() instanceof FarmBlock);
+    }
+
+    public static boolean canConnect(BlockState state) {
+        Block block = state.getBlock();
+        if (block instanceof GrowthcraftCropsRopeBlock crop) {
+            return crop.connectsAsRope();
+        }
+        return block instanceof RopeBlock
+                || block instanceof RopeFenceBlock
+                || state.is(growthcraft.core.init.GrowthcraftTags.Blocks.ROPE);
     }
 }

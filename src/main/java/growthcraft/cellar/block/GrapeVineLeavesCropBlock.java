@@ -68,7 +68,9 @@ public class GrapeVineLeavesCropBlock extends GrowthcraftCropsRopeBlock {
         }
         for (Direction direction : directions) {
             BlockPos spreadPos = pos.relative(direction);
-            if (level.getBlockState(spreadPos).is(GrowthcraftBlocks.ROPE_LINEN.get())) {
+            if (level.getBlockState(spreadPos).is(GrowthcraftBlocks.ROPE_LINEN.get())
+                    || level.getBlockState(spreadPos).is(GrowthcraftBlocks.ROPE_LINEN2.get())
+                ) {
                 setCropBlock(level, spreadPos, getActualBlockStateWithAge(level, spreadPos, 0));
                 return;
             }
@@ -84,7 +86,7 @@ public class GrapeVineLeavesCropBlock extends GrowthcraftCropsRopeBlock {
     protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         for (Direction direction : Direction.values()) {
             BlockState adjacent = level.getBlockState(pos.relative(direction));
-            if (adjacent.getBlock() instanceof GrapeVineCropBlock || adjacent.getBlock() instanceof GrapeVineLeavesCropBlock || RopeBlock.canConnect(adjacent)) {
+            if (adjacent.getBlock() instanceof GrapeVineCropBlock || adjacent.getBlock() instanceof GrapeVineLeavesCropBlock || GrowthcraftCropsRopeBlock.canConnect(adjacent)) {
                 return true;
             }
         }

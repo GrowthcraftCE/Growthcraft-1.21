@@ -20,6 +20,7 @@ public class GrowthcraftBlockLoot extends BlockLootSubProvider {
         // Generate loot tables for Growthcraft blocks
         // Rope block should drop the rope item (since there is no BlockItem for the rope block)
         this.add(GrowthcraftBlocks.ROPE_LINEN.get(), createSingleItemTable(GrowthcraftItems.ROPE_LINEN.get()));
+        this.add(GrowthcraftBlocks.ROPE_LINEN2.get(), createSingleItemTable(GrowthcraftItems.ROPE_LINEN2.get()));
 
         // Salt blocks and ores (retain existing behavior; custom JSONs may override at runtime)
         this.dropSelf(GrowthcraftBlocks.SALT_BLOCK.get());

@@ -9,6 +9,7 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FarmBlock;
+import net.neoforged.neoforge.common.Tags;
 
 public class HopsSeedsItem extends Item {
     public HopsSeedsItem(Properties properties) {
@@ -20,9 +21,8 @@ public class HopsSeedsItem extends Item {
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
         BlockPos plantPos = pos.above();
-        Block block = level.getBlockState(pos).getBlock();
 
-        if (block instanceof FarmBlock && level.getBlockState(plantPos).isAir()) {
+        if (level.getBlockState(pos).is(Tags.Blocks.VILLAGER_FARMLANDS) && level.getBlockState(plantPos).isAir()) {
             if (!level.isClientSide) {
                 level.setBlock(plantPos, GrowthcraftCellarBlocks.HOPS_VINE.get().getActualBlockStateWithAge(level, plantPos, 0), Block.UPDATE_ALL);
                 RopeBlock.refreshAdjacentConnections(level, plantPos);

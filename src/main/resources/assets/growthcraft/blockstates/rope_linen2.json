@@ -137,7 +137,47 @@
     },
     {
       "when": {
+        "up_ex": 2
+      },
+      "apply": {
+        "model": "growthcraft:block/rope_linen_vert_and_fence",
+        "x": 0,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "up_ex": 2
+      },
+      "apply": {
+        "model": "growthcraft:block/rope_linen_side",
+        "x": 270,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
         "down_ex": 1
+      },
+      "apply": {
+        "model": "growthcraft:block/rope_linen_side",
+        "x": 90,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "down_ex": 2
+      },
+      "apply": {
+        "model": "growthcraft:block/rope_linen_vert_and_fence",
+        "x": 180,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "down_ex": 2
       },
       "apply": {
         "model": "growthcraft:block/rope_linen_side",
