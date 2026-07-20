@@ -1,28 +1,64 @@
 package growthcraft.cellar.block;
 
-import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
-import growthcraft.core.block.RopeBlock;
 import growthcraft.core.block.RopeBlock2;
-import growthcraft.lib.block.GrowthcraftCropsRopeBlock;
+import growthcraft.core.block.RopeBlock2Base;
+import growthcraft.core.init.GrowthcraftBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class HopsCropBlock extends GrowthcraftCropsRopeBlock {
+public class HopsCropBlock extends RopeBlock2Base implements BonemealableBlock
+{
     private static final VoxelShape SEEDLING_SHAPE = Block.box(6.0D, 0.0D, 6.0D, 10.0D, 5.0D, 10.0D);
     private static final VoxelShape POST_SHAPE = Block.box(4.0D, 0.0D, 4.0D, 12.0D, 16.0D, 12.0D);
+    public static final IntegerProperty AGE = BlockStateProperties.AGE_7;
+    public static final int MAX_AGE = 7;
+
+    public HopsCropBlock()
+    {
+        super(BlockBehaviour.Properties.of()
+                .randomTicks()
+                .noCollission()
+                .instabreak()
+                .sound(SoundType.CROP));
+        this.registerDefaultState(
+                this.stateDefinition
+                        .any()
+                        .setValue(NORTH, 0)
+                        .setValue(EAST, 0)
+                        .setValue(SOUTH, 0)
+                        .setValue(WEST, 0)
+                        .setValue(UP, 0)
+                        .setValue(DOWN, 0)
+                        .setValue(AGE, 0)
+        );
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
+        builder.add(AGE);  // in addition to NORTH, EAST, WEST, SOUTH, UP, DOWN
+    }
 
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
@@ -32,18 +68,34 @@ public class HopsCropBlock extends GrowthcraftCropsRopeBlock {
     @Override
     protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         super.randomTick(state, level, pos, random);
-        tryGrowNewVine(level, pos);
+        if (!level.isAreaLoaded(pos, 1) || level.getRawBrightness(pos, 0) < 9 || random.nextInt(4) != 0) {
+            return;
+        }
+        if (state.getValue(AGE) < MAX_AGE) {
+            level.setBlock(pos, state.setValue(AGE, state.getValue(AGE) + 1), Block.UPDATE_ALL);
+            return;
+        }
+        this.tryGrowNewVine(state, level, pos);
     }
 
     @Override
     public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
-        return super.isValidBonemealTarget(level, pos, state) || level.getBlockState(pos.above()).getBlock() instanceof RopeBlock;
+        return state.getValue(AGE) < MAX_AGE || level.getBlockState(pos.above()).getBlock() instanceof RopeBlock2;
     }
 
     @Override
+    public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) { return true; }
+
+    @Override
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
-        super.performBonemeal(level, random, pos, state);
-        tryGrowNewVine(level, pos);
+        int previousAge = state.getValue(AGE);
+        if (previousAge < MAX_AGE) {
+            int age = Math.min(previousAge + Mth.nextInt(random, 1, 2), MAX_AGE);
+            level.setBlock(pos, state.setValue(AGE, age), Block.UPDATE_ALL);
+        }
+        else {
+            tryGrowNewVine(state, level, pos);
+        }
     }
 
     @Override
@@ -53,22 +105,34 @@ public class HopsCropBlock extends GrowthcraftCropsRopeBlock {
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        if (!isMaxAge(state)) {
+        if (state.getValue(AGE) != MAX_AGE) {
+            return InteractionResult.PASS;
+        }
+        if (player.getItemInHand(player.getUsedItemHand()).is(Items.BONE_MEAL)) {
             return InteractionResult.PASS;
         }
 
         popResource(level, pos, new ItemStack(GrowthcraftCellarItems.HOPS.get()));
-        level.setBlock(pos, getActualBlockStateWithAge(level, pos, getMaxAge() - 1), Block.UPDATE_ALL);
+        level.setBlock(pos, state.setValue(AGE, MAX_AGE - 1), Block.UPDATE_ALL);
         return InteractionResult.sidedSuccess(level.isClientSide);
     }
 
-    private void tryGrowNewVine(ServerLevel level, BlockPos pos) {
-        BlockState state = level.getBlockState(pos);
-        BlockPos above = pos.above();
-        BlockState aboveState = level.getBlockState(above);
+    private void tryGrowNewVine(BlockState state, ServerLevel level, BlockPos pos) {
+        if (state.getValue(AGE) == MAX_AGE) {
+            BlockPos above = pos.above();
+            if (level.getBlockState(above).getBlock() instanceof RopeBlock2) {
+                BlockState newState = this.getStateForPlacement(level, above);
+                level.setBlock(above, newState, Block.UPDATE_ALL);
+            }
+        }
+    }
 
-        if (isMaxAge(state) && (aboveState.getBlock() instanceof RopeBlock || aboveState.getBlock() instanceof RopeBlock2)) {
-            setCropBlock(level, above, GrowthcraftCellarBlocks.HOPS_VINE.get().getActualBlockStateWithAge(level, above, 0));
+    @Override
+    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        super.onRemove(state, level, pos, newState, movedByPiston);
+
+        if (RopeBlock2Base.shouldRestoreRopeOnRemove(state, level, pos, newState)) {
+            level.setBlock(pos, ((RopeBlock2) GrowthcraftBlocks.ROPE_LINEN2.get()).getStateForPlacement(level, pos), Block.UPDATE_ALL);
         }
     }
 }

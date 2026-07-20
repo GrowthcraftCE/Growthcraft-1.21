@@ -1,0 +1,157 @@
+package growthcraft.cellar.block;
+
+import growthcraft.core.block.RopeBlock2;
+import growthcraft.core.block.RopeBlock2Base;
+import growthcraft.core.init.GrowthcraftBlocks;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.BonemealableBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+
+import java.util.function.Supplier;
+
+public class GrapeVineLeavesBlock extends RopeBlock2Base implements BonemealableBlock {
+    private static final VoxelShape SHAPE_INT = Block.box(0.0D, 1.0D, 0.0D, 16.0D, 15.9D, 16.0D);
+    private static final VoxelShape SHAPE_COL = Block.box(6.0D, 9.0D, 6.0D, 10.0D, 16.0D, 10.0D);
+    public static final IntegerProperty AGE = BlockStateProperties.AGE_7;
+    public static final int MAX_AGE = 7;
+
+    private final Supplier<? extends GrapeVineFruitBlock> fruitBlock;
+    private final Supplier<? extends Item> seedItem;
+
+    public GrapeVineLeavesBlock(Supplier<? extends GrapeVineFruitBlock> fruitBlock, Supplier<? extends Item> seedItem) {
+        super(BlockBehaviour.Properties.of()
+                .randomTicks()
+                .instabreak()
+                .noOcclusion().forceSolidOff()
+                .sound(SoundType.CROP));
+        this.registerDefaultState(
+                this.stateDefinition
+                        .any()
+                        .setValue(NORTH, 0)
+                        .setValue(EAST, 0)
+                        .setValue(SOUTH, 0)
+                        .setValue(WEST, 0)
+                        .setValue(UP, 0)
+                        .setValue(DOWN, 0)
+                        .setValue(AGE, 0)
+        );
+        this.fruitBlock = fruitBlock;
+        this.seedItem = seedItem;
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        super.createBlockStateDefinition(builder);
+        builder.add(AGE);  // in addition to NORTH, EAST, WEST, SOUTH, UP, DOWN
+    }
+
+    @Override
+    protected boolean propagatesSkylightDown(BlockState state, BlockGetter reader, BlockPos pos) {
+        return true;
+    }
+
+
+    @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return SHAPE_INT;
+    }
+
+    @Override
+    protected VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
+    {
+        return SHAPE_COL;
+    }
+
+    @Override
+    public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
+        return new ItemStack(seedItem.get());
+    }
+
+    @Override
+    protected boolean isRandomlyTicking(BlockState state) {
+        return true;
+    }
+
+    @Override
+    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (!level.isAreaLoaded(pos, 1) || level.getRawBrightness(pos.above(), 0) < 9 || random.nextInt(4) != 0) {
+            return;
+        }
+        if (state.getValue(AGE) < MAX_AGE) {
+            level.setBlock(pos, state.setValue(AGE, state.getValue(AGE) + 1), Block.UPDATE_ALL);
+            return;
+        }
+
+        Direction direction = Direction.NORTH;
+        int rotationCount = random.nextInt(4); //to start from random direction
+        for (int index = 0; index < rotationCount; index++) {
+            direction = direction.getClockWise();
+        }
+        for (int index = 0; index < 4; index++) { // now the actual thing
+            BlockPos spreadPos = pos.relative(direction);
+            if (level.getBlockState(spreadPos).is(GrowthcraftBlocks.ROPE_LINEN2.get())) {
+                level.setBlock(spreadPos, this.getStateForPlacement(level, spreadPos),3);
+                return;
+            }
+        }
+
+        BlockPos fruitPos = pos.below();
+        if (level.getBlockState(fruitPos).isAir()) {
+            level.setBlock(fruitPos, fruitBlock.get().defaultBlockState(), 3);
+        }
+    }
+
+    @Override
+    protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        for (Direction direction : Direction.values()) {
+            BlockState adjacent = level.getBlockState(pos.relative(direction));
+            if (adjacent.getBlock() instanceof GrapeVineStemBlock || adjacent.getBlock() instanceof GrapeVineLeavesBlock || adjacent.getBlock() instanceof RopeBlock2)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
+        return state.getValue(AGE) < MAX_AGE;
+    }
+
+    @Override
+    public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
+        return true;
+    }
+
+    @Override
+    public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
+        int age = Math.min(state.getValue(AGE) + Mth.nextInt(random, 1, 2), MAX_AGE);
+        level.setBlock(pos, state.setValue(AGE, age), Block.UPDATE_ALL);
+    }
+
+    @Override
+    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        super.onRemove(state, level, pos, newState, movedByPiston);
+
+        if (RopeBlock2Base.shouldRestoreRopeOnRemove(state, level, pos, newState)) {
+            level.setBlock(pos, ((RopeBlock2) GrowthcraftBlocks.ROPE_LINEN2.get()).getStateForPlacement(level, pos), Block.UPDATE_ALL);
+        }
+    }
+}

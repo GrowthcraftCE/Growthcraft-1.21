@@ -55,7 +55,7 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
                 .save(output, ResourceLocation.fromNamespaceAndPath(Reference.MODID, "salt"));
 
         // Rope (linen) recipe: 8x rope_linen from string and lead
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftItems.ROPE_LINEN.get(), 8)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftItems.ROPE_LINEN2.get(), 8)
                 .pattern("AAA")
                 .pattern("ABA")
                 .pattern("AAA")
@@ -66,14 +66,14 @@ public class GrowthcraftRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(Items.LEAD), has(Items.LEAD))
                 .save(output, ResourceLocation.fromNamespaceAndPath(Reference.MODID, "rope_linen"));
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftItems.ROPE_LINEN.get(), 8)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, GrowthcraftItems.ROPE_LINEN2.get(), 8)
                 .pattern("AAA")
                 .pattern("ABA")
                 .pattern("AAA")
                 .define('A', Items.STRING)
-                .define('B', GrowthcraftItems.ROPE_LINEN.get())
+                .define('B', GrowthcraftItems.ROPE_LINEN2.get())
                 .group("growthcraft")
-                .unlockedBy(getHasName(GrowthcraftItems.ROPE_LINEN.get()), has(GrowthcraftItems.ROPE_LINEN.get()))
+                .unlockedBy(getHasName(GrowthcraftItems.ROPE_LINEN2.get()), has(GrowthcraftItems.ROPE_LINEN2.get()))
                 .save(output, ResourceLocation.fromNamespaceAndPath(Reference.MODID, "rope_linen_lengthen"));
 
         // Common iron ingots tag used by crowbar recipes

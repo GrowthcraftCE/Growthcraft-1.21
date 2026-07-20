@@ -20,7 +20,7 @@ public class GrowthcraftCreativeTabs {
                     .displayItems((params, output) -> {
                         // Materials
                         output.accept(GrowthcraftItems.SALT.get());
-                        output.accept(GrowthcraftItems.ROPE_LINEN.get());
+                        output.accept(GrowthcraftItems.ROPE_LINEN2.get());
 
                         // Blocks
                         output.accept(GrowthcraftItems.SALT_BLOCK.get());

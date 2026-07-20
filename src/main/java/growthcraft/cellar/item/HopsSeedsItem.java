@@ -1,14 +1,12 @@
 package growthcraft.cellar.item;
 
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
-import growthcraft.core.block.RopeBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.FarmBlock;
 import net.neoforged.neoforge.common.Tags;
 
 public class HopsSeedsItem extends Item {
@@ -24,8 +22,7 @@ public class HopsSeedsItem extends Item {
 
         if (level.getBlockState(pos).is(Tags.Blocks.VILLAGER_FARMLANDS) && level.getBlockState(plantPos).isAir()) {
             if (!level.isClientSide) {
-                level.setBlock(plantPos, GrowthcraftCellarBlocks.HOPS_VINE.get().getActualBlockStateWithAge(level, plantPos, 0), Block.UPDATE_ALL);
-                RopeBlock.refreshAdjacentConnections(level, plantPos);
+                level.setBlock(plantPos, GrowthcraftCellarBlocks.HOPS_VINE.get().defaultBlockState(), Block.UPDATE_ALL);
                 if (context.getPlayer() == null || !context.getPlayer().isCreative()) {
                     context.getItemInHand().shrink(1);
                 }

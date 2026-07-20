@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_rope_linen": {
+    "has_rope_linen2": {
       "conditions": {
         "items": [
           {
-            "items": "growthcraft:rope_linen"
+            "items": "growthcraft:rope_linen2"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_rope_linen"
+      "has_rope_linen2"
     ]
   ],
   "rewards": {

@@ -2,7 +2,7 @@
   "multipart": [
     {
       "when": {
-        "down": "false"
+        "down_ex": 0
       },
       "apply": {
         "model": "growthcraft:block/rope_linen"
@@ -18,7 +18,7 @@
     },
     {
       "when": {
-        "north": "true"
+        "north_ex": "1|2"
       },
       "apply": {
         "model": "growthcraft:block/rope_linen_side",
@@ -27,7 +27,7 @@
     },
     {
       "when": {
-        "east": "true"
+        "east_ex": "1|2"
       },
       "apply": {
         "model": "growthcraft:block/rope_linen_side",
@@ -37,7 +37,7 @@
     },
     {
       "when": {
-        "south": "true"
+        "south_ex": "1|2"
       },
       "apply": {
         "model": "growthcraft:block/rope_linen_side",
@@ -47,7 +47,7 @@
     },
     {
       "when": {
-        "west": "true"
+        "west_ex": "1|2"
       },
       "apply": {
         "model": "growthcraft:block/rope_linen_side",
@@ -57,7 +57,7 @@
     },
     {
       "when": {
-        "up": "true"
+        "up_ex": "1|2"
       },
       "apply": {
         "model": "growthcraft:block/rope_linen_side",
@@ -67,12 +67,74 @@
     },
     {
       "when": {
-        "down": "true"
+        "down_ex": "1|2"
       },
       "apply": {
         "model": "growthcraft_cellar:block/grape_vine/grape_vine_leaves_trunk",
         "uvlock": false
       }
+    },
+
+    {
+      "when": {
+        "north_ex": 2
+      },
+      "apply": {
+        "model": "growthcraft:block/rope_linen_side_and_fence",
+        "y": 0,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "east_ex": 2
+      },
+      "apply": {
+        "model": "growthcraft:block/rope_linen_side_and_fence",
+        "y": 90,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "south_ex": 2
+      },
+      "apply": {
+        "model": "growthcraft:block/rope_linen_side_and_fence",
+        "y": 180,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "west_ex": 2
+      },
+      "apply": {
+        "model": "growthcraft:block/rope_linen_side_and_fence",
+        "y": 270,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "up_ex": 2
+      },
+      "apply": {
+        "model": "growthcraft:block/rope_linen_vert_and_fence",
+        "x": 0,
+        "uvlock": false
+      }
+    },
+    {
+      "when": {
+        "down_ex": 2
+      },
+      "apply": {
+        "model": "growthcraft:block/rope_linen_vert_and_fence",
+        "x": 180,
+        "uvlock": false
+      }
     }
+
   ]
 }

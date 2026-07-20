@@ -3,6 +3,7 @@ package growthcraft.core.block;
 import growthcraft.core.init.GrowthcraftItems;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -26,11 +27,11 @@ public class RopeBlock2SupportEvents
         for (int i = 0; i < 4; i++)
         {
             BlockState sideBlock = event.getLevel().getBlockState(event.getPos().relative(direction));
-            if (sideBlock.getBlock() instanceof RopeBlock2)
+            if (sideBlock.getBlock() instanceof RopeBlock2Base)
             { // rope or leaves
                 if (sideBlock.getValue(RopeBlock2.getPropertyFromDirection(direction.getOpposite())) == 2)
                 {
-                    event.getLevel().setBlock(event.getPos().relative(direction), sideBlock.setValue(RopeBlock2.getPropertyFromDirection(direction.getOpposite()), 0), RopeBlock.UPDATE_ALL);
+                    event.getLevel().setBlock(event.getPos().relative(direction), sideBlock.setValue(RopeBlock2.getPropertyFromDirection(direction.getOpposite()), 0), Block.UPDATE_ALL);
                     event.setCanceled(true);
                     break;
                 }
@@ -49,15 +50,15 @@ public class RopeBlock2SupportEvents
             BlockState clickedState = event.getLevel().getBlockState(event.getPos());
             if (event.getFace() != null && clickedState.is(BlockTags.FENCES)) {
                 BlockState adjacent = event.getLevel().getBlockState(event.getPos().relative(event.getFace()));
-                if (adjacent.getBlock() instanceof RopeBlock2 && adjacent.getValue(RopeBlock2.getPropertyFromDirection(event.getFace().getOpposite())) == 0) {
-                    event.getLevel().setBlock(event.getPos().relative(event.getFace()), adjacent.setValue(RopeBlock2.getPropertyFromDirection(event.getFace().getOpposite()), 2), RopeBlock.UPDATE_ALL);
+                if (adjacent.getBlock() instanceof RopeBlock2Base && adjacent.getValue(RopeBlock2.getPropertyFromDirection(event.getFace().getOpposite())) == 0) {
+                    event.getLevel().setBlock(event.getPos().relative(event.getFace()), adjacent.setValue(RopeBlock2.getPropertyFromDirection(event.getFace().getOpposite()), 2), Block.UPDATE_ALL);
                     return;
                 }
             }
-            if (event.getFace() != null && clickedState.getBlock() instanceof RopeBlock2) {
+            if (event.getFace() != null && clickedState.getBlock() instanceof RopeBlock2Base) {
                 BlockState adjacent = event.getLevel().getBlockState(event.getPos().relative(event.getFace()));
                 if (adjacent.is(BlockTags.FENCES) && clickedState.getValue(RopeBlock2.getPropertyFromDirection(event.getFace())) == 0) {
-                    event.getLevel().setBlock(event.getPos(), clickedState.setValue(RopeBlock2.getPropertyFromDirection(event.getFace()), 2), RopeBlock.UPDATE_ALL);
+                    event.getLevel().setBlock(event.getPos(), clickedState.setValue(RopeBlock2.getPropertyFromDirection(event.getFace()), 2), Block.UPDATE_ALL);
                 }
             }
         }

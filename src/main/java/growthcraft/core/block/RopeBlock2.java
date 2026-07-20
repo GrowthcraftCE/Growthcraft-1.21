@@ -1,12 +1,9 @@
 package growthcraft.core.block;
 
 import growthcraft.core.init.GrowthcraftItems;
-import growthcraft.lib.block.GrowthcraftCropsRopeBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
@@ -18,11 +15,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.PushReaction;
-import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -30,22 +25,16 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RopeBlock2 extends Block implements SimpleWaterloggedBlock
+public class RopeBlock2 extends RopeBlock2Base implements SimpleWaterloggedBlock
 {
     private static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-    private static final IntegerProperty NORTH = IntegerProperty.create("north_ex", 0, 2); // 0: no conn, 1: conn to block edge (to other rope), 2: spec conn (to fences)
-    private static final IntegerProperty EAST  = IntegerProperty.create("east_ex",  0, 2);
-    private static final IntegerProperty SOUTH = IntegerProperty.create("south_ex", 0, 2);
-    private static final IntegerProperty WEST  = IntegerProperty.create("west_ex",  0, 2); // 0: no conn, 1: conn to block edge (to other rope), 2: spec conn (to fences)
-    private static final IntegerProperty UP = IntegerProperty.create("up_ex", 0, 2);
-    private static final IntegerProperty DOWN = IntegerProperty.create("down_ex", 0, 2);
     private static final BooleanProperty KNOT = BooleanProperty.create("knot");
     private final ArrayList<VoxelShape> shapeByIndex = new ArrayList<>();
     private final List<VoxelShape> collisionShapeByIndex = new ArrayList<>();
 
     public RopeBlock2()
     {
-        super(BlockBehaviour.Properties.of().strength(0.2F).pushReaction(PushReaction.DESTROY).sound(SoundType.WOOL));
+        super(BlockBehaviour.Properties.of().strength(0.2F).pushReaction(PushReaction.DESTROY).sound(SoundType.WOOL).noOcclusion());
         this.registerDefaultState(
             this.stateDefinition
                 .any()
@@ -63,7 +52,8 @@ public class RopeBlock2 extends Block implements SimpleWaterloggedBlock
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(NORTH, EAST, WEST, SOUTH, UP, DOWN, KNOT, WATERLOGGED);
+        super.createBlockStateDefinition(builder);
+        builder.add(KNOT, WATERLOGGED);  // in addition to NORTH, EAST, WEST, SOUTH, UP, DOWN
     }
 
     @Override
@@ -181,16 +171,6 @@ public class RopeBlock2 extends Block implements SimpleWaterloggedBlock
     //----------------------------------------------//
 
     @Override
-    protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType) {
-        return false;
-    }
-
-    @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return getConnectedState(context.getLevel(), context.getClickedPos(), true);
-    }
-
-    @Override
     protected FluidState getFluidState(BlockState state)
     {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
@@ -201,54 +181,19 @@ public class RopeBlock2 extends Block implements SimpleWaterloggedBlock
         return new ItemStack(GrowthcraftItems.ROPE_LINEN2.get());
     }
 
-    private BlockState getConnectedState(LevelAccessor level, BlockPos pos, boolean knot) {
-        return this.defaultBlockState()
-                .setValue(KNOT, knot)
-                .setValue(WATERLOGGED, level.getFluidState(pos).getType() == Fluids.WATER)
-                .setValue(NORTH, this.getConnectionFromState(level.getBlockState(pos.relative(Direction.NORTH))))
-                .setValue(SOUTH, this.getConnectionFromState(level.getBlockState(pos.relative(Direction.SOUTH))))
-                .setValue(WEST, this.getConnectionFromState(level.getBlockState(pos.relative(Direction.WEST))))
-                .setValue(EAST, this.getConnectionFromState(level.getBlockState(pos.relative(Direction.EAST))))
-                .setValue(UP, this.getConnectionFromState(level.getBlockState(pos.relative(Direction.UP))))
-                .setValue(DOWN, this.getConnectionFromState(level.getBlockState(pos.relative(Direction.DOWN))));
+    @Override
+    protected BlockState getConnectedState(LevelAccessor level, BlockPos pos) {
+        return super.getConnectedState(level, pos)
+                .setValue(KNOT, true)
+                .setValue(WATERLOGGED, level.getFluidState(pos).getType() == Fluids.WATER);
     }
-
-    public int getConnectionFromState(BlockState state) {
-        if (state.is(this) || state.getBlock() instanceof GrowthcraftCropsRopeBlock crop && crop.connectsAsRope()) {
-            return 1; // rope
-        }
-        if (state.is(BlockTags.FENCES)) {
-            return 2; // rope and fence wrapping
-        }
-        return 0;
-    }
-
-    private BlockState getUpdatedStateOnDemand(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
-        int newConnectionValue = this.getConnectionFromState(level.getBlockState(currentPos.relative(facing)));
-        IntegerProperty property = getPropertyFromDirection(facing);
-        return state.setValue(property, newConnectionValue);
-    }
-
-    public static IntegerProperty getPropertyFromDirection(Direction facing) {
-        return switch (facing)
-        {
-            case Direction.NORTH -> NORTH;
-            case Direction.SOUTH -> SOUTH;
-            case Direction.WEST -> WEST;
-            case Direction.EAST -> EAST;
-            case Direction.UP -> UP;
-            case Direction.DOWN -> DOWN;
-        };
-    }
-
 
     @Override
     protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
         if (state.getValue(WATERLOGGED)) {
             level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
-
-        return this.getUpdatedStateOnDemand(state, facing, facingState, level, currentPos, facingPos);
+        return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
     }
 
     /////////////////
