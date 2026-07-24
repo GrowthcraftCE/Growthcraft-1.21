@@ -126,25 +126,25 @@ public class RopeBlock2 extends RopeBlock2Base implements SimpleWaterloggedBlock
             }
         }
     }
-    VoxelShape SHAPE_CENTER = Block.box(7.0D, 7.0D, 7.0D, 9.0D, 9.0D, 9.0D);
-    VoxelShape SHAPE_CENTER_NO_KNOT = Block.box(7.5D, 7.5D, 7.5D, 8.5D, 8.5D, 8.5D);
-    VoxelShape SHAPE_HORI_Z_POSI = Block.box(7.5D, 7.5D, 9.0D, 8.5D, 8.5D, 16.0D);
-    VoxelShape SHAPE_VERT_POSI = Block.box(7.5D, 9.0D, 7.5D, 8.5D, 16.0D, 8.5D);
-    VoxelShape SHAPE_HORI_X_POSI = Block.box(9.0D, 7.5D, 7.5D, 16.0D, 8.5D, 8.5D);
-    VoxelShape SHAPE_VERT_NEGA = SHAPE_VERT_POSI.move(0, -9/16d, 0);
-    VoxelShape SHAPE_HORI_Z_NEGA = SHAPE_HORI_Z_POSI.move(0, 0, -9/16d);
-    VoxelShape SHAPE_HORI_X_NEGA = SHAPE_HORI_X_POSI.move(-9/16d, 0, 0);
+    private static final VoxelShape SHAPE_CENTER = Block.box(7.0D, 7.0D, 7.0D, 9.0D, 9.0D, 9.0D);
+    private static final VoxelShape SHAPE_CENTER_NO_KNOT = Block.box(7.5D, 7.5D, 7.5D, 8.5D, 8.5D, 8.5D);
+    private static final VoxelShape SHAPE_HORI_Z_POSI = Block.box(7.5D, 7.5D, 9.0D, 8.5D, 8.5D, 16.0D);
+    private static final VoxelShape SHAPE_VERT_POSI = Block.box(7.5D, 9.0D, 7.5D, 8.5D, 16.0D, 8.5D);
+    private static final VoxelShape SHAPE_HORI_X_POSI = Block.box(9.0D, 7.5D, 7.5D, 16.0D, 8.5D, 8.5D);
+    private static final VoxelShape SHAPE_VERT_NEGA = SHAPE_VERT_POSI.move(0, -9/16d, 0);
+    private static final VoxelShape SHAPE_HORI_Z_NEGA = SHAPE_HORI_Z_POSI.move(0, 0, -9/16d);
+    private static final VoxelShape SHAPE_HORI_X_NEGA = SHAPE_HORI_X_POSI.move(-9/16d, 0, 0);
 
-    VoxelShape SHAPE_HORI_Z_POSI_EX1 = Block.box(7.5D, 7.5D, 16.0D, 8.5D, 8.5D, 21.0D);
-    VoxelShape SHAPE_HORI_X_POSI_EX1 = Block.box(16.0D, 7.5D, 7.5D, 21.0D, 8.5D, 8.5D);
-    VoxelShape SHAPE_HORI_Z_POSI_EX2 = Block.box(5.0D, 4.0D, 21.0D, 11.0D, 12.0D, 27.0D);
-    VoxelShape SHAPE_HORI_Z_NEGA_EX1 = SHAPE_HORI_Z_POSI_EX1.move(0, 0, -21/16d);
-    VoxelShape SHAPE_HORI_X_NEGA_EX1 = SHAPE_HORI_X_POSI_EX1.move(-21/16d, 0, 0);
+    private static final VoxelShape SHAPE_HORI_Z_POSI_EX1 = Block.box(7.5D, 7.5D, 16.0D, 8.5D, 8.5D, 21.0D);
+    private static final VoxelShape SHAPE_HORI_X_POSI_EX1 = Block.box(16.0D, 7.5D, 7.5D, 21.0D, 8.5D, 8.5D);
+    private static final VoxelShape SHAPE_HORI_Z_POSI_EX2 = Block.box(5.0D, 4.0D, 21.0D, 11.0D, 12.0D, 27.0D);
+    private static final VoxelShape SHAPE_HORI_Z_NEGA_EX1 = SHAPE_HORI_Z_POSI_EX1.move(0, 0, -21/16d);
+    private static final VoxelShape SHAPE_HORI_X_NEGA_EX1 = SHAPE_HORI_X_POSI_EX1.move(-21/16d, 0, 0);
 
-    VoxelShape SHAPE_HORI_Z_POSI_COLL = Block.box(7.5D, 8.0D, 9.0D, 8.5D, 9.0D, 16.0D);
-    VoxelShape SHAPE_HORI_X_POSI_COLL = Block.box(9.0D, 8.0D, 7.5D, 16.0D, 9.0D, 8.5D);
-    VoxelShape SHAPE_HORI_Z_NEGA_COLL = SHAPE_HORI_Z_POSI_COLL.move(0, 0, -9/16d);
-    VoxelShape SHAPE_HORI_X_NEGA_COLL = SHAPE_HORI_X_POSI_COLL.move(-9/16d, 0, 0);
+    private static final VoxelShape SHAPE_HORI_Z_POSI_COLL = Block.box(7.5D, 8.0D, 9.0D, 8.5D, 9.0D, 16.0D);
+    private static final VoxelShape SHAPE_HORI_X_POSI_COLL = Block.box(9.0D, 8.0D, 7.5D, 16.0D, 9.0D, 8.5D);
+    private static final VoxelShape SHAPE_HORI_Z_NEGA_COLL = SHAPE_HORI_Z_POSI_COLL.move(0, 0, -9/16d);
+    private static final VoxelShape SHAPE_HORI_X_NEGA_COLL = SHAPE_HORI_X_POSI_COLL.move(-9/16d, 0, 0);
 
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {

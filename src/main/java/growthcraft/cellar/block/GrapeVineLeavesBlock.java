@@ -22,13 +22,16 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 
 public class GrapeVineLeavesBlock extends RopeBlock2Base implements BonemealableBlock {
     private static final VoxelShape SHAPE_INT = Block.box(0.0D, 1.0D, 0.0D, 16.0D, 15.9D, 16.0D);
-    private static final VoxelShape SHAPE_COL = Block.box(6.0D, 9.0D, 6.0D, 10.0D, 16.0D, 10.0D);
+    private static final List<VoxelShape> collisionShapeByIndex = new ArrayList<>(); // can be static, 3 blocks have the same colission
     public static final IntegerProperty AGE = BlockStateProperties.AGE_7;
     public static final int MAX_AGE = 7;
 
@@ -54,6 +57,7 @@ public class GrapeVineLeavesBlock extends RopeBlock2Base implements Bonemealable
         );
         this.fruitBlock = fruitBlock;
         this.seedItem = seedItem;
+        GrapeVineLeavesBlock.makeShapes();
     }
 
     @Override
@@ -74,10 +78,57 @@ public class GrapeVineLeavesBlock extends RopeBlock2Base implements Bonemealable
     }
 
     @Override
-    protected VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
-    {
-        return SHAPE_COL;
+    protected VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return collisionShapeByIndex.get(getIndexFromState(state));
     }
+    private static final VoxelShape SHAPE_HORI_Z_POSI = Block.box(6.0D, 0.05D, 10.0D, 10.0D, 15.95D, 16.0D);
+    private static final VoxelShape SHAPE_HORI_X_POSI = Block.box(10.0D, 0.05D, 6.0D, 16.0D, 15.5D, 10.0D);
+    private static final VoxelShape SHAPE_HORI_Z_NEGA = SHAPE_HORI_Z_POSI.move(0, 0, -10/16d);
+    private static final VoxelShape SHAPE_HORI_X_NEGA = SHAPE_HORI_X_POSI.move(-10/16d, 0, 0);
+
+
+
+    private static int getIndexFromState(BlockState state)
+    {
+        int result = 0;
+        result = result * 2 + (state.getValue(WEST) > 0 ? 1 : 0);
+        result = result * 2 + (state.getValue(SOUTH) > 0 ? 1 : 0);
+        result = result * 2 + (state.getValue(EAST) > 0 ? 1 : 0);
+        result = result * 2 + (state.getValue(NORTH) > 0 ? 1 : 0);
+        return result;
+    }
+
+    private static void makeShapes()
+    {
+        for (int west = 0; west <= 1; west++)
+        {
+            for (int south = 0; south <= 1; south++)
+            {
+                for (int east = 0; east <= 1; east++)
+                {
+                    for (int north = 0; north <= 1; north++)  // we could have assumed 4 variants per connection. that would allow simple bitwise math instead of these loops at the cost of 4x more memory.
+                    {
+                        VoxelShape collShape = Shapes.empty();
+                        if (north == 1) {
+                            collShape = Shapes.or(collShape, SHAPE_HORI_Z_NEGA);
+                        }
+                        if (south == 1) {
+                            collShape = Shapes.or(collShape, SHAPE_HORI_Z_POSI);
+                        }
+                        if (east == 1) {
+                            collShape = Shapes.or(collShape, SHAPE_HORI_X_POSI);
+                        }
+                        if (west == 1) {
+                            collShape = Shapes.or(collShape, SHAPE_HORI_X_NEGA);
+                        }
+                        collisionShapeByIndex.add(collShape);
+                    }
+                }
+            }
+        }
+    }
+
+    //----------------------------------------------//
 
     @Override
     public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
