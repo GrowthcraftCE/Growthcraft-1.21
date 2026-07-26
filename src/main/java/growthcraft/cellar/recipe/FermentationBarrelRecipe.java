@@ -94,7 +94,7 @@ public class FermentationBarrelRecipe implements Recipe<FermentationBarrelInput>
 
         var fluid = BuiltInRegistries.FLUID.get(result.fluidId());
         if (fluid != Fluids.EMPTY) {
-            stack.set(DataComponents.CUSTOM_NAME,
+            stack.set(DataComponents.ITEM_NAME,
                     new FluidStack(fluid, Math.max(1, result.amount())).getHoverName());
         }
 
