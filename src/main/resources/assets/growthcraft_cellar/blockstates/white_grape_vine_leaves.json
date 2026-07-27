@@ -1,17 +1,11 @@
 {
   "multipart": [
     {
-      "when": {
-        "down_ex": 0
-      },
       "apply": {
         "model": "growthcraft:block/rope_linen"
       }
     },
     {
-      "when": {
-        "age": "0|1|2|3|4|5|6|7"
-      },
       "apply": {
         "model": "growthcraft_cellar:block/grape_vine/grape_vine_leaves"
       }
@@ -70,7 +64,8 @@
         "down_ex": "1|2"
       },
       "apply": {
-        "model": "growthcraft_cellar:block/grape_vine/grape_vine_leaves_trunk",
+        "model": "growthcraft:block/rope_linen_side",
+        "x": 90,
         "uvlock": false
       }
     },
