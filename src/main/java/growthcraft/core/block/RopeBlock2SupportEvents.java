@@ -1,5 +1,6 @@
 package growthcraft.core.block;
 
+import growthcraft.core.config.Reference;
 import growthcraft.core.init.GrowthcraftItems;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
@@ -10,7 +11,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 
-@EventBusSubscriber
+@EventBusSubscriber(modid = Reference.MODID)
 public class RopeBlock2SupportEvents
 {
     ///
