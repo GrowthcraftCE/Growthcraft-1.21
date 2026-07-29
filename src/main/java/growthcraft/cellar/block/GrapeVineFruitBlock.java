@@ -106,7 +106,7 @@ public class GrapeVineFruitBlock  extends BushBlock implements BonemealableBlock
 
     @Override
     public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
-        int age = Math.min(state.getValue(AGE) + Mth.nextInt(random, 0, 2) / 2, MAX_AGE);
+        int age = Math.min(state.getValue(AGE) + Mth.nextInt(random, 0, 2) / 2 + 1, MAX_AGE);
         level.setBlock(pos, state.setValue(AGE, age), Block.UPDATE_ALL);
     }
 }

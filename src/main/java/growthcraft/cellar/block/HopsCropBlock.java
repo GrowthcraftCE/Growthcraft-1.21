@@ -1,10 +1,12 @@
 package growthcraft.cellar.block;
 
+import growthcraft.cellar.block.support.VineGrowthHelper;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.core.block.RopeBlock2;
 import growthcraft.core.block.RopeBlock2Base;
 import growthcraft.core.init.GrowthcraftBlocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -119,20 +121,45 @@ public class HopsCropBlock extends RopeBlock2Base implements BonemealableBlock
 
     private void tryGrowNewVine(BlockState state, ServerLevel level, BlockPos pos) {
         if (state.getValue(AGE) == MAX_AGE) {
-            BlockPos above = pos.above();
-            if (level.getBlockState(above).getBlock() instanceof RopeBlock2) {
-                BlockState newState = this.getStateForPlacement(level, above);
-                level.setBlock(above, newState, Block.UPDATE_ALL);
+            Direction directionToExpand = VineGrowthHelper.tryHopsExpand(level, pos);
+            if (directionToExpand != null) {
+                BlockPos posToExpand = pos.relative(directionToExpand);
+                BlockState newState = this.getStateForPlacement(level, posToExpand);
+                if (! directionToExpand.equals(Direction.UP)) {
+                    newState = newState.setValue(AGE, 5); // todo this age is temporary to account for no model
+                }
+                level.setBlock(posToExpand, newState, Block.UPDATE_ALL);
             }
         }
     }
 
     @Override
+    protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos)
+    {
+        return VineGrowthHelper.canHopsSurvive(level, pos);
+    }
+
+    @Override
+    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston)
+    {
+        if (! this.canSurvive(state, level, pos)) {
+            level.destroyBlock(pos, true);
+        }
+        super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
+    }
+
+    @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
         super.onRemove(state, level, pos, newState, movedByPiston);
-
-        if (RopeBlock2Base.shouldRestoreRopeOnRemove(state, level, pos, newState)) {
+        if (this.shouldRestoreRopeOnRemove(state, level, pos, newState)) {
             level.setBlock(pos, ((RopeBlock2) GrowthcraftBlocks.ROPE_LINEN2.get()).getStateForPlacement(level, pos), Block.UPDATE_ALL);
         }
+    }
+
+    @Override
+    public boolean shouldRestoreRopeOnRemove(BlockState state, Level level, BlockPos pos, BlockState newState)
+    {
+        return !newState.is(state.getBlock())
+            && !(newState.getBlock() instanceof RopeBlock2Base);
     }
 }

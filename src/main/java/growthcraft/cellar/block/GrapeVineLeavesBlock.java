@@ -1,5 +1,6 @@
 package growthcraft.cellar.block;
 
+import growthcraft.cellar.block.support.VineGrowthHelper;
 import growthcraft.core.block.RopeBlock2;
 import growthcraft.core.block.RopeBlock2Base;
 import growthcraft.core.init.GrowthcraftBlocks;
@@ -14,6 +15,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -41,7 +43,7 @@ public class GrapeVineLeavesBlock extends RopeBlock2Base implements Bonemealable
     public GrapeVineLeavesBlock(Supplier<? extends GrapeVineFruitBlock> fruitBlock, Supplier<? extends Item> seedItem) {
         super(BlockBehaviour.Properties.of()
                 .randomTicks()
-                .instabreak()
+                .strength(0.1f)
                 .noOcclusion().forceSolidOff()
                 .sound(SoundType.CROP));
         this.registerDefaultState(
@@ -150,35 +152,30 @@ public class GrapeVineLeavesBlock extends RopeBlock2Base implements Bonemealable
             return;
         }
 
-        Direction direction = Direction.NORTH;
-        int rotationCount = random.nextInt(4); //to start from random direction
-        for (int index = 0; index < rotationCount; index++) {
-            direction = direction.getClockWise();
-        }
-        for (int index = 0; index < 4; index++) { // now the actual thing
-            BlockPos spreadPos = pos.relative(direction);
-            if (level.getBlockState(spreadPos).is(GrowthcraftBlocks.ROPE_LINEN2.get())) {
-                level.setBlock(spreadPos, this.getStateForPlacement(level, spreadPos),3);
-                return;
-            }
-        }
-
         BlockPos fruitPos = pos.below();
         if (level.getBlockState(fruitPos).isAir()) {
             level.setBlock(fruitPos, fruitBlock.get().defaultBlockState(), 3);
+        }
+
+        Direction directionToExpand = VineGrowthHelper.tryGrapeLeavesExpand(level, pos);
+        if (directionToExpand != null) {
+            BlockPos posToExpand = pos.relative(directionToExpand);
+            level.setBlock(posToExpand, this.getStateForPlacement(level, posToExpand),3);
         }
     }
 
     @Override
     protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        for (Direction direction : Direction.values()) {
-            BlockState adjacent = level.getBlockState(pos.relative(direction));
-            if (adjacent.getBlock() instanceof GrapeVineStemBlock || adjacent.getBlock() instanceof GrapeVineLeavesBlock || adjacent.getBlock() instanceof RopeBlock2)
-            {
-                return true;
-            }
+        return VineGrowthHelper.canGrapeLeavesSurvive(level, pos);
+    }
+
+    @Override
+    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston)
+    {
+        if (! this.canSurvive(state, level, pos)) {
+            level.destroyBlock(pos, true);
         }
-        return false;
+        super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
     }
 
     @Override
@@ -201,7 +198,7 @@ public class GrapeVineLeavesBlock extends RopeBlock2Base implements Bonemealable
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
         super.onRemove(state, level, pos, newState, movedByPiston);
 
-        if (RopeBlock2Base.shouldRestoreRopeOnRemove(state, level, pos, newState)) {
+        if (this.shouldRestoreRopeOnRemove(state, level, pos, newState)) {
             level.setBlock(pos, ((RopeBlock2) GrowthcraftBlocks.ROPE_LINEN2.get()).getStateForPlacement(level, pos), Block.UPDATE_ALL);
         }
     }

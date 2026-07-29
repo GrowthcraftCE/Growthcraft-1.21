@@ -9,6 +9,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
@@ -65,7 +66,7 @@ public abstract class RopeBlock2Base extends Block
             return 1; // rope or leaves
         }
         if (state.getBlock() instanceof GrapeVineStemBlock && vertical) {
-            return 1; // rope or leaves
+            return 1;
         }
         if (state.is(BlockTags.FENCES)) {
             return 2; // rope and fence wrapping
@@ -97,7 +98,7 @@ public abstract class RopeBlock2Base extends Block
         return this.getUpdatedStateOnDemand(state, facing, facingState, level, currentPos, facingPos);
     }
 
-    public static boolean shouldRestoreRopeOnRemove(BlockState state, Level level, BlockPos pos, BlockState newState) {
+    public boolean shouldRestoreRopeOnRemove(BlockState state, Level level, BlockPos pos, BlockState newState) {
         return !newState.is(state.getBlock())
                 && !(newState.getBlock() instanceof RopeBlock2Base)
                 && !(level.getBlockState(pos.below()).is(Tags.Blocks.VILLAGER_FARMLANDS));

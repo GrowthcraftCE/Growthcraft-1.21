@@ -42,7 +42,7 @@ public class GrapeVineStemBlock extends BushBlock implements BonemealableBlock
     public GrapeVineStemBlock(Supplier<? extends GrapeVineLeavesBlock> leavesBlock, Supplier<? extends Item> seedItem) {
         super(BlockBehaviour.Properties.of()
                 .randomTicks()
-                .instabreak()
+                .strength(0.1f)
                 .sound(SoundType.CROP));
         this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0));
         this.leavesBlock = leavesBlock;
@@ -157,8 +157,15 @@ public class GrapeVineStemBlock extends BushBlock implements BonemealableBlock
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
         super.onRemove(state, level, pos, newState, movedByPiston);
 
-        if (RopeBlock2Base.shouldRestoreRopeOnRemove(state, level, pos, newState)) {
+        if (this.shouldRestoreRopeOnRemove(state, level, pos, newState)) {
             level.setBlock(pos, ((RopeBlock2) GrowthcraftBlocks.ROPE_LINEN2.get()).getStateForPlacement(level, pos), Block.UPDATE_ALL);
         }
+    }
+
+    private boolean shouldRestoreRopeOnRemove(BlockState state, Level level, BlockPos pos, BlockState newState)
+    {
+        return !newState.is(state.getBlock())
+                && !(newState.getBlock() instanceof RopeBlock2Base)
+                && !(level.getBlockState(pos.below()).is(Tags.Blocks.VILLAGER_FARMLANDS));
     }
 }
