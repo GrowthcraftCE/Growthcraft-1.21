@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "#growthcraft_cellar:adjunct_grains_basic",
+    "#c:crops/rice",
+    {
+      "id": "#c:crops/corn",
+      "required": false
+    }
+  ]
+}

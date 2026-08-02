@@ -10,6 +10,7 @@ import growthcraft.milk.init.GrowthcraftMilkBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
@@ -30,6 +31,7 @@ public class GrowthcraftBlockTags extends BlockTagsProvider {
                         GrowthcraftBlocks.SALT_ORE_DEEPSLATE.get(),
                         GrowthcraftBlocks.SALT_ORE_NETHER.get(),
                         GrowthcraftBlocks.SALT_ORE_END.get(),
+                        GrowthcraftBlocks.SALT_BLOCK.get(),
                         GrowthcraftCellarBlocks.BREW_KETTLE.get(),
                         GrowthcraftCellarBlocks.ROASTER.get(),
                         GrowthcraftMilkBlocks.MIXING_VAT.get(),
@@ -40,6 +42,7 @@ public class GrowthcraftBlockTags extends BlockTagsProvider {
                 .add(
                         GrowthcraftCellarBlocks.FERMENTATION_BARREL_OAK.get(),
                         GrowthcraftCellarBlocks.FRUIT_PRESS.get(),
+                        GrowthcraftCellarBlocks.FRUIT_PRESS_PISTON.get(),
                         GrowthcraftMilkBlocks.CHEESE_PRESS.get(),
                         GrowthcraftMilkBlocks.CHURN.get(),
                         GrowthcraftMilkBlocks.HANGING_SIGN_1_OAK.get(),
@@ -69,7 +72,6 @@ public class GrowthcraftBlockTags extends BlockTagsProvider {
                         GrowthcraftApplesBlocks.APPLE_PLANK_DOOR.get(),
                         GrowthcraftApplesBlocks.APPLE_PLANK_FENCE.get(),
                         GrowthcraftApplesBlocks.APPLE_PLANK_FENCE_GATE.get(),
-                        GrowthcraftApplesBlocks.APPLE_PLANK_FENCE_ROPE_LINEN.get(),
                         GrowthcraftApplesBlocks.APPLE_PLANK_PRESSURE_PLATE.get(),
                         GrowthcraftApplesBlocks.APPLE_PLANK_SLAB.get(),
                         GrowthcraftApplesBlocks.APPLE_PLANK_STAIRS.get(),
@@ -86,7 +88,42 @@ public class GrowthcraftBlockTags extends BlockTagsProvider {
         this.tag(BlockTags.LEAVES)
                 .add(GrowthcraftApplesBlocks.APPLE_TREE_LEAVES.get());
 
+        this.tag(BlockTags.PLANKS)
+                .add(GrowthcraftApplesBlocks.APPLE_PLANK.get());
+
+        this.tag(BlockTags.WOODEN_BUTTONS)
+                .add(GrowthcraftApplesBlocks.APPLE_PLANK_BUTTON.get());
+
+        this.tag(BlockTags.WOODEN_DOORS)
+                .add(GrowthcraftApplesBlocks.APPLE_PLANK_DOOR.get());
+
+        this.tag(BlockTags.WOODEN_FENCES)
+                .add(GrowthcraftApplesBlocks.APPLE_PLANK_FENCE.get());
+
+        this.tag(BlockTags.FENCE_GATES)
+                .add(GrowthcraftApplesBlocks.APPLE_PLANK_FENCE_GATE.get());
+
+        this.tag(BlockTags.WOODEN_PRESSURE_PLATES)
+                .add(GrowthcraftApplesBlocks.APPLE_PLANK_PRESSURE_PLATE.get());
+
+        this.tag(BlockTags.WOODEN_SLABS)
+                .add(GrowthcraftApplesBlocks.APPLE_PLANK_SLAB.get());
+
+        this.tag(BlockTags.WOODEN_STAIRS)
+                .add(GrowthcraftApplesBlocks.APPLE_PLANK_STAIRS.get());
+
+        this.tag(BlockTags.WOODEN_TRAPDOORS)
+                .add(GrowthcraftApplesBlocks.APPLE_PLANK_TRAPDOOR.get());
+
         this.tag(BlockTags.LOGS)
+                .add(
+                        GrowthcraftApplesBlocks.APPLE_WOOD.get(),
+                        GrowthcraftApplesBlocks.APPLE_WOOD_LOG.get(),
+                        GrowthcraftApplesBlocks.APPLE_WOOD_LOG_STRIPPED.get(),
+                        GrowthcraftApplesBlocks.APPLE_WOOD_STRIPPED.get()
+                );
+
+        this.tag(BlockTags.LOGS_THAT_BURN)
                 .add(
                         GrowthcraftApplesBlocks.APPLE_WOOD.get(),
                         GrowthcraftApplesBlocks.APPLE_WOOD_LOG.get(),
@@ -97,29 +134,19 @@ public class GrowthcraftBlockTags extends BlockTagsProvider {
         this.tag(BlockTags.SAPLINGS)
                 .add(GrowthcraftApplesBlocks.APPLE_TREE_SAPLING.get());
 
+        this.tag(Tags.Blocks.FENCES_WOODEN)
+                .add(GrowthcraftApplesBlocks.APPLE_PLANK_FENCE.get());
+
+        this.tag(Tags.Blocks.FENCE_GATES_WOODEN)
+                .add(GrowthcraftApplesBlocks.APPLE_PLANK_FENCE_GATE.get());
+
         this.tag(BlockTags.CLIMBABLE)
                 .add(GrowthcraftBambooBlocks.BAMBOO_POST_HORIZONTAL.get());
 
         this.tag(GrowthcraftTags.Blocks.ROPE)
                 .add(
-                        GrowthcraftBlocks.ROPE_LINEN.get(),
-                        GrowthcraftBlocks.ROPE_LINEN_ACACIA_FENCE.get(),
-                        GrowthcraftBlocks.ROPE_LINEN_BAMBOO_FENCE.get(),
-                        GrowthcraftBlocks.ROPE_LINEN_BIRCH_FENCE.get(),
-                        GrowthcraftBlocks.ROPE_LINEN_CHERRY_FENCE.get(),
-                        GrowthcraftBlocks.ROPE_LINEN_CRIMSON_FENCE.get(),
-                        GrowthcraftBlocks.ROPE_LINEN_DARK_OAK_FENCE.get(),
-                        GrowthcraftBlocks.ROPE_LINEN_JUNGLE_FENCE.get(),
-                        GrowthcraftBlocks.ROPE_LINEN_MANGROVE_FENCE.get(),
-                        GrowthcraftBlocks.ROPE_LINEN_NETHER_BRICK_FENCE.get(),
-                        GrowthcraftBlocks.ROPE_LINEN_OAK_FENCE.get(),
-                        GrowthcraftBlocks.ROPE_LINEN_SPRUCE_FENCE.get(),
-                        GrowthcraftBlocks.ROPE_LINEN_WARPED_FENCE.get(),
-                        GrowthcraftApplesBlocks.APPLE_PLANK_FENCE_ROPE_LINEN.get(),
+                        GrowthcraftBlocks.ROPE_LINEN2.get(),
                         GrowthcraftCellarBlocks.HOPS_VINE.get(),
-                        GrowthcraftCellarBlocks.PURPLE_GRAPE_VINE.get(),
-                        GrowthcraftCellarBlocks.RED_GRAPE_VINE.get(),
-                        GrowthcraftCellarBlocks.WHITE_GRAPE_VINE.get(),
                         GrowthcraftCellarBlocks.PURPLE_GRAPE_VINE_LEAVES.get(),
                         GrowthcraftCellarBlocks.RED_GRAPE_VINE_LEAVES.get(),
                         GrowthcraftCellarBlocks.WHITE_GRAPE_VINE_LEAVES.get()

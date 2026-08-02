@@ -17,9 +17,7 @@ growthcraft:crowbar_yellow
 growthcraft:filled_bottle
 growthcraft:place_holder_block
 growthcraft:rope
-growthcraft:rope_fence_oak_linen
-growthcraft:rope_knot_bamboo
-growthcraft:rope_linen
+growthcraft:rope_linen2
 growthcraft:salt
 growthcraft:salt_block
 growthcraft:salt_ore
@@ -89,7 +87,6 @@ growthcraft_cellar:purple_grape_wine_fluid_bucket
 growthcraft_cellar:red_grape_juice_fluid_bucket
 growthcraft_cellar:red_grape_wine_fluid_bucket
 growthcraft_cellar:roaster
-growthcraft_cellar:starter_culture
 growthcraft_cellar:stout_ale_fluid_bucket
 growthcraft_cellar:vienna_lager_fluid_bucket
 growthcraft_cellar:white_grape_juice_fluid_bucket

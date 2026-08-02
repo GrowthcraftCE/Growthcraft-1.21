@@ -1,13 +1,9 @@
 package growthcraft.cellar.block;
 
 import growthcraft.cellar.block.entity.BrewKettleBlockEntity;
-import growthcraft.cellar.config.Reference;
+import growthcraft.lib.utils.HeatSourceUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.tags.FluidTags;
-import net.minecraft.tags.TagKey;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -17,7 +13,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.Mirror;
@@ -29,22 +24,22 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.fluids.FluidUtil;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Optional;
 
 public class BrewKettleBlock extends Block implements EntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty LIT = BooleanProperty.create("lit");
     public static final BooleanProperty HAS_LID = BooleanProperty.create("has_lid");
-    private static final TagKey<Block> HEAT_SOURCE_TAG = TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Reference.MODID, Reference.UnlocalizedName.Tag.HEATSOURCES));
 
     public BrewKettleBlock() {
         super(Properties.of()
@@ -100,10 +95,29 @@ public class BrewKettleBlock extends Block implements EntityBlock {
 
     @Override
     protected ItemInteractionResult useItemOn(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if (FluidUtil.getFluidHandler(heldStack).isPresent() && FluidUtil.interactWithFluidHandler(player, hand, level, pos, hitResult.getDirection())) {
+        Optional<IFluidHandlerItem> heldFluidHandler = FluidUtil.getFluidHandler(heldStack);
+        if (heldFluidHandler.isPresent() && interactWithKettleFluidHandler(player, hand, level, pos, heldFluidHandler.get())) {
             return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
+    private static boolean interactWithKettleFluidHandler(Player player, InteractionHand hand, Level level, BlockPos pos, IFluidHandlerItem heldFluidHandler) {
+        if (containsFluid(heldFluidHandler)) {
+            return FluidUtil.interactWithFluidHandler(player, hand, level, pos, Direction.UP);
+        }
+
+        return FluidUtil.interactWithFluidHandler(player, hand, level, pos, Direction.DOWN)
+                || FluidUtil.interactWithFluidHandler(player, hand, level, pos, Direction.UP);
+    }
+
+    private static boolean containsFluid(IFluidHandler heldFluidHandler) {
+        for (int tank = 0; tank < heldFluidHandler.getTanks(); tank++) {
+            if (!heldFluidHandler.getFluidInTank(tank).isEmpty()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -139,14 +153,7 @@ public class BrewKettleBlock extends Block implements EntityBlock {
     }
 
     private static boolean hasHeatSourceBelow(Level level, BlockPos pos) {
-        BlockPos below = pos.below();
-        BlockState state = level.getBlockState(below);
-        if (state.is(HEAT_SOURCE_TAG)) return true;
-        if (state.is(Blocks.MAGMA_BLOCK) || state.is(Blocks.FIRE) || state.is(Blocks.SOUL_FIRE)) return true;
-        if (state.hasProperty(BlockStateProperties.LIT) && Boolean.TRUE.equals(state.getValue(BlockStateProperties.LIT))) return true;
-
-        FluidState fluid = level.getFluidState(below);
-        return !fluid.isEmpty() && (fluid.is(FluidTags.LAVA) || fluid.getType() == Fluids.LAVA);
+        return HeatSourceUtils.hasHeatSourceBelow(level, pos);
     }
 
     @Override

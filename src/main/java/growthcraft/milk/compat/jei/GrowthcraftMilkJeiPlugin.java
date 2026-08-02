@@ -1,8 +1,11 @@
 package growthcraft.milk.compat.jei;
 
+import growthcraft.core.init.GrowthcraftTags;
 import growthcraft.milk.config.Reference;
 import growthcraft.milk.init.GrowthcraftMilkItems;
 import growthcraft.milk.init.GrowthcraftMilkRecipes;
+import growthcraft.milk.init.GrowthcraftMilkTags;
+import growthcraft.milk.item.CheeseCurdsDrainedItem;
 import growthcraft.milk.recipe.CheesePressRecipe;
 import growthcraft.milk.recipe.ChurnRecipe;
 import growthcraft.milk.recipe.MixingVatRecipe;
@@ -16,8 +19,13 @@ import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.neoforged.neoforge.common.Tags;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @JeiPlugin
 public class GrowthcraftMilkJeiPlugin implements IModPlugin {
@@ -39,6 +47,22 @@ public class GrowthcraftMilkJeiPlugin implements IModPlugin {
             new RecipeType<>(
                     ResourceLocation.fromNamespaceAndPath(Reference.MODID, Reference.UnlocalizedName.MIXING_VAT_RECIPE),
                     GrowthcraftMilkJeiPlugin.<MixingVatRecipe>recipeHolderClass());
+    public static final RecipeType<CurdDryingRecipeCategory.Recipe> CURDS =
+            new RecipeType<>(
+                    ResourceLocation.fromNamespaceAndPath(Reference.MODID, "jei_curds"),
+                    CurdDryingRecipeCategory.Recipe.class);
+    public static final RecipeType<CheeseAgingRecipeCategory.Recipe> AGING =
+            new RecipeType<>(
+                    ResourceLocation.fromNamespaceAndPath(Reference.MODID, "jei_cheese1"),
+                    CheeseAgingRecipeCategory.Recipe.class);
+    public static final RecipeType<CheeseWaxingRecipeCategory.Recipe> WAXING =
+            new RecipeType<>(
+                    ResourceLocation.fromNamespaceAndPath(Reference.MODID, "jei_cheese2"),
+                    CheeseWaxingRecipeCategory.Recipe.class);
+    public static final RecipeType<CheesePreppingRecipeCategory.Recipe> OTHER =
+            new RecipeType<>(
+                    ResourceLocation.fromNamespaceAndPath(Reference.MODID, "jei_knife"),
+                    CheesePreppingRecipeCategory.Recipe.class);
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
     private static <T extends Recipe<?>> Class<? extends RecipeHolder<T>> recipeHolderClass() {
@@ -57,7 +81,11 @@ public class GrowthcraftMilkJeiPlugin implements IModPlugin {
                 new CheesePressRecipeCategory(guiHelper),
                 new ChurnRecipeCategory(guiHelper),
                 new MixingVatRecipeCategory(guiHelper),
-                new PancheonRecipeCategory(guiHelper)
+                new PancheonRecipeCategory(guiHelper),
+                new CurdDryingRecipeCategory(guiHelper),
+                new CheeseAgingRecipeCategory(guiHelper),
+                new CheeseWaxingRecipeCategory(guiHelper),
+                new CheesePreppingRecipeCategory(guiHelper)
         );
     }
 
@@ -72,6 +100,49 @@ public class GrowthcraftMilkJeiPlugin implements IModPlugin {
         registration.addRecipes(CHURN, minecraft.level.getRecipeManager().getAllRecipesFor(GrowthcraftMilkRecipes.CHURN_TYPE.get()));
         registration.addRecipes(MIXING_VAT, minecraft.level.getRecipeManager().getAllRecipesFor(GrowthcraftMilkRecipes.MIXING_VAT_TYPE.get()));
         registration.addRecipes(PANCHEON, minecraft.level.getRecipeManager().getAllRecipesFor(GrowthcraftMilkRecipes.PANCHEON_TYPE.get()));
+
+        List<CurdDryingRecipeCategory.Recipe> list1 = new ArrayList<>();
+        for (var cheese : GrowthcraftMilkItems.getCheeseRegistry()) {
+            if (cheese.drainedCurds() != null) {
+                list1.add(new CurdDryingRecipeCategory.Recipe(cheese.curds(), cheese.drainedCurds()));
+            }
+        }
+        registration.addRecipes(CURDS, list1);
+
+        List<CheeseAgingRecipeCategory.Recipe> list2 = new ArrayList<>();
+        for (var cheese : GrowthcraftMilkItems.getCheeseRegistry()) {
+            if (cheese.aged() != null) {  // condition to skip ricotta
+                if (cheese.waxed() != null) {
+                    list2.add(new CheeseAgingRecipeCategory.Recipe(cheese.waxed(), cheese.aged()));
+                }
+                else {
+                    list2.add(new CheeseAgingRecipeCategory.Recipe(cheese.unprocessed(), cheese.aged()));
+                }
+            }
+        }
+        registration.addRecipes(AGING, list2);
+
+        List<CheeseWaxingRecipeCategory.Recipe> list3 = new ArrayList<>();
+        for (var cheese : GrowthcraftMilkItems.getCheeseRegistry()) {
+            if (cheese.waxed() != null && cheese.waxingItem() != null) { // second part unneeded
+                list3.add(new CheeseWaxingRecipeCategory.Recipe(cheese.unprocessed(), cheese.waxingItem(), cheese.waxed()));
+            }
+        }
+        registration.addRecipes(WAXING, list3);
+
+        List<CheesePreppingRecipeCategory.Recipe> list4 = new ArrayList<>();
+        for (var cheese : GrowthcraftMilkItems.getCheeseRegistry()) {
+            if (cheese.slice() != null) {
+                if (cheese.aged() != null) {
+                    list4.add(new CheesePreppingRecipeCategory.Recipe(cheese.aged(), GrowthcraftTags.Items.CHEESE_CUTTING_TOOLS, cheese.slice()));
+                }
+                else {
+                    //list4.add(new CheesePreppingRecipeCategory.Recipe(cheese.drainedCurds(), Items.BOWL, cheese.slice()));
+                    //riccota. don't display.
+                }
+            }
+        }
+        registration.addRecipes(OTHER, list4);
     }
 
     @Override

@@ -48,6 +48,22 @@ public class GrowthcraftConfig {
             .comment("Number of salt ore veins per chunk (spread amount).")
             .defineInRange(String.format("%s.%s", CATEGORY_WORLDGEN, "saltOreGenSpreadAmount"), 10, 1, 20);
 
+    private static final ModConfigSpec.BooleanValue debugEnabled = SERVER_BUILDER
+            .comment("Set to true to add additional Growthcraft Core debug logging.")
+            .define("debug.enabled", false);
+
+    private static final ModConfigSpec.BooleanValue worldgenDebugEnabled = SERVER_BUILDER
+            .comment("Set to true to add additional debug logging for Growthcraft Core world generation.")
+            .define("debug.worldgen.enabled", false);
+
+    private static final ModConfigSpec.BooleanValue ropesDebugEnabled = SERVER_BUILDER
+            .comment("Set to true to add additional debug logging for Growthcraft ropes and rope fences.")
+            .define("debug.ropes.enabled", false);
+
+    private static final ModConfigSpec.BooleanValue shopSignsDebugEnabled = SERVER_BUILDER
+            .comment("Set to true to add additional debug logging for Growthcraft shop sign transforms.")
+            .define("debug.shop_signs.enabled", false);
+
     private static ModConfigSpec.BooleanValue crowbarsEnabled; // Placeholder for future config
 
     public static final ModConfigSpec SPEC = SERVER_BUILDER.build();
@@ -61,6 +77,10 @@ public class GrowthcraftConfig {
     public static int saltOreHeightMin() { return saltOreGenHeightMin.get(); }
     public static int saltOreHeightMax() { return saltOreGenHeightMax.get(); }
     public static int saltOreSpreadAmount() { return saltOreGenSpreadAmount.get(); }
+    public static boolean isDebugEnabled() { return debugEnabled.get(); }
+    public static boolean isWorldgenDebugEnabled() { return worldgenDebugEnabled.get(); }
+    public static boolean isRopesDebugEnabled() { return ropesDebugEnabled.get(); }
+    public static boolean isShopSignsDebugEnabled() { return shopSignsDebugEnabled.get(); }
 
     private static boolean validateItemName(final Object obj) {
         return obj instanceof String itemName && BuiltInRegistries.ITEM.containsKey(ResourceLocation.parse(itemName));

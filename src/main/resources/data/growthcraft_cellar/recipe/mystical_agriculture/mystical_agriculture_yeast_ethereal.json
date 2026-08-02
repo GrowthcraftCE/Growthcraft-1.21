@@ -6,9 +6,12 @@
       "modid": "mysticalagriculture"
     },
     {
-      "type": "mysticalagriculture:crop_enabled",
-      "crop": "mysticalagriculture:nature"
+      "type": "growthcraft:third_party_condition",
+      "target_type": "mysticalagriculture:crop_enabled",
+      "target_content": "{ \"crop\": \"mysticalagriculture:nature\" }",
+      "value_if_not_present": false
     }
+
   ],
   "pattern": [
     "AEA",

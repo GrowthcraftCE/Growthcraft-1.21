@@ -2,35 +2,35 @@
   "multipart": [
     {
       "when": { "slicesbottom": "1" },
-      "apply": { "model": "growthcraft_milk:block/cheese_wheel/cheese_slab_slices_bottom_1" }
+      "apply": { "model": "growthcraft_milk:block/cheese_wheel/textured/emmentaler/aged/slices_bottom_1" }
     },
     {
       "when": { "slicesbottom": "2" },
-      "apply": { "model": "growthcraft_milk:block/cheese_wheel/cheese_slab_slices_bottom_2" }
+      "apply": { "model": "growthcraft_milk:block/cheese_wheel/textured/emmentaler/aged/slices_bottom_2" }
     },
     {
       "when": { "slicesbottom": "3" },
-      "apply": { "model": "growthcraft_milk:block/cheese_wheel/cheese_slab_slices_bottom_3" }
+      "apply": { "model": "growthcraft_milk:block/cheese_wheel/textured/emmentaler/aged/slices_bottom_3" }
     },
     {
       "when": { "slicesbottom": "4" },
-      "apply": { "model": "growthcraft_milk:block/cheese_wheel/cheese_slab_slices_bottom_4" }
+      "apply": { "model": "growthcraft_milk:block/cheese_wheel/textured/emmentaler/aged/slices_bottom_4" }
     },
     {
       "when": { "slicestop": "1" },
-      "apply": { "model": "growthcraft_milk:block/cheese_wheel/cheese_slab_slices_top_1" }
+      "apply": { "model": "growthcraft_milk:block/cheese_wheel/textured/emmentaler/aged/slices_top_1" }
     },
     {
       "when": { "slicestop": "2" },
-      "apply": { "model": "growthcraft_milk:block/cheese_wheel/cheese_slab_slices_top_2" }
+      "apply": { "model": "growthcraft_milk:block/cheese_wheel/textured/emmentaler/aged/slices_top_2" }
     },
     {
       "when": { "slicestop": "3" },
-      "apply": { "model": "growthcraft_milk:block/cheese_wheel/cheese_slab_slices_top_3" }
+      "apply": { "model": "growthcraft_milk:block/cheese_wheel/textured/emmentaler/aged/slices_top_3" }
     },
     {
       "when": { "slicestop": "4" },
-      "apply": { "model": "growthcraft_milk:block/cheese_wheel/cheese_slab_slices_top_4" }
+      "apply": { "model": "growthcraft_milk:block/cheese_wheel/textured/emmentaler/aged/slices_top_4" }
     }
   ]
 }

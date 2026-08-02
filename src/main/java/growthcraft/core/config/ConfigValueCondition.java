@@ -3,9 +3,11 @@ package growthcraft.core.config;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import growthcraft.cellar.config.GrowthcraftCellarConfig;
 import growthcraft.core.Growthcraft;
+import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.common.conditions.ICondition;
+
+import java.util.Optional;
 
 public record ConfigValueCondition(String module, String name) implements ICondition {
     public static final MapCodec<ConfigValueCondition> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
@@ -15,12 +17,18 @@ public record ConfigValueCondition(String module, String name) implements ICondi
 
     @Override
     public boolean test(IContext context) {
-        if ("cellar".equals(module) && "brewing.allow_additional_adjunct_grains".equals(name)) {
-            return GrowthcraftCellarConfig.isSecondaryAdjunctGrainsAllowed();
+        Optional<ModConfigSpec.BooleanValue> configValue = ConfigValueConditionResolver.findBooleanConfigValue(module, name);
+        if (configValue.isEmpty()) {
+            return false;
         }
 
-        Growthcraft.LOGGER.error("Growthcraft condition error: invalid config value {}.{}", module, name);
-        return false;
+        try {
+            return configValue.get().get();
+        } catch (IllegalStateException exception) {
+            Growthcraft.LOGGER.error("Growthcraft condition error: config value {}.{} was read before its config loaded",
+                    module, name, exception);
+            return false;
+        }
     }
 
     @Override

@@ -18,6 +18,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.neoforged.neoforge.common.Tags;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -34,6 +35,7 @@ public class GrowthcraftItemTags extends IntrinsicHolderTagsProvider<Item> {
         // Add all crowbar variants to the common wrench tag so other mods recognize them
         this.tag(C_WRENCHES)
                 .add(
+                        GrowthcraftItems.WRENCH.get(),
                         GrowthcraftItems.CROWBAR_WHITE.get(),
                         GrowthcraftItems.CROWBAR_LIGHT_GRAY.get(),
                         GrowthcraftItems.CROWBAR_GRAY.get(),
@@ -61,8 +63,47 @@ public class GrowthcraftItemTags extends IntrinsicHolderTagsProvider<Item> {
         this.tag(GrowthcraftTags.Items.KNIVES)
                 .add(GrowthcraftRiceItems.KNIFE.get());
 
+        this.tag(GrowthcraftTags.Items.CHEESE_CUTTING_TOOLS)
+                .addTag(GrowthcraftTags.Items.KNIVES)
+                .add(
+                        Items.WOODEN_SWORD,
+                        Items.STONE_SWORD,
+                        Items.IRON_SWORD,
+                        Items.GOLDEN_SWORD,
+                        Items.DIAMOND_SWORD,
+                        Items.NETHERITE_SWORD
+                )
+                .addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "tools/sword"));
+
         this.tag(ItemTags.LEAVES)
                 .add(GrowthcraftApplesItems.APPLE_TREE_LEAVES.get());
+
+        this.tag(ItemTags.PLANKS)
+                .add(GrowthcraftApplesItems.APPLE_PLANK.get());
+
+        this.tag(ItemTags.WOODEN_BUTTONS)
+                .add(GrowthcraftApplesItems.APPLE_PLANK_BUTTON.get());
+
+        this.tag(ItemTags.WOODEN_DOORS)
+                .add(GrowthcraftApplesItems.APPLE_PLANK_DOOR.get());
+
+        this.tag(ItemTags.WOODEN_FENCES)
+                .add(GrowthcraftApplesItems.APPLE_PLANK_FENCE.get());
+
+        this.tag(ItemTags.FENCE_GATES)
+                .add(GrowthcraftApplesItems.APPLE_PLANK_FENCE_GATE.get());
+
+        this.tag(ItemTags.WOODEN_PRESSURE_PLATES)
+                .add(GrowthcraftApplesItems.APPLE_PLANK_PRESSURE_PLATE.get());
+
+        this.tag(ItemTags.WOODEN_SLABS)
+                .add(GrowthcraftApplesItems.APPLE_PLANK_SLAB.get());
+
+        this.tag(ItemTags.WOODEN_STAIRS)
+                .add(GrowthcraftApplesItems.APPLE_PLANK_STAIRS.get());
+
+        this.tag(ItemTags.WOODEN_TRAPDOORS)
+                .add(GrowthcraftApplesItems.APPLE_PLANK_TRAPDOOR.get());
 
         this.tag(ItemTags.LOGS)
                 .add(
@@ -72,8 +113,22 @@ public class GrowthcraftItemTags extends IntrinsicHolderTagsProvider<Item> {
                         GrowthcraftApplesItems.APPLE_WOOD_STRIPPED.get()
                 );
 
+        this.tag(ItemTags.LOGS_THAT_BURN)
+                .add(
+                        GrowthcraftApplesItems.APPLE_WOOD.get(),
+                        GrowthcraftApplesItems.APPLE_WOOD_LOG.get(),
+                        GrowthcraftApplesItems.APPLE_WOOD_LOG_STRIPPED.get(),
+                        GrowthcraftApplesItems.APPLE_WOOD_STRIPPED.get()
+                );
+
         this.tag(ItemTags.SAPLINGS)
                 .add(GrowthcraftApplesItems.APPLE_TREE_SAPLING.get());
+
+        this.tag(Tags.Items.FENCES_WOODEN)
+                .add(GrowthcraftApplesItems.APPLE_PLANK_FENCE.get());
+
+        this.tag(Tags.Items.FENCE_GATES_WOODEN)
+                .add(GrowthcraftApplesItems.APPLE_PLANK_FENCE_GATE.get());
 
         this.tag(GrowthcraftMilkTags.Items.CHEESE_SLICES)
                 .add(

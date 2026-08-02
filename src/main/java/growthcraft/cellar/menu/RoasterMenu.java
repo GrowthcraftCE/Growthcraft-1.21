@@ -63,6 +63,12 @@ public class RoasterMenu extends AbstractContainerMenu {
         return Math.min(pixels, (data.get(0) * pixels) / total);
     }
 
+    public int getPercentProgress() {
+        int total = data.get(1);
+        if (total <= 0) return 0;
+        return Math.min(100, (data.get(0) * 100) / total);
+    }
+
     @Override
     public boolean stillValid(Player player) {
         return container.stillValid(player);

@@ -18,6 +18,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.material.Fluids;
 
@@ -84,6 +85,10 @@ public class CultureJarRecipeCategory implements IRecipeCategory<RecipeHolder<Cu
             builder.addSlot(RecipeIngredientRole.INPUT, TANK_X, TANK_Y)
                     .setFluidRenderer(1000, true, TANK_WIDTH, TANK_HEIGHT)
                     .addFluidStack(inputFluid, recipe.getFluid().amount());
+            ItemStack bucket = inputFluid.getBucket().getDefaultInstance();
+            if (! bucket.isEmpty()) {
+                builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStack(bucket);
+            }
         }
 
         builder.addSlot(RecipeIngredientRole.OUTPUT, OUTPUT_X, OUTPUT_Y)

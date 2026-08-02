@@ -6,10 +6,11 @@
       "modid": "mysticalagriculture"
     },
     {
-      "type": "mysticalagriculture:crop_enabled",
-      "crop": "mysticalagriculture:honey"
-    }
-  ],
+      "type": "growthcraft:third_party_condition",
+      "target_type": "mysticalagriculture:crop_enabled",
+      "target_content": "{ \"crop\": \"mysticalagriculture:honey\" }",
+      "value_if_not_present": false
+    }  ],
   "pattern": [
     "A A",
     " B ",
@@ -24,7 +25,7 @@
     }
   },
   "result": {
-    "item": "growthcraft:rope_linen",
+    "item": "growthcraft:rope_linen2",
     "count": 4
   }
 }

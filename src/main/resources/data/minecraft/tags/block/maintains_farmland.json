@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "growthcraft_cellar:hops_vine",
+    "growthcraft_cellar:white_grape_vine",
+    "growthcraft_cellar:purple_grape_vine",
+    "growthcraft_cellar:red_grape_vine",
+    "growthcraft:rope_linen2"
+  ]
+}

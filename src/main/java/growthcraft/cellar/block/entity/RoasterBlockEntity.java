@@ -200,6 +200,9 @@ public class RoasterBlockEntity extends BlockEntity implements WorldlyContainer,
 
         roaster.processTimeTotal = Math.max(1, recipe.getRoastingLevel() * TICKS_PER_LEVEL);
         roaster.processTime++;
+        if (roaster.processTime == 1 || roaster.processTime % 40 == 0) {
+            roaster.setChanged();
+        }
         if (roaster.processTime >= roaster.processTimeTotal) {
             roaster.completeRecipe(recipe, batchSize);
             roaster.processTime = 0;

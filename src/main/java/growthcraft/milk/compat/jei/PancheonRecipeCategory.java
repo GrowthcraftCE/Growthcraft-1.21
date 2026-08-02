@@ -17,6 +17,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
@@ -73,6 +74,10 @@ public class PancheonRecipeCategory implements IRecipeCategory<RecipeHolder<Panc
             builder.addSlot(RecipeIngredientRole.INPUT, INPUT_TANK_X, INPUT_TANK_Y)
                     .setFluidRenderer(2000, true, INPUT_TANK_WIDTH, INPUT_TANK_HEIGHT)
                     .addFluidStack(inputFluid, recipe.getInputFluid().amount());
+            ItemStack bucket = inputFluid.getBucket().getDefaultInstance();
+            if (! bucket.isEmpty()) {
+                builder.addInvisibleIngredients(RecipeIngredientRole.INPUT).addItemStack(bucket);
+            }
         }
 
         addOutputFluid(builder, recipe, 0, OUTPUT_TANK_0_Y);
@@ -86,6 +91,10 @@ public class PancheonRecipeCategory implements IRecipeCategory<RecipeHolder<Panc
             builder.addSlot(RecipeIngredientRole.OUTPUT, OUTPUT_TANK_X, y)
                     .setFluidRenderer(1000, true, OUTPUT_TANK_WIDTH, OUTPUT_TANK_HEIGHT)
                     .addFluidStack(fluid, output.amount());
+            ItemStack bucket = fluid.getBucket().getDefaultInstance();
+            if (! bucket.isEmpty()) {
+                builder.addInvisibleIngredients(RecipeIngredientRole.OUTPUT).addItemStack(bucket);
+            }
         }
     }
 

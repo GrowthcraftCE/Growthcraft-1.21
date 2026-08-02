@@ -128,7 +128,7 @@
   "item.growthcraft_cellar.yeast_lager": "Lager Yeast",
   "item.growthcraft_cellar.yeast_lager_ethereal": "Lager Yeast (Ethereal)",
   "item.growthcraft_cellar.cork_bark": "Cork Bark",
-  "growthcraft_cellar.tooltip.roaster.progress": "Roast Level %s (%d%%)",
+  "growthcraft_cellar.tooltip.roaster.progress": "Roasting %s%%",
   "growthcraft_cellar.tooltip.fermentation.progress": "Fermenting %s%%",
   "growthcraft_cellar.tooltip.fruit_press.progress": "Pressing %s%%",
   "growthcraft_cellar.tooltip.fermentation.yeast_warning": "Insufficient yeast.",
@@ -154,5 +154,8 @@
   "emi.category.growthcraft_cellar.jar2": "Culturing",
   "emi.category.growthcraft_cellar.book": "Other",
   "label.growthcraft_cellar.roaster_level": "Roaster level: %s",
-  "gui.growthcraft_cellar.empty": "Empty"
+  "gui.growthcraft_cellar.empty": "Empty",
+  "tag.item.growthcraft_cellar.adjunct_grains_basic": "Basic Adjunct Grains",
+  "tag.item.growthcraft_cellar.adjunct_grains_extended": "Extended Adjunct Grains",
+  "tag.item.growthcraft_cellar.adjunct_grains_extended_minus_wheat": "Extended Adjunct Grains (No Wheat)"
 }

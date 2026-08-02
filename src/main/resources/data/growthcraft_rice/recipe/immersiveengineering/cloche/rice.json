@@ -10,17 +10,17 @@
     "item": "growthcraft_rice:rice_grains"
   },
   "render": {
-    "type": "crop",
+    "type": "immersiveengineering:generic",
     "block": "growthcraft_rice:rice_crop"
   },
   "results": [
     {
       "count": 2,
-      "item": "growthcraft_rice:rice"
+      "id": "growthcraft_rice:rice"
     },
     {
       "count": 3,
-      "item": "growthcraft_rice:rice_stalk"
+      "id": "growthcraft_rice:rice_stalk"
     }
   ],
   "soil": {

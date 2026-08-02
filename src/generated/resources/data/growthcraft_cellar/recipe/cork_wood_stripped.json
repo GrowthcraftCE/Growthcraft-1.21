@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "growthcraft_cellar",
+  "key": {
+    "#": {
+      "item": "growthcraft_cellar:cork_wood_log_stripped"
+    }
+  },
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "result": {
+    "count": 3,
+    "id": "growthcraft_cellar:cork_wood_stripped"
+  }
+}

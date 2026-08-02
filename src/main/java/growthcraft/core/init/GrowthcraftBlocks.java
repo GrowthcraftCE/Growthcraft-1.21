@@ -1,7 +1,6 @@
 package growthcraft.core.init;
 
-import growthcraft.core.block.RopeBlock;
-import growthcraft.core.block.RopeFenceBlock;
+import growthcraft.core.block.RopeBlock2;
 import growthcraft.core.config.Reference;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -12,8 +11,8 @@ public class GrowthcraftBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Reference.MODID);
 
     // Rope blocks
-    public static final DeferredBlock<RopeBlock> ROPE_LINEN = BLOCKS.register(Reference.UnlocalizedName.Block.ROPE_LINEN,
-            () -> new RopeBlock(BlockBehaviour.Properties.of().strength(0.2F)))
+    public static final DeferredBlock<Block> ROPE_LINEN2 = BLOCKS.register(Reference.UnlocalizedName.Block.ROPE_LINEN + "2",
+            RopeBlock2::new)
     ;
 
     // Salt blocks and ores
@@ -35,43 +34,5 @@ public class GrowthcraftBlocks {
 
     public static final DeferredBlock<Block> SALT_ORE_END = BLOCKS.register("salt_ore_end",
             () -> new Block(BlockBehaviour.Properties.of().strength(3.0F, 3.0F).requiresCorrectToolForDrops()))
-    ;
-
-    // Rope Linen Fence variants
-    public static final DeferredBlock<RopeFenceBlock> ROPE_LINEN_OAK_FENCE = BLOCKS.register(Reference.UnlocalizedName.Block.ROPE_LINEN_OAK_FENCE,
-            () -> new RopeFenceBlock(BlockBehaviour.Properties.of().strength(2.0F, 3.0F)))
-    ;
-    public static final DeferredBlock<RopeFenceBlock> ROPE_LINEN_SPRUCE_FENCE = BLOCKS.register(Reference.UnlocalizedName.Block.ROPE_LINEN_SPRUCE_FENCE,
-            () -> new RopeFenceBlock(BlockBehaviour.Properties.of().strength(2.0F, 3.0F)))
-    ;
-    public static final DeferredBlock<RopeFenceBlock> ROPE_LINEN_BIRCH_FENCE = BLOCKS.register(Reference.UnlocalizedName.Block.ROPE_LINEN_BIRCH_FENCE,
-            () -> new RopeFenceBlock(BlockBehaviour.Properties.of().strength(2.0F, 3.0F)))
-    ;
-    public static final DeferredBlock<RopeFenceBlock> ROPE_LINEN_JUNGLE_FENCE = BLOCKS.register(Reference.UnlocalizedName.Block.ROPE_LINEN_JUNGLE_FENCE,
-            () -> new RopeFenceBlock(BlockBehaviour.Properties.of().strength(2.0F, 3.0F)))
-    ;
-    public static final DeferredBlock<RopeFenceBlock> ROPE_LINEN_DARK_OAK_FENCE = BLOCKS.register(Reference.UnlocalizedName.Block.ROPE_LINEN_DARK_OAK_FENCE,
-            () -> new RopeFenceBlock(BlockBehaviour.Properties.of().strength(2.0F, 3.0F)))
-    ;
-    public static final DeferredBlock<RopeFenceBlock> ROPE_LINEN_ACACIA_FENCE = BLOCKS.register(Reference.UnlocalizedName.Block.ROPE_LINEN_ACACIA_FENCE,
-            () -> new RopeFenceBlock(BlockBehaviour.Properties.of().strength(2.0F, 3.0F)))
-    ;
-    public static final DeferredBlock<RopeFenceBlock> ROPE_LINEN_MANGROVE_FENCE = BLOCKS.register(Reference.UnlocalizedName.Block.ROPE_LINEN_MANGROVE_FENCE,
-            () -> new RopeFenceBlock(BlockBehaviour.Properties.of().strength(2.0F, 3.0F)))
-    ;
-    public static final DeferredBlock<RopeFenceBlock> ROPE_LINEN_CHERRY_FENCE = BLOCKS.register(Reference.UnlocalizedName.Block.ROPE_LINEN_CHERRY_FENCE,
-            () -> new RopeFenceBlock(BlockBehaviour.Properties.of().strength(2.0F, 3.0F)))
-    ;
-    public static final DeferredBlock<RopeFenceBlock> ROPE_LINEN_BAMBOO_FENCE = BLOCKS.register(Reference.UnlocalizedName.Block.ROPE_LINEN_BAMBOO_FENCE,
-            () -> new RopeFenceBlock(BlockBehaviour.Properties.of().strength(2.0F, 3.0F)))
-    ;
-    public static final DeferredBlock<RopeFenceBlock> ROPE_LINEN_NETHER_BRICK_FENCE = BLOCKS.register(Reference.UnlocalizedName.Block.ROPE_LINEN_NETHER_BRICK_FENCE,
-            () -> new RopeFenceBlock(BlockBehaviour.Properties.of().strength(2.0F, 6.0F)))
-    ;
-    public static final DeferredBlock<RopeFenceBlock> ROPE_LINEN_CRIMSON_FENCE = BLOCKS.register(Reference.UnlocalizedName.Block.ROPE_LINEN_CRIMSON_FENCE,
-            () -> new RopeFenceBlock(BlockBehaviour.Properties.of().strength(2.0F, 3.0F)))
-    ;
-    public static final DeferredBlock<RopeFenceBlock> ROPE_LINEN_WARPED_FENCE = BLOCKS.register(Reference.UnlocalizedName.Block.ROPE_LINEN_WARPED_FENCE,
-            () -> new RopeFenceBlock(BlockBehaviour.Properties.of().strength(2.0F, 3.0F)))
     ;
 }

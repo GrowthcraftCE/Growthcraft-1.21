@@ -5,9 +5,13 @@ import growthcraft.core.init.GrowthcraftTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -43,6 +47,7 @@ public class CheeseWheelBlock extends HorizontalDirectionalBlock {
     public static final IntegerProperty SLICE_COUNT_BOTTOM = IntegerProperty.create("slicesbottom", 0, 4);
     public static final IntegerProperty AGE = BlockStateProperties.AGE_7;
     public static final int MAX_AGE = 7;
+    private static final float AGING_RANDOM_TICK_CHANCE = 0.4F;
 
     private static final VoxelShape FULL_SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 16.0D, 15.0D);
     private static final VoxelShape HALF_SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D);
@@ -77,6 +82,12 @@ public class CheeseWheelBlock extends HorizontalDirectionalBlock {
                 .setValue(AGE, 0));
     }
 
+    public Item getWaxingItem()  // this should possibly return GrowthcraftMilkItems.CheeseEntry and report all it acn. later.
+    { // this is for JEI:
+        return this.waxItem != null && this.waxItem.get() != null ? this.waxItem.get() : null;
+    }
+    /// ////////
+
     @Override
     protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
         return CODEC;
@@ -106,6 +117,10 @@ public class CheeseWheelBlock extends HorizontalDirectionalBlock {
             return;
         }
 
+        if (!canAgeAt(level, pos) || random.nextFloat() >= AGING_RANDOM_TICK_CHANCE) {
+            return;
+        }
+
         int age = state.getValue(AGE);
         if (age < MAX_AGE - 1) {
             level.setBlock(pos, state.setValue(AGE, age + 1), Block.UPDATE_ALL);
@@ -122,7 +137,10 @@ public class CheeseWheelBlock extends HorizontalDirectionalBlock {
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (!player.isCrouching()) {
-            return InteractionResult.PASS;
+            if (!level.isClientSide) {
+                displayAgingStatus(state, level, pos, player);
+            }
+            return InteractionResult.sidedSuccess(level.isClientSide);
         }
 
         if (!level.isClientSide) {
@@ -170,7 +188,7 @@ public class CheeseWheelBlock extends HorizontalDirectionalBlock {
             return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
 
-        if (sliceable && heldStack.is(GrowthcraftTags.Items.KNIVES)) {
+        if (sliceable && heldStack.is(GrowthcraftTags.Items.CHEESE_CUTTING_TOOLS)) {
             Item slice = sliceItem.get();
             if (slice == null || getTotalSlices(state) <= 0) {
                 return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
@@ -183,7 +201,10 @@ public class CheeseWheelBlock extends HorizontalDirectionalBlock {
             return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
 
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        if (!level.isClientSide) {
+            displayAgingStatus(state, level, pos, player);
+        }
+        return ItemInteractionResult.sidedSuccess(level.isClientSide);
     }
 
     @Override
@@ -254,6 +275,65 @@ public class CheeseWheelBlock extends HorizontalDirectionalBlock {
     private boolean canWaxWith(ItemStack stack) {
         Item wax = waxItem.get();
         return wax != null && waxedBlock.get() != null && stack.is(wax);
+    }
+
+    private void displayAgingStatus(BlockState state, Level level, BlockPos pos, Player player) {
+        player.displayClientMessage(agingStatus(state, level, pos).withStyle(Style.EMPTY.withColor(0xffddcc88)), true);
+    }
+
+    private MutableComponent agingStatus(BlockState state, Level level, BlockPos pos) {
+        Block agingResult = agedBlock.get();
+        if (agingResult != null && state.getValue(AGE) < MAX_AGE) {
+            AgingBlockReason blockedReason = agingBlockReason(level, pos);
+            if (blockedReason != AgingBlockReason.NONE) {
+                return Component.translatable(blockedReason.translationKey);
+            }
+
+            return Component.translatable("message.growthcraft_milk.cheese_wheel.aging", agingProgressPercent(state));
+        }
+
+        if (!sliceable && waxItem.get() != null && waxedBlock.get() != null) {
+            return Component.translatable("message.growthcraft_milk.cheese_wheel.needs_wax");
+        }
+
+        return Component.translatable("message.growthcraft_milk.cheese_wheel.aged");
+    }
+
+    private static boolean canAgeAt(ServerLevel level, BlockPos pos) {
+        return agingBlockReason(level, pos) == AgingBlockReason.NONE;
+    }
+
+    private static int agingProgressPercent(BlockState state) {
+        return Math.round(state.getValue(AGE) * 100.0F / MAX_AGE);
+    }
+
+    private static AgingBlockReason agingBlockReason(Level level, BlockPos pos) {
+        if (level.getFluidState(pos).is(FluidTags.WATER) || level.getFluidState(pos.above()).is(FluidTags.WATER)) {
+            return AgingBlockReason.UNDERWATER;
+        }
+
+        if (level.canSeeSky(pos.above())) {
+            return AgingBlockReason.OPEN_SKY;
+        }
+
+        if (level.isRainingAt(pos.above())) {
+            return AgingBlockReason.WET;
+        }
+
+        return AgingBlockReason.NONE;
+    }
+
+    private enum AgingBlockReason {
+        NONE(""),
+        UNDERWATER("message.growthcraft_milk.cheese_wheel.blocked_underwater"),
+        OPEN_SKY("message.growthcraft_milk.cheese_wheel.blocked_open_sky"),
+        WET("message.growthcraft_milk.cheese_wheel.blocked_wet");
+
+        private final String translationKey;
+
+        AgingBlockReason(String translationKey) {
+            this.translationKey = translationKey;
+        }
     }
 
     private void takeWholeWheel(BlockState state, Level level, BlockPos pos, Player player) {

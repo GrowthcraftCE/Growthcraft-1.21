@@ -1,0 +1,14 @@
+{
+  "type": "neoforge:add_table",
+  "conditions": [
+    {
+      "condition": "minecraft:random_chance",
+      "chance": 0.125
+    },
+    {
+      "condition": "minecraft:block_state_property",
+      "block": "minecraft:large_fern"
+    }
+  ],
+  "table": "growthcraft:gameplay/grass_seeds"
+}

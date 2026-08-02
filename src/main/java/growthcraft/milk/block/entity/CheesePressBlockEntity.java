@@ -139,8 +139,25 @@ public class CheesePressBlockEntity extends BlockEntity implements WorldlyContai
         return processTime > 0 && processTimeTotal > 0;
     }
 
+    public int getProcessTime() {
+        return processTime;
+    }
+
+    public int getProcessTimeTotal() {
+        return processTimeTotal;
+    }
+
     public boolean hasContent() {
         return !getItem(SLOT_INPUT).isEmpty() || !getItem(SLOT_OUTPUT).isEmpty();
+    }
+
+    public boolean hasMatchingRecipe(Level level) {
+        return findMatch(level, getItem(SLOT_INPUT)).isPresent();
+    }
+
+    public boolean canProcessInput(Level level) {
+        Optional<RecipeHolder<CheesePressRecipe>> match = findMatch(level, getItem(SLOT_INPUT));
+        return match.isPresent() && canOutput(match.get().value().getResultItem());
     }
 
     private void resetProgress() {

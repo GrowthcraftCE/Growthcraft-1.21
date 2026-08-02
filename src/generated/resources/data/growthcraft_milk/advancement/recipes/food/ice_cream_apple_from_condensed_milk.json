@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_condensed_milk_bucket": {
+      "conditions": {
+        "items": [
+          {
+            "items": "growthcraft_milk:condensed_milk_fluid_bucket"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "growthcraft_milk:ice_cream_apple_from_condensed_milk"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_condensed_milk_bucket"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "growthcraft_milk:ice_cream_apple_from_condensed_milk"
+    ]
+  }
+}

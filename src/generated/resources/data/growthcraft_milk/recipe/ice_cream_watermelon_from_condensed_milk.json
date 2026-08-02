@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "growthcraft_milk",
+  "ingredients": [
+    {
+      "item": "growthcraft_milk:condensed_milk_fluid_bucket"
+    },
+    {
+      "item": "minecraft:melon_slice"
+    },
+    {
+      "item": "minecraft:bowl"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "growthcraft_milk:ice_cream_watermelon"
+  }
+}

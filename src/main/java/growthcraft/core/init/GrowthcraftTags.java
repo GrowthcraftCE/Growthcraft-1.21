@@ -20,9 +20,14 @@ public final class GrowthcraftTags {
     }
 
     public static final class Items {
+        public static final TagKey<Item> CHEESE_CUTTING_TOOLS = TagKey.create(
+                Registries.ITEM,
+                ResourceLocation.fromNamespaceAndPath(Reference.MODID, "tools/cheese_cutting")
+        );
+
         public static final TagKey<Item> KNIVES = TagKey.create(
                 Registries.ITEM,
-                ResourceLocation.fromNamespaceAndPath(Reference.MODID, Reference.UnlocalizedName.Tag.KNIVES)
+                ResourceLocation.fromNamespaceAndPath("c", "tools/knife")
         );
 
         private Items() {}

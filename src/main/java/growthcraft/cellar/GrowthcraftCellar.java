@@ -7,14 +7,10 @@ import growthcraft.cellar.init.*;
 import growthcraft.core.init.GrowthcraftCreativeTabs;
 import net.minecraft.world.item.CreativeModeTab;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
-import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
@@ -24,9 +20,6 @@ public class GrowthcraftCellar {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public GrowthcraftCellar(IEventBus modEventBus, ModContainer modContainer) {
-        // Register the commonSetup
-        modEventBus.addListener(this::commonSetup);
-
         // Register Deferred Registers
         GrowthcraftCellarItems.ITEMS.register(modEventBus);
         GrowthcraftCellarBlocks.BLOCKS.register(modEventBus);
@@ -37,6 +30,7 @@ public class GrowthcraftCellar {
         GrowthcraftCellarMenus.MENUS.register(modEventBus);
         GrowthcraftCellarRecipes.SERIALIZERS.register(modEventBus);
         GrowthcraftCellarRecipes.TYPES.register(modEventBus);
+        GrowthcraftCellarLootModifiers.init(modEventBus);
 
         // Capabilities registration
         modEventBus.addListener(GrowthcraftCellarCapabilities::registerCapabilities);
@@ -44,13 +38,7 @@ public class GrowthcraftCellar {
         // Add creative tab contributions
         modEventBus.addListener(this::buildCreativeTab);
 
-        NeoForge.EVENT_BUS.register(this);
-
         modContainer.registerConfig(ModConfig.Type.COMMON, GrowthcraftCellarConfig.SPEC);
-    }
-
-    private void commonSetup(FMLCommonSetupEvent event) {
-        LOGGER.info("HELLO FROM COMMON SETUP");
     }
 
     private void buildCreativeTab(BuildCreativeModeTabContentsEvent event) {
@@ -105,19 +93,10 @@ public class GrowthcraftCellar {
             event.accept(GrowthcraftCellarItems.YEAST_LAGER);
             event.accept(GrowthcraftCellarItems.YEAST_LAGER_ETHEREAL);
 
-            // Cultures
-            event.accept(GrowthcraftCellarItems.STARTER_CULTURE);
-
             // Fluid buckets
             for (var container : GrowthcraftCellarFluids.ALL) {
                 event.accept(container.bucket.get());
             }
         }
-    }
-
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event) {
-        LOGGER.info("HELLO from server starting");
     }
 }

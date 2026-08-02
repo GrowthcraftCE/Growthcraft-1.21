@@ -17,9 +17,7 @@ growthcraft:crowbar_yellow
 growthcraft:filled_bottle
 growthcraft:place_holder_block
 growthcraft:rope
-growthcraft:rope_fence_oak_linen
-growthcraft:rope_knot_bamboo
-growthcraft:rope_linen
+growthcraft:rope_linen2
 growthcraft:salt
 growthcraft:salt_block
 growthcraft:salt_ore

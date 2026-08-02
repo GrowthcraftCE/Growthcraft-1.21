@@ -10,7 +10,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.ExtraCodecs;
@@ -95,8 +94,8 @@ public class FermentationBarrelRecipe implements Recipe<FermentationBarrelInput>
 
         var fluid = BuiltInRegistries.FLUID.get(result.fluidId());
         if (fluid != Fluids.EMPTY) {
-            Component fluidName = new FluidStack(fluid, Math.max(1, result.amount())).getHoverName();
-            stack.set(DataComponents.CUSTOM_NAME, Component.translatable(stack.getDescriptionId(), fluidName));
+            stack.set(DataComponents.ITEM_NAME,
+                    new FluidStack(fluid, Math.max(1, result.amount())).getHoverName());
         }
 
         List<MobEffectInstance> potionEffects = effects.stream()
