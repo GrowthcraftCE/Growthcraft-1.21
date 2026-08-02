@@ -3,7 +3,6 @@ package growthcraft.core.init;
 import growthcraft.core.config.Reference;
 import growthcraft.core.item.CrowbarItem;
 import growthcraft.core.item.OffsetTier;
-import growthcraft.core.item.RopeItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tiers;
@@ -15,7 +14,7 @@ public class GrowthcraftItems {
 
     // Simple materials / tools
     public static final DeferredItem<Item> SALT = ITEMS.register(Reference.UnlocalizedName.Item.SALT, () -> new Item(new Item.Properties()));
-    public static final DeferredItem<Item> ROPE_LINEN = ITEMS.register(Reference.UnlocalizedName.Item.ROPE_LINEN, () -> new RopeItem(new Item.Properties()));
+    public static final DeferredItem<Item> ROPE_LINEN2 = ITEMS.register(Reference.UnlocalizedName.Item.ROPE_LINEN+"2", () -> new BlockItem(GrowthcraftBlocks.ROPE_LINEN2.get(), new Item.Properties()));
 
     // BlockItems
     public static final DeferredItem<Item> SALT_BLOCK = ITEMS.register(Reference.UnlocalizedName.Block.SALT_BLOCK, () -> new BlockItem(GrowthcraftBlocks.SALT_BLOCK.get(), new Item.Properties()));

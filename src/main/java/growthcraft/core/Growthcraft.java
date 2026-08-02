@@ -7,7 +7,6 @@ import growthcraft.core.init.GrowthcraftConditions;
 import growthcraft.core.init.GrowthcraftCreativeTabs;
 import growthcraft.core.init.GrowthcraftItems;
 import growthcraft.core.init.GrowthcraftParticles;
-import growthcraft.core.event.RopeShearHandler;
 import growthcraft.milk.block.signs.ShopSignTransformHandler;
 import org.slf4j.Logger;
 
@@ -36,7 +35,6 @@ public class Growthcraft {
         GrowthcraftConditions.CONDITION_CODECS.register(modEventBus);
         GrowthcraftParticles.PARTICLE_TYPES.register(modEventBus);
 
-        NeoForge.EVENT_BUS.addListener(RopeShearHandler::onRightClickBlock);
         NeoForge.EVENT_BUS.addListener(ShopSignTransformHandler::onRightClickBlock);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, GrowthcraftConfig.SPEC);

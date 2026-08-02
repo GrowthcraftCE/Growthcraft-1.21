@@ -2,7 +2,7 @@
   "multipart": [
     {
       "when": {
-        "age": "0|1|2|3"
+        "age": "0|1"
       },
       "apply": {
         "model": "growthcraft:block/rope_linen"
@@ -42,62 +42,11 @@
     },
     {
       "when": {
-        "north": "true"
-      },
-      "apply": {
-        "model": "growthcraft:block/rope_linen_side",
-        "uvlock": false
-      }
-    },
-    {
-      "when": {
-        "east": "true"
-      },
-      "apply": {
-        "model": "growthcraft:block/rope_linen_side",
-        "y": 90,
-        "uvlock": false
-      }
-    },
-    {
-      "when": {
-        "south": "true"
-      },
-      "apply": {
-        "model": "growthcraft:block/rope_linen_side",
-        "y": 180,
-        "uvlock": false
-      }
-    },
-    {
-      "when": {
-        "west": "true"
-      },
-      "apply": {
-        "model": "growthcraft:block/rope_linen_side",
-        "y": 270,
-        "uvlock": false
-      }
-    },
-    {
-      "when": {
-        "up": "true",
         "age": "0|1|2|3"
       },
       "apply": {
         "model": "growthcraft:block/rope_linen_side",
         "x": 270,
-        "uvlock": false
-      }
-    },
-    {
-      "when": {
-        "down": "true",
-        "age": "0|1|2|3"
-      },
-      "apply": {
-        "model": "growthcraft:block/rope_linen_side",
-        "x": 90,
         "uvlock": false
       }
     }

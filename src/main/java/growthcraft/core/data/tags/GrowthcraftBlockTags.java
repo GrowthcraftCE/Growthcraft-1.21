@@ -72,7 +72,6 @@ public class GrowthcraftBlockTags extends BlockTagsProvider {
                         GrowthcraftApplesBlocks.APPLE_PLANK_DOOR.get(),
                         GrowthcraftApplesBlocks.APPLE_PLANK_FENCE.get(),
                         GrowthcraftApplesBlocks.APPLE_PLANK_FENCE_GATE.get(),
-                        GrowthcraftApplesBlocks.APPLE_PLANK_FENCE_ROPE_LINEN.get(),
                         GrowthcraftApplesBlocks.APPLE_PLANK_PRESSURE_PLATE.get(),
                         GrowthcraftApplesBlocks.APPLE_PLANK_SLAB.get(),
                         GrowthcraftApplesBlocks.APPLE_PLANK_STAIRS.get(),
@@ -146,24 +145,8 @@ public class GrowthcraftBlockTags extends BlockTagsProvider {
 
         this.tag(GrowthcraftTags.Blocks.ROPE)
                 .add(
-                        GrowthcraftBlocks.ROPE_LINEN.get(),
-                        GrowthcraftBlocks.ROPE_LINEN_ACACIA_FENCE.get(),
-                        GrowthcraftBlocks.ROPE_LINEN_BAMBOO_FENCE.get(),
-                        GrowthcraftBlocks.ROPE_LINEN_BIRCH_FENCE.get(),
-                        GrowthcraftBlocks.ROPE_LINEN_CHERRY_FENCE.get(),
-                        GrowthcraftBlocks.ROPE_LINEN_CRIMSON_FENCE.get(),
-                        GrowthcraftBlocks.ROPE_LINEN_DARK_OAK_FENCE.get(),
-                        GrowthcraftBlocks.ROPE_LINEN_JUNGLE_FENCE.get(),
-                        GrowthcraftBlocks.ROPE_LINEN_MANGROVE_FENCE.get(),
-                        GrowthcraftBlocks.ROPE_LINEN_NETHER_BRICK_FENCE.get(),
-                        GrowthcraftBlocks.ROPE_LINEN_OAK_FENCE.get(),
-                        GrowthcraftBlocks.ROPE_LINEN_SPRUCE_FENCE.get(),
-                        GrowthcraftBlocks.ROPE_LINEN_WARPED_FENCE.get(),
-                        GrowthcraftApplesBlocks.APPLE_PLANK_FENCE_ROPE_LINEN.get(),
+                        GrowthcraftBlocks.ROPE_LINEN2.get(),
                         GrowthcraftCellarBlocks.HOPS_VINE.get(),
-                        GrowthcraftCellarBlocks.PURPLE_GRAPE_VINE.get(),
-                        GrowthcraftCellarBlocks.RED_GRAPE_VINE.get(),
-                        GrowthcraftCellarBlocks.WHITE_GRAPE_VINE.get(),
                         GrowthcraftCellarBlocks.PURPLE_GRAPE_VINE_LEAVES.get(),
                         GrowthcraftCellarBlocks.RED_GRAPE_VINE_LEAVES.get(),
                         GrowthcraftCellarBlocks.WHITE_GRAPE_VINE_LEAVES.get()
