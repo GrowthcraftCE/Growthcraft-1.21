@@ -43,6 +43,10 @@ repositories {
         name = "TerraformersMC"
         url = "https://maven.terraformersmc.com/releases/"
     }
+    maven {
+        name = "BlakesMods"
+        url = "https://maven.blakesmods.com"
+    }
 }
 
 base {
@@ -171,6 +175,8 @@ dependencies {
     localRuntime "vazkii.patchouli:Patchouli:${patchouli_version}"
     localRuntime "maven.modrinth:appleskin:${appleskin_version}"
     localRuntime "maven.modrinth:jei:${jei_runtime_version}"
+    localRuntime "com.blakebr0.cucumber:Cucumber:${minecraft_version}-${cucumber_version}"
+    localRuntime "com.blakebr0.mysticalagriculture:MysticalAgriculture:${minecraft_version}-${mystical_agriculture_version}"
 
     implementation "vazkii.patchouli:Patchouli:${patchouli_version}"
 

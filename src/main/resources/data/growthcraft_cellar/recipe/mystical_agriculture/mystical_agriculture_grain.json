@@ -26,7 +26,7 @@
     }
   },
   "result": {
-    "item": "growthcraft_cellar:grain",
+    "id": "growthcraft_cellar:grain",
     "count": 8
   }
 }

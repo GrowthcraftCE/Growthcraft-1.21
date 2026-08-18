@@ -26,7 +26,7 @@
     }
   },
   "result": {
-    "item": "growthcraft_cellar:grape_red",
+    "id": "growthcraft_cellar:grape_red",
     "count": 4
   }
 }

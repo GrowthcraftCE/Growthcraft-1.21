@@ -29,7 +29,7 @@
     }
   },
   "result": {
-    "item": "growthcraft_cellar:grain_brown",
+    "id": "growthcraft_cellar:grain_brown",
     "count": 4
   }
 }

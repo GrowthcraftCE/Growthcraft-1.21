@@ -30,7 +30,7 @@
     }
   },
   "result": {
-    "item": "growthcraft_cellar:yeast_lager",
+    "id": "growthcraft_cellar:yeast_lager",
     "count": 8
   }
 }

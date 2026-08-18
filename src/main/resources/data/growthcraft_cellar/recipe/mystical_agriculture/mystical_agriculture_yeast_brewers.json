@@ -30,7 +30,7 @@
     }
   },
   "result": {
-    "item": "growthcraft_cellar:yeast_brewers",
+    "id": "growthcraft_cellar:yeast_brewers",
     "count": 8
   }
 }
