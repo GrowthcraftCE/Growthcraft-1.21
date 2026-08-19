@@ -19,6 +19,8 @@ class RecipeResourceTest {
     );
     private static final Pattern TYPE_FIELD = Pattern.compile("\"type\"\\s*:\\s*\"[^\"]+\"");
     private static final Pattern FORGE_TYPE_FIELD = Pattern.compile("\"type\"\\s*:\\s*\"forge:");
+    private static final Pattern CUCUMBER_SHAPED_TYPE = Pattern.compile("\"type\"\\s*:\\s*\"cucumber:shaped_no_mirror\"");
+    private static final Pattern LEGACY_RESULT_ITEM = Pattern.compile("\"result\"\\s*:\\s*\\{\\s*\"item\"\\s*:");
     private static final Pattern RECIPE_PATH = Pattern.compile("^[^/\\\\]+[/\\\\]recipes?[/\\\\].+\\.json$");
 
     @Test
@@ -96,6 +98,32 @@ class RecipeResourceTest {
         );
     }
 
+    @Test
+    void cucumberShapedRecipesUseModernResultId() throws IOException {
+        List<Path> recipesWithLegacyResults = new ArrayList<>();
+        for (Path root : DATA_ROOTS) {
+            if (!Files.exists(root)) {
+                continue;
+            }
+
+            try (Stream<Path> files = Files.walk(root)) {
+                recipesWithLegacyResults.addAll(files
+                        .filter(Files::isRegularFile)
+                        .filter(path -> RECIPE_PATH.matcher(root.relativize(path).toString()).matches())
+                        .filter(RecipeResourceTest::isCucumberShapedRecipeWithLegacyResult)
+                        .toList());
+            }
+        }
+        List<Path> sortedRecipes = recipesWithLegacyResults.stream().sorted().toList();
+
+        assertTrue(
+                sortedRecipes.isEmpty(),
+                () -> "Cucumber shaped recipes must use result.id instead of result.item:"
+                        + System.lineSeparator()
+                        + String.join(System.lineSeparator(), sortedRecipes.stream().map(Path::toString).toList())
+        );
+    }
+
     private static boolean declaresType(Path path) {
         try {
             return TYPE_FIELD.matcher(Files.readString(path)).find();
@@ -115,6 +143,15 @@ class RecipeResourceTest {
     private static boolean declaresForgeConditionType(Path path) {
         try {
             return FORGE_TYPE_FIELD.matcher(Files.readString(path)).find();
+        } catch (IOException e) {
+            throw new IllegalStateException("Unable to read recipe JSON: " + path, e);
+        }
+    }
+
+    private static boolean isCucumberShapedRecipeWithLegacyResult(Path path) {
+        try {
+            String json = Files.readString(path);
+            return CUCUMBER_SHAPED_TYPE.matcher(json).find() && LEGACY_RESULT_ITEM.matcher(json).find();
         } catch (IOException e) {
             throw new IllegalStateException("Unable to read recipe JSON: " + path, e);
         }
