@@ -4,7 +4,7 @@
 
 - **Minecraft platform version:** `1.21.1` (`minecraft_version` in `gradle.properties`)
 - **NeoForge version:** `21.1.209` (`neo_version` in `gradle.properties`)
-- **Growthcraft mod version:** `1.21.1.7` (`mod_version` in `gradle.properties`)
+- **Growthcraft mod version:** `1.21.1.8` (`mod_version` in `gradle.properties`)
 
 ## Semantics
 

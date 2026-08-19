@@ -32,7 +32,7 @@
     }
   },
   "result": {
-    "item": "growthcraft_milk:starter_culture",
+    "id": "growthcraft_milk:starter_culture",
     "count": 8
   }
 }

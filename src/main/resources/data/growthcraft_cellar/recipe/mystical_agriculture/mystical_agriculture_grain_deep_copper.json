@@ -29,7 +29,7 @@
     }
   },
   "result": {
-    "item": "growthcraft_cellar:grain_deep_copper",
+    "id": "growthcraft_cellar:grain_deep_copper",
     "count": 4
   }
 }

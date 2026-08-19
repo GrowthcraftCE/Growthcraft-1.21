@@ -93,6 +93,29 @@
         }
       ],
       "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "block": "growthcraft_rice:rice_crop",
+          "condition": "minecraft:block_state_property",
+          "properties": {
+            "age": "7"
+          }
+        },
+        {
+          "chance": 0.05,
+          "condition": "minecraft:random_chance"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "growthcraft_rice:yeast_seishu"
+        }
+      ],
+      "rolls": 1.0
     }
   ],
   "random_sequence": "growthcraft_rice:blocks/rice_crop"

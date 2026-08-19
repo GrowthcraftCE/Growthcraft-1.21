@@ -17,6 +17,7 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
@@ -39,6 +40,7 @@ public class RiceBlockLoot extends BlockLootSubProvider {
         Item rice = GrowthcraftRiceItems.RICE.get();
         Item stalk = GrowthcraftRiceItems.RICE_STALK.get();
         Item seed = GrowthcraftRiceItems.RICE_GRAINS.get();
+        Item seishuYeast = GrowthcraftRiceItems.YEAST_SEISHU.get();
         var enchantments = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
 
         return applyExplosionDecay(crop, LootTable.lootTable()
@@ -56,7 +58,12 @@ public class RiceBlockLoot extends BlockLootSubProvider {
                         .setRolls(ConstantValue.exactly(1.0F))
                         .when(isMatureRice())
                         .add(LootItem.lootTableItem(seed)
-                                .apply(ApplyBonusCount.addBonusBinomialDistributionCount(enchantments.getOrThrow(Enchantments.FORTUNE), 0.5714286F, 3)))));
+                                .apply(ApplyBonusCount.addBonusBinomialDistributionCount(enchantments.getOrThrow(Enchantments.FORTUNE), 0.5714286F, 3))))
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantValue.exactly(1.0F))
+                        .when(isMatureRice())
+                        .when(LootItemRandomChanceCondition.randomChance(0.05F))
+                        .add(LootItem.lootTableItem(seishuYeast))));
     }
 
     private LootItemBlockStatePropertyCondition.Builder isMatureRice() {

@@ -29,7 +29,7 @@
     }
   },
   "result": {
-    "item": "growthcraft_cellar:grain_golden",
+    "id": "growthcraft_cellar:grain_golden",
     "count": 4
   }
 }
