@@ -10,6 +10,8 @@ public class GrowthcraftCellarConfig {
     // Do we allow rice and corn as adjunct grains in brewing recipes
     private static ModConfigSpec.BooleanValue secondaryAdjunctGrainsAllowed;
     private static ModConfigSpec.IntValue grapeVineMaxHeight;
+    private static ModConfigSpec.BooleanValue grapeVineThin;
+
     private static ModConfigSpec.BooleanValue debugEnabled;
     private static ModConfigSpec.BooleanValue brewKettleDebugEnabled;
     private static ModConfigSpec.BooleanValue cultureJarDebugEnabled;
@@ -30,15 +32,21 @@ public class GrowthcraftCellarConfig {
         grapeVineMaxHeight = SERVER_BUILDER
                 .comment("Maximum height that grape vines can climb before producing horizontal leaves.")
                 .defineInRange("grape_vine_max_height", 8, 1, 32);
-        cropsDebugEnabled = SERVER_BUILDER
-                .comment("Set to true to add additional debug logging for Cellar crops.")
-                .define("debugEnabled", false);
-        SERVER_BUILDER.pop();
+
+        grapeVineThin = SERVER_BUILDER
+                .comment("Use nice new thin model for grape leaves.")
+                .define("grape_vine_alternate_model", false);
+        SERVER_BUILDER.pop(); //crops
 
         SERVER_BUILDER.push("debug");
         debugEnabled = SERVER_BUILDER
                 .comment("Set to true to add additional Growthcraft Cellar debug logging.")
                 .define("enabled", false);
+
+        SERVER_BUILDER.push("crops");
+        cropsDebugEnabled = SERVER_BUILDER
+                .comment("Set to true to add additional debug logging for Cellar crops.")
+                .define("debugEnabled", false);
         SERVER_BUILDER.pop();
 
         SERVER_BUILDER.push("brew_kettle");
@@ -77,10 +85,12 @@ public class GrowthcraftCellarConfig {
                 .define("debugEnabled", false);
         SERVER_BUILDER.pop();
 
+        SERVER_BUILDER.pop(); //debug
+
         SPEC = SERVER_BUILDER.build();
     }
 
-    // values can be pulled via recipe conditions. if this is gray, doesn't mean it is unused.
+    // values can be pulled via recipe conditions. if this is gray (should be), doesn't mean config value is unused.
     public static boolean isSecondaryAdjunctGrainsAllowed() {
         return secondaryAdjunctGrainsAllowed.get();
     }
@@ -88,37 +98,35 @@ public class GrowthcraftCellarConfig {
     public static int getGrapeVineMaxHeight() {
         return grapeVineMaxHeight.get();
     }
-
-    public static boolean isDebugEnabled() {
-        return debugEnabled.get();
+    public static boolean shouldUseThinGrapeModels() {
+        return grapeVineThin.get();
     }
 
-    public static boolean isBrewKettleDebugEnabled() {
-        return brewKettleDebugEnabled.get();
-    }
-
-    public static boolean isCultureJarDebugEnabled() {
-        return cultureJarDebugEnabled.get();
-    }
-
-    public static boolean isFermentationBarrelDebugEnabled() {
-        return fermentationBarrelDebugEnabled.get();
-    }
-
-    public static boolean isFruitPressDebugEnabled() {
-        return fruitPressDebugEnabled.get();
-    }
-
-    public static boolean isRoasterDebugEnabled() {
-        return roasterDebugEnabled.get();
-    }
-
-    public static boolean isCropsDebugEnabled() {
-        return cropsDebugEnabled.get();
-    }
-
-    public static boolean isCapabilitiesDebugEnabled() {
-        return capabilitiesDebugEnabled.get();
+    public static class Debug {
+        public static boolean isDebugEnabled() {
+            return debugEnabled.get();
+        }
+        public static boolean isBrewKettleDebugEnabled() {
+            return brewKettleDebugEnabled.get();
+        }
+        public static boolean isCultureJarDebugEnabled() {
+            return cultureJarDebugEnabled.get();
+        }
+        public static boolean isFermentationBarrelDebugEnabled() {
+            return fermentationBarrelDebugEnabled.get();
+        }
+        public static boolean isFruitPressDebugEnabled() {
+            return fruitPressDebugEnabled.get();
+        }
+        public static boolean isRoasterDebugEnabled() {
+            return roasterDebugEnabled.get();
+        }
+        public static boolean isCropsDebugEnabled() {
+            return cropsDebugEnabled.get();
+        }
+        public static boolean isCapabilitiesDebugEnabled() {
+            return capabilitiesDebugEnabled.get();
+        }
     }
 
     private GrowthcraftCellarConfig() {}

@@ -36,7 +36,7 @@ public final class GrowthcraftCellarCapabilities {
     }
 
     private static void debug(String message, Object... args) {
-        if (GrowthcraftCellarConfig.isCapabilitiesDebugEnabled()) {
+        if (GrowthcraftCellarConfig.Debug.isCapabilitiesDebugEnabled()) {
             GrowthcraftCellar.LOGGER.debug(message, args);
         }
     }
