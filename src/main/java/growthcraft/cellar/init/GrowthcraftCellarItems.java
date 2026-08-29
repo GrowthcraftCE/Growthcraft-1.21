@@ -1,10 +1,7 @@
 package growthcraft.cellar.init;
 
 import growthcraft.cellar.config.Reference;
-import growthcraft.cellar.item.CellarPotionItem;
-import growthcraft.cellar.item.EtherealYeastItem;
-import growthcraft.cellar.item.GrapeSeedsItem;
-import growthcraft.cellar.item.HopsSeedsItem;
+import growthcraft.cellar.item.*;
 import growthcraft.lib.item.GrowthcraftFoodItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -76,6 +73,8 @@ public class GrowthcraftCellarItems {
     public static final DeferredItem<Item> POTION_ALE = ITEMS.register(Reference.UnlocalizedName.Item.POTION_ALE, () -> new CellarPotionItem(new Item.Properties()));
     public static final DeferredItem<Item> POTION_LAGER = ITEMS.register(Reference.UnlocalizedName.Item.POTION_LAGER, () -> new CellarPotionItem(new Item.Properties()));
     public static final DeferredItem<Item> POTION_WINE = ITEMS.register(Reference.UnlocalizedName.Item.POTION_WINE, () -> new CellarPotionItem(new Item.Properties()));
+    public static final DeferredItem<Item> BOTTLE_STAINED = ITEMS.register(Reference.UnlocalizedName.Item.BOTTLE_STAINED, () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> POTION_WINE_STAINED = ITEMS.register(Reference.UnlocalizedName.Item.POTION_WINE_STAINED, () -> new CellarPotionItemWithVariableContainer(new Item.Properties(), BOTTLE_STAINED));
 
     private static DeferredItem<Item> blockItem(String name, net.neoforged.neoforge.registries.DeferredBlock<? extends Block> block) {
         return ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
