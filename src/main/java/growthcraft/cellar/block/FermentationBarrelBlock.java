@@ -1,10 +1,12 @@
 package growthcraft.cellar.block;
 
 import growthcraft.cellar.block.entity.FermentationBarrelBlockEntity;
+import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.milk.init.GrowthcraftMilkFluids;
 import growthcraft.milk.item.GrowthcraftMilkBucketItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -94,7 +96,9 @@ public class FermentationBarrelBlock extends Block implements EntityBlock {
             return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
 
-        if (heldStack.getItem() instanceof BottleItem) {
+        if (heldStack.getItem() instanceof BottleItem || heldStack.is(GrowthcraftCellarItems.BOTTLE_STAINED)) {
+            // ir would be nice and fitting if the green bottle extended BottleItem and could maybe hold other fluids and interact with other blocks...
+            // ...but i don't care for it.  this is done to have both colorless and green bottles in parallel.
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof FermentationBarrelBlockEntity barrel && !barrel.getResultingPotionItemStack().isEmpty()) {
                 if (!level.isClientSide) {
@@ -134,6 +138,12 @@ public class FermentationBarrelBlock extends Block implements EntityBlock {
         ItemStack result = barrel.getResultingPotionItemStack();
         if (result.isEmpty()) return;
 
+        if  (heldStack.is(GrowthcraftCellarItems.BOTTLE_STAINED)) {
+            ItemStack result1 = result;
+            result = GrowthcraftCellarItems.POTION_WINE_STAINED.toStack(1);
+            result.set(DataComponents.ITEM_NAME, result1.get(DataComponents.ITEM_NAME));
+            result.set(DataComponents.POTION_CONTENTS, result1.get(DataComponents.POTION_CONTENTS));
+        }
         barrel.drainBottleAmount(state);
         if (!player.getAbilities().instabuild) {
             heldStack.shrink(1);

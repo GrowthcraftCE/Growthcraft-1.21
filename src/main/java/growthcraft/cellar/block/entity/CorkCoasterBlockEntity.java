@@ -71,7 +71,8 @@ public class CorkCoasterBlockEntity extends BlockEntity implements Container, Cl
 
     @Override
     public boolean canPlaceItem(int index, ItemStack stack) {
-        return index == 0 && stack.is(GrowthcraftCellarItems.POTION_WINE.get());
+        return index == 0 &&
+                (stack.is(GrowthcraftCellarItems.POTION_WINE_STAINED.get()) || stack.is(GrowthcraftCellarItems.POTION_WINE.get()));
     }
 
     @Override

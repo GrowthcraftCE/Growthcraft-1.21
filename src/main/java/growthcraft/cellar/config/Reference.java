@@ -103,6 +103,8 @@ public final class Reference {
             public static final String POTION_ALE = "potion_ale";
             public static final String POTION_LAGER = "potion_lager";
             public static final String POTION_WINE = "potion_wine";
+            public static final String POTION_WINE_STAINED = "potion_wine_stained";
+            public static final String BOTTLE_STAINED = "bottle_stained";
 
             // Fluid Buckets (match item model names)
             public static final String AMBER_ALE_FLUID_BUCKET = "amber_ale_fluid_bucket";
