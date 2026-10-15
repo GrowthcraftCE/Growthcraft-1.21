@@ -97,6 +97,9 @@ public class GrowthcraftCellar {
             for (var container : GrowthcraftCellarFluids.ALL) {
                 event.accept(container.bucket.get());
             }
+
+            // other
+            event.accept(GrowthcraftCellarItems.BOTTLE_STAINED);
         }
     }
 }

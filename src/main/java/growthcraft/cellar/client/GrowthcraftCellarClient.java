@@ -70,7 +70,8 @@ public final class GrowthcraftCellarClient {
                         : 0xFFFFFFFF,
                 GrowthcraftCellarItems.POTION_ALE.get(),
                 GrowthcraftCellarItems.POTION_LAGER.get(),
-                GrowthcraftCellarItems.POTION_WINE.get());
+                GrowthcraftCellarItems.POTION_WINE.get(),
+                GrowthcraftCellarItems.POTION_WINE_STAINED.get());
     }
 
     private static void registerGrainColor(RegisterColorHandlersEvent.Item event,
