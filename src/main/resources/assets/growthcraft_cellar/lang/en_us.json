@@ -129,6 +129,7 @@
   "item.growthcraft_cellar.yeast_lager_ethereal": "Lager Yeast (Ethereal)",
   "item.growthcraft_cellar.cork_bark": "Cork Bark",
   "item.growthcraft_cellar.bottle_stained": "Stained Glass Bottle",
+  "item.growthcraft_cellar.potion_wine_stained": "Wine Bottle (Stained Glass)",
   "growthcraft_cellar.tooltip.roaster.progress": "Roasting %s%%",
   "growthcraft_cellar.tooltip.fermentation.progress": "Fermenting %s%%",
   "growthcraft_cellar.tooltip.fruit_press.progress": "Pressing %s%%",
