@@ -15,6 +15,11 @@
       "recipe": "growthcraft_cellar:fermentation_barrel_oak",
       "title": " ",
       "text": "The fermentation barrel can fit up to four buckets of fluid, but takes longer to process the more fluid is present."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Bottling",
+      "text": "Clear and green stained glass bottles are available for wine. Use the chosen empty bottle on the barrel to draw out a finished drink.$(br2)See $(l:cellar/wine_bottles)Wine Bottles$() for crafting, empty bottle returns, and Cork Coaster displays."
     }
   ]
 }
