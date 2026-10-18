@@ -1,21 +1,26 @@
 package growthcraft.core.init;
 
 import growthcraft.apples.init.GrowthcraftApplesBlocks;
+import growthcraft.cellar.block.HopsCropBlock;
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.core.config.Reference;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
@@ -63,6 +68,40 @@ public final class FruitGrowthGameTests {
         verifyFruitLoot(helper, GrowthcraftCellarBlocks.PURPLE_GRAPE_VINE_FRUIT.get(), GrowthcraftCellarItems.GRAPE_PURPLE.get());
         verifyFruitLoot(helper, GrowthcraftCellarBlocks.RED_GRAPE_VINE_FRUIT.get(), GrowthcraftCellarItems.GRAPE_RED.get());
         verifyFruitLoot(helper, GrowthcraftCellarBlocks.WHITE_GRAPE_VINE_FRUIT.get(), GrowthcraftCellarItems.GRAPE_WHITE.get());
+        helper.succeed();
+    }
+
+    @GameTest(template = "fruit_growth_test")
+    public static void hopsMatureDrops(GameTestHelper helper) {
+        BlockPos pos = new BlockPos(2, 2, 2);
+        BlockPos absolutePos = helper.absolutePos(pos);
+        HopsCropBlock hops = GrowthcraftCellarBlocks.HOPS_VINE.get();
+        var level = helper.getLevel();
+        var player = helper.makeMockPlayer(GameType.SURVIVAL);
+        var hit = new BlockHitResult(Vec3.atCenterOf(absolutePos), Direction.UP, absolutePos, false);
+        helper.setBlock(pos.below(), Blocks.FARMLAND);
+        for (int age = 0; age <= HopsCropBlock.MAX_AGE; age++) {
+            BlockState state = hops.defaultBlockState().setValue(HopsCropBlock.AGE, age);
+            helper.setBlock(pos, state);
+            var drops = Block.getDrops(state, level, absolutePos, null);
+            if (age < HopsCropBlock.MAX_AGE) {
+                helper.assertTrue(drops.isEmpty(), "Immature hops must not yield produce or duplicate seeds at age " + age);
+                helper.assertTrue(!state.useWithoutItem(level, player, hit).consumesAction(), "Immature hops must not be harvestable");
+            } else {
+                helper.assertTrue(drops.size() == 1 && drops.getFirst().is(GrowthcraftCellarItems.HOPS.get())
+                        && drops.getFirst().getCount() == 1, "Mature hops must drop exactly one hops item");
+                helper.assertTrue(state.useWithoutItem(level, player, hit).consumesAction(), "Mature hops must remain harvestable");
+                helper.assertBlockProperty(pos, HopsCropBlock.AGE, HopsCropBlock.MAX_AGE - 1);
+                helper.assertItemEntityCountIs(GrowthcraftCellarItems.HOPS.get(), pos, 1.0, 1);
+                helper.assertTrue(Block.getDrops(helper.getBlockState(pos), level, absolutePos, null).isEmpty(),
+                        "Breaking just-harvested hops must not give another hops item");
+            }
+        }
+        // Bonemeal must still mature the crop and enable its normal drop.
+        hops.performBonemeal(level, RandomSource.create(220L), absolutePos, helper.getBlockState(pos));
+        helper.assertBlockProperty(pos, HopsCropBlock.AGE, HopsCropBlock.MAX_AGE);
+        helper.assertTrue(Block.getDrops(helper.getBlockState(pos), level, absolutePos, null).size() == 1,
+                "Bonemealed mature hops must yield produce");
         helper.succeed();
     }
 

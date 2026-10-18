@@ -3,6 +3,7 @@ package growthcraft.cellar.data.loot;
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.cellar.block.GrapeVineFruitBlock;
+import growthcraft.cellar.block.HopsCropBlock;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -40,7 +41,13 @@ public class CellarBlockLoot extends BlockLootSubProvider {
         addMatureFruitDrop(GrowthcraftCellarBlocks.PURPLE_GRAPE_VINE_FRUIT.get(), GrowthcraftCellarItems.GRAPE_PURPLE.get());
         addMatureFruitDrop(GrowthcraftCellarBlocks.RED_GRAPE_VINE_FRUIT.get(), GrowthcraftCellarItems.GRAPE_RED.get());
         addMatureFruitDrop(GrowthcraftCellarBlocks.WHITE_GRAPE_VINE_FRUIT.get(), GrowthcraftCellarItems.GRAPE_WHITE.get());
-        dropOther(GrowthcraftCellarBlocks.HOPS_VINE.get(), GrowthcraftCellarItems.HOPS.get());
+        add(GrowthcraftCellarBlocks.HOPS_VINE.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                        .add(applyExplosionCondition(GrowthcraftCellarItems.HOPS.get(),
+                                LootItem.lootTableItem(GrowthcraftCellarItems.HOPS.get())
+                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(GrowthcraftCellarBlocks.HOPS_VINE.get())
+                                                .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                        .hasProperty(HopsCropBlock.AGE, HopsCropBlock.MAX_AGE)))))));
         dropSelf(GrowthcraftCellarBlocks.CORK_COASTER.get());
         add(GrowthcraftCellarBlocks.CORK_TREE_LEAVES.get(), createLeavesDrops(
                 GrowthcraftCellarBlocks.CORK_TREE_LEAVES.get(),
