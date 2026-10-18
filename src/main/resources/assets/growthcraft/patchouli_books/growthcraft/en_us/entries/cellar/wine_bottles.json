@@ -1,0 +1,37 @@
+{
+  "name": "Wine Bottles",
+  "icon": "growthcraft_cellar:bottle_stained",
+  "category": "growthcraft:cellar",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Choose Your Bottle",
+      "text": "Wine can be served in clear or green stained glass bottles. The choice changes its appearance, not the wine's effects.$(br2)Use either empty bottle on a $(l:cellar/ferment_barrel)Fermentation Barrel$() containing a finished drink to fill it."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "minecraft:glass_bottle",
+      "title": "Clear Glass",
+      "text": "Use a vanilla Glass Bottle for clear wine bottles. Filled clear bottles appear in 2D in your inventory and hand, and in 3D on Cork Coasters.$(br2)Drinking returns a vanilla Glass Bottle."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "growthcraft_cellar:crafting_green_bottle",
+      "title": "Stained Glass",
+      "text": "Three Green Stained Glass blocks in a V shape make three Stained Glass Bottles. Fill them at a Fermentation Barrel."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "growthcraft_cellar:potion_wine_stained",
+      "title": "Green Wine Bottles",
+      "text": "Filled stained bottles retain their green 3D appearance. Drinking returns an empty Stained Glass Bottle.$(br2)Stained bottles fill from Fermentation Barrels; they cannot collect water like vanilla Glass Bottles."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "growthcraft_cellar:cork_coaster",
+      "title": "Display Your Wine",
+      "text": "Both filled wine bottle types can be displayed on Cork Coasters.$(br2)Use a filled bottle on an empty coaster to place it. Use an empty hand to retrieve it. The bottle keeps its wine and effects."
+    }
+  ]
+}
