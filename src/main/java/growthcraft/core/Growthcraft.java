@@ -7,6 +7,9 @@ import growthcraft.core.init.GrowthcraftConditions;
 import growthcraft.core.init.GrowthcraftCreativeTabs;
 import growthcraft.core.init.GrowthcraftItems;
 import growthcraft.core.init.GrowthcraftParticles;
+import growthcraft.core.init.GrowthcraftWorldgen;
+import growthcraft.core.init.GrowthcraftGameRules;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import growthcraft.milk.block.signs.ShopSignTransformHandler;
 import org.slf4j.Logger;
 
@@ -34,6 +37,10 @@ public class Growthcraft {
         GrowthcraftCreativeTabs.CREATIVE_MODE_TABS.register(modEventBus);
         GrowthcraftConditions.CONDITION_CODECS.register(modEventBus);
         GrowthcraftParticles.PARTICLE_TYPES.register(modEventBus);
+        GrowthcraftWorldgen.FEATURES.register(modEventBus);
+        GrowthcraftWorldgen.PLACEMENTS.register(modEventBus);
+
+        modEventBus.addListener((FMLCommonSetupEvent event) -> event.enqueueWork(GrowthcraftGameRules::register));
 
         NeoForge.EVENT_BUS.addListener(ShopSignTransformHandler::onRightClickBlock);
 
