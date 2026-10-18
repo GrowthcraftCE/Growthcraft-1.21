@@ -1,0 +1,48 @@
+{
+  "name": "Salt Generation",
+  "icon": "growthcraft:salt_ore",
+  "category": "growthcraft:server_settings",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Salt Generation",
+      "text": "Salt generation is controlled by both the Growthcraft config and a gamerule saved with each world.$(br2)Both must allow generation. The gamerule defaults to ON; it cannot override a disabled config."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Creating a World",
+      "text": "Before creating a world, open $(bold)Game Rules$() and scroll to $(bold)World Updates$().$(br2)Set $(bold)Generate Growthcraft salt ore$() to OFF to prevent salt generation from the start. Click Done to keep your choice."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Existing Worlds",
+      "text": "The rule is saved with the world and applies to the Overworld, Nether and End.$(br2)Changes affect newly generated chunks. Existing ore remains. Worlds without a saved rule default to ON."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Gamerule Command",
+      "text": "With cheats or operator permission, disable generation with:$(br2)/gamerule growthcraftSaltGeneration false$(br2)Use true to allow it again, provided the config also allows it."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Server Config",
+      "text": "Edit $(bold)growthcraft-common.toml$() in the config folder while the game or server is stopped.$(br2)Under $(bold)[worldgen]$(), set $(bold)saltOreGenEnabled$() to false to disable Growthcraft salt generation regardless of the world rule."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Amount and Height",
+      "text": "Under $(bold)[worldgen]$():$(br2)$(bold)saltOreGenVeinSize$(): vein size parameter (default 5).$(br2)$(bold)saltOreGenSpreadAmount$(): placement attempts per chunk (default 10).$(br2)Actual ore counts vary with terrain. Lower these values for less salt."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Height Range",
+      "text": "$(bold)saltOreGenHeightMin$() and $(bold)saltOreGenHeightMax$() set the Y range for placement attempts.$(br2)Defaults are -32 and 64. Minimum must not exceed maximum; an inverted range skips generation."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "Salt Variants",
+      "text": "The config also controls generation in the Nether and End, and whether deepslate can contain salt.$(br2)Disabling deepslate salt still allows stone salt in the Overworld. These switches are under $(bold)[worldgen]$()."
+    }
+  ]
+}

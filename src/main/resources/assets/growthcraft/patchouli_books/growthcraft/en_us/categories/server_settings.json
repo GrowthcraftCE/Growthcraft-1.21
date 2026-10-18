@@ -1,0 +1,6 @@
+{
+  "name": "Server Settings",
+  "description": "World and server settings for Growthcraft.",
+  "icon": "minecraft:comparator",
+  "sortnum": 9
+}
