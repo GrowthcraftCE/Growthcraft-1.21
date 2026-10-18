@@ -2,6 +2,14 @@ package growthcraft.cellar.data.loot;
 
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
+import growthcraft.cellar.block.GrapeVineFruitBlock;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
@@ -29,9 +37,9 @@ public class CellarBlockLoot extends BlockLootSubProvider {
         add(GrowthcraftCellarBlocks.PURPLE_GRAPE_VINE_LEAVES.get(), noDrop());
         add(GrowthcraftCellarBlocks.RED_GRAPE_VINE_LEAVES.get(), noDrop());
         add(GrowthcraftCellarBlocks.WHITE_GRAPE_VINE_LEAVES.get(), noDrop());
-        dropOther(GrowthcraftCellarBlocks.PURPLE_GRAPE_VINE_FRUIT.get(), GrowthcraftCellarItems.GRAPE_PURPLE.get());
-        dropOther(GrowthcraftCellarBlocks.RED_GRAPE_VINE_FRUIT.get(), GrowthcraftCellarItems.GRAPE_RED.get());
-        dropOther(GrowthcraftCellarBlocks.WHITE_GRAPE_VINE_FRUIT.get(), GrowthcraftCellarItems.GRAPE_WHITE.get());
+        addMatureFruitDrop(GrowthcraftCellarBlocks.PURPLE_GRAPE_VINE_FRUIT.get(), GrowthcraftCellarItems.GRAPE_PURPLE.get());
+        addMatureFruitDrop(GrowthcraftCellarBlocks.RED_GRAPE_VINE_FRUIT.get(), GrowthcraftCellarItems.GRAPE_RED.get());
+        addMatureFruitDrop(GrowthcraftCellarBlocks.WHITE_GRAPE_VINE_FRUIT.get(), GrowthcraftCellarItems.GRAPE_WHITE.get());
         dropOther(GrowthcraftCellarBlocks.HOPS_VINE.get(), GrowthcraftCellarItems.HOPS.get());
         dropSelf(GrowthcraftCellarBlocks.CORK_COASTER.get());
         add(GrowthcraftCellarBlocks.CORK_TREE_LEAVES.get(), createLeavesDrops(
@@ -43,6 +51,15 @@ public class CellarBlockLoot extends BlockLootSubProvider {
         dropSelf(GrowthcraftCellarBlocks.CORK_WOOD_LOG.get());
         dropSelf(GrowthcraftCellarBlocks.CORK_WOOD_LOG_STRIPPED.get());
         dropSelf(GrowthcraftCellarBlocks.CORK_WOOD_STRIPPED.get());
+    }
+
+    private void addMatureFruitDrop(Block fruit, Item item) {
+        add(fruit, LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                        .add(applyExplosionCondition(item, LootItem.lootTableItem(item)
+                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(fruit)
+                                        .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                .hasProperty(GrapeVineFruitBlock.AGE, GrapeVineFruitBlock.MAX_AGE)))))));
     }
 
     @Override
