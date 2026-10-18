@@ -1,0 +1,182 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"bam": "minecraft:block/stripped_bamboo_block",
+		"particle": "#bam"
+	},
+	"elements": [
+		{
+			"name": "Right-hand post",
+			"from": [14, 2, 5.5],
+			"to": [16, 16, 10.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, -1.5]},
+			"faces": {
+				"north": {"uv": [12, 2, 14, 16], "texture": "#bam"},
+				"east": {"uv": [1, 0, 6, 14], "texture": "#bam"},
+				"south": {"uv": [13, 2, 15, 16], "texture": "#bam"},
+				"west": {"uv": [9, 2, 14, 16], "texture": "#bam"},
+				"up": {"uv": [13, 0, 15, 4], "texture": "#bam"},
+				"down": {"uv": [8, 5, 12, 7], "rotation": 90, "texture": "#bam"}
+			}
+		},
+		{
+			"name": "Left-hand post",
+			"from": [0, 2, 5.5],
+			"to": [2, 16, 10.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [16, 0, -1.5]},
+			"faces": {
+				"north": {"uv": [14, 2, 12, 16], "texture": "#bam"},
+				"east": {"uv": [14, 2, 9, 16], "texture": "#bam"},
+				"south": {"uv": [15, 2, 13, 16], "texture": "#bam"},
+				"west": {"uv": [6, 0, 1, 14], "texture": "#bam"},
+				"up": {"uv": [15, 0, 13, 4], "texture": "#bam"},
+				"down": {"uv": [8, 7, 12, 5], "rotation": 90, "texture": "#bam"}
+			}
+		},
+		{
+			"name": "Right-hand post top",
+			"from": [14, 16, 5.5],
+			"to": [16, 22, 10.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 11, -1.5]},
+			"faces": {
+				"north": {"uv": [12, 5, 14, 11], "texture": "#bam"},
+				"east": {"uv": [9, 5, 14, 11], "texture": "#bam"},
+				"south": {"uv": [13, 5, 15, 11], "texture": "#bam"},
+				"west": {"uv": [9, 5, 14, 11], "texture": "#bam"},
+				"up": {"uv": [13, 0, 15, 4], "texture": "#bam"},
+				"down": {"uv": [8, 5, 12, 7], "rotation": 90, "texture": "#bam"}
+			}
+		},
+		{
+			"name": "Left-hand post top",
+			"from": [0, 16, 5.5],
+			"to": [2, 22, 10.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [16, 11, -1.5]},
+			"faces": {
+				"north": {"uv": [14, 5, 12, 11], "texture": "#bam"},
+				"east": {"uv": [14, 5, 9, 11], "texture": "#bam"},
+				"south": {"uv": [15, 5, 13, 11], "texture": "#bam"},
+				"west": {"uv": [14, 5, 9, 11], "texture": "#bam"},
+				"up": {"uv": [15, 0, 13, 4], "texture": "#bam"},
+				"down": {"uv": [8, 7, 12, 5], "rotation": 90, "texture": "#bam"}
+			}
+		},
+		{
+			"name": "Inner vertical post of left-hand gate door",
+			"from": [2, 4, 12.5],
+			"to": [4, 18, 14.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, 16]},
+			"faces": {
+				"north": {"uv": [16, 0, 14, 14], "texture": "#bam"},
+				"east": {"uv": [13, 0, 11, 14], "texture": "#bam"},
+				"south": {"uv": [15, 0, 13, 14], "texture": "#bam"},
+				"west": {"uv": [14, 0, 12, 14], "texture": "#bam"},
+				"up": {"uv": [13, 3, 15, 1], "texture": "#bam"},
+				"down": {"uv": [12, 8, 14, 6], "texture": "#bam"}
+			}
+		},
+		{
+			"name": "Inner vertical post of right-hand gate door",
+			"from": [12, 4, 12.5],
+			"to": [14, 18, 14.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, 16]},
+			"faces": {
+				"north": {"uv": [14, 0, 12, 14], "texture": "#bam"},
+				"east": {"uv": [15, 0, 13, 14], "texture": "#bam"},
+				"south": {"uv": [14, 0, 12, 14], "texture": "#bam"},
+				"west": {"uv": [14, 0, 12, 14], "texture": "#bam"},
+				"up": {"uv": [9, 5, 11, 3], "texture": "#bam"},
+				"down": {"uv": [12, 2, 14, 0], "texture": "#bam"}
+			}
+		},
+		{
+			"name": "Lower horizontal bar of left-hand gate door",
+			"from": [2, 4, 8.5],
+			"to": [4, 6, 12.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, 16]},
+			"faces": {
+				"north": {"uv": [2, 0, 0, 2], "texture": "#bam"},
+				"east": {"uv": [16, 13, 12, 15], "texture": "#bam"},
+				"west": {"uv": [16, 13, 12, 15], "texture": "#bam"},
+				"up": {"uv": [16, 13, 12, 15], "rotation": 270, "texture": "#bam"},
+				"down": {"uv": [16, 13, 12, 15], "rotation": 90, "texture": "#bam"}
+			}
+		},
+		{
+			"name": "Upper horizontal bar of left-hand gate door",
+			"from": [2, 10, 8.5],
+			"to": [4, 12, 12.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, 16]},
+			"faces": {
+				"north": {"uv": [2, 6, 0, 8], "texture": "#bam"},
+				"east": {"uv": [16, 13, 12, 15], "texture": "#bam"},
+				"west": {"uv": [16, 13, 12, 15], "texture": "#bam"},
+				"up": {"uv": [16, 13, 12, 15], "rotation": 270, "texture": "#bam"},
+				"down": {"uv": [16, 13, 12, 15], "rotation": 90, "texture": "#bam"}
+			}
+		},
+		{
+			"name": "Lower horizontal bar of right-hand gate door",
+			"from": [12, 4, 8.5],
+			"to": [14, 6, 12.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, 16]},
+			"faces": {
+				"north": {"uv": [11, 1, 9, 3], "texture": "#bam"},
+				"east": {"uv": [16, 13, 12, 15], "texture": "#bam"},
+				"west": {"uv": [16, 13, 12, 15], "texture": "#bam"},
+				"up": {"uv": [16, 13, 12, 15], "rotation": 270, "texture": "#bam"},
+				"down": {"uv": [16, 13, 12, 15], "rotation": 90, "texture": "#bam"}
+			}
+		},
+		{
+			"name": "Upper horizontal bar of right-hand gate door",
+			"from": [12, 10, 8.5],
+			"to": [14, 12, 12.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, 16]},
+			"faces": {
+				"north": {"uv": [7, 7, 5, 9], "texture": "#bam"},
+				"east": {"uv": [16, 13, 12, 15], "texture": "#bam"},
+				"west": {"uv": [16, 13, 12, 15], "texture": "#bam"},
+				"up": {"uv": [16, 13, 12, 15], "rotation": 270, "texture": "#bam"},
+				"down": {"uv": [16, 13, 12, 15], "rotation": 90, "texture": "#bam"}
+			}
+		},
+		{
+			"name": "Third horizontal bar of right-hand gate door",
+			"from": [12, 16, 8.5],
+			"to": [14, 18, 12.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 6, 16]},
+			"faces": {
+				"north": {"uv": [3, 13, 1, 15], "texture": "#bam"},
+				"east": {"uv": [16, 13, 12, 15], "texture": "#bam"},
+				"west": {"uv": [16, 13, 12, 15], "texture": "#bam"},
+				"up": {"uv": [16, 13, 12, 15], "rotation": 270, "texture": "#bam"},
+				"down": {"uv": [16, 13, 12, 15], "rotation": 90, "texture": "#bam"}
+			}
+		},
+		{
+			"name": "Third horizontal bar of left-hand gate door",
+			"from": [2, 16, 8.5],
+			"to": [4, 18, 12.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [-8, 6, 16]},
+			"faces": {
+				"north": {"uv": [6, 12, 4, 14], "texture": "#bam"},
+				"east": {"uv": [16, 13, 12, 15], "texture": "#bam"},
+				"west": {"uv": [16, 13, 12, 15], "texture": "#bam"},
+				"up": {"uv": [16, 13, 12, 15], "rotation": 270, "texture": "#bam"},
+				"down": {"uv": [16, 13, 12, 15], "rotation": 90, "texture": "#bam"}
+			}
+		}
+	],
+	"display": {
+		"gui": {
+			"rotation": [30, 45, 0],
+			"translation": [0, -1, 0],
+			"scale": [0.8, 0.8, 0.8]
+		},
+		"head": {
+			"translation": [0, -3, -6]
+		}
+	}
+}

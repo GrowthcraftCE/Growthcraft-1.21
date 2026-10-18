@@ -36,7 +36,7 @@ public class CorkCoasterBlockEntityRenderer implements BlockEntityRenderer<CorkC
             default -> 180.0F;
         }));
         poseStack.translate(0.0F, -0.1F, 0.0F);
-        itemRenderer.renderStatic(item, ItemDisplayContext.FIXED, packedLight, packedOverlay, poseStack, buffer, coaster.getLevel(), 0);
-        poseStack.popPose();
+        itemRenderer.renderStatic(item, ItemDisplayContext.HEAD, packedLight, packedOverlay, poseStack, buffer, coaster.getLevel(), 0);
+        poseStack.popPose();  // yes, head.  FIXED is how it looks in an item frame. we may not want that. let's use an unused one and just set models right.
     }
 }

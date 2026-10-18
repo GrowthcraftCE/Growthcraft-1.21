@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Wines and ciders are made from different fruits, but use the same overall process:$(br2)1. Grow grapes or apples.$(br)2. Place the fruit into the $(l:cellar/fruit_press)Fruit Press$() to make juice.$(br)3. Place the juice into a $(l:cellar/ferment_barrel)Fermentation Barrel$() with $(6)Bayanus Yeast$().$(br)4. Use a glass bottle to extract the fermented wine.$(br)5. Enjoy the effects!"
+      "text": "Wines and ciders are made from different fruits, but use the same overall process:$(br2)1. Grow grapes or apples.$(br)2. Place the fruit into the $(l:cellar/fruit_press)Fruit Press$() to make juice.$(br)3. Place the juice into a $(l:cellar/ferment_barrel)Fermentation Barrel$() with $(6)Bayanus Yeast$().$(br)4. Bottle the wine; see $(l:cellar/wine_bottles)Wine Bottles$().$(br)5. Enjoy the effects!"
     },
     {
       "type": "patchouli:spotlight",

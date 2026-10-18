@@ -1,4 +1,6 @@
 {
+  "gamerule.growthcraftSaltGeneration": "Generate Growthcraft salt ore",
+  "gamerule.growthcraftSaltGeneration.description": "Allow Growthcraft salt ore in newly generated chunks. The Growthcraft config must also allow generation. Existing ore is unchanged.",
   "advancements.growthcraft.root.description": " ",
   "advancements.growthcraft.root.title": "Growthcraft",
   "block.growthcraft.rope_linen": "Rope",

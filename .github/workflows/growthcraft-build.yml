@@ -41,7 +41,7 @@ jobs:
       - name: Build with Gradle
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./gradlew build --info
+        run: ./gradlew build runGameTestServer --info
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4

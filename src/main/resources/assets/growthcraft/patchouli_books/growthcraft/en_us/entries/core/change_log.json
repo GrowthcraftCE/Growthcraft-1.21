@@ -6,6 +6,26 @@
   "pages": [
     {
       "type": "patchouli:text",
+      "title": "1.21.1.9: Crops",
+      "text": "Apple fruit now spawns directly below the ticked leaf; decayed leaves cannot spawn fruit.$(br2)Apples, grapes and hops drop produce only when fully mature. Bonemeal and right-click harvesting retain their expected behavior."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "1.21.1.9: Salt",
+      "text": "Salt generation now respects runtime config settings.$(br2)Added a per-world salt generation gamerule, plus Server Settings documentation. Both the config and world rule must allow generation.$(br2)See $(l:server_settings/salt_generation)Salt Generation$()."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "1.21.1.9: Bottles",
+      "text": "Added clear and green stained wine bottles with Cork Coaster support.$(br2)The manual now explains crafting, filling, appearance and empty bottle returns. See $(l:cellar/wine_bottles)Wine Bottles$()."
+    },
+    {
+      "type": "patchouli:text",
+      "title": "1.21.1.9: More",
+      "text": "Removed an obsolete rope loot table.$(br2)Added optional legacy bamboo textures and an alternate grape appearance setting.$(br2)Added regression coverage for crop drops and salt generation. Server GameTests now run in the build workflow."
+    },
+    {
+      "type": "patchouli:text",
       "text": "1.21.1.7$(br)First production release for the Growthcraft 1.21.1 port."
     },
     {

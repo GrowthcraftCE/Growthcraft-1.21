@@ -1,6 +1,7 @@
 package growthcraft.cellar.block;
 
 import growthcraft.cellar.block.support.VineGrowthHelper;
+import growthcraft.cellar.config.GrowthcraftCellarConfig;
 import growthcraft.core.block.RopeBlock2;
 import growthcraft.core.block.RopeBlock2Base;
 import growthcraft.core.init.GrowthcraftBlocks;
@@ -15,7 +16,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -33,7 +33,8 @@ import java.util.function.Supplier;
 
 public class GrapeVineLeavesBlock extends RopeBlock2Base implements BonemealableBlock {
     private static final VoxelShape SHAPE_INT = Block.box(0.0D, 1.0D, 0.0D, 16.0D, 15.9D, 16.0D);
-    private static final List<VoxelShape> collisionShapeByIndex = new ArrayList<>(); // can be static, 3 blocks have the same colission
+    private static final List<VoxelShape> collisionShapeByIndex = new ArrayList<>(); // can be static, 3 blocks have the same collision
+    private static final List<VoxelShape> interactionShapeByIndex = new ArrayList<>(); // for thin variant
     public static final IntegerProperty AGE = BlockStateProperties.AGE_7;
     public static final int MAX_AGE = 7;
 
@@ -76,27 +77,46 @@ public class GrapeVineLeavesBlock extends RopeBlock2Base implements Bonemealable
 
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return SHAPE_INT;
+        if (! GrowthcraftCellarConfig.shouldUseThinGrapeModels()) {
+            return SHAPE_INT;
+        }
+        else {
+            return interactionShapeByIndex.get(getIndexFromState(state, false));
+        }
     }
 
     @Override
     protected VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return collisionShapeByIndex.get(getIndexFromState(state));
+        return collisionShapeByIndex.get(getIndexFromState(state, true));
     }
     private static final VoxelShape SHAPE_HORI_Z_POSI = Block.box(6.0D, 0.05D, 10.0D, 10.0D, 15.95D, 16.0D);
-    private static final VoxelShape SHAPE_HORI_X_POSI = Block.box(10.0D, 0.05D, 6.0D, 16.0D, 15.5D, 10.0D);
+    private static final VoxelShape SHAPE_HORI_X_POSI = Block.box(10.0D, 0.05D, 6.0D, 16.0D, 15.95D, 10.0D);
     private static final VoxelShape SHAPE_HORI_Z_NEGA = SHAPE_HORI_Z_POSI.move(0, 0, -10/16d);
     private static final VoxelShape SHAPE_HORI_X_NEGA = SHAPE_HORI_X_POSI.move(-10/16d, 0, 0);
 
+    private static final VoxelShape SHAPE_THIN_CENTER = Block.box(4.0D, 0.00D, 4.0D, 12.0D, 10.0D, 12.0D);
+    private static final VoxelShape SHAPE_HORI_Z_POSI_2 = Block.box(6.0D, 0.05D, 10.0D, 10.0D, 10.00D, 16.0D);
+    private static final VoxelShape SHAPE_HORI_X_POSI_2 = Block.box(10.0D, 0.05D, 6.0D, 16.0D, 10.00D, 10.0D);
+    private static final VoxelShape SHAPE_HORI_Z_NEGA_2 = SHAPE_HORI_Z_POSI_2.move(0, 0, -10/16d);
+    private static final VoxelShape SHAPE_HORI_X_NEGA_2 = SHAPE_HORI_X_POSI_2.move(-10/16d, 0, 0);
 
 
-    private static int getIndexFromState(BlockState state)
+
+    private static int getIndexFromState(BlockState state, boolean forCollision)
     {
         int result = 0;
-        result = result * 2 + (state.getValue(WEST) > 0 ? 1 : 0);
-        result = result * 2 + (state.getValue(SOUTH) > 0 ? 1 : 0);
-        result = result * 2 + (state.getValue(EAST) > 0 ? 1 : 0);
-        result = result * 2 + (state.getValue(NORTH) > 0 ? 1 : 0);
+        if (forCollision) {
+            result = result * 2 + (state.getValue(WEST) > 0 ? 1 : 0);
+            result = result * 2 + (state.getValue(SOUTH) > 0 ? 1 : 0);
+            result = result * 2 + (state.getValue(EAST) > 0 ? 1 : 0);
+            result = result * 2 + (state.getValue(NORTH) > 0 ? 1 : 0);
+        }
+        else {  // for interaction
+            result = result * 2 + (state.getValue(WEST) == 1 ? 1 : 0);
+            result = result * 2 + (state.getValue(SOUTH) == 1 ? 1 : 0);
+            result = result * 2 + (state.getValue(EAST) == 1 ? 1 : 0);
+            result = result * 2 + (state.getValue(NORTH) == 1 ? 1 : 0);
+        }
         return result;
     }
 
@@ -111,19 +131,26 @@ public class GrapeVineLeavesBlock extends RopeBlock2Base implements Bonemealable
                     for (int north = 0; north <= 1; north++)  // we could have assumed 4 variants per connection. that would allow simple bitwise math instead of these loops at the cost of 4x more memory.
                     {
                         VoxelShape collShape = Shapes.empty();
+                        VoxelShape intShape = Shapes.empty();
+                        intShape = Shapes.or(intShape, SHAPE_THIN_CENTER);
                         if (north == 1) {
                             collShape = Shapes.or(collShape, SHAPE_HORI_Z_NEGA);
+                            intShape = Shapes.or(intShape, SHAPE_HORI_Z_NEGA_2);
                         }
                         if (south == 1) {
                             collShape = Shapes.or(collShape, SHAPE_HORI_Z_POSI);
+                            intShape = Shapes.or(intShape, SHAPE_HORI_Z_POSI_2);
                         }
                         if (east == 1) {
                             collShape = Shapes.or(collShape, SHAPE_HORI_X_POSI);
+                            intShape = Shapes.or(intShape, SHAPE_HORI_X_POSI_2);
                         }
                         if (west == 1) {
                             collShape = Shapes.or(collShape, SHAPE_HORI_X_NEGA);
+                            intShape = Shapes.or(intShape, SHAPE_HORI_X_NEGA_2);
                         }
                         collisionShapeByIndex.add(collShape);
+                        interactionShapeByIndex.add(intShape);
                     }
                 }
             }

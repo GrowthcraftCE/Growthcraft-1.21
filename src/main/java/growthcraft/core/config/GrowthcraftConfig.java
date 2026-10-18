@@ -33,7 +33,7 @@ public class GrowthcraftConfig {
 
     // Generation parameters
     private static final ModConfigSpec.IntValue saltOreGenVeinSize = SERVER_BUILDER
-            .comment("Salt ore vein size (number of blocks per vein).")
+            .comment("Salt ore vein size (maximum size parameter; actual veins may be smaller).")
             .defineInRange(String.format("%s.%s", CATEGORY_WORLDGEN, "saltOreGenVeinSize"), 5, 1, 10);
 
     private static final ModConfigSpec.IntValue saltOreGenHeightMin = SERVER_BUILDER
@@ -45,7 +45,7 @@ public class GrowthcraftConfig {
             .defineInRange(String.format("%s.%s", CATEGORY_WORLDGEN, "saltOreGenHeightMax"), 64, -64, 255);
 
     private static final ModConfigSpec.IntValue saltOreGenSpreadAmount = SERVER_BUILDER
-            .comment("Number of salt ore veins per chunk (spread amount).")
+            .comment("Number of salt ore placement attempts per chunk (spread amount).")
             .defineInRange(String.format("%s.%s", CATEGORY_WORLDGEN, "saltOreGenSpreadAmount"), 10, 1, 20);
 
     private static final ModConfigSpec.BooleanValue debugEnabled = SERVER_BUILDER
@@ -68,7 +68,7 @@ public class GrowthcraftConfig {
 
     public static final ModConfigSpec SPEC = SERVER_BUILDER.build();
 
-    // Public getters for worldgen values (used by datagen and runtime where applicable)
+    // Read during salt placement in newly generated chunks.
     public static boolean saltOreGenEnabled() { return SALT_ORE_GEN_ENABLED.get(); }
     public static boolean saltOreGenEndEnabled() { return saltOreGenTheEndEnabled.get(); }
     public static boolean saltOreGenNetherEnabled() { return saltOreGenNetherEnabled.get(); }

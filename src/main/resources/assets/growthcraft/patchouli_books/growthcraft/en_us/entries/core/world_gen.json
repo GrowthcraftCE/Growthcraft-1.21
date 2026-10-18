@@ -7,7 +7,7 @@
     {
       "type": "patchouli:spotlight",
       "item": "growthcraft:salt_ore",
-      "text": "Salt is primarily used during the cheese making process.$(br2)In order to get salt, you have to mine it between y level 0 and 64 in veins up to 9 blocks."
+      "text": "Salt is primarily used during cheese making.$(br2)By default, salt ore generates from Y -32 to 64 with a vein size parameter of 5.$(br2)See $(l:server_settings/salt_generation)Salt Generation$() under Server Settings for the world rule and config controls."
     },
     {
       "type": "crafting",

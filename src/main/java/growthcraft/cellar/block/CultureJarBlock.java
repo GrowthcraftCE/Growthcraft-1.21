@@ -38,7 +38,7 @@ public class CultureJarBlock extends HorizontalDirectionalBlock implements Entit
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
     private static void debug(String message, Object... args) {
-        if (GrowthcraftCellarConfig.isCultureJarDebugEnabled()) {
+        if (GrowthcraftCellarConfig.Debug.isCultureJarDebugEnabled()) {
             GrowthcraftCellar.LOGGER.debug(message, args);
         }
     }

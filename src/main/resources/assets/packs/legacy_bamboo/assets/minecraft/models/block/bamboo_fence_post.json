@@ -1,0 +1,55 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/fence_post",
+	"textures": {
+		"top": "minecraft:block/stripped_bamboo_block_top",
+		"side": "minecraft:block/stripped_bamboo_block",
+		"particle": "#side"
+	},
+	"elements": [
+		{
+			"name": "Center post",
+			"from": [6.5, 0.001, 6.5],
+			"to": [9.5, 16, 9.5],
+			"faces": {
+				"north": {"uv": [4, 0, 7, 15.99], "texture": "#side"},
+				"east": {"uv": [4, 0, 7, 15.99], "texture": "#side"},
+				"south": {"uv": [4, 0, 7, 15.99], "texture": "#side"},
+				"west": {"uv": [4, 0, 7, 15.99], "texture": "#side"},
+				"up": {"uv": [8, 8, 12, 12], "texture": "#top"},
+				"down": {"uv": [4, 1, 7, 4], "rotation": 270, "texture": "#top"}
+			}
+		},
+		{
+			"name": "Center post top block",
+			"from": [6.501, 16, 6.501],
+			"to": [9.499, 23.999, 9.499],
+			"faces": {
+				"north": {"uv": [12, 8, 15, 16], "texture": "#side"},
+				"east": {"uv": [12, 8, 15, 16], "texture": "#side"},
+				"south": {"uv": [12, 8, 15, 16], "texture": "#side"},
+				"west": {"uv": [12, 8, 15, 16], "texture": "#side"},
+				"up": {"uv": [4, 1, 7, 4], "texture": "#top"},
+				"down": {"uv": [4, 8, 8, 12], "rotation": 270, "texture": "#top"}
+			}
+		},
+		{
+			"name": "bottom_overlay2x2",
+			"from": [6.5, 0, 7.5],
+			"to": [8.5, 0.001, 9.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6.5, 0, 7.5]},
+			"faces": {
+				"down": {"uv": [6, 0, 8, 2], "rotation": 270, "texture": "#top"}
+			}
+		},
+		{
+			"name": "top_overlay2x2",
+			"from": [7.501, 23.999, 6.501],
+			"to": [9.499, 24.0, 8.499],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7.5, 0, 6.5]},
+			"faces": {
+				"up": {"uv": [6, 0, 8, 2], "texture": "#top"}
+			}
+		}
+	]
+}

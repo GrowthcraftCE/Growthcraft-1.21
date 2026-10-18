@@ -1,0 +1,9 @@
+{
+	"parent": "growthcraft_cellar:item/potion_wine_stained_3d",
+	"textures": {
+		"0": "growthcraft_cellar:item/potion/brew_bottle_contents",
+		"1": "block/white_stained_glass",
+		"2": "block/spruce_planks",
+		"particle": "block/cyan_stained_glass"
+	}
+}

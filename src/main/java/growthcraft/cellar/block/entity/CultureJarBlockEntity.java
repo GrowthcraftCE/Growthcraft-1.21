@@ -35,7 +35,7 @@ public class CultureJarBlockEntity extends BlockEntity implements WorldlyContain
     public static final int TANK_CAPACITY = 1000; // 1 bucket
 
     private static void debug(String message, Object... args) {
-        if (GrowthcraftCellarConfig.isCultureJarDebugEnabled()) {
+        if (GrowthcraftCellarConfig.Debug.isCultureJarDebugEnabled()) {
             GrowthcraftCellar.LOGGER.debug(message, args);
         }
     }
