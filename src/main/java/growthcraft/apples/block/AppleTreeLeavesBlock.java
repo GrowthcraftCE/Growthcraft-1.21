@@ -9,9 +9,6 @@ import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class AppleTreeLeavesBlock extends LeavesBlock {
     public static final MapCodec<AppleTreeLeavesBlock> CODEC = simpleCodec(AppleTreeLeavesBlock::new);
     private static final int APPLE_CHECK_AREA = 3;
@@ -34,31 +31,31 @@ public class AppleTreeLeavesBlock extends LeavesBlock {
     @Override
     protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         super.randomTick(state, level, pos, random);
-        if (!level.isAreaLoaded(pos, APPLE_CHECK_AREA + 1) || !level.getBlockState(pos.below()).isAir()) {
+        // The vanilla random tick may have decayed this leaf.
+        if (!level.getBlockState(pos).is(this) || !level.isAreaLoaded(pos, APPLE_CHECK_AREA + 1)
+                || !level.getBlockState(pos.below()).isAir()) {
             return;
         }
 
-        tryGrowAppleFruit(level, pos, random);
+        tryGrowAppleFruit(level, pos);
     }
 
-    private void tryGrowAppleFruit(ServerLevel level, BlockPos pos, RandomSource random) {
+    private void tryGrowAppleFruit(ServerLevel level, BlockPos pos) {
         BlockPos lowerBound = pos.below().south(APPLE_CHECK_AREA).west(APPLE_CHECK_AREA);
         BlockPos upperBound = pos.below().north(APPLE_CHECK_AREA).east(APPLE_CHECK_AREA);
         int applesInArea = 0;
-        List<BlockPos> validGrowthPositions = new ArrayList<>();
 
         for (BlockPos candidate : BlockPos.betweenClosed(lowerBound, upperBound)) {
             BlockPos growthPos = candidate.immutable();
             if (level.getBlockState(growthPos).is(GrowthcraftApplesBlocks.APPLE_TREE_FRUIT.get())) {
                 applesInArea++;
-            } else if (level.getBlockState(growthPos).isAir() && level.getBlockState(growthPos.above()).is(GrowthcraftApplesBlocks.APPLE_TREE_LEAVES.get())) {
-                validGrowthPositions.add(growthPos);
             }
         }
 
-        if (applesInArea < MAX_APPLES_IN_AREA && !validGrowthPositions.isEmpty()) {
-            BlockPos spawnPos = validGrowthPositions.get(random.nextInt(validGrowthPositions.size()));
-            level.setBlock(spawnPos, GrowthcraftApplesBlocks.APPLE_TREE_FRUIT.get().defaultBlockState(), 2);
+        // Only the randomly ticked leaf may grow fruit; nearby leaves must not refill its space.
+        if (applesInArea < MAX_APPLES_IN_AREA) {
+            level.setBlock(pos.below(), GrowthcraftApplesBlocks.APPLE_TREE_FRUIT.get().defaultBlockState(), 2);
         }
     }
+
 }

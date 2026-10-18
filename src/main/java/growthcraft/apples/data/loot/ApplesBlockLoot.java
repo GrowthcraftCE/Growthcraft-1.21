@@ -1,7 +1,14 @@
 package growthcraft.apples.data.loot;
 
+import growthcraft.apples.block.AppleTreeFruitBlock;
 import growthcraft.apples.init.GrowthcraftApplesBlocks;
 import growthcraft.core.init.GrowthcraftItems;
+import net.minecraft.advancements.critereon.StatePropertiesPredicate;
+import net.minecraft.world.level.storage.loot.LootPool;
+import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
@@ -26,7 +33,13 @@ public class ApplesBlockLoot extends BlockLootSubProvider {
         add(GrowthcraftApplesBlocks.APPLE_PLANK_SLAB.get(), createSlabItemTable(GrowthcraftApplesBlocks.APPLE_PLANK_SLAB.get()));
         dropSelf(GrowthcraftApplesBlocks.APPLE_PLANK_STAIRS.get());
         dropSelf(GrowthcraftApplesBlocks.APPLE_PLANK_TRAPDOOR.get());
-        dropOther(GrowthcraftApplesBlocks.APPLE_TREE_FRUIT.get(), net.minecraft.world.item.Items.APPLE);
+        add(GrowthcraftApplesBlocks.APPLE_TREE_FRUIT.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                        .add(applyExplosionCondition(net.minecraft.world.item.Items.APPLE,
+                                LootItem.lootTableItem(net.minecraft.world.item.Items.APPLE)
+                                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(GrowthcraftApplesBlocks.APPLE_TREE_FRUIT.get())
+                                                .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                        .hasProperty(AppleTreeFruitBlock.AGE, AppleTreeFruitBlock.MAX_AGE)))))));
         add(GrowthcraftApplesBlocks.APPLE_TREE_LEAVES.get(), block -> createOakLeavesDrops(block, GrowthcraftApplesBlocks.APPLE_TREE_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
         dropSelf(GrowthcraftApplesBlocks.APPLE_TREE_SAPLING.get());
         dropSelf(GrowthcraftApplesBlocks.APPLE_WOOD.get());

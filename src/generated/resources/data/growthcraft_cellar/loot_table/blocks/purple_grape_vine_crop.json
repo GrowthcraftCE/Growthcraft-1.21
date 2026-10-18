@@ -3,14 +3,21 @@
   "pools": [
     {
       "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
-      ],
       "entries": [
         {
           "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "growthcraft_cellar:purple_grape_vine_crop",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "age": "7"
+              }
+            },
+            {
+              "condition": "minecraft:survives_explosion"
+            }
+          ],
           "name": "growthcraft_cellar:grape_purple"
         }
       ],
