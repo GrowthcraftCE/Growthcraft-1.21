@@ -6,6 +6,11 @@
   "pages": [
     {
       "type": "patchouli:text",
+      "title": "1.21.1.10: Startup Fix",
+      "text": "Fixed a startup crash with Json Things caused by reading the grape appearance setting before configs were loaded during custom pack discovery."
+    },
+    {
+      "type": "patchouli:text",
       "title": "1.21.1.9: Crops",
       "text": "Apple fruit now spawns directly below the ticked leaf; decayed leaves cannot spawn fruit.$(br2)Apples, grapes and hops drop produce only when fully mature. Bonemeal and right-click harvesting retain their expected behavior."
     },
