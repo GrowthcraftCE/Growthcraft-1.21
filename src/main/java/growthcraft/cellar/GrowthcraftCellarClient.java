@@ -66,6 +66,11 @@ public class GrowthcraftCellarClient {
 
     @SubscribeEvent
     static void addPacks(AddPackFindersEvent event) {
+        // Other mods can discover custom packs before COMMON configs are loaded.
+        // Only client resource discovery needs the grape model setting.
+        if (event.getPackType() != PackType.CLIENT_RESOURCES) {
+            return;
+        }
         if (GrowthcraftCellarConfig.shouldUseThinGrapeModels()) {
             event.addPackFinders(
                     ResourceLocation.fromNamespaceAndPath(Reference.MODID, "assets/packs/thin_grape_plant"),
